@@ -39,7 +39,6 @@ class LoginPage extends StatelessWidget {
       print(resp.data);
       GlobalController.to.updateStorage(EStorageKeys.PROFILE, resp.data);
       print(GlobalController.to.getStroageJson(EStorageKeys.PROFILE));
-      print(resp);
     } else {
       print('invalid form');
     }

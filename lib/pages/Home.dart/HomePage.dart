@@ -7,7 +7,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: null,
+        child: Center(
+          child: Text('Home'),
+        ),
       ),
     );
   }

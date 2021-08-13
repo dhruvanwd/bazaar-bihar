@@ -8,12 +8,15 @@ import 'package:orca_mob/pages/login-signup/loginPage.dart';
 
 void main() async {
   await GetStorage.init();
-  Get.put(GlobalController());
+  final globalController = Get.put(GlobalController());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages: [
-        GetPage(name: '/', page: () => LoginPage()),
+        GetPage(
+            name: '/',
+            page: () =>
+                globalController.isUserLoggedIn ? HomePage() : LoginPage()),
         GetPage(name: '/signup', page: () => SignupPage()),
         // GetPage(name: '/', page: () => HomePage()),
       ],

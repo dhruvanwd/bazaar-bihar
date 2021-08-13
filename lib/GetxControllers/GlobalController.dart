@@ -24,6 +24,14 @@ class GlobalController extends GetxController {
     }
   }
 
+  get isUserLoggedIn {
+    try {
+      return getStroageJson(EStorageKeys.PROFILE) != null;
+    } catch (e) {
+      return false;
+    }
+  }
+
   updateStorage(EStorageKeys key, dynamic data) {
     try {
       String keyName = getKeyFromEnum(key);
