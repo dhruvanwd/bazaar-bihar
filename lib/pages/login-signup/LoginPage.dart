@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orca_mob/GetxControllers/GlobalController.dart';
+import 'package:orca_mob/Utils/RequestBody.dart';
 import 'package:orca_mob/pages/login-signup/CustomButton.dart';
 import 'package:orca_mob/pages/login-signup/appTitle.dart';
 import 'createAccountLabel.dart';
@@ -9,6 +11,33 @@ class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
   final height = Get.mediaQuery.size.height;
   final _formKey = GlobalKey<FormState>();
+
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final apiRequestInstance = GlobalController.to.apiRequestInstance;
+  onLogin() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      final resp = await apiRequestInstance.loginUser(
+        RequestBody(
+          amendType: 'findOne',
+          collectionName: 'users',
+          payload: [
+            {
+              "mobile": usernameController.text,
+              "password": passwordController.text
+            }
+          ],
+        ),
+      );
+
+      print(resp);
+    } else {
+      print('invalid form');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,20 +64,30 @@ class LoginPage extends StatelessWidget {
                         child: appTitle(),
                       ),
                       TextFormField(
+                        controller: usernameController,
                         decoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Email/Mobile Number'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter username';
+                          }
+                        },
                       ),
                       Padding(padding: EdgeInsets.only(top: 16)),
                       TextFormField(
+                        controller: passwordController,
                         decoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Password'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter password';
+                          }
+                        },
                       ),
                       Padding(padding: EdgeInsets.only(top: 60)),
-                      signInSubmitButton(() {
-                        print("onLogin");
-                      }, "Login"),
+                      signInSubmitButton(onLogin, "Login"),
                       Padding(padding: EdgeInsets.only(top: 150)),
                       createAccountLabel(
                           'signup', 'Don\'t have an account ?', 'Register')
