@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orca_mob/GetxControllers/GlobalController.dart';
 import 'package:orca_mob/GetxControllers/SignupController.dart';
+import 'package:orca_mob/Utils/RequestBody.dart';
+import 'package:orca_mob/pages/Home.dart/HomePage.dart';
 import 'package:orca_mob/pages/login-signup/CustomButton.dart';
 import 'package:orca_mob/pages/login-signup/appTitle.dart';
 import 'createAccountLabel.dart';
@@ -10,7 +13,37 @@ class SignupPage extends StatelessWidget {
   SignupPage({Key? key}) : super(key: key);
   final height = Get.mediaQuery.size.height;
   final _formKey = GlobalKey<FormState>();
-  final signupController = Get.put(SignupController());
+  final nameController = TextEditingController();
+  final mobileController = TextEditingController();
+  final passwordController = TextEditingController();
+  final _signupGetxController = Get.put(SignupController());
+  final _apiRequestInstance = GlobalController.to.apiRequestInstance;
+
+  onSignup() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      final resp = await _apiRequestInstance.createUser(RequestBody(
+          amendType: 'insertOne',
+          collectionName: 'users',
+          payload: [
+            {
+              'fullName': nameController.text,
+              'mobile': mobileController.text,
+              'role': 'buyer',
+              'password': passwordController.text,
+              'state': 'bihar',
+              'city': 'nawada',
+            }
+          ]));
+      print(resp.data);
+      GlobalController.to.updateStorage(EStorageKeys.PROFILE, resp.data);
+      print(GlobalController.to.getStroageJson(EStorageKeys.PROFILE));
+      Get.offAll(HomePage());
+    } else {
+      print("Invalid form");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,18 +71,32 @@ class SignupPage extends StatelessWidget {
                           child: appTitle(),
                         ),
                         TextFormField(
+                          controller: nameController,
                           decoration: InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: 'Full name'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Enter your name';
+                            }
+                          },
                         ),
                         Padding(padding: EdgeInsets.only(top: 12)),
                         TextFormField(
+                          controller: mobileController,
                           decoration: InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: 'Mobile Number'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Enter your mobile number';
+                            }
+                          },
                         ),
                         Padding(padding: EdgeInsets.only(top: 12)),
                         TextFormField(
+                          controller: passwordController,
+                          obscureText: _.isObscureText,
                           decoration: InputDecoration(
                               border: UnderlineInputBorder(),
                               suffixIcon: IconButton(
@@ -63,12 +110,11 @@ class SignupPage extends StatelessWidget {
                                       ),
                               ),
                               labelText: 'Password'),
-                        ),
-                        Padding(padding: EdgeInsets.only(top: 12)),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: UnderlineInputBorder(),
-                              labelText: 'Confirm Password'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Enter password';
+                            }
+                          },
                         ),
                         Padding(padding: EdgeInsets.only(top: 16)),
                         Row(
@@ -94,9 +140,7 @@ class SignupPage extends StatelessWidget {
                           ],
                         ),
                         Padding(padding: EdgeInsets.only(top: 40)),
-                        signInSubmitButton(() {
-                          print("onLogin");
-                        }, "Create Account"),
+                        signInSubmitButton(onSignup, "Create Account"),
                         Padding(padding: EdgeInsets.only(top: 50)),
                         createAccountLabel(
                             'login', 'Already have an account ?', 'login')

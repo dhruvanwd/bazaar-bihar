@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orca_mob/GetxControllers/GlobalController.dart';
@@ -15,7 +14,7 @@ class LoginPage extends StatelessWidget {
   final height = Get.mediaQuery.size.height;
   final _formKey = GlobalKey<FormState>();
 
-  LoginController _loginController = Get.put(LoginController());
+  final _loginController = Get.put(LoginController());
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
