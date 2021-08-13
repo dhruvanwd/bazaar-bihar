@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:orca_mob/GetxControllers/GlobalController.dart';
 import 'package:orca_mob/GetxControllers/LoginController.dart';
 import 'package:orca_mob/Utils/RequestBody.dart';
+import 'package:orca_mob/pages/Home.dart/HomePage.dart';
 import 'package:orca_mob/pages/login-signup/CustomButton.dart';
 import 'package:orca_mob/pages/login-signup/appTitle.dart';
 import 'createAccountLabel.dart';
@@ -39,6 +40,7 @@ class LoginPage extends StatelessWidget {
       print(resp.data);
       GlobalController.to.updateStorage(EStorageKeys.PROFILE, resp.data);
       print(GlobalController.to.getStroageJson(EStorageKeys.PROFILE));
+      Get.offAll(HomePage());
     } else {
       print('invalid form');
     }

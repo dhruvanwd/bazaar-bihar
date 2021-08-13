@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:orca_mob/Utils/ApiService.dart';
+import 'package:orca_mob/pages/login-signup/LoginPage.dart';
 
 enum EStorageKeys {
   PROFILE,
@@ -22,6 +23,11 @@ class GlobalController extends GetxController {
     } else if (key == EStorageKeys.SETTINGS) {
       return 'settings';
     }
+  }
+
+  logout() {
+    localStorage.erase();
+    Get.off(LoginPage());
   }
 
   get isUserLoggedIn {
