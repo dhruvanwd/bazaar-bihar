@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:orca_mob/Utils/ApiService.dart';
+import 'package:orca_mob/Utils/RequestBody.dart';
 import 'package:orca_mob/pages/login-signup/LoginPage.dart';
 
 enum EStorageKeys {
@@ -61,4 +62,24 @@ class GlobalController extends GetxController {
       print(e);
     }
   }
+
+  // ------categories----------
+
+  var categories = [];
+
+  fetchCategories() async {
+    final resp = await apiRequestInstance.fetchData(
+        RequestBody(amendType: '', collectionName: 'categories', payload: {
+      "name": {
+        "\$regex": '',
+        "\$options": 'i',
+      },
+    }));
+    categories = resp.data;
+    update();
+    print(resp.data);
+  }
+
+  createImageUrl(dynamic image) =>
+      'https://bazaar-bihar.s3.ap-south-1.amazonaws.com/' + image['filename'];
 }

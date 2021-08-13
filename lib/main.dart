@@ -18,7 +18,10 @@ void main() async {
             page: () =>
                 globalController.isUserLoggedIn ? HomePage() : LoginPage()),
         GetPage(name: '/signup', page: () => SignupPage()),
-        // GetPage(name: '/', page: () => HomePage()),
+        GetPage(
+          name: '/',
+          page: () => HomePage(),
+        ),
       ],
     ),
   );

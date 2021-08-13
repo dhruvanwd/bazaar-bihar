@@ -74,8 +74,9 @@ class LoginPage extends StatelessWidget {
                         TextFormField(
                           controller: usernameController,
                           decoration: InputDecoration(
+                              prefixText: "+91",
                               border: UnderlineInputBorder(),
-                              labelText: 'Email/Mobile Number'),
+                              labelText: 'Mobile Number'),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter username';
