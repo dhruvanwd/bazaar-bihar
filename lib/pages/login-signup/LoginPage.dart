@@ -10,11 +10,11 @@ import 'createAccountLabel.dart';
 import 'bezierContainer.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) {
+    Get.put(LoginController());
+  }
   final height = Get.mediaQuery.size.height;
   final _formKey = GlobalKey<FormState>();
-
-  final _loginController = Get.put(LoginController());
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();

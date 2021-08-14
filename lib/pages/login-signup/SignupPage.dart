@@ -10,13 +10,15 @@ import 'createAccountLabel.dart';
 import 'bezierContainer.dart';
 
 class SignupPage extends StatelessWidget {
-  SignupPage({Key? key}) : super(key: key);
+  SignupPage({Key? key}) {
+    Get.put(SignupController());
+  }
+
   final height = Get.mediaQuery.size.height;
   final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final mobileController = TextEditingController();
   final passwordController = TextEditingController();
-  final _signupGetxController = Get.put(SignupController());
   final _apiRequestInstance = GlobalController.to.apiRequestInstance;
 
   onSignup() async {

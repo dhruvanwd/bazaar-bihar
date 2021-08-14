@@ -18,7 +18,7 @@ class ShopByCategory extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 90,
+            height: 80,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: _.categories
@@ -26,27 +26,32 @@ class ShopByCategory extends StatelessWidget {
                     (e) => Card(
                       clipBehavior: Clip.hardEdge,
                       color: Colors.grey.shade200,
-                      margin: EdgeInsets.symmetric(horizontal: 4),
+                      margin: EdgeInsets.symmetric(horizontal: 8),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Image(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                _.createImageUrl(e['image']),
+                      child: InkWell(
+                        onTap: () {
+                          Get.toNamed('/shops');
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Image(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                  _.createImageUrl(e['image']),
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(bottom: 8),
-                            child: Center(
-                              child: Text(e['name']),
-                            ),
-                          )
-                        ],
+                            Container(
+                              padding: EdgeInsets.only(bottom: 8),
+                              child: Center(
+                                child: Text(e['name']),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   )

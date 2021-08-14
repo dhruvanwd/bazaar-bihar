@@ -1,0 +1,27 @@
+{
+  "name": "bazaar_bihar",
+  "version": "1.0.0",
+  "description": "A new Flutter project.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "start": "flutter run --no-sound-null-safety",
+    "bundle:dev": "flutter build appbundle --no-sound-null-safety",
+    "bundle:prod": "flutter build appbundle --release --no-sound-null-safety",
+    "build:apk:prod": "flutter build apk --release --no-sound-null-safety"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhruvanwd/bazaar_bihar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dhruvanwd/bazaar_bihar/issues"
+  },
+  "homepage": "https://github.com/dhruvanwd/bazaar_bihar#readme"
+}
