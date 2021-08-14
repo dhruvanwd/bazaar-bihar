@@ -11,7 +11,7 @@ class ShopByCategory extends StatelessWidget {
       builder: (_) => Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
+            padding: EdgeInsets.symmetric(vertical: 16),
             child: Text(
               "Shop by category",
               style: Theme.of(context).textTheme.headline6,
@@ -33,24 +33,26 @@ class ShopByCategory extends StatelessWidget {
                         onTap: () {
                           Get.toNamed('/shops');
                         },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Image(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                  _.createImageUrl(e['image']),
+                        child: Padding(
+                          padding: EdgeInsets.all(4),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Image(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                    _.createImageUrl(e['image']),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(bottom: 8),
-                              child: Center(
-                                child: Text(e['name']),
-                              ),
-                            )
-                          ],
+                              Container(
+                                child: Center(
+                                  child: Text(e['name']),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

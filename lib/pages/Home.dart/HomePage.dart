@@ -16,7 +16,9 @@ class HomePage extends StatelessWidget {
     return GetBuilder<GlobalController>(
       builder: (_) => Scaffold(
         appBar: AppBar(
-          title: Text("Homepage"),
+          title: GetBuilder<HomePageController>(
+            builder: (_homeCtrl) => Text(_homeCtrl.appTitle),
+          ),
           actions: [
             IconButton(
               onPressed: _.logout,

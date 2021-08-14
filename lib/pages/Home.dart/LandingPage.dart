@@ -14,7 +14,7 @@ class LandingPage extends StatelessWidget {
         children: [
           ShopByCategory(),
           Padding(
-            padding: EdgeInsets.only(top: 8),
+            padding: EdgeInsets.only(top: 16),
             child: Text(
               "Suggested Shops",
               style: Theme.of(context).textTheme.headline6,
