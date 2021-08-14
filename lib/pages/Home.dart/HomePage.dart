@@ -57,6 +57,7 @@ class HomePage extends StatelessWidget {
             body: GetBuilder<HomePageController>(
                 builder: (homePageCtrl) => homePageCtrl.currentPage),
             bottomNavigationBar: ConvexAppBar(
+              backgroundColor: Get.theme.primaryColor,
               style: TabStyle.flip,
               items: [
                 TabItem(icon: Icons.home, title: 'Home'),

@@ -1,5 +1,6 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OrderCard extends StatelessWidget {
   OrderCard({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class OrderCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Container(
-            color: Colors.blue.shade400,
+            color: Get.theme.primaryColor,
             child: Column(
               children: [
                 Center(
@@ -29,9 +30,24 @@ class OrderCard extends StatelessWidget {
                     ),
                   ),
                   child: ListTile(
-                    title: Text('Saraswati general store'),
-                    subtitle: Text("5 Oct 2021"),
-                    trailing: Text('\$ 200'),
+                    title: Text(
+                      'Saraswati general store',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    subtitle: Text(
+                      "5 Oct 2021",
+                      style: TextStyle(
+                        color: Colors.blueGrey.shade100,
+                      ),
+                    ),
+                    trailing: Text(
+                      '\$ 200',
+                      style: TextStyle(
+                        color: Colors.blue.shade400,
+                      ),
+                    ),
                   ),
                 )
               ],
