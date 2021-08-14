@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
           style: TabStyle.flip,
           items: [
             TabItem(icon: Icons.home, title: 'Home'),
-            TabItem(icon: Icons.map, title: 'Orders'),
+            TabItem(icon: Icons.receipt, title: 'Orders'),
             TabItem(icon: Icons.people, title: 'Profile'),
           ],
           initialActiveIndex: 0, //optional, default as 0
