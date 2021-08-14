@@ -15,6 +15,10 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.light().copyWith(primaryColor: Colors.deepOrange),
+      darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.brown),
+      // NOTE: Optional - use themeMode to specify the startup theme
+      themeMode: globalController.themeMode,
       getPages: [
         GetPage(
             name: '/',

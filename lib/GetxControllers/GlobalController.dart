@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:orca_mob/GetxControllers/HomePageController.dart';
@@ -14,6 +14,7 @@ enum EStorageKeys {
 
 class GlobalController extends GetxController {
   static GlobalController get to => Get.find();
+  ThemeMode get themeMode => ThemeMode.system;
   HomePageController get homePageCtrl => HomePageController.to;
   final ApiRequest apiRequestInstance =
       ApiRequest(baseUrl: 'http://192.168.1.100:8000');
@@ -27,6 +28,8 @@ class GlobalController extends GetxController {
       return 'settings';
     }
   }
+
+  updateTheme() {}
 
   logout() {
     localStorage.erase();

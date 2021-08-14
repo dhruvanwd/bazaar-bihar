@@ -7,7 +7,7 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.symmetric(horizontal: 8),
       child: FlipCard(
         direction: FlipDirection.HORIZONTAL, // default
         front: Card(
@@ -16,7 +16,7 @@ class OrderCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Container(
-            color: Colors.blue.shade200,
+            color: Colors.blue.shade400,
             child: Column(
               children: [
                 Center(
@@ -25,7 +25,7 @@ class OrderCard extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     border: Border(
-                      top: BorderSide(width: 2, color: Colors.purple),
+                      top: BorderSide(width: 2, color: Colors.grey.shade400),
                     ),
                   ),
                   child: ListTile(
