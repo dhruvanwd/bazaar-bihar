@@ -65,7 +65,7 @@ class OrderCard extends StatelessWidget {
                               dense: true,
                               leading: CircleAvatar(
                                 child: Image(
-                                  image: NetworkImage('images/mart.jpg'),
+                                  image: AssetImage('images/mart.jpg'),
                                 ),
                               ),
                               title: Text('Sugar'),

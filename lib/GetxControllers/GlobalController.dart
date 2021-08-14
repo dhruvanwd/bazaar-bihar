@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:orca_mob/GetxControllers/HomePageController.dart';
 import 'package:orca_mob/Utils/ApiService.dart';
 import 'package:orca_mob/Utils/RequestBody.dart';
 import 'package:orca_mob/pages/login-signup/LoginPage.dart';
@@ -13,6 +14,7 @@ enum EStorageKeys {
 
 class GlobalController extends GetxController {
   static GlobalController get to => Get.find();
+  HomePageController get homePageCtrl => HomePageController.to;
   final ApiRequest apiRequestInstance =
       ApiRequest(baseUrl: 'http://192.168.1.100:8000');
 
@@ -82,4 +84,10 @@ class GlobalController extends GetxController {
 
   createImageUrl(dynamic image) =>
       'https://bazaar-bihar.s3.ap-south-1.amazonaws.com/' + image['filename'];
+
+  @override
+  void onInit() {
+    Get.put(HomePageController());
+    super.onInit();
+  }
 }

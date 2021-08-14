@@ -13,27 +13,22 @@ class _OrdersPageState extends State<OrdersPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("My Orders"),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            OrderCard(),
-            OrderCard(),
-            OrderCard(),
-            OrderCard(),
-            OrderCard(),
-            OrderCard(),
-            OrderCard(),
-            OrderCard(),
-            OrderCard(),
-            OrderCard(),
-            OrderCard(),
-            OrderCard(),
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          OrderCard(),
+          OrderCard(),
+          OrderCard(),
+          OrderCard(),
+          OrderCard(),
+          OrderCard(),
+          OrderCard(),
+          OrderCard(),
+          OrderCard(),
+          OrderCard(),
+          OrderCard(),
+          OrderCard(),
+        ],
       ),
     );
   }
