@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:orca_mob/pages/Home.dart/LandingPage.dart';
 import 'package:orca_mob/pages/OrdersPage/OrdersPage.dart';
+import 'package:orca_mob/pages/profilePage/ProfilePage.dart';
 
 class HomePageController extends GetxController {
   static HomePageController get to => Get.find();
@@ -16,6 +17,8 @@ class HomePageController extends GetxController {
       return LandingPage();
     } else if (currentTabIndex == 1) {
       return OrdersPage();
+    } else if (currentTabIndex == 2) {
+      return ProfilePage();
     }
     return LandingPage();
   }
