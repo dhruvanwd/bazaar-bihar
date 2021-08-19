@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -9,11 +10,13 @@ import 'package:bazaar_bihar/models/ProductsModel.dart';
 class ProductCard extends StatelessWidget {
   final ProductModel currentProduct;
   ProductCard(this.currentProduct);
+  final ShopModel _shop = Get.arguments;
 
   final _ = GlobalController.to;
 
   @override
   Widget build(BuildContext context) {
+    print(_shop);
     return Card(
       margin: EdgeInsets.only(bottom: 16),
       clipBehavior: Clip.hardEdge,
@@ -35,12 +38,14 @@ class ProductCard extends StatelessWidget {
                     enlargeStrategy: CenterPageEnlargeStrategy.scale,
                   ),
                   items: currentProduct.images
-                      .map((image) => Image(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                              _.createImageUrl(image),
-                            ),
-                          ))
+                      .map(
+                        (image) => Image(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            _.createImageUrl(image),
+                          ),
+                        ),
+                      )
                       .toList()),
               Row(
                 children: [

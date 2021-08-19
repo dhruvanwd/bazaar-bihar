@@ -9,7 +9,7 @@ class ShopsList extends StatelessWidget {
   ShopsList(this.shopsList);
   final List<ShopModel> shopsList;
   final PageController _pageController = PageController();
-
+  final GlobalController _globalController = GlobalController.to;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,10 +26,8 @@ class ShopsList extends StatelessWidget {
                 .map(
                   (shop) => InkWell(
                     onTap: () {
-                      GlobalController.to.fetchProductsByShopId(shop.id);
-                      Get.toNamed(
-                        '/products',
-                      );
+                      _globalController.fetchProductsByShopId(shop.id);
+                      Get.toNamed('/products', arguments: shop);
                     },
                     child: Card(
                       margin: EdgeInsets.only(bottom: 16),
@@ -47,20 +45,16 @@ class ShopsList extends StatelessWidget {
                               height: 320,
                               enlargeStrategy: CenterPageEnlargeStrategy.scale,
                             ),
-                            items: [
-                              Image.asset(
-                                'images/mart.jpg',
-                                fit: BoxFit.cover,
-                              ),
-                              Image.asset(
-                                'images/makeup.jpg',
-                                fit: BoxFit.cover,
-                              ),
-                              Image.asset(
-                                'images/mushrooms.jpg',
-                                fit: BoxFit.cover,
-                              ),
-                            ],
+                            items: shop.images
+                                .map(
+                                  (image) => Image(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                      _globalController.createImageUrl(image),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
                           ),
                           Container(
                             child: ListTile(

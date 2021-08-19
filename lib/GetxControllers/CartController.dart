@@ -1,10 +1,9 @@
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/models/ProductsModel.dart';
-import 'package:bazaar_bihar/models/ShopModels.dart';
 
 class CartController extends GetxController {
   static CartController get to => Get.find();
-  late ShopModel shop;
+  var shop;
   List<ProductModel> products = [];
 
   addProduct(ProductModel product) {
