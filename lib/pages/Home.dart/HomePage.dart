@@ -10,8 +10,10 @@ import 'package:bazaar_bihar/pages/Home.dart/AppBarMenu.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 class HomePage extends StatelessWidget {
-  final globalController = Get.find<GlobalController>();
-  HomePage({Key? key}) : super(key: key);
+  final _globalController = Get.find<GlobalController>();
+  HomePage() {
+    _globalController.fetchShops(null);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class HomePage extends StatelessWidget {
               title: Text(_.appTitle),
               actions: [
                 IconButton(
-                  onPressed: globalController.logout,
+                  onPressed: _globalController.logout,
                   icon: Icon(AntDesign.logout),
                 )
               ],

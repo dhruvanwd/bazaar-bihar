@@ -23,39 +23,42 @@ class ShopByCategory extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: _.categories
                   .map(
-                    (cat) => InkWell(
-                      onTap: () {
-                        _.fetchShops(cat.id);
-                        Get.toNamed('/shops');
-                      },
-                      child: Card(
-                        clipBehavior: Clip.hardEdge,
-                        color: Colors.grey.shade200,
-                        elevation: 2,
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Image(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                    _.createImageUrl(cat.image),
+                    (cat) => SizedBox(
+                      width: 90,
+                      child: InkWell(
+                        onTap: () {
+                          _.fetchShops(cat.id);
+                          Get.toNamed('/shops');
+                        },
+                        child: Card(
+                          clipBehavior: Clip.hardEdge,
+                          color: Colors.grey.shade200,
+                          elevation: 2,
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Image(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                      _.createImageUrl(cat.image),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                child: Center(
-                                  child: Text(cat.name),
-                                ),
-                              )
-                            ],
+                                Container(
+                                  child: Center(
+                                    child: Text(cat.name),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

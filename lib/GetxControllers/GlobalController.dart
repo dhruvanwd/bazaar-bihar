@@ -104,7 +104,6 @@ class GlobalController extends GetxController {
     Get.put(CartController());
     checkNetworkConnectivity();
     fetchCategories();
-    fetchShops(null);
     super.onInit();
   }
 
