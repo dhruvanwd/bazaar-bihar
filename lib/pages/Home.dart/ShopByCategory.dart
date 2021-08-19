@@ -11,7 +11,7 @@ class ShopByCategory extends StatelessWidget {
       builder: (_) => Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(vertical: 12),
             child: Text(
               "Shop by category",
               style: Theme.of(context).textTheme.headline6,
@@ -23,18 +23,22 @@ class ShopByCategory extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: _.categories
                   .map(
-                    (e) => Card(
-                      clipBehavior: Clip.hardEdge,
-                      color: Colors.grey.shade200,
-                      margin: EdgeInsets.symmetric(horizontal: 8),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4)),
-                      child: InkWell(
-                        onTap: () {
-                          Get.toNamed('/shops');
-                        },
+                    (cat) => InkWell(
+                      onTap: () {
+                        _.fetchShops(cat.id);
+                        Get.toNamed('/shops');
+                      },
+                      child: Card(
+                        clipBehavior: Clip.hardEdge,
+                        color: Colors.grey.shade200,
+                        elevation: 2,
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
                         child: Padding(
-                          padding: EdgeInsets.all(4),
+                          padding: EdgeInsets.all(8),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -42,13 +46,13 @@ class ShopByCategory extends StatelessWidget {
                                 child: Image(
                                   fit: BoxFit.cover,
                                   image: NetworkImage(
-                                    _.createImageUrl(e['image']),
+                                    _.createImageUrl(cat.image),
                                   ),
                                 ),
                               ),
                               Container(
                                 child: Center(
-                                  child: Text(e['name']),
+                                  child: Text(cat.name),
                                 ),
                               )
                             ],

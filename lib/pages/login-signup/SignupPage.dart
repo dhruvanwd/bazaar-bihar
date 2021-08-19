@@ -24,23 +24,32 @@ class SignupPage extends StatelessWidget {
   onSignup() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      final resp = await _apiRequestInstance.createUser(RequestBody(
-          amendType: 'insertOne',
-          collectionName: 'users',
-          payload: [
-            {
-              'fullName': nameController.text,
-              'mobile': mobileController.text,
-              'role': 'buyer',
-              'password': passwordController.text,
-              'state': 'bihar',
-              'city': 'nawada',
-            }
-          ]));
-      print(resp.data);
-      GlobalController.to.updateStorage(EStorageKeys.PROFILE, resp.data);
-      print(GlobalController.to.getStroageJson(EStorageKeys.PROFILE));
-      Get.offAll(HomePage());
+      try {
+        final resp = await _apiRequestInstance.createUser(RequestBody(
+            amendType: 'insertOne',
+            collectionName: 'users',
+            payload: [
+              {
+                'fullName': nameController.text,
+                'mobile': mobileController.text,
+                'role': 'buyer',
+                'password': passwordController.text,
+                'state': 'bihar',
+                'city': 'nawada',
+              }
+            ]));
+        print(resp.data);
+        GlobalController.to.updateStorage(EStorageKeys.PROFILE, resp.data);
+        print(GlobalController.to.getStroageJson(EStorageKeys.PROFILE));
+        Get.offAll(HomePage());
+      } catch (e) {
+        Get.snackbar(
+          "Signup failed",
+          "Server error.",
+          snackPosition: SnackPosition.BOTTOM,
+          colorText: Colors.red,
+        );
+      }
     } else {
       print("Invalid form");
     }

@@ -6,7 +6,6 @@ import 'package:orca_mob/pages/Home.dart/HomePage.dart';
 import 'package:orca_mob/pages/OrdersPage/ProductsPage.dart';
 import 'package:orca_mob/pages/login-signup/SignupPage.dart';
 import 'package:orca_mob/pages/login-signup/loginPage.dart';
-
 import 'pages/Home.dart/ShopsPage.dart';
 
 void main() async {
@@ -15,9 +14,8 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(primaryColor: Colors.brown),
-      darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.brown),
-      // NOTE: Optional - use themeMode to specify the startup theme
+      theme: ThemeData.light().copyWith(primaryColor: Colors.blueGrey),
+      darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.grey),
       themeMode: globalController.themeMode,
       getPages: [
         GetPage(

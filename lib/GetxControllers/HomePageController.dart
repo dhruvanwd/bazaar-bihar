@@ -5,11 +5,17 @@ import 'package:orca_mob/pages/profilePage/ProfilePage.dart';
 
 class HomePageController extends GetxController {
   static HomePageController get to => Get.find();
-  var currentTabIndex = 0;
+  int currentTabIndex = 0;
 
   setTabIndex(int indx) {
     currentTabIndex = indx;
     update();
+  }
+
+  @override
+  void onInit() {
+    print('initializing HomePageController...............!');
+    super.onInit();
   }
 
   var appTitle = "Homepage";
@@ -17,18 +23,15 @@ class HomePageController extends GetxController {
   get currentPage {
     if (currentTabIndex == 0) {
       appTitle = "Homepage";
-
       return LandingPage();
     } else if (currentTabIndex == 1) {
       appTitle = "My orders";
       return OrdersPage();
     } else if (currentTabIndex == 2) {
       appTitle = "Profile";
-
       return ProfilePage();
     }
     appTitle = "Homepage";
-
     return LandingPage();
   }
 }

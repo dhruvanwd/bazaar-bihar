@@ -2,10 +2,16 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:orca_mob/GetxControllers/CartController.dart';
 import 'package:orca_mob/GetxControllers/HomePageController.dart';
 import 'package:orca_mob/Utils/ApiService.dart';
 import 'package:orca_mob/Utils/RequestBody.dart';
+import 'package:orca_mob/models/CategoryModel.dart';
+import 'package:orca_mob/models/ImagesModel.dart';
+import 'package:orca_mob/models/ProductsModel.dart';
+import 'package:orca_mob/models/ShopModels.dart';
 import 'package:orca_mob/pages/login-signup/LoginPage.dart';
+import 'package:connectivity/connectivity.dart';
 
 enum EStorageKeys {
   PROFILE,
@@ -15,11 +21,10 @@ enum EStorageKeys {
 class GlobalController extends GetxController {
   static GlobalController get to => Get.find();
   ThemeMode get themeMode => ThemeMode.system;
-  HomePageController get homePageCtrl => HomePageController.to;
   final ApiRequest apiRequestInstance =
-      ApiRequest(baseUrl: 'http://192.168.1.100:8000');
+      ApiRequest(baseUrl: 'http://52.14.49.133:8000');
 
-  final localStorage = GetStorage();
+  final _localStorage = GetStorage();
 
   getKeyFromEnum(EStorageKeys key) {
     if (key == EStorageKeys.PROFILE) {
@@ -32,7 +37,7 @@ class GlobalController extends GetxController {
   updateTheme() {}
 
   logout() {
-    localStorage.erase();
+    _localStorage.erase();
     Get.off(LoginPage());
   }
 
@@ -48,9 +53,8 @@ class GlobalController extends GetxController {
     try {
       String keyName = getKeyFromEnum(key);
       final jsonEncoder = JsonEncoder();
-      localStorage.write(keyName, jsonEncoder.convert(data));
+      _localStorage.write(keyName, jsonEncoder.convert(data));
     } catch (e) {
-      print("updateStorage Error.....!");
       print(e);
     }
   }
@@ -58,19 +62,18 @@ class GlobalController extends GetxController {
   getStroageJson(EStorageKeys key) {
     try {
       String keyName = getKeyFromEnum(key);
-      String rawJson = localStorage.read(keyName);
+      String rawJson = _localStorage.read(keyName);
       Map<String, dynamic> jsonData =
           Map<String, dynamic>.from(jsonDecode(rawJson));
       return jsonData;
     } catch (e) {
-      print("getStroageJson Error.....!");
       print(e);
     }
   }
 
   // ------categories----------
 
-  var categories = [];
+  List<CategoryModel> categories = [];
 
   fetchCategories() async {
     final resp = await apiRequestInstance.fetchData(
@@ -80,17 +83,70 @@ class GlobalController extends GetxController {
         "\$options": 'i',
       },
     }));
-    categories = resp.data;
+    categories = categoryModelFromMap(resp.data);
     update();
-    print(resp.data);
   }
 
-  createImageUrl(dynamic image) =>
-      'https://bazaar-bihar.s3.ap-south-1.amazonaws.com/' + image['filename'];
+  createImageUrl(ImageModel image) =>
+      'https://bazaar-bihar.s3.ap-south-1.amazonaws.com/' + image.filename;
+
+  checkNetworkConnectivity() async {
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      Get.snackbar("Offline", "Check network connection");
+    }
+  }
 
   @override
   void onInit() {
     Get.put(HomePageController());
+    Get.put(CartController());
+    checkNetworkConnectivity();
+    fetchCategories();
+    fetchShops(null);
     super.onInit();
+  }
+
+  List<ShopModel> shopsList = [];
+  List<ShopModel> shopsListByCatId = [];
+
+  fetchShops(String? categoryId) async {
+    final userProfile = getStroageJson(EStorageKeys.PROFILE);
+    final Map<String, dynamic> payload = {
+      "name": {
+        "\$regex": '',
+        "\$options": 'i',
+      },
+      "state": {
+        "\$regex": userProfile['state'],
+        "\$options": 'i',
+      },
+      "city": {
+        "\$regex": userProfile['city'],
+        "\$options": 'i',
+      }
+    };
+
+    if (categoryId != null) {
+      payload.assign("categoryId", categoryId);
+    }
+    final resp = await apiRequestInstance.fetchData(
+        RequestBody(amendType: '', collectionName: 'shops', payload: payload));
+    if (categoryId == null) {
+      shopsList = shopModelFromJson(resp.data);
+    } else {
+      shopsListByCatId = shopModelFromJson(resp.data);
+    }
+    update();
+  }
+
+  List<ProductModel> productsList = [];
+  fetchProductsByShopId(String shopId) async {
+    final Map<String, dynamic> payload = {"shopId": shopId};
+    final resp = await apiRequestInstance.fetchData(RequestBody(
+        amendType: '', collectionName: 'products', payload: payload));
+    productsList = productModelFromMap(resp.data);
+    update();
   }
 }

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 Widget createAccountLabel(String route, String label, String actionLabel) {
   return InkWell(
     onTap: () {
-      Get.toNamed("/$route");
+      Get.offAllNamed("/$route");
     },
     child: Container(
       margin: EdgeInsets.symmetric(vertical: 20),

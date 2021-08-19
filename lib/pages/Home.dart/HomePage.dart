@@ -2,23 +2,23 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
+import 'package:orca_mob/GetxControllers/CartController.dart';
 import 'package:orca_mob/GetxControllers/GlobalController.dart';
 import 'package:orca_mob/GetxControllers/HomePageController.dart';
+import 'package:orca_mob/components/FloatingCartButton.dart';
 import 'package:orca_mob/pages/Home.dart/AppBarMenu.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 class HomePage extends StatelessWidget {
   final globalController = Get.find<GlobalController>();
-  HomePage({Key? key}) {
-    globalController.fetchCategories();
-  }
+  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
     final GlobalKey<SideMenuState> _endSideMenuKey = GlobalKey<SideMenuState>();
 
-    return GetBuilder<GlobalController>(
+    return GetBuilder<HomePageController>(
       builder: (_) => SideMenu(
         key: _endSideMenuKey,
         inverse: true, // end side menu
@@ -44,18 +44,21 @@ class HomePage extends StatelessWidget {
                     _state.openSideMenu(); // open side menu
                 },
               ),
-              title: GetBuilder<HomePageController>(
-                builder: (_homeCtrl) => Text(_homeCtrl.appTitle),
-              ),
+              title: Text(_.appTitle),
               actions: [
                 IconButton(
-                  onPressed: _.logout,
+                  onPressed: globalController.logout,
                   icon: Icon(AntDesign.logout),
                 )
               ],
             ),
-            body: GetBuilder<HomePageController>(
-                builder: (homePageCtrl) => homePageCtrl.currentPage),
+            body: _.currentPage,
+            floatingActionButton: GetBuilder<CartController>(
+              builder: (_floatCtrl) => Visibility(
+                visible: _floatCtrl.products.length != 0,
+                child: FloatingCartButton(),
+              ),
+            ),
             bottomNavigationBar: ConvexAppBar(
               backgroundColor: Get.theme.primaryColor,
               style: TabStyle.flip,
@@ -64,8 +67,8 @@ class HomePage extends StatelessWidget {
                 TabItem(icon: Icons.receipt, title: 'Orders'),
                 TabItem(icon: Icons.people, title: 'Profile'),
               ],
-              initialActiveIndex: 0, //optional, default as 0
-              onTap: _.homePageCtrl.setTabIndex,
+              initialActiveIndex: _.currentTabIndex,
+              onTap: _.setTabIndex,
             ),
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:orca_mob/GetxControllers/GlobalController.dart';
@@ -22,24 +23,34 @@ class LoginPage extends StatelessWidget {
   onLogin() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-
-      final resp = await apiRequestInstance.loginUser(
-        RequestBody(
-          amendType: 'findOne',
-          collectionName: 'users',
-          payload: [
-            {
-              "mobile": usernameController.text,
-              "password": passwordController.text
-            }
-          ],
-        ),
-      );
-      print("-------resp.data---------");
-      print(resp.data);
-      GlobalController.to.updateStorage(EStorageKeys.PROFILE, resp.data);
-      print(GlobalController.to.getStroageJson(EStorageKeys.PROFILE));
-      Get.offAll(HomePage());
+      try {
+        final resp = await apiRequestInstance.loginUser(
+          RequestBody(
+            amendType: 'findOne',
+            collectionName: 'users',
+            payload: [
+              {
+                "mobile":
+                    usernameController.text.replaceAll(new RegExp(r"\s+"), ""),
+                "password": passwordController.text
+              }
+            ],
+          ),
+        );
+        print("-------resp.data---------");
+        print(resp.data);
+        GlobalController.to.updateStorage(EStorageKeys.PROFILE, resp.data);
+        print(GlobalController.to.getStroageJson(EStorageKeys.PROFILE));
+        Get.offAll(HomePage());
+      } catch (e) {
+        print(e);
+        Get.snackbar(
+          "Login failed",
+          "Invalid credentials.",
+          snackPosition: SnackPosition.BOTTOM,
+          colorText: Colors.red,
+        );
+      }
     } else {
       print('invalid form');
     }
@@ -73,6 +84,9 @@ class LoginPage extends StatelessWidget {
                         ),
                         TextFormField(
                           controller: usernameController,
+                          inputFormatters: [
+                            TextInputMask(mask: '999 9999 999', reverse: false)
+                          ],
                           decoration: InputDecoration(
                               prefixText: "+91",
                               border: UnderlineInputBorder(),

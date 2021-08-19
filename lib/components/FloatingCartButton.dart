@@ -1,24 +1,26 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:orca_mob/GetxControllers/CartController.dart';
 
-class FloatingCartButton extends StatefulWidget {
-  const FloatingCartButton({Key? key, required this.parentContext})
-      : super(key: key);
-  final parentContext;
-  @override
-  _FloatingCartButtonState createState() => _FloatingCartButtonState();
-}
-
-class _FloatingCartButtonState extends State<FloatingCartButton> {
+class FloatingCartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      mini: true,
-      onPressed: () {
-        Get.toNamed('/cart');
-      },
-      child: Icon(
-        Icons.shopping_cart,
+    return GetBuilder<CartController>(
+      builder: (_) => FloatingActionButton(
+        mini: true,
+        onPressed: () {
+          Get.toNamed('/cart');
+        },
+        child: Badge(
+          badgeContent: Text(
+            _.products.length.toString(),
+            style: TextStyle(color: Colors.white),
+          ),
+          child: Icon(
+            Icons.shopping_cart,
+          ),
+        ),
       ),
     );
   }
