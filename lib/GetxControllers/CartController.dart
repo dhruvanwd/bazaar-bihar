@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:orca_mob/models/ProductsModel.dart';
-import 'package:orca_mob/models/ShopModels.dart';
+import 'package:bazaar_bihar/models/ProductsModel.dart';
+import 'package:bazaar_bihar/models/ShopModels.dart';
 
 class CartController extends GetxController {
   static CartController get to => Get.find();

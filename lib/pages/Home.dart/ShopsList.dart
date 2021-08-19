@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orca_mob/GetxControllers/GlobalController.dart';
-import 'package:orca_mob/models/ShopModels.dart';
+import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:stacked_card_carousel/stacked_card_carousel.dart';
 
 class ShopsList extends StatelessWidget {

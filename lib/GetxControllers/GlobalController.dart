@@ -2,15 +2,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:orca_mob/GetxControllers/CartController.dart';
-import 'package:orca_mob/GetxControllers/HomePageController.dart';
-import 'package:orca_mob/Utils/ApiService.dart';
-import 'package:orca_mob/Utils/RequestBody.dart';
-import 'package:orca_mob/models/CategoryModel.dart';
-import 'package:orca_mob/models/ImagesModel.dart';
-import 'package:orca_mob/models/ProductsModel.dart';
-import 'package:orca_mob/models/ShopModels.dart';
-import 'package:orca_mob/pages/login-signup/LoginPage.dart';
+import 'package:bazaar_bihar/GetxControllers/CartController.dart';
+import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
+import 'package:bazaar_bihar/Utils/ApiService.dart';
+import 'package:bazaar_bihar/Utils/RequestBody.dart';
+import 'package:bazaar_bihar/models/CategoryModel.dart';
+import 'package:bazaar_bihar/models/ImagesModel.dart';
+import 'package:bazaar_bihar/models/ProductsModel.dart';
+import 'package:bazaar_bihar/models/ShopModels.dart';
+import 'package:bazaar_bihar/pages/login-signup/LoginPage.dart';
 import 'package:connectivity/connectivity.dart';
 
 enum EStorageKeys {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orca_mob/GetxControllers/GlobalController.dart';
-import 'package:orca_mob/pages/Home.dart/ShopByCategory.dart';
-import 'package:orca_mob/pages/Home.dart/ShopsList.dart';
+import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/pages/Home.dart/ShopByCategory.dart';
+import 'package:bazaar_bihar/pages/Home.dart/ShopsList.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);

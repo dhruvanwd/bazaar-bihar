@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:orca_mob/pages/OrdersPage/OrderCard.dart';
+import 'package:bazaar_bihar/pages/OrdersPage/OrderCard.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({Key? key}) : super(key: key);

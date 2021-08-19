@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:orca_mob/Utils/RequestBody.dart';
+import 'package:bazaar_bihar/Utils/RequestBody.dart';
 
 class ApiRequest {
   final String baseUrl;

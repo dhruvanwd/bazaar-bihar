@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:orca_mob/GetxControllers/CartController.dart';
-import 'package:orca_mob/GetxControllers/GlobalController.dart';
-import 'package:orca_mob/models/ProductsModel.dart';
+import 'package:bazaar_bihar/GetxControllers/CartController.dart';
+import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/models/ProductsModel.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel currentProduct;

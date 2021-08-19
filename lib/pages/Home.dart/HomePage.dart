@@ -2,11 +2,11 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:orca_mob/GetxControllers/CartController.dart';
-import 'package:orca_mob/GetxControllers/GlobalController.dart';
-import 'package:orca_mob/GetxControllers/HomePageController.dart';
-import 'package:orca_mob/components/FloatingCartButton.dart';
-import 'package:orca_mob/pages/Home.dart/AppBarMenu.dart';
+import 'package:bazaar_bihar/GetxControllers/CartController.dart';
+import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
+import 'package:bazaar_bihar/components/FloatingCartButton.dart';
+import 'package:bazaar_bihar/pages/Home.dart/AppBarMenu.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 class HomePage extends StatelessWidget {

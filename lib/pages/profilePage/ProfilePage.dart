@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:orca_mob/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

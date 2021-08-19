@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:orca_mob/pages/Home.dart/LandingPage.dart';
-import 'package:orca_mob/pages/OrdersPage/OrdersPage.dart';
-import 'package:orca_mob/pages/profilePage/ProfilePage.dart';
+import 'package:bazaar_bihar/pages/Home.dart/LandingPage.dart';
+import 'package:bazaar_bihar/pages/OrdersPage/OrdersPage.dart';
+import 'package:bazaar_bihar/pages/profilePage/ProfilePage.dart';
 
 class HomePageController extends GetxController {
   static HomePageController get to => Get.find();

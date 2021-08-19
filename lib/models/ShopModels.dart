@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:orca_mob/models/ImagesModel.dart';
+import 'package:bazaar_bihar/models/ImagesModel.dart';
 
 List<ShopModel> shopModelFromJson(List<dynamic> shopsJson) =>
     List<ShopModel>.from(shopsJson.map((x) => ShopModel.fromJson(x)));

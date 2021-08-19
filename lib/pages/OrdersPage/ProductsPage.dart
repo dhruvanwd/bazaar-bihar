@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:orca_mob/GetxControllers/GlobalController.dart';
-import 'package:orca_mob/components/FloatingCartButton.dart';
-import 'package:orca_mob/pages/OrdersPage/ProductCard.dart';
+import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/components/FloatingCartButton.dart';
+import 'package:bazaar_bihar/pages/OrdersPage/ProductCard.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({Key? key}) : super(key: key);

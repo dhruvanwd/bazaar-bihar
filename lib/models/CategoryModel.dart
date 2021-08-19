@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:orca_mob/models/ImagesModel.dart';
+import 'package:bazaar_bihar/models/ImagesModel.dart';
 
 List<CategoryModel> categoryModelFromMap(List<dynamic> categories) =>
     List<CategoryModel>.from(categories.map((x) => CategoryModel.fromMap(x)));

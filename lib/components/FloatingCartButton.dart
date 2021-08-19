@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orca_mob/GetxControllers/CartController.dart';
+import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 
 class FloatingCartButton extends StatelessWidget {
   @override

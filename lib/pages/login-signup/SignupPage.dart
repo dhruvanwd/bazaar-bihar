@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orca_mob/GetxControllers/GlobalController.dart';
-import 'package:orca_mob/GetxControllers/SignupController.dart';
-import 'package:orca_mob/Utils/RequestBody.dart';
-import 'package:orca_mob/pages/Home.dart/HomePage.dart';
-import 'package:orca_mob/pages/login-signup/CustomButton.dart';
-import 'package:orca_mob/pages/login-signup/appTitle.dart';
+import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/GetxControllers/SignupController.dart';
+import 'package:bazaar_bihar/Utils/RequestBody.dart';
+import 'package:bazaar_bihar/pages/Home.dart/HomePage.dart';
+import 'package:bazaar_bihar/pages/login-signup/CustomButton.dart';
+import 'package:bazaar_bihar/pages/login-signup/appTitle.dart';
 import 'createAccountLabel.dart';
 import 'bezierContainer.dart';
 

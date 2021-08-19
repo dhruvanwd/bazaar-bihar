@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:orca_mob/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 
 class ShopByCategory extends StatelessWidget {
   ShopByCategory({Key? key}) : super(key: key);
