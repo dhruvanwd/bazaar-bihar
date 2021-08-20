@@ -12,40 +12,42 @@ import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 class HomePage extends StatelessWidget {
   final _globalController = Get.find<GlobalController>();
   HomePage() {
-    _globalController.fetchShops(null);
+    if (_globalController.shopsList.length == 0) {
+      _globalController.fetchShops(null);
+    }
+  }
+
+  final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
+  final GlobalKey<SideMenuState> _endSideMenuKey = GlobalKey<SideMenuState>();
+
+  toggleDrawer() {
+    final _state = _sideMenuKey.currentState;
+    if (_state!.isOpened)
+      _state.closeSideMenu(); // close side menu
+    else
+      _state.openSideMenu(); // open side menu
   }
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
-    final GlobalKey<SideMenuState> _endSideMenuKey = GlobalKey<SideMenuState>();
-
     return GetBuilder<HomePageController>(
       builder: (_) => SideMenu(
         key: _endSideMenuKey,
         inverse: true, // end side menu
         background: Colors.green[700],
         type: SideMenuType.slideNRotate,
-        menu: AppBarMenu(),
+        menu: AppBarMenu(toggleDrawer),
         radius: BorderRadius.circular(8),
         child: SideMenu(
           key: _sideMenuKey,
-          menu: AppBarMenu(),
+          menu: AppBarMenu(toggleDrawer),
           type: SideMenuType.slideNRotate,
           radius: BorderRadius.circular(8),
           background: Colors.green[700],
           child: Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () {
-                  final _state = _sideMenuKey.currentState;
-                  if (_state!.isOpened)
-                    _state.closeSideMenu(); // close side menu
-                  else
-                    _state.openSideMenu(); // open side menu
-                },
-              ),
+              leading:
+                  IconButton(icon: Icon(Icons.menu), onPressed: toggleDrawer),
               title: Text(_.appTitle),
               actions: [
                 IconButton(
@@ -57,7 +59,7 @@ class HomePage extends StatelessWidget {
             body: _.currentPage,
             floatingActionButton: GetBuilder<CartController>(
               builder: (_floatCtrl) => Visibility(
-                visible: _floatCtrl.products.length != 0,
+                visible: _floatCtrl.carts.length != 0,
                 child: FloatingCartButton(),
               ),
             ),

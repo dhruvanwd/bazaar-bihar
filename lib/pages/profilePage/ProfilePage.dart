@@ -106,13 +106,13 @@ class _MapScreenState extends State<ProfilePage>
                                   ),
                                 ],
                               ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  _status ? _getEditIcon() : Container(),
-                                ],
-                              )
+                              // Column(
+                              //   mainAxisAlignment: MainAxisAlignment.end,
+                              //   mainAxisSize: MainAxisSize.min,
+                              //   children: <Widget>[
+                              //     _status ? _getEditIcon() : Container(),
+                              //   ],
+                              // )
                             ],
                           )),
                       Padding(

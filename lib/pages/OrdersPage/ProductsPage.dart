@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
@@ -5,14 +6,15 @@ import 'package:bazaar_bihar/components/FloatingCartButton.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/ProductCard.dart';
 
 class ProductsPage extends StatelessWidget {
-  const ProductsPage({Key? key}) : super(key: key);
+  ProductsPage({Key? key}) : super(key: key);
+  final ShopModel _shop = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GlobalController>(
       builder: (_) => Scaffold(
         appBar: AppBar(
-          title: Text('Shop Name'),
+          title: Text(_shop.name),
         ),
         floatingActionButton: FloatingCartButton(),
         body: Container(
@@ -20,7 +22,7 @@ class ProductsPage extends StatelessWidget {
           padding: EdgeInsets.all(8),
           child: GridView.count(
             crossAxisCount: 1,
-            crossAxisSpacing: 8.0,
+            crossAxisSpacing: 2.0,
             childAspectRatio: 1.1,
             children:
                 _.productsList.map((product) => ProductCard(product)).toList(),

@@ -3,10 +3,11 @@ import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 
 class AppBarMenu extends StatelessWidget {
+  final toggleDrawer;
+  AppBarMenu(this.toggleDrawer);
   @override
   Widget build(BuildContext context) {
     final profile = GlobalController.to.getStroageJson(EStorageKeys.PROFILE);
-
     return GetBuilder<GlobalController>(
         builder: (_) => SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 50.0),
@@ -33,19 +34,13 @@ class AppBarMenu extends StatelessWidget {
                     ),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed("/");
+                      toggleDrawer();
+                    },
                     leading: Icon(Icons.home, size: 20.0, color: Colors.white),
                     title: Text("Home"),
                     dense: true,
-                  ),
-                  ListTile(
-                    onTap: () {},
-                    leading: Icon(Icons.verified_user,
-                        size: 20.0, color: Colors.white),
-                    title: Text("Profile"),
-                    dense: true,
-
-                    // padding: EdgeInsets.zero,
                   ),
                   ListTile(
                     onTap: () {},
@@ -53,8 +48,6 @@ class AppBarMenu extends StatelessWidget {
                         size: 20.0, color: Colors.white),
                     title: Text("Wallet"),
                     dense: true,
-
-                    // padding: EdgeInsets.zero,
                   ),
                   ListTile(
                     onTap: () {},
@@ -62,8 +55,6 @@ class AppBarMenu extends StatelessWidget {
                         size: 20.0, color: Colors.white),
                     title: Text("Cart"),
                     dense: true,
-
-                    // padding: EdgeInsets.zero,
                   ),
                   ListTile(
                     onTap: () {},
@@ -71,8 +62,6 @@ class AppBarMenu extends StatelessWidget {
                         size: 20.0, color: Colors.white),
                     title: Text("Favorites"),
                     dense: true,
-
-                    // padding: EdgeInsets.zero,
                   ),
                   ListTile(
                     onTap: () {},
@@ -80,8 +69,6 @@ class AppBarMenu extends StatelessWidget {
                         Icon(Icons.settings, size: 20.0, color: Colors.white),
                     title: Text("Settings"),
                     dense: true,
-
-                    // padding: EdgeInsets.zero,
                   ),
                 ],
               ),

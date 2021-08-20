@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/components/CachedImageManager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
@@ -45,12 +46,7 @@ class ShopByCategory extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Expanded(
-                                  child: Image(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      _.createImageUrl(cat.image),
-                                    ),
-                                  ),
+                                  child: CachedImageMananger(cat.image),
                                 ),
                                 Container(
                                   child: Center(

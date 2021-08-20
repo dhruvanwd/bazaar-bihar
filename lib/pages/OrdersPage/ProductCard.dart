@@ -1,10 +1,9 @@
 import 'package:bazaar_bihar/models/ShopModels.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
-import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/models/ProductsModel.dart';
 
 class ProductCard extends StatelessWidget {
@@ -12,13 +11,11 @@ class ProductCard extends StatelessWidget {
   ProductCard(this.currentProduct);
   final ShopModel _shop = Get.arguments;
 
-  final _ = GlobalController.to;
-
   @override
   Widget build(BuildContext context) {
     print(_shop);
     return Card(
-      margin: EdgeInsets.only(bottom: 16),
+      margin: EdgeInsets.only(bottom: 16, right: 8, left: 8),
       clipBehavior: Clip.hardEdge,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
@@ -28,25 +25,7 @@ class ProductCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CarouselSlider(
-                  options: CarouselOptions(
-                    enlargeCenterPage: true,
-                    viewportFraction: 1,
-                    aspectRatio: 1,
-                    enableInfiniteScroll: false,
-                    height: 250,
-                    enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                  ),
-                  items: currentProduct.images
-                      .map(
-                        (image) => Image(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                            _.createImageUrl(image),
-                          ),
-                        ),
-                      )
-                      .toList()),
+              CarouselWithIndicator(currentProduct.images),
               Row(
                 children: [
                   Expanded(
@@ -119,15 +98,15 @@ class ProductCard extends StatelessWidget {
                     padding: EdgeInsets.only(right: 4),
                     child: GetBuilder<CartController>(
                       builder: (_cartCtrl) {
-                        final bool isAddedToCart = _cartCtrl.products
-                            .any((p) => p.id == currentProduct.id);
+                        final bool isAddedToCart =
+                            _cartCtrl.isproductAdded(_shop, currentProduct);
                         return IconButton(
                           color: Colors.deepOrange,
                           onPressed: () {
                             if (isAddedToCart) {
-                              _cartCtrl.removeProduct(currentProduct);
+                              _cartCtrl.removeProduct(_shop, currentProduct);
                             } else
-                              _cartCtrl.addProduct(currentProduct);
+                              _cartCtrl.addProduct(_shop, currentProduct);
                           },
                           icon: isAddedToCart
                               ? Icon(

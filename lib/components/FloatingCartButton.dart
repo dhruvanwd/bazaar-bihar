@@ -14,7 +14,7 @@ class FloatingCartButton extends StatelessWidget {
         },
         child: Badge(
           badgeContent: Text(
-            _.products.length.toString(),
+            _.carts.length.toString(),
             style: TextStyle(color: Colors.white),
           ),
           child: Icon(

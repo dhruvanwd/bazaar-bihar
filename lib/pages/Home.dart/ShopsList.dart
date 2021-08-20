@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
@@ -37,25 +37,7 @@ class ShopsList extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          CarouselSlider(
-                            options: CarouselOptions(
-                              enlargeCenterPage: true,
-                              viewportFraction: 1,
-                              aspectRatio: 1,
-                              height: 320,
-                              enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                            ),
-                            items: shop.images
-                                .map(
-                                  (image) => Image(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      _globalController.createImageUrl(image),
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
+                          CarouselWithIndicator(shop.images),
                           Container(
                             child: ListTile(
                               title: Text(shop.name),
