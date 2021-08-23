@@ -1,11 +1,7 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/pages/CartPage/ProductCartItem.dart';
-import 'package:bazaar_bihar/pages/Home.dart/ShopCard.dart';
-import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
-import 'package:bazaar_bihar/pages/OrdersPage/ProductCard.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
   final CartModel cart;

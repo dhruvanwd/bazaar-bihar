@@ -37,8 +37,33 @@ class GlobalController extends GetxController {
   updateTheme() {}
 
   logout() {
-    _localStorage.erase();
-    Get.off(LoginPage());
+    Get.defaultDialog(
+      title: "Logout ?",
+      middleText: "Are you sure. you want to logout?",
+      backgroundColor: Colors.grey.shade100,
+      titleStyle: TextStyle(color: Colors.brown),
+      middleTextStyle: TextStyle(color: Colors.brown),
+      confirm: TextButton(
+        onPressed: () {
+          _localStorage.erase();
+          Get.offAll(LoginPage());
+          Get.back();
+        },
+        child: Text(
+          "yes, Logout",
+          style: TextStyle(color: Colors.deepOrange),
+        ),
+      ),
+      cancel: TextButton(
+        onPressed: () {
+          Get.back();
+        },
+        child: Text(
+          "Close",
+          style: TextStyle(color: Colors.green),
+        ),
+      ),
+    );
   }
 
   get isUserLoggedIn {
