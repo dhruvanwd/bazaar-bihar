@@ -6,6 +6,7 @@ import 'package:bazaar_bihar/pages/Home.dart/HomePage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/ProductsPage.dart';
 import 'package:bazaar_bihar/pages/login-signup/SignupPage.dart';
 import 'package:bazaar_bihar/pages/login-signup/loginPage.dart';
+import 'pages/CartPage/CartCarousel.dart';
 import 'pages/Home.dart/ShopsPage.dart';
 
 void main() async {
@@ -25,6 +26,7 @@ void main() async {
         GetPage(name: '/signup', page: () => SignupPage()),
         GetPage(name: '/shops', page: () => ShopsPage()),
         GetPage(name: '/products', page: () => ProductsPage()),
+        GetPage(name: '/cart', page: () => CartCarousel()),
         GetPage(
           name: '/',
           page: () => HomePage(),

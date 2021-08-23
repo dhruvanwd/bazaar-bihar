@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/components/ImageError.dart';
 import 'package:bazaar_bihar/components/RandomImageLoaders.dart';
 import 'package:bazaar_bihar/models/ImagesModel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -14,7 +15,7 @@ class CachedImageMananger extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: _.createImageUrl(image),
       placeholder: (context, url) => RandomImageLoaders(),
-      errorWidget: (context, url, error) => Icon(Icons.error),
+      errorWidget: (context, url, error) => ImageError(),
     );
   }
 }

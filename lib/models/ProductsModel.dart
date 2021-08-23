@@ -13,19 +13,19 @@ String productModelToMap(List<ProductModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
 
 class ProductModel {
-  ProductModel({
-    required this.id,
-    required this.name,
-    required this.images,
-    required this.markedPrice,
-    required this.sellingPrice,
-    required this.quantity,
-    required this.description,
-    required this.categoryId,
-    required this.shopId,
-    required this.isInStock,
-    required this.unit,
-  });
+  ProductModel(
+      {required this.id,
+      required this.name,
+      required this.images,
+      required this.markedPrice,
+      required this.sellingPrice,
+      required this.quantity,
+      required this.description,
+      required this.categoryId,
+      required this.shopId,
+      required this.isInStock,
+      required this.unit,
+      this.cartItemCount = 0});
 
   String id;
   String name;
@@ -38,6 +38,7 @@ class ProductModel {
   String shopId;
   bool isInStock;
   String unit;
+  int cartItemCount;
 
   factory ProductModel.fromMap(Map<String, dynamic> json) => ProductModel(
         id: json["_id"],

@@ -7,6 +7,20 @@ class CartController extends GetxController {
   static CartController get to => Get.find();
   List<CartModel> carts = [];
 
+  incrProductCount(ProductModel product) {
+    product.cartItemCount++;
+    update();
+  }
+
+  decrProductCount(ProductModel product) {
+    if (product.cartItemCount > 1)
+      product.cartItemCount--;
+    else {
+      Get.snackbar("Count Can't be 0", "Incr Product");
+    }
+    update();
+  }
+
   bool isproductAdded(ShopModel shop, ProductModel product) {
     try {
       final tempCart = carts.firstWhere((cart) => cart.shop.id == shop.id);
@@ -21,11 +35,13 @@ class CartController extends GetxController {
   addProduct(ShopModel shop, ProductModel product) {
     try {
       CartModel foundCart = carts.firstWhere((cart) => cart.shop.id == shop.id);
+      product.cartItemCount++;
       foundCart.addProduct(product);
       print("updated existing cart");
     } catch (e) {
       final tempCartModel = CartModel(shop: shop);
       tempCartModel.addProduct(product);
+      product.cartItemCount++;
       carts.add(tempCartModel);
       print("created new cart with products");
     }

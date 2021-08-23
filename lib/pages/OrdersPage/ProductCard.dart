@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/components/ProductPriceInfo.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
 import 'package:flutter/material.dart';
@@ -62,34 +63,7 @@ class ProductCard extends StatelessWidget {
                         Padding(
                           padding:
                               EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Text.rich(
-                                  TextSpan(
-                                    text:
-                                        'MRP: ₹${currentProduct.markedPrice} ',
-                                    style: TextStyle(
-                                      decoration: TextDecoration.lineThrough,
-                                      decorationColor: Colors.red.shade500,
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                        text:
-                                            ' SP: ₹${currentProduct.sellingPrice}',
-                                        style: TextStyle(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.purple,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                            ],
-                          ),
+                          child: ProductPriceInfo(currentProduct),
                         )
                       ],
                     ),

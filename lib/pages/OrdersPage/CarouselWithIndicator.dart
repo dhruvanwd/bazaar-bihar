@@ -26,7 +26,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
               viewportFraction: 1,
               aspectRatio: 1,
               enableInfiniteScroll: false,
-              height: 250,
+              height: widget.images.length < 2 ? 250 : 230,
               enlargeStrategy: CenterPageEnlargeStrategy.scale,
               onPageChanged: (index, reason) {
                 setState(() {

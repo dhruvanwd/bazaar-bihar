@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/pages/Home.dart/ShopCard.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,25 +30,7 @@ class ShopsList extends StatelessWidget {
                       _globalController.fetchProductsByShopId(shop.id);
                       Get.toNamed('/products', arguments: shop);
                     },
-                    child: Card(
-                      margin: EdgeInsets.only(bottom: 16),
-                      clipBehavior: Clip.hardEdge,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        children: [
-                          CarouselWithIndicator(shop.images),
-                          Container(
-                            child: ListTile(
-                              title: Text(shop.name),
-                              trailing: Text('9:00 AM - 9:00 PM'),
-                              subtitle: Text(shop.addressLine1),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    child: ShopCard(shop),
                   ),
                 )
                 .toList()
