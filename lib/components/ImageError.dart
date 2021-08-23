@@ -19,6 +19,7 @@ class ImageError extends StatelessWidget {
           ),
           child: Text(
             "Image not found !",
+            textAlign: TextAlign.center,
             style: TextStyle(color: Colors.red, fontSize: 18),
           ),
         ),

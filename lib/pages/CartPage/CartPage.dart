@@ -20,7 +20,10 @@ class CartPage extends StatelessWidget {
           SliverAppBar(
             pinned: true,
             expandedHeight: 250,
-            title: Text(cart.shop.name),
+            title: Text(
+              cart.shop.name,
+              style: TextStyle(color: Colors.brown),
+            ),
             flexibleSpace: FlexibleSpaceBar(
               titlePadding: EdgeInsets.all(0),
               title: SingleChildScrollView(

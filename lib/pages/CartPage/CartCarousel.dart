@@ -11,6 +11,28 @@ class CartCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      persistentFooterButtons: [
+        Container(
+          width: Get.mediaQuery.size.width,
+          child: Row(
+            children: [
+              Expanded(
+                child: TextButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Get.theme.primaryColor),
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    "Checkout",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              )
+            ],
+          ),
+        )
+      ],
       body: Center(
         child: GetBuilder<CartController>(
           builder: (_catCtrl) => CarouselSlider(
@@ -21,7 +43,7 @@ class CartCarousel extends StatelessWidget {
               aspectRatio: 1,
               viewportFraction: 1,
               initialPage: 0,
-              enableInfiniteScroll: true,
+              reverse: true,
               autoPlayInterval: Duration(seconds: 3),
               autoPlayAnimationDuration: Duration(milliseconds: 800),
               autoPlayCurve: Curves.fastOutSlowIn,
