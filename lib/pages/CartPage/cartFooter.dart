@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
+import 'package:bazaar_bihar/components/StrechedPrimaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,25 +37,9 @@ cartFooter(CartController _catCtrl) {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Get.theme.primaryColor),
-                        ),
-                        onPressed: () {
-                          Get.offNamed("/checkout");
-                        },
-                        child: Text(
-                          "Checkout",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    )
-                  ],
-                )
+                StrechedPrimaryButton(() {
+                  Get.toNamed("/checkout");
+                }, "Checkout"),
               ],
             ),
           )

@@ -16,8 +16,8 @@ class CartAddressModel {
     required this.destinationContact,
     required this.addressLine1,
     required this.zipCode,
-    required this.streetName,
-    required this.nearBy,
+    required this.locality,
+    required this.receiverName,
   });
 
   String city;
@@ -25,27 +25,26 @@ class CartAddressModel {
   String destinationContact;
   String addressLine1;
   String zipCode;
-  String streetName;
-  String nearBy;
+  String locality;
+  String receiverName;
 
   factory CartAddressModel.fromJson(Map<String, dynamic> json) =>
       CartAddressModel(
-        city: json["city"],
-        state: json["state"],
-        destinationContact: json["destinationContact"],
-        addressLine1: json["AddressLine1"],
-        zipCode: json["zipCode"],
-        streetName: json["streetName"],
-        nearBy: json["nearBy"],
-      );
+          city: json["city"],
+          state: json["state"],
+          destinationContact: json["destinationContact"],
+          addressLine1: json["addressLine1"],
+          zipCode: json["zipCode"],
+          locality: json["locality"],
+          receiverName: json['receiverName']);
 
   Map<String, dynamic> toJson() => {
         "city": city,
         "state": state,
         "destinationContact": destinationContact,
-        "AddressLine1": addressLine1,
+        "addressLine1": addressLine1,
         "zipCode": zipCode,
-        "streetName": streetName,
-        "nearBy": nearBy,
+        "locality": locality,
+        "receiverName": receiverName
       };
 }
