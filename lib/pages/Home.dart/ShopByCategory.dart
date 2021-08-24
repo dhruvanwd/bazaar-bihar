@@ -29,7 +29,7 @@ class ShopByCategory extends StatelessWidget {
                       child: InkWell(
                         onTap: () {
                           _.fetchShops(cat.id);
-                          Get.toNamed('/shops');
+                          Get.toNamed('/shops', arguments: cat);
                         },
                         child: Card(
                           clipBehavior: Clip.hardEdge,

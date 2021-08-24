@@ -3,6 +3,7 @@ import 'package:bazaar_bihar/components/CachedImageManager.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/pages/CartPage/ProductCartItem.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
   final CartModel cart;
@@ -33,11 +34,13 @@ class CartPage extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-                (content, index) => ProductCartItem(
-                      cart.products[index],
-                    ),
-                childCount: cart.products.length),
-          )
+              (content, index) => ProductCartItem(
+                cart.products[index],
+              ),
+              childCount: cart.products.length,
+            ),
+          ),
+          SliverPadding(padding: EdgeInsets.only(bottom: 200))
         ],
       ),
     );

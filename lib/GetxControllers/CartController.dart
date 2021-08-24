@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/GetxControllers/UserAddresses.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:get/get.dart';
@@ -61,7 +62,12 @@ class CartController extends GetxController {
     } catch (e) {
       print("This product is not added to cart");
     }
-
     update();
+  }
+
+  @override
+  void onInit() {
+    Get.put(UserAddressesCtrl());
+    super.onInit();
   }
 }

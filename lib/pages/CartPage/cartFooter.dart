@@ -44,7 +44,9 @@ cartFooter(CartController _catCtrl) {
                           backgroundColor:
                               MaterialStateProperty.all(Get.theme.primaryColor),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offNamed("/checkout");
+                        },
                         child: Text(
                           "Checkout",
                           style: TextStyle(color: Colors.white),

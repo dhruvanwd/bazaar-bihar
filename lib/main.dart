@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -27,6 +28,7 @@ void main() async {
         GetPage(name: '/shops', page: () => ShopsPage()),
         GetPage(name: '/products', page: () => ProductsPage()),
         GetPage(name: '/cart', page: () => CartCarousel()),
+        GetPage(name: '/checkout', page: () => CheckoutCart()),
         GetPage(
           name: '/',
           page: () => HomePage(),
