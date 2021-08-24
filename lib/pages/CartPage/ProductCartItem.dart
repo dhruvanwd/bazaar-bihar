@@ -52,14 +52,13 @@ class ProductCartItem extends StatelessWidget {
                   Card(
                     child: Row(
                       children: [
-                        Container(
-                          child: IconButton(
-                              padding: EdgeInsets.all(0),
-                              iconSize: 20,
-                              onPressed: () {
-                                _cartCtrl.incrProductCount(product);
-                              },
-                              icon: Icon(Icons.add)),
+                        IconButton(
+                          padding: EdgeInsets.all(0),
+                          iconSize: 20,
+                          onPressed: () {
+                            _cartCtrl.incrProductCount(product);
+                          },
+                          icon: Icon(Icons.add),
                         ),
                         Container(
                           child: Text(
@@ -67,15 +66,13 @@ class ProductCartItem extends StatelessWidget {
                             style: Get.theme.textTheme.subtitle1,
                           ),
                         ),
-                        Container(
-                          child: IconButton(
-                            padding: EdgeInsets.all(0),
-                            iconSize: 20,
-                            onPressed: () {
-                              _cartCtrl.decrProductCount(product);
-                            },
-                            icon: Icon(Icons.remove),
-                          ),
+                        IconButton(
+                          padding: EdgeInsets.all(0),
+                          iconSize: 20,
+                          onPressed: () {
+                            _cartCtrl.decrProductCount(product);
+                          },
+                          icon: Icon(Icons.remove),
                         ),
                       ],
                     ),

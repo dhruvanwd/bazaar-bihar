@@ -16,6 +16,7 @@ class CartPage extends StatelessWidget {
           SliverAppBar(
             pinned: true,
             expandedHeight: 250,
+            stretch: true,
             title: Text(
               cart.shop.name,
               style: TextStyle(color: Colors.brown),
@@ -23,6 +24,7 @@ class CartPage extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               titlePadding: EdgeInsets.all(0),
               title: SingleChildScrollView(
+                padding: EdgeInsets.all(0),
                 child: CachedImageMananger(
                   cart.shop.images[0],
                 ),

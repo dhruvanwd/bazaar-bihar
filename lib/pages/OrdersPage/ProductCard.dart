@@ -10,11 +10,10 @@ import 'package:bazaar_bihar/models/ProductsModel.dart';
 class ProductCard extends StatelessWidget {
   final ProductModel currentProduct;
   ProductCard(this.currentProduct);
-  final ShopModel _shop = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-    print(_shop);
+    final ShopModel _shop = Get.arguments;
     return Card(
       margin: EdgeInsets.only(bottom: 16, right: 8, left: 8),
       clipBehavior: Clip.hardEdge,

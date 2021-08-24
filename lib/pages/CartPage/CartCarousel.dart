@@ -22,9 +22,9 @@ class CartCarousel extends StatelessWidget {
                   carouselController: buttonCarouselController,
                   options: CarouselOptions(
                     height: Get.mediaQuery.size.height,
-                    aspectRatio: 1,
                     viewportFraction: 1,
                     initialPage: 0,
+                    enableInfiniteScroll: false,
                     reverse: true,
                     autoPlayInterval: Duration(seconds: 3),
                     autoPlayAnimationDuration: Duration(milliseconds: 800),
