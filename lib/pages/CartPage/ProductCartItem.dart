@@ -13,7 +13,7 @@ class ProductCartItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CartController>(
         builder: (_cartCtrl) => Container(
-              margin: EdgeInsets.only(bottom: 8, left: 8, right: 8),
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                   color: Colors.grey.shade200,
                   shape: BoxShape.rectangle,

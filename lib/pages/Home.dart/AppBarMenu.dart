@@ -50,7 +50,10 @@ class AppBarMenu extends StatelessWidget {
                     dense: true,
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed("/cart");
+                      toggleDrawer();
+                    },
                     leading: Icon(Icons.shopping_cart,
                         size: 20.0, color: Colors.white),
                     title: Text("Cart"),

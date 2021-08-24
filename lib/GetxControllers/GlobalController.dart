@@ -39,10 +39,10 @@ class GlobalController extends GetxController {
   logout() {
     Get.defaultDialog(
       title: "Logout ?",
+      titlePadding: EdgeInsets.only(top: 20, bottom: 10),
       middleText: "Are you sure. you want to logout?",
       backgroundColor: Colors.grey.shade100,
       titleStyle: TextStyle(color: Colors.brown),
-      middleTextStyle: TextStyle(color: Colors.brown),
       confirm: TextButton(
         onPressed: () {
           _localStorage.erase();
