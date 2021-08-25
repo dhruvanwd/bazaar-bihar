@@ -41,19 +41,19 @@ class ProductModel {
   int cartItemCount;
 
   factory ProductModel.fromMap(Map<String, dynamic> json) => ProductModel(
-        id: json["_id"],
-        name: json["name"],
-        images: List<ImageModel>.from(
-            json["images"].map((x) => ImageModel.fromJson(x))),
-        markedPrice: json["markedPrice"],
-        sellingPrice: json["sellingPrice"],
-        quantity: json["quantity"],
-        description: json["description"],
-        categoryId: json["categoryId"],
-        shopId: json["shopId"],
-        isInStock: json["isInStock"],
-        unit: json["unit"],
-      );
+      id: json["_id"],
+      name: json["name"],
+      images: List<ImageModel>.from(
+          json["images"].map((x) => ImageModel.fromJson(x))),
+      markedPrice: json["markedPrice"],
+      sellingPrice: json["sellingPrice"],
+      quantity: json["quantity"],
+      description: json["description"],
+      categoryId: json["categoryId"],
+      shopId: json["shopId"],
+      isInStock: json["isInStock"],
+      unit: json["unit"],
+      cartItemCount: json['cartItemCount'] ?? 0);
 
   Map<String, dynamic> toMap() => {
         "_id": id,
@@ -67,5 +67,6 @@ class ProductModel {
         "shopId": shopId,
         "isInStock": isInStock,
         "unit": unit,
+        "cartItemCount": cartItemCount
       };
 }

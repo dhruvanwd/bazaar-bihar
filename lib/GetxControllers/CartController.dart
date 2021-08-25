@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/UserAddresses.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
@@ -8,8 +9,16 @@ class CartController extends GetxController {
   static CartController get to => Get.find();
   List<CartModel> carts = [];
 
+  updateCartState() {
+    final cartsJsonList = carts.map((cart) => cart.toJson()).toList();
+    print(cartsJsonList);
+    GlobalController.to
+        .updateStorage(EStorageKeys.CART, {"cart": cartsJsonList});
+  }
+
   incrProductCount(ProductModel product) {
     product.cartItemCount++;
+    updateCartState();
     update();
   }
 
@@ -19,6 +28,7 @@ class CartController extends GetxController {
     else {
       Get.snackbar("Count Can't be 0", "Incr Product");
     }
+    updateCartState();
     update();
   }
 
@@ -40,12 +50,13 @@ class CartController extends GetxController {
       foundCart.addProduct(product);
       print("updated existing cart");
     } catch (e) {
-      final tempCartModel = CartModel(shop: shop);
+      final tempCartModel = CartModel(shop: shop, products: []);
       tempCartModel.addProduct(product);
       product.cartItemCount++;
       carts.add(tempCartModel);
       print("created new cart with products");
     }
+    updateCartState();
     update();
   }
 
@@ -62,12 +73,26 @@ class CartController extends GetxController {
     } catch (e) {
       print("This product is not added to cart");
     }
+    updateCartState();
     update();
+  }
+
+  restoreOfflineCartData() {
+    final Map? cartsJson =
+        GlobalController.to.getStroageJson(EStorageKeys.CART);
+    print("restoreOfflineCartData...........!");
+    print(cartsJson);
+    if (cartsJson != null) {
+      final List cartsJsonList = List.from(cartsJson['cart']);
+      cartsJsonList
+          .forEach((cartJson) => {carts.add(CartModel.fromMap(cartJson))});
+    }
   }
 
   @override
   void onInit() {
     Get.put(UserAddressesCtrl());
+    restoreOfflineCartData();
     super.onInit();
   }
 }
