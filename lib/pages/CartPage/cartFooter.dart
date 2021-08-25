@@ -1,16 +1,10 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
-import 'package:bazaar_bihar/components/StrechedPrimaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-cartFooter(CartController _catCtrl) {
-  double totalMrp = 0.0;
-  double totalSp = 0.0;
-
-  _catCtrl.carts.forEach((cart) => cart.products.forEach((product) {
-        totalMrp += double.parse(product.markedPrice) * product.cartItemCount;
-        totalSp += double.parse(product.sellingPrice) * product.cartItemCount;
-      }));
+cartFooter(Widget actionBtn) {
+  final _catCtrl = CartController.to;
+  Map orderPriceInfo = _catCtrl.getOrderPriceSummary();
   return [
     _catCtrl.carts.length > 0
         ? Container(
@@ -21,14 +15,14 @@ cartFooter(CartController _catCtrl) {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "Total MRP: ₹$totalMrp",
+                      "Total MRP: ₹${orderPriceInfo['totalMrp']}",
                       style: TextStyle(
                         decoration: TextDecoration.lineThrough,
                         decorationColor: Colors.red.shade500,
                       ),
                     ),
                     Text(
-                      "Payable amount: ₹$totalSp",
+                      "Payable amount: ₹${orderPriceInfo['totalSp']}",
                       style: TextStyle(
                         decoration: TextDecoration.none,
                         color: Colors.purple,
@@ -37,9 +31,7 @@ cartFooter(CartController _catCtrl) {
                     ),
                   ],
                 ),
-                StrechedPrimaryButton(() {
-                  Get.toNamed("/checkout");
-                }, "Checkout"),
+                actionBtn,
               ],
             ),
           )

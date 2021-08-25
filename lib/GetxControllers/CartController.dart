@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
 import 'package:bazaar_bihar/GetxControllers/UserAddresses.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
@@ -20,6 +21,17 @@ class CartController extends GetxController {
     product.cartItemCount++;
     updateCartState();
     update();
+  }
+
+  getOrderPriceSummary() {
+    double totalMrp = 0.0;
+    double totalSp = 0.0;
+    carts.forEach((cart) => cart.products.forEach((product) {
+          totalMrp += double.parse(product.markedPrice) * product.cartItemCount;
+          totalSp += double.parse(product.sellingPrice) * product.cartItemCount;
+        }));
+
+    return Map.from({"totalMrp": totalMrp, "totalSp": totalSp});
   }
 
   decrProductCount(ProductModel product) {
@@ -77,11 +89,15 @@ class CartController extends GetxController {
     update();
   }
 
+  emptyCart() {
+    carts = [];
+    updateCartState();
+    update();
+  }
+
   restoreOfflineCartData() {
     final Map? cartsJson =
         GlobalController.to.getStroageJson(EStorageKeys.CART);
-    print("restoreOfflineCartData...........!");
-    print(cartsJson);
     if (cartsJson != null) {
       final List cartsJsonList = List.from(cartsJson['cart']);
       cartsJsonList
@@ -92,6 +108,7 @@ class CartController extends GetxController {
   @override
   void onInit() {
     Get.put(UserAddressesCtrl());
+    Get.put(PaymentController());
     restoreOfflineCartData();
     super.onInit();
   }

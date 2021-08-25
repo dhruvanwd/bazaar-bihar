@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
+import 'package:bazaar_bihar/components/StrechedPrimaryButton.dart';
 import 'package:bazaar_bihar/pages/CartPage/cartFooter.dart';
 import 'package:bazaar_bihar/pages/CartPage/CartPage.dart';
 import 'package:bazaar_bihar/pages/CartPage/emptyCart.dart';
@@ -14,7 +15,11 @@ class CartCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CartController>(
       builder: (_catCtrl) => Scaffold(
-        persistentFooterButtons: cartFooter(_catCtrl),
+        persistentFooterButtons: cartFooter(
+          StrechedPrimaryButton(() {
+            Get.toNamed("/checkout");
+          }, "Checkout"),
+        ),
         body: Center(
           child: _catCtrl.carts.length > 0
               ? CarouselSlider(
