@@ -1,3 +1,5 @@
+import 'package:bazaar_bihar/GetxControllers/CartController.dart';
+import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +15,8 @@ import 'pages/Home.dart/ShopsPage.dart';
 void main() async {
   await GetStorage.init();
   final globalController = Get.put(GlobalController());
+  Get.put(HomePageController());
+  Get.put(CartController());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

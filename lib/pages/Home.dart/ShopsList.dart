@@ -1,5 +1,4 @@
 import 'package:bazaar_bihar/pages/Home.dart/ShopCard.dart';
-import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';

@@ -1,13 +1,10 @@
-import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/components/CachedImageManager.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/pages/CartPage/ProductCartItem.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
   final CartModel cart;
-  final _ = GlobalController.to;
   CartPage(this.cart);
   @override
   Widget build(BuildContext context) {

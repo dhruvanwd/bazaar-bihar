@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:bazaar_bihar/GetxControllers/CartController.dart';
-import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
 import 'package:bazaar_bihar/Utils/ApiService.dart';
 import 'package:bazaar_bihar/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/models/CategoryModel.dart';
@@ -13,10 +11,7 @@ import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:bazaar_bihar/pages/login-signup/LoginPage.dart';
 import 'package:connectivity/connectivity.dart';
 
-enum EStorageKeys {
-  PROFILE,
-  SETTINGS,
-}
+enum EStorageKeys { PROFILE, SETTINGS, CART, CART_ADDRESS }
 
 class GlobalController extends GetxController {
   static GlobalController get to => Get.find();
@@ -31,6 +26,10 @@ class GlobalController extends GetxController {
       return "profile";
     } else if (key == EStorageKeys.SETTINGS) {
       return 'settings';
+    } else if (key == EStorageKeys.CART) {
+      return 'cart';
+    } else if (key == EStorageKeys.CART_ADDRESS) {
+      return 'addresses';
     }
   }
 
@@ -125,8 +124,6 @@ class GlobalController extends GetxController {
 
   @override
   void onInit() {
-    Get.put(HomePageController());
-    Get.put(CartController());
     checkNetworkConnectivity();
     fetchCategories();
     super.onInit();

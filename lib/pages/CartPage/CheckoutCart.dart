@@ -1,7 +1,6 @@
 import 'package:bazaar_bihar/GetxControllers/UserAddresses.dart';
 import 'package:bazaar_bihar/models/CartAddressModel.dart';
 import 'package:bazaar_bihar/pages/CartPage/CartAddressForm.dart';
-import 'package:bazaar_bihar/pages/login-signup/appTitle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
