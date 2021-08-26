@@ -13,6 +13,7 @@ class CachedImageMananger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
+      fit: BoxFit.cover,
       imageUrl: _.createImageUrl(image),
       placeholder: (context, url) => RandomImageLoaders(),
       errorWidget: (context, url, error) => ImageError(),

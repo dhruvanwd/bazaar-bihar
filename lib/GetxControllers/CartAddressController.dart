@@ -17,7 +17,6 @@ class CartAddressController extends GetxController {
       "addresses": addressJsonList,
       "selectedAddres": selectedAddres?.toJson()
     });
-    print("updateOfflineAddressData...........!");
   }
 
   void updateSelectedAddress(CartAddressModel address) {
@@ -57,7 +56,6 @@ class CartAddressController extends GetxController {
       if (selectedAddres == addr) {
         selectedAddres = null;
       }
-
       updateOfflineAddressData();
       update();
     } catch (e) {
@@ -77,9 +75,26 @@ class CartAddressController extends GetxController {
     }
   }
 
+  fetchCartAddresses() async {
+    if (cartAdresses.length != 0) return;
+    final profile = GlobalController.to.getStroageJson(EStorageKeys.PROFILE);
+    final resp = await _apiInstance.fetchData(RequestBody(
+        amendType: 'findOne',
+        collectionName: 'cart_addresses',
+        payload: {"ownerId": profile['_id']}));
+    print("cart addresses..............!");
+    List addresses = resp.data;
+    addresses.forEach((addr) {
+      cartAdresses.add(cartAddressModelFromJson(addr));
+    });
+    updateOfflineAddressData();
+    update();
+  }
+
   @override
   void onInit() {
     restoreOfflineAddressData();
+    fetchCartAddresses();
     super.onInit();
   }
 }

@@ -8,11 +8,10 @@ import 'package:bazaar_bihar/pages/OrdersPage/ProductCard.dart';
 class ProductsPage extends StatelessWidget {
   ProductsPage({Key? key}) : super(key: key);
   final ShopModel _shop = Get.arguments;
+  final screenWidth = Get.mediaQuery.size.width;
 
   @override
   Widget build(BuildContext context) {
-    print(Get.mediaQuery.size.height);
-    print(Get.mediaQuery.size.width);
     return GetBuilder<GlobalController>(
       builder: (_) => Scaffold(
         appBar: AppBar(
@@ -25,7 +24,7 @@ class ProductsPage extends StatelessWidget {
           child: GridView.count(
             crossAxisCount: 1,
             crossAxisSpacing: 2.0,
-            childAspectRatio: 1,
+            childAspectRatio: screenWidth < 365 ? 1 : 1.1,
             children:
                 _.productsList.map((product) => ProductCard(product)).toList(),
           ),
