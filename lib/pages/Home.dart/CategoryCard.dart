@@ -55,7 +55,7 @@ class _CategoryCardState extends State<CategoryCard> {
                     child: Text(
                       cat.name,
                       softWrap: false,
-                      overflow: TextOverflow.visible,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ),

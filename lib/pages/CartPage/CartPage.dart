@@ -2,6 +2,7 @@ import 'package:bazaar_bihar/components/CachedImageManager.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/pages/CartPage/ProductCartItem.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
   final CartModel cart;
@@ -15,9 +16,10 @@ class CartPage extends StatelessWidget {
             pinned: true,
             expandedHeight: 250,
             stretch: true,
+            toolbarTextStyle: TextStyle(color: Colors.green),
             title: Text(
               cart.shop.name,
-              style: TextStyle(color: Colors.brown),
+              style: TextStyle(color: Get.theme.primaryColor),
             ),
             flexibleSpace: FlexibleSpaceBar(
               titlePadding: EdgeInsets.all(0),

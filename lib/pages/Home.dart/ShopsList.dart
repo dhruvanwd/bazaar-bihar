@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/pages/Home.dart/ShopCard.dart';
+import 'package:bazaar_bihar/pages/Home.dart/ShopUnavailable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
@@ -34,13 +35,7 @@ class ShopsList extends StatelessWidget {
                   ),
                 )
                 .toList()
-            : [
-                Container(
-                  child: Center(
-                    child: Text("No shop found...."),
-                  ),
-                )
-              ],
+            : [ShopUnavailable()],
       ),
     );
   }

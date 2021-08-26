@@ -13,6 +13,7 @@ class ProductCartItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CartController>(
         builder: (_cartCtrl) => Container(
+              width: Get.mediaQuery.size.width,
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                   color: Colors.grey.shade200,
@@ -26,57 +27,68 @@ class ProductCartItem extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 2),
                     child: CachedImageMananger(product.images[0]),
                   ),
-                  Container(
-                    width: Get.mediaQuery.size.width - 250,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(2),
-                          child: Text(
-                            product.name,
-                            style: Get.theme.textTheme.subtitle1!
-                                .copyWith(color: Get.theme.primaryColor),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                          child: Padding(
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
                             padding: EdgeInsets.all(2),
-                            child: ProductPriceInfo(product),
+                            child: Text(
+                              product.name,
+                              style: Get.theme.textTheme.subtitle1!
+                                  .copyWith(color: Get.theme.primaryColor),
+                            ),
                           ),
-                        )
-                      ],
+                          SizedBox(
+                            height: 30,
+                            child: Padding(
+                              padding: EdgeInsets.all(2),
+                              child: ProductPriceInfo(product),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  Card(
-                    child: Row(
-                      children: [
-                        IconButton(
-                          padding: EdgeInsets.all(0),
-                          iconSize: 20,
-                          onPressed: () {
-                            _cartCtrl.incrProductCount(product);
-                          },
-                          icon: Icon(Icons.add),
+                  Column(
+                    children: [
+                      Card(
+                        child: Row(
+                          children: [
+                            IconButton(
+                              padding: EdgeInsets.all(0),
+                              iconSize: 20,
+                              onPressed: () {
+                                _cartCtrl.incrProductCount(product);
+                              },
+                              icon: Icon(Icons.add),
+                            ),
+                            Container(
+                              child: Text(
+                                "${product.cartItemCount}",
+                                style: Get.theme.textTheme.subtitle1,
+                              ),
+                            ),
+                            IconButton(
+                              padding: EdgeInsets.all(0),
+                              iconSize: 20,
+                              onPressed: () {
+                                _cartCtrl.decrProductCount(product);
+                              },
+                              icon: Icon(Icons.remove),
+                            ),
+                          ],
                         ),
-                        Container(
-                          child: Text(
-                            "${product.cartItemCount}",
-                            style: Get.theme.textTheme.subtitle1,
-                          ),
-                        ),
-                        IconButton(
-                          padding: EdgeInsets.all(0),
-                          iconSize: 20,
-                          onPressed: () {
-                            _cartCtrl.decrProductCount(product);
-                          },
-                          icon: Icon(Icons.remove),
-                        ),
-                      ],
-                    ),
-                  )
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 4),
+                        child: Text(
+                            "Total: ${double.parse(product.sellingPrice) * product.cartItemCount}"),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ));
