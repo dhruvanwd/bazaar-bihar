@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/components/CachedImageManager.dart';
+import 'package:bazaar_bihar/pages/Home.dart/CategoryCard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
@@ -24,41 +25,7 @@ class ShopByCategory extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: _.categories
                   .map(
-                    (cat) => SizedBox(
-                      width: 90,
-                      child: InkWell(
-                        onTap: () {
-                          _.fetchShops(cat.id);
-                          Get.toNamed('/shops', arguments: cat);
-                        },
-                        child: Card(
-                          clipBehavior: Clip.hardEdge,
-                          color: Colors.grey.shade200,
-                          elevation: 2,
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(8),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: CachedImageMananger(cat.image),
-                                ),
-                                Container(
-                                  child: Center(
-                                    child: Text(cat.name),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    (cat) => CategoryCard(cat),
                   )
                   .toList(),
             ),
