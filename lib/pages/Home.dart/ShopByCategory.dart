@@ -1,4 +1,3 @@
-import 'package:bazaar_bihar/components/CachedImageManager.dart';
 import 'package:bazaar_bihar/pages/Home.dart/CategoryCard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

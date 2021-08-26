@@ -16,6 +16,7 @@ class CartAddressModel {
     required this.zipCode,
     required this.locality,
     required this.receiverName,
+    required this.id,
   });
 
   String city;
@@ -25,6 +26,7 @@ class CartAddressModel {
   String zipCode;
   String locality;
   String receiverName;
+  String id;
 
   factory CartAddressModel.fromJson(Map<String, dynamic> json) =>
       CartAddressModel(
@@ -34,6 +36,7 @@ class CartAddressModel {
           addressLine1: json["addressLine1"],
           zipCode: json["zipCode"],
           locality: json["locality"],
+          id: json['_id'],
           receiverName: json['receiverName']);
 
   Map<String, dynamic> toJson() => {
@@ -43,6 +46,7 @@ class CartAddressModel {
         "addressLine1": addressLine1,
         "zipCode": zipCode,
         "locality": locality,
-        "receiverName": receiverName
+        "receiverName": receiverName,
+        "_id": id
       };
 }

@@ -48,9 +48,7 @@ class _CategoryCardState extends State<CategoryCard> {
                 bottom: 0,
                 child: Container(
                   color: Colors.white60,
-                  padding: EdgeInsets.symmetric(
-                    vertical: 2,
-                  ),
+                  padding: EdgeInsets.symmetric(vertical: 2, horizontal: 1),
                   child: Center(
                     child: Text(
                       cat.name,

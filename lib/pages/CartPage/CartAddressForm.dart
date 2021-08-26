@@ -1,4 +1,6 @@
-import 'package:bazaar_bihar/GetxControllers/UserAddresses.dart';
+import 'dart:math';
+
+import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/components/StrechedPrimaryButton.dart';
 import 'package:bazaar_bihar/models/CartAddressModel.dart';
 import 'package:easy_mask/easy_mask.dart';
@@ -16,6 +18,7 @@ class CartAddressForm extends StatelessWidget {
   final _addressLine1Controller = TextEditingController();
   final _mobileController = TextEditingController();
   final _nameController = TextEditingController();
+  final rand = Random();
 
   onCreateAddress() {
     if (_formKey.currentState!.validate()) {
@@ -27,10 +30,11 @@ class CartAddressForm extends StatelessWidget {
         "destinationContact": _mobileController.text,
         "addressLine1": _addressLine1Controller.text,
         "locality": _localityController.text,
-        "receiverName": _nameController.text
+        "receiverName": _nameController.text,
+        "_id": "tempId${rand.nextDouble()}"
       };
       print(addressDetail);
-      UserAddressesCtrl.to
+      CartAddressController.to
           .addNewAddress(cartAddressModelFromJson(addressDetail));
     }
   }
@@ -39,7 +43,7 @@ class CartAddressForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black26,
-        body: GetBuilder<UserAddressesCtrl>(
+        body: GetBuilder<CartAddressController>(
           builder: (_addressCtrl) => Center(
             child: SizedBox(
               height: Get.mediaQuery.size.height - 150,

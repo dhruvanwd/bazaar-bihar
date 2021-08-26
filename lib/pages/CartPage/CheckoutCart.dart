@@ -1,5 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
-import 'package:bazaar_bihar/GetxControllers/UserAddresses.dart';
+import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/components/StrechedPrimaryButton.dart';
 import 'package:bazaar_bihar/models/CartAddressModel.dart';
 import 'package:bazaar_bihar/pages/CartPage/CartAddressForm.dart';
@@ -12,7 +12,7 @@ class CheckoutCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UserAddressesCtrl>(
+    return GetBuilder<CartAddressController>(
       builder: (_addressCtrl) => Scaffold(
         appBar: AppBar(
           title: Text("Confirm order"),
@@ -48,15 +48,18 @@ class CheckoutCart extends StatelessWidget {
                   child: ListView.builder(
                       itemCount: _addressCtrl.cartAdresses.length,
                       itemBuilder: (context, index) {
-                        print("showing address------------");
                         final address = _addressCtrl.cartAdresses[index];
-                        print(address.toJson());
                         return RadioListTile(
                           dense: true,
                           value: address,
                           groupValue: _addressCtrl.selectedAddres,
                           title: Text("${address.addressLine1}"),
                           subtitle: Text("${address.receiverName}"),
+                          secondary: IconButton(
+                              onPressed: () {
+                                _addressCtrl.deleteUserAddress(address);
+                              },
+                              icon: Icon(Icons.delete_sharp)),
                           onChanged: (CartAddressModel? address) {
                             if (address != null) {
                               _addressCtrl.updateSelectedAddress(address);

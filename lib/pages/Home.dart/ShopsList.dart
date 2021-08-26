@@ -11,6 +11,7 @@ class ShopsList extends StatelessWidget {
   final List<ShopModel> shopsList;
   final PageController _pageController = PageController();
   final GlobalController _globalController = GlobalController.to;
+  final screenWidth = Get.mediaQuery.size.width;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +23,7 @@ class ShopsList extends StatelessWidget {
         pageController: _pageController,
         type: StackedCardCarouselType.fadeOutStack,
         initialOffset: 16,
-        spaceBetweenItems: 350,
+        spaceBetweenItems: screenWidth < 365 ? 300 : 350,
         items: shopsList.length != 0
             ? shopsList
                 .map(

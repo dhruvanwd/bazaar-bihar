@@ -16,8 +16,7 @@ enum EStorageKeys { PROFILE, SETTINGS, CART, CART_ADDRESS }
 class GlobalController extends GetxController {
   static GlobalController get to => Get.find();
   ThemeMode get themeMode => ThemeMode.system;
-  final ApiRequest apiRequestInstance =
-      ApiRequest(baseUrl: 'http://52.14.49.133:8000');
+  final ApiRequest apiRequestInstance = ApiRequest();
 
   final _localStorage = GetStorage();
 

@@ -11,6 +11,8 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(Get.mediaQuery.size.height);
+    print(Get.mediaQuery.size.width);
     return GetBuilder<GlobalController>(
       builder: (_) => Scaffold(
         appBar: AppBar(
@@ -23,7 +25,7 @@ class ProductsPage extends StatelessWidget {
           child: GridView.count(
             crossAxisCount: 1,
             crossAxisSpacing: 2.0,
-            childAspectRatio: 1.1,
+            childAspectRatio: 1,
             children:
                 _.productsList.map((product) => ProductCard(product)).toList(),
           ),

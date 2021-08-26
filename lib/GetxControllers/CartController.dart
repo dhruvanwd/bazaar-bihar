@@ -1,6 +1,6 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
-import 'package:bazaar_bihar/GetxControllers/UserAddresses.dart';
+import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:get/get.dart';
@@ -107,7 +107,7 @@ class CartController extends GetxController {
 
   @override
   void onInit() {
-    Get.put(UserAddressesCtrl());
+    Get.put(CartAddressController());
     Get.put(PaymentController());
     restoreOfflineCartData();
     super.onInit();
