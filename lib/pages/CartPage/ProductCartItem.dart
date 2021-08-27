@@ -54,32 +54,35 @@ class ProductCartItem extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Card(
-                        child: Row(
-                          children: [
-                            IconButton(
-                              padding: EdgeInsets.all(0),
-                              iconSize: 20,
-                              onPressed: () {
-                                _cartCtrl.incrProductCount(product);
-                              },
-                              icon: Icon(Icons.add),
-                            ),
-                            Container(
-                              child: Text(
-                                "${product.cartItemCount}",
-                                style: Get.theme.textTheme.subtitle1,
+                      SizedBox(
+                        height: 50,
+                        child: Card(
+                          child: Row(
+                            children: [
+                              IconButton(
+                                padding: EdgeInsets.all(0),
+                                iconSize: 20,
+                                onPressed: () {
+                                  _cartCtrl.incrProductCount(product);
+                                },
+                                icon: Icon(Icons.add),
                               ),
-                            ),
-                            IconButton(
-                              padding: EdgeInsets.all(0),
-                              iconSize: 20,
-                              onPressed: () {
-                                _cartCtrl.decrProductCount(product);
-                              },
-                              icon: Icon(Icons.remove),
-                            ),
-                          ],
+                              Container(
+                                child: Text(
+                                  "${product.cartItemCount}",
+                                  style: Get.theme.textTheme.subtitle1,
+                                ),
+                              ),
+                              IconButton(
+                                padding: EdgeInsets.all(0),
+                                iconSize: 20,
+                                onPressed: () {
+                                  _cartCtrl.decrProductCount(product);
+                                },
+                                icon: Icon(Icons.remove),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Padding(

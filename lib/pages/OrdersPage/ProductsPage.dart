@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/components/ShopUnavailable.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,8 +26,9 @@ class ProductsPage extends StatelessWidget {
             crossAxisCount: 1,
             crossAxisSpacing: 2.0,
             childAspectRatio: screenWidth < 365 ? 1 : 1.1,
-            children:
-                _.productsList.map((product) => ProductCard(product)).toList(),
+            children: _.productsList.length > 0
+                ? _.productsList.map((product) => ProductCard(product)).toList()
+                : [ShopUnavailable("No product found....")],
           ),
         ),
       ),

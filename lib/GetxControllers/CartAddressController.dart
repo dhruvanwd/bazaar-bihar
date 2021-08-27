@@ -37,6 +37,7 @@ class CartAddressController extends GetxController {
         collectionName: "cart_addresses",
         payload: [jsonCartAddress]));
     print(resp.data['ops'][0]);
+    Get.back();
     return cartAddressModelFromJson(resp.data['ops'][0]);
   }
 
@@ -46,7 +47,6 @@ class CartAddressController extends GetxController {
     Get.snackbar("Address added", '');
     selectedAddres = address;
     updateOfflineAddressData();
-    Get.back();
     update();
   }
 

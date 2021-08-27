@@ -131,6 +131,11 @@ class GlobalController extends GetxController {
   List<ShopModel> shopsList = [];
   List<ShopModel> shopsListByCatId = [];
 
+  clearCurrentShop() {
+    shopsListByCatId = [];
+    update();
+  }
+
   fetchShops(String? categoryId) async {
     final userProfile = getStroageJson(EStorageKeys.PROFILE);
     final Map<String, dynamic> payload = {
@@ -158,6 +163,11 @@ class GlobalController extends GetxController {
     } else {
       shopsListByCatId = shopModelFromJson(resp.data);
     }
+    update();
+  }
+
+  clearProductsList() {
+    productsList = [];
     update();
   }
 

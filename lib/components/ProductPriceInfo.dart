@@ -7,28 +7,23 @@ class ProductPriceInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
+      alignment: WrapAlignment.start,
+      runSpacing: 5,
       children: [
-        Expanded(
-          child: Text.rich(
-            TextSpan(
-              text: 'MRP: ₹${currentProduct.markedPrice} ',
-              style: TextStyle(
-                decoration: TextDecoration.lineThrough,
-                decorationColor: Colors.red.shade500,
-              ),
-              children: [
-                TextSpan(
-                  text: ' SP: ₹${currentProduct.sellingPrice}',
-                  style: TextStyle(
-                    decoration: TextDecoration.none,
-                    color: Colors.purple,
-                    fontWeight: FontWeight.w600,
-                  ),
-                )
-              ],
-            ),
-            textAlign: TextAlign.left,
+        Text(
+          'MRP: ₹${currentProduct.markedPrice} ',
+          style: TextStyle(
+            decoration: TextDecoration.lineThrough,
+            decorationColor: Colors.red.shade500,
+          ),
+        ),
+        Text(
+          'SP: ₹${currentProduct.sellingPrice}',
+          style: TextStyle(
+            decoration: TextDecoration.none,
+            color: Colors.purple,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],

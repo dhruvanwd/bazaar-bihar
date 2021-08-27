@@ -46,7 +46,7 @@ class CartAddressForm extends StatelessWidget {
         body: GetBuilder<CartAddressController>(
           builder: (_addressCtrl) => Center(
             child: SizedBox(
-              height: Get.mediaQuery.size.height - 150,
+              height: Get.mediaQuery.size.height - 120,
               child: SingleChildScrollView(
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 100, horizontal: 16),
@@ -62,10 +62,27 @@ class CartAddressForm extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 4),
-                          child: Text(
-                            "Add new address",
-                            style: Get.theme.textTheme.headline6!
-                                .copyWith(color: Colors.purple),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                    "Add new address",
+                                    style: Get.theme.textTheme.headline6!
+                                        .copyWith(color: Colors.purple),
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                icon: Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                ),
+                              )
+                            ],
                           ),
                         ),
                         Padding(

@@ -1,5 +1,5 @@
 import 'package:bazaar_bihar/pages/Home.dart/ShopCard.dart';
-import 'package:bazaar_bihar/pages/Home.dart/ShopUnavailable.dart';
+import 'package:bazaar_bihar/components/ShopUnavailable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
@@ -29,6 +29,7 @@ class ShopsList extends StatelessWidget {
                 .map(
                   (shop) => InkWell(
                     onTap: () {
+                      _globalController.clearProductsList();
                       _globalController.fetchProductsByShopId(shop.id);
                       Get.toNamed('/products', arguments: shop);
                     },
@@ -36,7 +37,7 @@ class ShopsList extends StatelessWidget {
                   ),
                 )
                 .toList()
-            : [ShopUnavailable()],
+            : [ShopUnavailable("No shop found....")],
       ),
     );
   }

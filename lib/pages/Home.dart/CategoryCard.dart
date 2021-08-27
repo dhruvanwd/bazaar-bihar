@@ -21,6 +21,7 @@ class _CategoryCardState extends State<CategoryCard> {
       width: 90,
       child: InkWell(
         onTap: () {
+          _.clearCurrentShop();
           _.fetchShops(cat.id);
           Get.toNamed('/shops', arguments: cat);
         },
