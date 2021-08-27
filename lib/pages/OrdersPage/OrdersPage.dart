@@ -1,5 +1,7 @@
+import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:flutter/material.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/OrderCard.dart';
+import 'package:get/get.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({Key? key}) : super(key: key);
@@ -9,12 +11,11 @@ class OrdersPage extends StatefulWidget {
 }
 
 class _OrdersPageState extends State<OrdersPage> {
-  final products = [];
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
+        child: GetBuilder<OrderController>(
+      builder: (_orderCtrl) => Column(
         children: [
           OrderCard(),
           OrderCard(),
@@ -30,6 +31,6 @@ class _OrdersPageState extends State<OrdersPage> {
           OrderCard(),
         ],
       ),
-    );
+    ));
   }
 }

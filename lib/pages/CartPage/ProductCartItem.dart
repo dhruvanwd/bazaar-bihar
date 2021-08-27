@@ -34,11 +34,14 @@ class ProductCartItem extends StatelessWidget {
                       padding: EdgeInsets.only(left: 8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
                             padding: EdgeInsets.all(2),
                             child: Text(
                               product.name,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: false,
                               style: Get.theme.textTheme.subtitle1!
                                   .copyWith(color: Get.theme.primaryColor),
                             ),
@@ -95,7 +98,7 @@ class ProductCartItem extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 4),
                         child: Text(
-                            "Total: ${double.parse(product.sellingPrice) * product.cartItemCount}"),
+                            "Total: ₹${double.parse(product.sellingPrice) * product.cartItemCount}"),
                       ),
                     ],
                   ),

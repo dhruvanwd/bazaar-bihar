@@ -1,5 +1,6 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
+import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/components/LoaderPage.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
@@ -18,6 +19,7 @@ void main() async {
   final globalController = Get.put(GlobalController());
   Get.put(HomePageController());
   Get.put(CartController());
+  Get.put(OrderController());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

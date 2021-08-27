@@ -17,9 +17,15 @@ class CartPage extends StatelessWidget {
             expandedHeight: 250,
             stretch: true,
             toolbarTextStyle: TextStyle(color: Colors.green),
-            title: Text(
-              cart.shop.name,
-              style: TextStyle(color: Get.theme.primaryColor),
+            title: Card(
+              color: Colors.white60,
+              child: Padding(
+                padding: EdgeInsets.all(4),
+                child: Text(
+                  cart.shop.name,
+                  style: TextStyle(color: Colors.purple),
+                ),
+              ),
             ),
             flexibleSpace: FlexibleSpaceBar(
               titlePadding: EdgeInsets.all(0),

@@ -3,6 +3,7 @@ import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
 import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/models/ProductsModel.dart';
 
@@ -18,7 +19,11 @@ class CartController extends GetxController {
   }
 
   incrProductCount(ProductModel product) {
-    product.cartItemCount++;
+    if (product.cartItemCount > 9) {
+      Get.snackbar("Max Limit", 'maximum 10 items allowed !',
+          colorText: Colors.purple, snackPosition: SnackPosition.BOTTOM);
+    } else
+      product.cartItemCount++;
     updateCartState();
     update();
   }
@@ -26,12 +31,26 @@ class CartController extends GetxController {
   getOrderPriceSummary() {
     double totalMrp = 0.0;
     double totalSp = 0.0;
-    carts.forEach((cart) => cart.products.forEach((product) {
-          totalMrp += double.parse(product.markedPrice) * product.cartItemCount;
-          totalSp += double.parse(product.sellingPrice) * product.cartItemCount;
-        }));
+    List<Map<dynamic, dynamic>> shopWiseInfo = [];
+    carts.forEach((cart) {
+      final shopInfo = Map.from({"shopName": cart.shop.name});
+      cart.products.forEach((product) {
+        double mrp = double.parse(product.markedPrice) * product.cartItemCount;
+        shopInfo['mrp'] = mrp;
+        totalMrp += mrp;
+        final double sp =
+            double.parse(product.sellingPrice) * product.cartItemCount;
+        shopInfo['sp'] = sp;
+        totalSp += sp;
+      });
+      shopWiseInfo.add(shopInfo);
+    });
 
-    return Map.from({"totalMrp": totalMrp, "totalSp": totalSp});
+    return Map.from({
+      "totalMrp": totalMrp,
+      "totalSp": totalSp,
+      "shopWiseInfo": shopWiseInfo
+    });
   }
 
   decrProductCount(ShopModel shop, ProductModel product) {
@@ -60,7 +79,6 @@ class CartController extends GetxController {
       CartModel foundCart = carts.firstWhere((cart) => cart.shop.id == shop.id);
       product.cartItemCount++;
       foundCart.addProduct(product);
-      print("updated existing cart");
     } catch (e) {
       final tempCartModel = CartModel(shop: shop, products: []);
       tempCartModel.addProduct(product);

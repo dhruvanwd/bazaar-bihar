@@ -3,7 +3,7 @@ import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/components/StrechedPrimaryButton.dart';
 import 'package:bazaar_bihar/models/CartAddressModel.dart';
 import 'package:bazaar_bihar/pages/CartPage/CartAddressForm.dart';
-import 'package:bazaar_bihar/pages/CartPage/cartFooter.dart';
+import 'package:bazaar_bihar/pages/CartPage/CartFooter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,11 +17,13 @@ class CheckoutCart extends StatelessWidget {
         appBar: AppBar(
           title: Text("Confirm order"),
         ),
-        persistentFooterButtons: cartFooter(
-          StrechedPrimaryButton(() {
-            PaymentController.to.initTransaction();
-          }, "Place Order"),
-        ),
+        persistentFooterButtons: [
+          CartFooter(
+            StrechedPrimaryButton(() {
+              PaymentController.to.initTransaction();
+            }, "Place Order"),
+          )
+        ],
         body: Container(
           width: Get.mediaQuery.size.width,
           padding: EdgeInsets.symmetric(horizontal: 16),
