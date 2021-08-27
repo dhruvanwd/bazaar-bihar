@@ -15,6 +15,7 @@ enum EStorageKeys { PROFILE, SETTINGS, CART, CART_ADDRESS }
 
 class GlobalController extends GetxController {
   static GlobalController get to => Get.find();
+
   ThemeMode get themeMode => ThemeMode.system;
   final ApiRequest apiRequestInstance = ApiRequest();
 
@@ -107,6 +108,7 @@ class GlobalController extends GetxController {
       },
     }));
     categories = categoryModelFromMap(resp.data);
+    // closeLoader();
     update();
   }
 

@@ -18,6 +18,9 @@ class RandomImageLoaders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(loaders[randomLoader.nextInt(loaders.length)]);
+    return Image.asset(
+      loaders[randomLoader.nextInt(loaders.length)],
+      fit: BoxFit.cover,
+    );
   }
 }
