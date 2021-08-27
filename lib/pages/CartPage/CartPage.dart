@@ -33,9 +33,8 @@ class CartPage extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (content, index) => ProductCartItem(
-                cart.products[index],
-              ),
+              (content, index) =>
+                  ProductCartItem(cart.products[index], cart.shop),
               childCount: cart.products.length,
             ),
           ),

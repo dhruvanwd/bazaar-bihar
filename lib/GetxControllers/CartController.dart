@@ -34,11 +34,11 @@ class CartController extends GetxController {
     return Map.from({"totalMrp": totalMrp, "totalSp": totalSp});
   }
 
-  decrProductCount(ProductModel product) {
+  decrProductCount(ShopModel shop, ProductModel product) {
     if (product.cartItemCount > 1)
       product.cartItemCount--;
     else {
-      Get.snackbar("Count Can't be 0", "Incr Product");
+      removeProduct(shop, product);
     }
     updateCartState();
     update();

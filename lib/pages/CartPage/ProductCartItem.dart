@@ -2,12 +2,14 @@ import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/components/CachedImageManager.dart';
 import 'package:bazaar_bihar/components/ProductPriceInfo.dart';
 import 'package:bazaar_bihar/models/ProductsModel.dart';
+import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductCartItem extends StatelessWidget {
-  ProductCartItem(this.product);
+  ProductCartItem(this.product, this.shop);
   final ProductModel product;
+  final ShopModel shop;
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +79,14 @@ class ProductCartItem extends StatelessWidget {
                                 padding: EdgeInsets.all(0),
                                 iconSize: 20,
                                 onPressed: () {
-                                  _cartCtrl.decrProductCount(product);
+                                  _cartCtrl.decrProductCount(shop, product);
                                 },
-                                icon: Icon(Icons.remove),
+                                icon: product.cartItemCount == 1
+                                    ? Icon(
+                                        Icons.delete,
+                                        color: Colors.deepOrange,
+                                      )
+                                    : Icon(Icons.remove),
                               ),
                             ],
                           ),
