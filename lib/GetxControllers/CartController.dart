@@ -2,6 +2,7 @@ import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
 import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
+import 'package:bazaar_bihar/models/PaymentInfoModal.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,7 @@ class CartController extends GetxController {
     update();
   }
 
-  getOrderPriceSummary() {
+  PaymentInfoModal getOrderPriceSummary() {
     double totalMrp = 0.0;
     double totalSp = 0.0;
     List<Map<dynamic, dynamic>> shopWiseInfo = [];
@@ -46,11 +47,11 @@ class CartController extends GetxController {
       shopWiseInfo.add(shopInfo);
     });
 
-    return Map.from({
+    return PaymentInfoModal.fromJson(Map.from({
       "totalMrp": totalMrp,
       "totalSp": totalSp,
       "shopWiseInfo": shopWiseInfo
-    });
+    }));
   }
 
   decrProductCount(ShopModel shop, ProductModel product) {

@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
+import 'package:bazaar_bihar/models/PaymentInfoModal.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -24,10 +25,10 @@ class PaymentController extends GetxController {
   }
 
   initTransaction() {
-    Map priceInfo = CartController.to.getOrderPriceSummary();
+    PaymentInfoModal priceInfo = CartController.to.getOrderPriceSummary();
     var options = {
       'key': 'rzp_test_XRToCJGiKV3909',
-      'amount': priceInfo['totalSp'],
+      'amount': priceInfo.totalSp,
       'name': 'BazaarBihar',
       'description': 'Fine T-Shirt',
       'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'}

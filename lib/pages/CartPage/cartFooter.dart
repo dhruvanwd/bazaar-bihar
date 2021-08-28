@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
+import 'package:bazaar_bihar/models/PaymentInfoModal.dart';
 import 'package:bazaar_bihar/pages/CartPage/CollapsableCartFooter.dart';
 import 'package:bazaar_bihar/pages/CartPage/ShopWiseBill.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class CartFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map orderPriceInfo = _catCtrl.getOrderPriceSummary();
+    final PaymentInfoModal orderPriceInfo = _catCtrl.getOrderPriceSummary();
     print("------------orderPriceInfo-------------");
     print(orderPriceInfo);
     return _catCtrl.carts.length > 0
@@ -52,9 +53,12 @@ class CartFooter extends StatelessWidget {
               children: [
                 Expanded(
                   child: CollapsableCartFooter(
-                      genShopDetail(orderPriceInfo['shopWiseInfo'])),
+                      genShopDetail(orderPriceInfo.shopWiseInfo)),
                 ),
-                ShopWiseTotalBill(orderPriceInfo, false),
+                ShopWiseTotalBill({
+                  "totalMrp": orderPriceInfo.totalMrp,
+                  "totalSp": orderPriceInfo.totalSp,
+                }, false),
                 actionBtn,
               ],
             ),
