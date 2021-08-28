@@ -2,7 +2,7 @@ import 'package:bazaar_bihar/components/CachedImageManager.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/pages/CartPage/ProductCartItem.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:bazaar_bihar/Utils/extensions.dart' show CapExtension;
 
 class CartPage extends StatelessWidget {
   final CartModel cart;
@@ -22,7 +22,7 @@ class CartPage extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(4),
                 child: Text(
-                  cart.shop.name,
+                  cart.shop.name.inCaps,
                   style: TextStyle(color: Colors.purple),
                 ),
               ),

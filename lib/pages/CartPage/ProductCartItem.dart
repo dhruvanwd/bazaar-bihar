@@ -5,6 +5,7 @@ import 'package:bazaar_bihar/models/ProductsModel.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:bazaar_bihar/Utils/extensions.dart' show CapExtension;
 
 class ProductCartItem extends StatelessWidget {
   ProductCartItem(this.product, this.shop);
@@ -39,7 +40,7 @@ class ProductCartItem extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(2),
                             child: Text(
-                              product.name,
+                              product.name.inCaps,
                               overflow: TextOverflow.ellipsis,
                               softWrap: false,
                               style: Get.theme.textTheme.subtitle1!

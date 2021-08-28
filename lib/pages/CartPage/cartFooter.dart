@@ -3,6 +3,7 @@ import 'package:bazaar_bihar/pages/CartPage/CollapsableCartFooter.dart';
 import 'package:bazaar_bihar/pages/CartPage/ShopWiseBill.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:bazaar_bihar/Utils/extensions.dart' show CapExtension;
 
 genShopDetail(List<Map> shopsInfo) {
   final shopsWidget = shopsInfo
@@ -11,10 +12,13 @@ genShopDetail(List<Map> shopsInfo) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  shopInfo['shopName'],
-                  style: Get.theme.textTheme.subtitle1!
-                      .copyWith(color: Colors.purple),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 4),
+                  child: Text(
+                    (shopInfo['shopName'] as String).inCaps,
+                    style: Get.theme.textTheme.subtitle1!
+                        .copyWith(color: Colors.purple),
+                  ),
                 ),
                 ShopWiseTotalBill(
                     {"totalMrp": shopInfo['mrp'], "totalSp": shopInfo['sp']},

@@ -6,6 +6,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/models/ProductsModel.dart';
+import 'package:bazaar_bihar/Utils/extensions.dart' show CapExtension;
 
 class ProductCard extends StatelessWidget {
   final ProductModel currentProduct;
@@ -40,7 +41,7 @@ class ProductCard extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(right: 8),
                               child: Text(
-                                currentProduct.name,
+                                currentProduct.name.inCaps,
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   fontSize: 16,

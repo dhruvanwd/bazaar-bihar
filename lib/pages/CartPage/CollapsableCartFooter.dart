@@ -60,8 +60,12 @@ class _CollapsableCartFooterState extends State<CollapsableCartFooter>
                   else
                     _animationController.reverse();
                 },
-                icon: Icon(
-                    isClosed ? FontAwesome.angle_up : FontAwesome.angle_down),
+                icon: isClosed
+                    ? Icon(FontAwesome.angle_up)
+                    : Icon(
+                        FontAwesome.angle_down,
+                        color: Colors.deepOrange,
+                      ),
               ),
             ),
           ],
