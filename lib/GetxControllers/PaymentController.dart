@@ -14,23 +14,39 @@ class PaymentController extends GetxController {
   final _cartCtrl = CartController.to;
   final _razorpay = Razorpay();
 
+  _placeOrder(Map orderDetail) async {
+    try {
+      print("---------orderDetail----------");
+      print(orderDetail);
+      final resp = await _globalCtrl.apiRequestInstance.storeData(RequestBody(
+          amendType: "insertOne",
+          collectionName: "orders",
+          payload: [orderDetail]));
+      print(resp.data);
+      Get.snackbar("Success", "Order placed");
+      Get.offAllNamed("/");
+      _cartCtrl.emptyCart();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    Get.snackbar("Success", "Order placed");
-    Get.offAllNamed("/");
     PaymentInfoModal priceInfo = _cartCtrl.getOrderPriceSummary();
-    print("-------------------priceInfo---------------------");
-    final Map orderDetail = Map.from({
+    final profile = _globalCtrl.getStroageJson(EStorageKeys.PROFILE);
+    DateTime now = DateTime.now();
+    String updatedDt = _globalCtrl.dateFormat.format(now);
+    final Map orderDetail = {
       "priceInfo": priceInfo.toJson(),
       "paymentId": response.paymentId,
       "status": "INITIATED",
       // ACCEPTED //CANCELLED // IN_TRANSIT
       // DELIVERED
-      "cartInfo": _cartCtrl.carts.map((e) => e.toJson()),
-    });
-    print(orderDetail);
-    _globalCtrl.apiRequestInstance.storeData(RequestBody(
-        amendType: "insertOne", collectionName: "orders", payload: []));
-    _cartCtrl.emptyCart();
+      "createdAt": updatedDt,
+      "orderBy": profile['_id'],
+      "cartInfo": _cartCtrl.carts.map((e) => e.toJson()).toList(),
+    };
+    _placeOrder(orderDetail);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {

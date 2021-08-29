@@ -10,12 +10,13 @@ import 'package:bazaar_bihar/models/ProductsModel.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:bazaar_bihar/pages/login-signup/LoginPage.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:intl/intl.dart';
 
 enum EStorageKeys { PROFILE, SETTINGS, CART, CART_ADDRESS }
 
 class GlobalController extends GetxController {
   static GlobalController get to => Get.find();
-
+  var dateFormat = DateFormat("yy-MM-dd hh:mm:ss aaa");
   ThemeMode get themeMode => ThemeMode.system;
   final ApiRequest apiRequestInstance = ApiRequest();
 

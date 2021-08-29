@@ -27,7 +27,7 @@ dependencies:
   in_app_update: ^2.0.0
   cached_network_image: ^3.1.0
   razorpay_flutter: ^1.2.7
-
+  intl: ^0.17.0
 
 
 dev_dependencies:

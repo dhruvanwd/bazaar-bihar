@@ -46,11 +46,11 @@ class CartController extends GetxController {
       shopWiseInfo.add(shopInfo);
     });
 
-    return PaymentInfoModal.fromJson(Map.from({
+    return PaymentInfoModal.fromJson({
       "totalMrp": totalMrp,
       "totalSp": totalSp,
       "shopWiseInfo": shopWiseInfo
-    }));
+    });
   }
 
   decrProductCount(ShopModel shop, ProductModel product) {
