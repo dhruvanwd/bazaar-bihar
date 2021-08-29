@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/models/CartModel.dart';
+import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,9 +25,7 @@ class OrderCard extends StatelessWidget {
             color: Get.theme.primaryColor,
             child: Column(
               children: [
-                Center(
-                  child: Image.asset('images/mart.jpg', fit: BoxFit.cover),
-                ),
+                CarouselWithIndicator(order.shop.images),
                 Container(
                   decoration: BoxDecoration(
                     border: Border(
