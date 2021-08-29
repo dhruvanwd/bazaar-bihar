@@ -22,7 +22,7 @@ class OrderCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Container(
-            color: Get.theme.primaryColor,
+            color: Colors.brown,
             child: Column(
               children: [
                 CarouselWithIndicator(order.shop.images),

@@ -26,7 +26,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(primaryColor: Colors.blueGrey),
+      theme: ThemeData.light().copyWith(primaryColor: Colors.orange),
       darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.grey),
       themeMode: globalController.themeMode,
       getPages: [

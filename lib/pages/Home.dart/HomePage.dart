@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
       builder: (_) => SideMenu(
         key: _endSideMenuKey,
         inverse: true, // end side menu
-        background: Colors.green[700],
+        background: Colors.blueGrey.shade700,
         type: SideMenuType.slideNRotate,
         menu: AppBarMenu(toggleDrawer),
         radius: BorderRadius.circular(8),
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
           menu: AppBarMenu(toggleDrawer),
           type: SideMenuType.slideNRotate,
           radius: BorderRadius.circular(8),
-          background: Colors.green[700],
+          background: Colors.blueGrey.shade700,
           child: Scaffold(
             appBar: AppBar(
               leading:
