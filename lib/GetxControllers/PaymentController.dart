@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
+import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/models/PaymentInfoModal.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -12,8 +13,16 @@ class PaymentController extends GetxController {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     Get.snackbar("Success", "Order placed");
-    CartController.to.emptyCart();
     Get.offAllNamed("/");
+    PaymentInfoModal priceInfo = CartController.to.getOrderPriceSummary();
+    print("-------------------priceInfo---------------------");
+    final Map orderDetail = Map.from({
+      "priceInfo": priceInfo.toJson(),
+      "paymentId": response.paymentId,
+      "cartInfo": CartController.to.carts.map((e) => e.toJson()),
+    });
+    print(orderDetail);
+    CartController.to.emptyCart();
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -26,13 +35,16 @@ class PaymentController extends GetxController {
 
   initTransaction() {
     PaymentInfoModal priceInfo = CartController.to.getOrderPriceSummary();
+    final profile = GlobalController.to.getStroageJson(EStorageKeys.PROFILE);
     var options = {
       'key': 'rzp_test_XRToCJGiKV3909',
       'amount': priceInfo.totalSp,
       'name': 'BazaarBihar',
-      'description': 'Fine T-Shirt',
-      'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'}
+      'description': 'Order From BazaarBihar',
+      'prefill': {'contact': profile['mobile'], 'email': 'test@razorpay.com'}
     };
+    print("--------payment options---------");
+    print(options);
 
     _razorpay.open(options);
   }

@@ -13,4 +13,9 @@ class PaymentInfoModal {
           shopWiseInfo: json['shopWiseInfo'],
           totalMrp: json['totalMrp'],
           totalSp: json['totalSp']);
+
+  toJson() {
+    return Map.from(
+        {shopWiseInfo: shopWiseInfo, totalMrp: totalMrp, totalSp: totalSp});
+  }
 }
