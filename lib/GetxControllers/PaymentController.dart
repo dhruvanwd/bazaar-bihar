@@ -14,12 +14,10 @@ class PaymentController extends GetxController {
   final _cartCtrl = CartController.to;
   final _razorpay = Razorpay();
 
-  _placeOrder(Map orderDetail) async {
+  _placeOrder(List<Map> orderDetail) async {
     try {
-      print("---------orderDetail----------");
-      print(orderDetail);
       final resp = await _globalCtrl.apiRequestInstance.storeData(RequestBody(
-          amendType: "insertOne",
+          amendType: "insertMany",
           collectionName: "orders",
           payload: [orderDetail]));
       print(resp.data);
@@ -40,17 +38,28 @@ class PaymentController extends GetxController {
     final profile = _globalCtrl.getStroageJson(EStorageKeys.PROFILE);
     DateTime now = DateTime.now();
     String updatedDt = _globalCtrl.dateFormat.format(now);
+
+    print("---------priceInfo----------");
+    print(priceInfo.toJson());
+
+    final Map priceInfoJson = priceInfo.toJson();
+    List shopWiseInfo = priceInfoJson['shopWiseInfo'];
     final Map orderDetail = {
-      "priceInfo": priceInfo.toJson(),
       "paymentId": response.paymentId,
       "status": "INITIATED",
       // ACCEPTED //CANCELLED // IN_TRANSIT
       // DELIVERED
       "createdAt": updatedDt,
       "orderBy": profile['_id'],
-      "cartInfo": _cartCtrl.carts.map((e) => e.toJson()).toList(),
     };
-    _placeOrder(orderDetail);
+
+    final orders = _cartCtrl.carts.map((e) {
+      final tempMap = e.toJson();
+      final paymentInfo = shopWiseInfo
+          .firstWhere((shopInfo) => shopInfo['shopName'] == e.shop.name);
+      return {...tempMap, ...orderDetail, ...paymentInfo};
+    }).toList();
+    _placeOrder(orders);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {

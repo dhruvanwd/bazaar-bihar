@@ -1,12 +1,16 @@
+import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrderCard extends StatelessWidget {
-  OrderCard({Key? key}) : super(key: key);
+  final Map orderDetail;
+  OrderCard(this.orderDetail);
 
   @override
   Widget build(BuildContext context) {
+    final CartModel order = CartModel.fromMap(orderDetail);
+    print(orderDetail);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8),
       child: FlipCard(
@@ -31,19 +35,19 @@ class OrderCard extends StatelessWidget {
                   ),
                   child: ListTile(
                     title: Text(
-                      'Saraswati general store',
+                      order.shop.name,
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
                     subtitle: Text(
-                      "5 Oct 2021",
+                      orderDetail['createdAt'],
                       style: TextStyle(
                         color: Colors.blueGrey.shade100,
                       ),
                     ),
                     trailing: Text(
-                      '\$ 200',
+                      '\$${orderDetail["mrp"]}',
                       style: TextStyle(
                         color: Colors.blue.shade400,
                       ),
@@ -69,6 +73,7 @@ class OrderCard extends StatelessWidget {
                   child: ListView.custom(
                     childrenDelegate: SliverChildBuilderDelegate(
                       (_, index) {
+                        final product = order.products[index];
                         return Card(
                           clipBehavior: Clip.hardEdge,
                           shape: RoundedRectangleBorder(
@@ -84,20 +89,23 @@ class OrderCard extends StatelessWidget {
                                   image: AssetImage('images/mart.jpg'),
                                 ),
                               ),
-                              title: Text('Sugar'),
-                              subtitle: Text('MP: \$ 200   Discount: 20%'),
-                              trailing: Text('\$ 180'),
+                              title: Text(product.name),
+                              subtitle: Text(
+                                  'MRP: \$${product.markedPrice}   Discount: ${product.discount}%'),
+                              trailing: Text('\$${product.sellingPrice}'),
                             ),
                           ),
                         );
                       },
+                      childCount: order.products.length,
                     ),
                   ),
                 ),
                 ListTile(
                   title: Text('Total'),
-                  subtitle: Text('MP: \$ 2000   Discount: 20%'),
-                  trailing: Text('\$ 1800'),
+                  subtitle:
+                      Text('MRP: \$${orderDetail["mrp"]}   Discount: 20%'),
+                  trailing: Text('\$${orderDetail["sp"]}'),
                 ),
               ],
             ),

@@ -16,20 +16,7 @@ class _OrdersPageState extends State<OrdersPage> {
     return SingleChildScrollView(
         child: GetBuilder<OrderController>(
       builder: (_orderCtrl) => Column(
-        children: [
-          OrderCard(),
-          OrderCard(),
-          OrderCard(),
-          OrderCard(),
-          OrderCard(),
-          OrderCard(),
-          OrderCard(),
-          OrderCard(),
-          OrderCard(),
-          OrderCard(),
-          OrderCard(),
-          OrderCard(),
-        ],
+        children: _orderCtrl.orders.map((order) => OrderCard(order)).toList(),
       ),
     ));
   }

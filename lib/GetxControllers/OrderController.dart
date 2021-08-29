@@ -9,6 +9,8 @@ class OrderController extends GetxController {
   final ApiRequest apiRequestInstance = ApiRequest();
   final _globalCtrl = GlobalController.to;
 
+  var orders = [];
+
   fetchOrderDetails() async {
     var dateFormat = DateFormat("yy-MM-dd");
     final profile = _globalCtrl.getStroageJson(EStorageKeys.PROFILE);
@@ -20,8 +22,8 @@ class OrderController extends GetxController {
       },
       "orderBy": profile['_id']
     }));
-
-    print(resp.data);
+    orders = resp.data;
+    update();
   }
 
   @override

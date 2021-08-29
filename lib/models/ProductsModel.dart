@@ -40,6 +40,12 @@ class ProductModel {
   String unit;
   int cartItemCount;
 
+  get discount =>
+      (((double.parse(this.markedPrice) - double.parse(this.sellingPrice)) /
+                  double.parse(this.markedPrice)) *
+              100)
+          .toStringAsFixed(2);
+
   factory ProductModel.fromMap(Map<String, dynamic> json) => ProductModel(
       id: json["_id"],
       name: json["name"],
