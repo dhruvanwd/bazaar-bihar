@@ -23,8 +23,12 @@ class PaymentController extends GetxController {
           collectionName: "orders",
           payload: [orderDetail]));
       print(resp.data);
-      Get.snackbar("Success", "Order placed");
       Get.offAllNamed("/");
+      Get.snackbar(
+        "Successful !",
+        "Order placed",
+        snackPosition: SnackPosition.BOTTOM,
+      );
       _cartCtrl.emptyCart();
     } catch (e) {
       print(e);
