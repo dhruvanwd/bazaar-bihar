@@ -1,5 +1,6 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/models/PaymentInfoModal.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -9,20 +10,27 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class PaymentController extends GetxController {
   static get to => Get.find<PaymentController>();
+  final _globalCtrl = GlobalController.to;
+  final _cartCtrl = CartController.to;
   final _razorpay = Razorpay();
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     Get.snackbar("Success", "Order placed");
     Get.offAllNamed("/");
-    PaymentInfoModal priceInfo = CartController.to.getOrderPriceSummary();
+    PaymentInfoModal priceInfo = _cartCtrl.getOrderPriceSummary();
     print("-------------------priceInfo---------------------");
     final Map orderDetail = Map.from({
       "priceInfo": priceInfo.toJson(),
       "paymentId": response.paymentId,
-      "cartInfo": CartController.to.carts.map((e) => e.toJson()),
+      "status": "INITIATED",
+      // ACCEPTED //CANCELLED // IN_TRANSIT
+      // DELIVERED
+      "cartInfo": _cartCtrl.carts.map((e) => e.toJson()),
     });
     print(orderDetail);
-    CartController.to.emptyCart();
+    _globalCtrl.apiRequestInstance.storeData(RequestBody(
+        amendType: "insertOne", collectionName: "orders", payload: []));
+    _cartCtrl.emptyCart();
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -34,8 +42,8 @@ class PaymentController extends GetxController {
   }
 
   initTransaction() {
-    PaymentInfoModal priceInfo = CartController.to.getOrderPriceSummary();
-    final profile = GlobalController.to.getStroageJson(EStorageKeys.PROFILE);
+    PaymentInfoModal priceInfo = _cartCtrl.getOrderPriceSummary();
+    final profile = _globalCtrl.getStroageJson(EStorageKeys.PROFILE);
     var options = {
       'key': 'rzp_test_XRToCJGiKV3909',
       'amount': priceInfo.totalSp,

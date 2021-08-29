@@ -44,7 +44,6 @@ class CartAddressController extends GetxController {
   addNewAddress(CartAddressModel addr) async {
     final address = await createNewAddress(addr);
     cartAdresses.add(address);
-    Get.snackbar("Address added", '');
     selectedAddres = address;
     updateOfflineAddressData();
     update();
@@ -67,11 +66,14 @@ class CartAddressController extends GetxController {
     final Map? addrJson =
         GlobalController.to.getStroageJson(EStorageKeys.CART_ADDRESS);
     print("restoreOfflineAddressData...........!");
+    print(addrJson);
     if (addrJson != null) {
       final List addrJsonList = List.from(addrJson['addresses']);
       selectedAddres = cartAddressModelFromJson(addrJson['selectedAddres']);
-      addrJsonList.forEach((cartJson) =>
-          {cartAdresses.add(CartAddressModel.fromJson(cartJson))});
+      addrJsonList.forEach((cartJson) {
+        print(cartJson);
+        cartAdresses.add(CartAddressModel.fromJson(cartJson));
+      });
     }
   }
 
