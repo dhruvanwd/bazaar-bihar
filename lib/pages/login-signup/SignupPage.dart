@@ -95,6 +95,11 @@ class SignupPage extends StatelessWidget {
                         Padding(padding: EdgeInsets.only(top: 12)),
                         TextFormField(
                           controller: mobileController,
+                          autofillHints: [
+                            AutofillHints.telephoneNumber,
+                            AutofillHints.telephoneNumberLocal,
+                            AutofillHints.telephoneNumberDevice,
+                          ],
                           decoration: InputDecoration(
                               prefixText: "+91",
                               border: UnderlineInputBorder(),

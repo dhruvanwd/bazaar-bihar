@@ -84,6 +84,11 @@ class LoginPage extends StatelessWidget {
                         ),
                         TextFormField(
                           controller: usernameController,
+                          autofillHints: [
+                            AutofillHints.telephoneNumber,
+                            AutofillHints.telephoneNumberLocal,
+                            AutofillHints.telephoneNumberDevice,
+                          ],
                           inputFormatters: [
                             TextInputMask(mask: '999 9999 999', reverse: false)
                           ],
