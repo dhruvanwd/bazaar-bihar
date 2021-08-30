@@ -1,5 +1,4 @@
 import 'package:bazaar_bihar/components/OfflineDialog.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -19,26 +18,20 @@ class HomePage extends StatelessWidget {
     }
   }
 
-  checkNetworkConnectivity() async {
-    print("checking internet connectivity");
-    ConnectivityResult connectivityResult =
-        await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.none) {
-      print("internet not connected");
-      Get.defaultDialog(
-        content: OfflineDialog(),
-        title: "You are offline..!",
-        confirm: TextButton(
-          onPressed: () {
-            Get.back();
-          },
-          child: Text("Okay"),
-        ),
-        titleStyle: TextStyle(color: Colors.brown),
-      );
-    } else {
-      print("internet connected");
-    }
+  showOfflineDialog() async {
+    await Future.delayed(Duration(seconds: 2));
+    Get.defaultDialog(
+      content: OfflineDialog(),
+      title: "You are offline..!",
+      titlePadding: EdgeInsets.all(16),
+      confirm: TextButton(
+        onPressed: () {
+          Get.back();
+        },
+        child: Text("Okay"),
+      ),
+      titleStyle: TextStyle(color: Colors.brown),
+    );
   }
 
   final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
@@ -54,54 +47,58 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    checkNetworkConnectivity();
     return GetBuilder<HomePageController>(
-      builder: (_) => SideMenu(
-        key: _endSideMenuKey,
-        inverse: true, // end side menu
-        background: Colors.blueGrey.shade700,
-        type: SideMenuType.slideNRotate,
-        menu: AppBarMenu(toggleDrawer),
-        radius: BorderRadius.circular(8),
-        child: SideMenu(
-          key: _sideMenuKey,
-          menu: AppBarMenu(toggleDrawer),
-          type: SideMenuType.slideNRotate,
-          radius: BorderRadius.circular(8),
+      builder: (_) {
+        if (_.showOfflineDialog) {
+          showOfflineDialog();
+        }
+        return SideMenu(
+          key: _endSideMenuKey,
+          inverse: true, // end side menu
           background: Colors.blueGrey.shade700,
-          child: Scaffold(
-            appBar: AppBar(
-              leading:
-                  IconButton(icon: Icon(Icons.menu), onPressed: toggleDrawer),
-              title: Text(_.appTitle),
-              actions: [
-                IconButton(
-                  onPressed: _globalController.logout,
-                  icon: Icon(AntDesign.logout),
-                )
-              ],
-            ),
-            body: _.currentPage,
-            floatingActionButton: GetBuilder<CartController>(
-              builder: (_floatCtrl) => Visibility(
-                visible: _floatCtrl.carts.length != 0,
-                child: FloatingCartButton(),
+          type: SideMenuType.slideNRotate,
+          menu: AppBarMenu(toggleDrawer),
+          radius: BorderRadius.circular(8),
+          child: SideMenu(
+            key: _sideMenuKey,
+            menu: AppBarMenu(toggleDrawer),
+            type: SideMenuType.slideNRotate,
+            radius: BorderRadius.circular(8),
+            background: Colors.blueGrey.shade700,
+            child: Scaffold(
+              appBar: AppBar(
+                leading:
+                    IconButton(icon: Icon(Icons.menu), onPressed: toggleDrawer),
+                title: Text(_.appTitle),
+                actions: [
+                  IconButton(
+                    onPressed: _globalController.logout,
+                    icon: Icon(AntDesign.logout),
+                  )
+                ],
+              ),
+              body: _.currentPage,
+              floatingActionButton: GetBuilder<CartController>(
+                builder: (_floatCtrl) => Visibility(
+                  visible: _floatCtrl.carts.length != 0,
+                  child: FloatingCartButton(),
+                ),
+              ),
+              bottomNavigationBar: ConvexAppBar(
+                backgroundColor: Get.theme.primaryColor,
+                style: TabStyle.flip,
+                items: [
+                  TabItem(icon: Icons.home, title: 'Home'),
+                  TabItem(icon: Icons.receipt, title: 'Orders'),
+                  TabItem(icon: Icons.people, title: 'Profile'),
+                ],
+                initialActiveIndex: _.currentTabIndex,
+                onTap: _.setTabIndex,
               ),
             ),
-            bottomNavigationBar: ConvexAppBar(
-              backgroundColor: Get.theme.primaryColor,
-              style: TabStyle.flip,
-              items: [
-                TabItem(icon: Icons.home, title: 'Home'),
-                TabItem(icon: Icons.receipt, title: 'Orders'),
-                TabItem(icon: Icons.people, title: 'Profile'),
-              ],
-              initialActiveIndex: _.currentTabIndex,
-              onTap: _.setTabIndex,
-            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

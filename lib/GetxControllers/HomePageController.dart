@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/pages/Home.dart/LandingPage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/OrdersPage.dart';
@@ -6,15 +7,36 @@ import 'package:bazaar_bihar/pages/profilePage/ProfilePage.dart';
 class HomePageController extends GetxController {
   static HomePageController get to => Get.find();
   int currentTabIndex = 0;
+  bool showOfflineDialog = false;
+  dynamic subscription;
 
   setTabIndex(int indx) {
     currentTabIndex = indx;
     update();
   }
 
+  handleInternetStatus(ConnectivityResult connectivityResult) {
+    if (connectivityResult == ConnectivityResult.none) {
+      print("internet not connected");
+      showOfflineDialog = true;
+    } else {
+      print("internet connected");
+      showOfflineDialog = false;
+    }
+    update();
+  }
+
+  checkInternetStatus() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    handleInternetStatus(connectivityResult);
+  }
+
   @override
   void onInit() {
     print('initializing HomePageController...............!');
+    checkInternetStatus();
+    subscription =
+        Connectivity().onConnectivityChanged.listen(handleInternetStatus);
     super.onInit();
   }
 
