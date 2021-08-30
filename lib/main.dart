@@ -44,3 +44,8 @@ void main() async {
     ),
   );
 }
+
+
+
+// TODO:
+// 1. add global refresh api calls if internet is connected

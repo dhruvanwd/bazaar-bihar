@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:bazaar_bihar/components/OfflineDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,7 +9,6 @@ import 'package:bazaar_bihar/models/ImagesModel.dart';
 import 'package:bazaar_bihar/models/ProductsModel.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:bazaar_bihar/pages/login-signup/LoginPage.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:intl/intl.dart';
 
 enum EStorageKeys { PROFILE, SETTINGS, CART, CART_ADDRESS }

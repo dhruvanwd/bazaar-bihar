@@ -1,8 +1,8 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/pages/Home.dart/LandingPage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/OrdersPage.dart';
 import 'package:bazaar_bihar/pages/profilePage/ProfilePage.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class HomePageController extends GetxController {
   static HomePageController get to => Get.find();
@@ -38,6 +38,12 @@ class HomePageController extends GetxController {
     subscription =
         Connectivity().onConnectivityChanged.listen(handleInternetStatus);
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    subscription.cancel();
+    super.onClose();
   }
 
   var appTitle = "Homepage";

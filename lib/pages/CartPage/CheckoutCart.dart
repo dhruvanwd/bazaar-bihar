@@ -19,7 +19,7 @@ class CheckoutCart extends StatelessWidget {
         ),
         persistentFooterButtons: [
           CartFooter(
-            StrechedPrimaryButton(() {
+            actionBtn: StrechedPrimaryButton(() {
               print(_addressCtrl.selectedAddres);
               if (_addressCtrl.selectedAddres.runtimeType != CartAddressModel) {
                 Get.snackbar(
@@ -30,8 +30,9 @@ class CheckoutCart extends StatelessWidget {
               } else {
                 PaymentController.to.initTransaction();
               }
-            }, "Place Order..........!"),
-          )
+            }, "Place Order"),
+            showRemoveCart: false,
+          ),
         ],
         body: Container(
           width: Get.mediaQuery.size.width,

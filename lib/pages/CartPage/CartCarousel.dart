@@ -17,9 +17,10 @@ class CartCarousel extends StatelessWidget {
       builder: (_catCtrl) => Scaffold(
         persistentFooterButtons: [
           CartFooter(
-            StrechedPrimaryButton(() {
+            actionBtn: StrechedPrimaryButton(() {
               Get.toNamed("/checkout");
             }, "Checkout"),
+            showRemoveCart: true,
           )
         ],
         body: Center(
