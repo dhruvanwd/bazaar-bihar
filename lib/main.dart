@@ -49,3 +49,4 @@ void main() async {
 
 // TODO:
 // 1. add global refresh api calls if internet is connected
+// 2. add gloal loader that can be invoked from anywhere

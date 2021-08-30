@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:image_picker/image_picker.dart';
+
+typedef void OnPickImageCallback(
+    double? maxWidth, double? maxHeight, int? quality);
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -12,11 +18,14 @@ class _MapScreenState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
+  final TextEditingController maxWidthController = TextEditingController();
+  final TextEditingController maxHeightController = TextEditingController();
+  final TextEditingController qualityController = TextEditingController();
   late TextEditingController _fullName;
   late TextEditingController _mobile;
   late TextEditingController _city;
   late TextEditingController _state;
-
+  dynamic _pickImageError;
   _MapScreenState() {
     final profile = GlobalController.to.getStroageJson(EStorageKeys.PROFILE);
     _fullName = TextEditingController(text: profile['fullName']);
@@ -25,6 +34,29 @@ class _MapScreenState extends State<ProfilePage>
     _state = TextEditingController(text: profile['state']);
   }
 // getStroageJson
+
+  final ImagePicker _picker = ImagePicker();
+  var _imageFile;
+
+  selectImage(BuildContext context) async {
+    try {
+      final pickedFile = await _picker.pickImage(
+        source: ImageSource.camera,
+        maxWidth: 200,
+        maxHeight: 200,
+      );
+      setState(() {
+        _imageFile = pickedFile!;
+      });
+    } catch (e) {
+      setState(() {
+        _pickImageError = e;
+      });
+
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GlobalController>(builder: (_) {
@@ -47,16 +79,33 @@ class _MapScreenState extends State<ProfilePage>
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Container(
-                                width: 140.0,
-                                height: 140.0,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: ExactAssetImage('images/as.png'),
-                                    fit: BoxFit.cover,
+                            _imageFile != null
+                                ? SizedBox(
+                                    width: 140.0,
+                                    height: 140.0,
+                                    child: Card(
+                                      clipBehavior: Clip.hardEdge,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                      child: Image.file(
+                                        File(_imageFile.path),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    width: 140.0,
+                                    height: 140.0,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        image: ExactAssetImage('images/as.png'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                   ),
-                                )),
                           ],
                         ),
                         Padding(
@@ -67,9 +116,14 @@ class _MapScreenState extends State<ProfilePage>
                                 CircleAvatar(
                                   backgroundColor: Colors.red,
                                   radius: 25.0,
-                                  child: Icon(
-                                    Icons.camera_alt,
-                                    color: Colors.white,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      selectImage(context);
+                                    },
+                                    icon: Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 )
                               ],
