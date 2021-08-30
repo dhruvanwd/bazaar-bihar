@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bazaar_bihar/components/OfflineDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -101,32 +102,28 @@ class GlobalController extends GetxController {
   List<CategoryModel> categories = [];
 
   fetchCategories() async {
-    final resp = await apiRequestInstance.fetchData(
-        RequestBody(amendType: '', collectionName: 'categories', payload: {
-      "name": {
-        "\$regex": '',
-        "\$options": 'i',
-      },
-    }));
-    categories = categoryModelFromMap(resp.data);
-    // closeLoader();
-    update();
+    try {
+      final resp = await apiRequestInstance.fetchData(
+          RequestBody(amendType: '', collectionName: 'categories', payload: {
+        "name": {
+          "\$regex": '',
+          "\$options": 'i',
+        },
+      }));
+      categories = categoryModelFromMap(resp.data);
+      // closeLoader();
+      update();
+    } catch (e) {
+      print(e);
+    }
   }
 
   createImageUrl(ImageModel image) =>
       'https://bazaar-bihar.s3.ap-south-1.amazonaws.com/' + image.filename;
 
-  checkNetworkConnectivity() async {
-    ConnectivityResult connectivityResult =
-        await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.none) {
-      Get.snackbar("Offline", "Check network connection");
-    }
-  }
-
   @override
   void onInit() {
-    checkNetworkConnectivity();
+    // checkNetworkConnectivity();
     fetchCategories();
     super.onInit();
   }
@@ -140,33 +137,37 @@ class GlobalController extends GetxController {
   }
 
   fetchShops(String? categoryId) async {
-    final userProfile = getStroageJson(EStorageKeys.PROFILE);
-    final Map<String, dynamic> payload = {
-      "name": {
-        "\$regex": '',
-        "\$options": 'i',
-      },
-      "state": {
-        "\$regex": userProfile['state'],
-        "\$options": 'i',
-      },
-      "city": {
-        "\$regex": userProfile['city'],
-        "\$options": 'i',
-      }
-    };
+    try {
+      final userProfile = getStroageJson(EStorageKeys.PROFILE);
+      final Map<String, dynamic> payload = {
+        "name": {
+          "\$regex": '',
+          "\$options": 'i',
+        },
+        "state": {
+          "\$regex": userProfile['state'],
+          "\$options": 'i',
+        },
+        "city": {
+          "\$regex": userProfile['city'],
+          "\$options": 'i',
+        }
+      };
 
-    if (categoryId != null) {
-      payload.assign("categoryId", categoryId);
+      if (categoryId != null) {
+        payload.assign("categoryId", categoryId);
+      }
+      final resp = await apiRequestInstance.fetchData(RequestBody(
+          amendType: '', collectionName: 'shops', payload: payload));
+      if (categoryId == null) {
+        shopsList = shopModelFromJson(resp.data);
+      } else {
+        shopsListByCatId = shopModelFromJson(resp.data);
+      }
+      update();
+    } catch (e) {
+      print(e);
     }
-    final resp = await apiRequestInstance.fetchData(
-        RequestBody(amendType: '', collectionName: 'shops', payload: payload));
-    if (categoryId == null) {
-      shopsList = shopModelFromJson(resp.data);
-    } else {
-      shopsListByCatId = shopModelFromJson(resp.data);
-    }
-    update();
   }
 
   clearProductsList() {

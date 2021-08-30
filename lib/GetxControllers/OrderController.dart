@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 
 class OrderController extends GetxController {
   static OrderController get to => Get.find();
-  final ApiRequest apiRequestInstance = ApiRequest();
+  final ApiRequest _apiRequestInstance = ApiRequest();
   final _globalCtrl = GlobalController.to;
 
   var orders = [];
@@ -14,7 +14,7 @@ class OrderController extends GetxController {
   fetchOrderDetails() async {
     var dateFormat = DateFormat("yy-MM-dd");
     final profile = _globalCtrl.getStroageJson(EStorageKeys.PROFILE);
-    final resp = await apiRequestInstance.fetchData(
+    final resp = await _apiRequestInstance.fetchData(
         RequestBody(amendType: "findOne", collectionName: "orders", payload: {
       "createdAt": {
         "\$regex": "${dateFormat.format(DateTime.now())}",

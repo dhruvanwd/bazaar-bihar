@@ -1,5 +1,6 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/models/PaymentInfoModal.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,7 @@ class PaymentController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
       _cartCtrl.emptyCart();
+      OrderController.to.fetchOrderDetails();
     } catch (e) {
       print(e);
     }

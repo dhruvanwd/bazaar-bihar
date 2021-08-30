@@ -20,8 +20,17 @@ class CheckoutCart extends StatelessWidget {
         persistentFooterButtons: [
           CartFooter(
             StrechedPrimaryButton(() {
-              PaymentController.to.initTransaction();
-            }, "Place Order"),
+              print(_addressCtrl.selectedAddres);
+              if (_addressCtrl.selectedAddres.runtimeType != CartAddressModel) {
+                Get.snackbar(
+                  "Select Address",
+                  "select one address",
+                  snackPosition: SnackPosition.BOTTOM,
+                );
+              } else {
+                PaymentController.to.initTransaction();
+              }
+            }, "Place Order..........!"),
           )
         ],
         body: Container(
@@ -54,6 +63,8 @@ class CheckoutCart extends StatelessWidget {
                         return RadioListTile(
                           dense: true,
                           value: address,
+                          selected:
+                              address.id == _addressCtrl.selectedAddres!.id,
                           groupValue: _addressCtrl.selectedAddres,
                           title: Text("${address.addressLine1}"),
                           subtitle: Text("${address.receiverName}"),
@@ -61,7 +72,10 @@ class CheckoutCart extends StatelessWidget {
                               onPressed: () {
                                 _addressCtrl.deleteUserAddress(address);
                               },
-                              icon: Icon(Icons.delete_sharp)),
+                              icon: Icon(
+                                Icons.delete_sharp,
+                                color: Colors.red,
+                              )),
                           onChanged: (CartAddressModel? address) {
                             if (address != null) {
                               _addressCtrl.updateSelectedAddress(address);

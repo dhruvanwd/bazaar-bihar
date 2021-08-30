@@ -69,11 +69,12 @@ class CartAddressController extends GetxController {
     print(addrJson);
     if (addrJson != null) {
       final List addrJsonList = List.from(addrJson['addresses']);
-      selectedAddres = cartAddressModelFromJson(addrJson['selectedAddres']);
       addrJsonList.forEach((cartJson) {
         print(cartJson);
         cartAdresses.add(CartAddressModel.fromJson(cartJson));
       });
+      selectedAddres = cartAdresses.firstWhere((addr1) =>
+          addrJson['selectedAddres']['addressLine1'] == addr1.addressLine1);
     }
   }
 

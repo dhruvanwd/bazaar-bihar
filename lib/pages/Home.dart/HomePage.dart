@@ -1,3 +1,5 @@
+import 'package:bazaar_bihar/components/OfflineDialog.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -17,6 +19,28 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  checkNetworkConnectivity() async {
+    print("checking internet connectivity");
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      print("internet not connected");
+      Get.defaultDialog(
+        content: OfflineDialog(),
+        title: "You are offline..!",
+        confirm: TextButton(
+          onPressed: () {
+            Get.back();
+          },
+          child: Text("Okay"),
+        ),
+        titleStyle: TextStyle(color: Colors.brown),
+      );
+    } else {
+      print("internet connected");
+    }
+  }
+
   final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
   final GlobalKey<SideMenuState> _endSideMenuKey = GlobalKey<SideMenuState>();
 
@@ -30,6 +54,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    checkNetworkConnectivity();
     return GetBuilder<HomePageController>(
       builder: (_) => SideMenu(
         key: _endSideMenuKey,

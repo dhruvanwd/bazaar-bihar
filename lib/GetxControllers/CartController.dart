@@ -18,6 +18,12 @@ class CartController extends GetxController {
         .updateStorage(EStorageKeys.CART, {"cart": cartsJsonList});
   }
 
+  removeCartItem(String shopName) {
+    print(shopName);
+    carts.removeWhere((cart) => cart.shop.name == shopName);
+    update();
+  }
+
   incrProductCount(ProductModel product) {
     if (product.cartItemCount > 9) {
       Get.snackbar("Max Limit", 'maximum 10 items allowed !',

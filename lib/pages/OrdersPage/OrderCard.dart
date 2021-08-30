@@ -22,10 +22,31 @@ class OrderCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Container(
-            color: Colors.brown,
+            color: Colors.brown.shade700,
             child: Column(
               children: [
-                CarouselWithIndicator(order.shop.images),
+                Stack(
+                  children: [
+                    CarouselWithIndicator(order.shop.images),
+                    Positioned(
+                        left: -50,
+                        top: 25,
+                        child: RotationTransition(
+                          turns: new AlwaysStoppedAnimation(320 / 360),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 3),
+                            decoration: BoxDecoration(color: Colors.white),
+                            child: Center(
+                              child: Text(
+                                "Order Placed",
+                                style: Get.theme.textTheme.subtitle2,
+                              ),
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
                 Container(
                   decoration: BoxDecoration(
                     border: Border(
@@ -64,47 +85,52 @@ class OrderCard extends StatelessWidget {
           ),
           child: Container(
             height: 350,
-            padding: EdgeInsets.all(8),
             color: Colors.cyan.shade100,
+            padding: EdgeInsets.all(8),
             child: Column(
               children: [
                 Expanded(
-                  child: ListView.custom(
-                    childrenDelegate: SliverChildBuilderDelegate(
-                      (_, index) {
-                        final product = order.products[index];
-                        return Card(
-                          clipBehavior: Clip.hardEdge,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Container(
-                            margin: EdgeInsets.only(bottom: 5),
-                            color: Colors.white,
-                            child: ListTile(
-                              dense: true,
-                              leading: CircleAvatar(
-                                child: Image(
-                                  image: AssetImage('images/mart.jpg'),
-                                ),
-                              ),
-                              title: Text(product.name),
-                              subtitle: Text(
-                                  'MRP: \$${product.markedPrice}   Discount: ${product.discount}%'),
-                              trailing: Text('\$${product.sellingPrice}'),
+                  child: Container(
+                    child: ListView.custom(
+                      childrenDelegate: SliverChildBuilderDelegate(
+                        (_, index) {
+                          final product = order.products[index];
+                          return Card(
+                            clipBehavior: Clip.hardEdge,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                          ),
-                        );
-                      },
-                      childCount: order.products.length,
+                            child: Container(
+                              margin: EdgeInsets.only(bottom: 5),
+                              color: Colors.white,
+                              child: ListTile(
+                                dense: true,
+                                leading: CircleAvatar(
+                                  child: Image(
+                                    image: AssetImage('images/mart.jpg'),
+                                  ),
+                                ),
+                                title: Text(product.name),
+                                subtitle: Text(
+                                    'MRP: \$${product.markedPrice}   Discount: ${product.discount}%'),
+                                trailing: Text('\$${product.sellingPrice}'),
+                              ),
+                            ),
+                          );
+                        },
+                        childCount: order.products.length,
+                      ),
                     ),
                   ),
                 ),
-                ListTile(
-                  title: Text('Total'),
-                  subtitle:
-                      Text('MRP: \$${orderDetail["mrp"]}   Discount: 20%'),
-                  trailing: Text('\$${orderDetail["sp"]}'),
+                Container(
+                  color: Colors.cyan.shade50,
+                  child: ListTile(
+                    title: Text('Total'),
+                    subtitle:
+                        Text('MRP: \$${orderDetail["mrp"]}   Discount: 20%'),
+                    trailing: Text('\$${orderDetail["sp"]}'),
+                  ),
                 ),
               ],
             ),

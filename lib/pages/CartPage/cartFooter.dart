@@ -3,10 +3,11 @@ import 'package:bazaar_bihar/models/PaymentInfoModal.dart';
 import 'package:bazaar_bihar/pages/CartPage/CollapsableCartFooter.dart';
 import 'package:bazaar_bihar/pages/CartPage/ShopWiseBill.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/Utils/extensions.dart' show CapExtension;
 
-genShopDetail(List<Map> shopsInfo) {
+genShopDetail(List<Map> shopsInfo, dynamic callBack) {
   final shopsWidget = shopsInfo
       .map((shopInfo) => Padding(
             padding: EdgeInsets.symmetric(vertical: 4),
@@ -21,9 +22,26 @@ genShopDetail(List<Map> shopsInfo) {
                         .copyWith(color: Colors.purple),
                   ),
                 ),
-                ShopWiseTotalBill(
-                    {"totalMrp": shopInfo['mrp'], "totalSp": shopInfo['sp']},
-                    true),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: ShopWiseTotalBill({
+                        "totalMrp": shopInfo['mrp'],
+                        "totalSp": shopInfo['sp']
+                      }, true),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        callBack(shopInfo['shopName']);
+                      },
+                      icon: Icon(
+                        EvilIcons.close_o,
+                        color: Colors.red,
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
           ))
@@ -53,7 +71,9 @@ class CartFooter extends StatelessWidget {
               children: [
                 Expanded(
                   child: CollapsableCartFooter(
-                      genShopDetail(orderPriceInfo.shopWiseInfo)),
+                    genShopDetail(
+                        orderPriceInfo.shopWiseInfo, _catCtrl.removeCartItem),
+                  ),
                 ),
                 ShopWiseTotalBill({
                   "totalMrp": orderPriceInfo.totalMrp,
