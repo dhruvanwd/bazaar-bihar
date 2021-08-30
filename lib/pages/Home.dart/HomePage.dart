@@ -8,10 +8,12 @@ import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
 import 'package:bazaar_bihar/components/FloatingCartButton.dart';
 import 'package:bazaar_bihar/pages/Home.dart/AppBarMenu.dart';
+import 'package:new_version/new_version.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 class HomePage extends StatelessWidget {
   final _globalController = Get.find<GlobalController>();
+  final newVersion = NewVersion();
   HomePage() {
     if (_globalController.shopsList.length == 0) {
       _globalController.fetchShops(null);
@@ -34,6 +36,21 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  checkUpdate(BuildContext context) {
+    try {
+      newVersion.getVersionStatus().then((status) {
+        print("--------android status update----------");
+        print(status!.localVersion);
+        print(status.storeVersion);
+        print(status.releaseNotes);
+        print(status.canUpdate);
+        newVersion.showAlertIfNecessary(context: context);
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
   final GlobalKey<SideMenuState> _endSideMenuKey = GlobalKey<SideMenuState>();
 
@@ -47,6 +64,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    checkUpdate(context);
     return GetBuilder<HomePageController>(
       builder: (_) {
         if (_.showOfflineDialog) {
