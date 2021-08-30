@@ -39,27 +39,47 @@ class GlobalController extends GetxController {
     Get.defaultDialog(
       title: "Logout ?",
       titlePadding: EdgeInsets.only(top: 20, bottom: 10),
-      middleText: "Are you sure. you want to logout?",
       backgroundColor: Colors.grey.shade100,
       titleStyle: TextStyle(color: Colors.brown),
-      confirm: TextButton(
-        onPressed: () {
-          _localStorage.erase();
-          Get.offAll(LoginPage());
-          Get.back();
-        },
-        child: Text(
-          "yes, Logout",
-          style: TextStyle(color: Colors.deepOrange),
-        ),
-      ),
-      cancel: TextButton(
-        onPressed: () {
-          Get.back();
-        },
-        child: Text(
-          "Close",
-          style: TextStyle(color: Colors.green),
+      content: Container(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              child: Text(
+                "Are you sure. you want to logout?",
+                style: Get.theme.textTheme.subtitle2,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      _localStorage.erase();
+                      Get.offAll(LoginPage());
+                      Get.back();
+                    },
+                    child: Text(
+                      "yes, Logout",
+                      style: TextStyle(color: Colors.deepOrange),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    child: Text(
+                      "Close",
+                      style: TextStyle(color: Colors.green),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
