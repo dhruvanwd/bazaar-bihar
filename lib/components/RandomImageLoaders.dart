@@ -9,7 +9,6 @@ final List<String> loaders = [
   "images/loaders/circularCapped.gif",
   "images/loaders/circularBalls.gif",
   "images/loaders/catLoader.gif",
-  "images/loaders/geometry.gif",
   "images/loaders/classicLoader.gif",
 ];
 

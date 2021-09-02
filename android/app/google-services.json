@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "94687797674",
+    "project_id": "bazaarbihar-e1973",
+    "storage_bucket": "bazaarbihar-e1973.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94687797674:android:44d05c139bc6b3e1abcbd3",
+        "android_client_info": {
+          "package_name": "com.bazaarbihar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94687797674-557n95oeu4sp4jptlg0t4r4uo57ejlqb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bazaarbihar",
+            "certificate_hash": "ce332ea3d8ad7975f5274e9be7abd47ef3a3dffb"
+          }
+        },
+        {
+          "client_id": "94687797674-6asru3rclo0fqfkacds4g45if856fdt4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsPsGVlit4GY6KFBoc_bfDTmFy-cotaNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94687797674-6asru3rclo0fqfkacds4g45if856fdt4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

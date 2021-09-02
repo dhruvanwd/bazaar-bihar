@@ -44,7 +44,8 @@ class HomePage extends StatelessWidget {
         print(status.storeVersion);
         print(status.releaseNotes);
         print(status.canUpdate);
-        newVersion.showAlertIfNecessary(context: context);
+        if (status.storeVersion != "Varies with device")
+          newVersion.showAlertIfNecessary(context: context);
       });
     } catch (e) {
       print(e);

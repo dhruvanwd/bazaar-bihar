@@ -1,8 +1,9 @@
+import 'package:bazaar_bihar/GetxControllers/SignupController.dart';
+import 'package:bazaar_bihar/pages/login-signup/LoginGoogleBtn.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/GetxControllers/LoginController.dart';
 import 'package:bazaar_bihar/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/pages/Home.dart/HomePage.dart';
 import 'package:bazaar_bihar/pages/login-signup/CustomButton.dart';
@@ -11,9 +12,7 @@ import 'createAccountLabel.dart';
 import 'bezierContainer.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) {
-    Get.put(LoginController());
-  }
+  LoginPage({Key? key}) : super(key: key);
   final height = Get.mediaQuery.size.height;
   final _formKey = GlobalKey<FormState>();
 
@@ -23,34 +22,10 @@ class LoginPage extends StatelessWidget {
   onLogin() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      try {
-        final resp = await apiRequestInstance.loginUser(
-          RequestBody(
-            amendType: 'findOne',
-            collectionName: 'users',
-            payload: [
-              {
-                "mobile":
-                    usernameController.text.replaceAll(new RegExp(r"\s+"), ""),
-                "password": passwordController.text
-              }
-            ],
-          ),
-        );
-        print("-------resp.data---------");
-        print(resp.data);
-        GlobalController.to.updateStorage(EStorageKeys.PROFILE, resp.data);
-        print(GlobalController.to.getStroageJson(EStorageKeys.PROFILE));
-        Get.offAll(HomePage());
-      } catch (e) {
-        print(e);
-        Get.snackbar(
-          "Login failed",
-          "Invalid credentials.",
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: Colors.red,
-        );
-      }
+      SignupController.to.loginUser({
+        "mobile": usernameController.text.replaceAll(new RegExp(r"\s+"), ""),
+        "password": passwordController.text
+      });
     } else {
       print('invalid form');
     }
@@ -67,7 +42,7 @@ class LoginPage extends StatelessWidget {
               right: -Get.mediaQuery.size.width * .4,
               child: BezierContainer(),
             ),
-            GetBuilder<LoginController>(
+            GetBuilder<SignupController>(
               builder: (_) => Positioned(
                 child: Form(
                   key: _formKey,
@@ -127,7 +102,8 @@ class LoginPage extends StatelessWidget {
                         ),
                         Padding(padding: EdgeInsets.only(top: 60)),
                         signInSubmitButton(onLogin, "Login"),
-                        Padding(padding: EdgeInsets.only(top: 150)),
+                        Padding(padding: EdgeInsets.only(top: 140)),
+                        LoginGoogleBtn(),
                         createAccountLabel(
                             'signup', 'Don\'t have an account ?', 'Register')
                       ],

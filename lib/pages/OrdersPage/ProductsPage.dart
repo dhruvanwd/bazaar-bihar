@@ -20,7 +20,7 @@ class ProductsPage extends StatelessWidget {
         ),
         floatingActionButton: FloatingCartButton(),
         body: Container(
-          margin: EdgeInsets.only(top: 5),
+          margin: EdgeInsets.only(top: 5, bottom: 50),
           padding: EdgeInsets.all(8),
           child: GridView.count(
             crossAxisCount: 1,

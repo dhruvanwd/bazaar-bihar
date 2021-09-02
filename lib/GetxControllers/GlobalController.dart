@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'package:bazaar_bihar/components/customAnimation.dart';
+import 'package:bazaar_bihar/models/UserModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:bazaar_bihar/Utils/ApiService.dart';
@@ -18,6 +21,7 @@ class GlobalController extends GetxController {
   var dateFormat = DateFormat("yy-MM-dd hh:mm:ss aaa");
   ThemeMode get themeMode => ThemeMode.system;
   final ApiRequest apiRequestInstance = ApiRequest();
+  late UserModel userProfile;
 
   final _localStorage = GetStorage();
 
@@ -139,9 +143,37 @@ class GlobalController extends GetxController {
   createImageUrl(ImageModel image) =>
       'https://bazaar-bihar.s3.ap-south-1.amazonaws.com/' + image.filename;
 
+  void configLoading() {
+    EasyLoading.instance
+      ..displayDuration = const Duration(milliseconds: 2000)
+      ..indicatorType = EasyLoadingIndicatorType.cubeGrid
+      ..loadingStyle = EasyLoadingStyle.dark
+      ..indicatorSize = 100.0
+      ..radius = 10.0
+      ..maskType = EasyLoadingMaskType.custom
+      ..maskColor = Colors.white60
+      ..userInteractions = true
+      ..contentPadding = EdgeInsets.all(60)
+      ..customAnimation = CustomAnimation();
+  }
+
+  updateUserProfile(Map profileJson) async {
+    try {
+      final resp = await apiRequestInstance.storeData(
+          RequestBody(amendType: '', collectionName: 'users', payload: [
+        {"_id": profileJson['_id']},
+        profileJson
+      ]));
+      categories = categoryModelFromMap(resp.data);
+      update();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   void onInit() {
-    // checkNetworkConnectivity();
+    configLoading();
     fetchCategories();
     super.onInit();
   }
@@ -156,6 +188,7 @@ class GlobalController extends GetxController {
 
   fetchShops(String? categoryId) async {
     try {
+      EasyLoading.show();
       final userProfile = getStroageJson(EStorageKeys.PROFILE);
       final Map<String, dynamic> payload = {
         "name": {
@@ -183,7 +216,9 @@ class GlobalController extends GetxController {
         shopsListByCatId = shopModelFromJson(resp.data);
       }
       update();
+      EasyLoading.dismiss();
     } catch (e) {
+      EasyLoading.dismiss();
       print(e);
     }
   }
@@ -195,10 +230,17 @@ class GlobalController extends GetxController {
 
   List<ProductModel> productsList = [];
   fetchProductsByShopId(String shopId) async {
-    final Map<String, dynamic> payload = {"shopId": shopId};
-    final resp = await apiRequestInstance.fetchData(RequestBody(
-        amendType: '', collectionName: 'products', payload: payload));
-    productsList = productModelFromMap(resp.data);
-    update();
+    try {
+      EasyLoading.show();
+      final Map<String, dynamic> payload = {"shopId": shopId};
+      final resp = await apiRequestInstance.fetchData(RequestBody(
+          amendType: '', collectionName: 'products', payload: payload));
+      productsList = productModelFromMap(resp.data);
+      update();
+      EasyLoading.dismiss();
+    } catch (e) {
+      print(e);
+      EasyLoading.dismiss();
+    }
   }
 }

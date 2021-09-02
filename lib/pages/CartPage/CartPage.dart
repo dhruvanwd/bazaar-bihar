@@ -17,10 +17,11 @@ class CartPage extends StatelessWidget {
             expandedHeight: 250,
             stretch: true,
             toolbarTextStyle: TextStyle(color: Colors.green),
+            titleSpacing: 0.0,
             title: Card(
-              color: Colors.white60,
+              color: Colors.white70,
               child: Padding(
-                padding: EdgeInsets.all(4),
+                padding: EdgeInsets.all(8),
                 child: Text(
                   cart.shop.name.inCaps,
                   style: TextStyle(color: Colors.purple),

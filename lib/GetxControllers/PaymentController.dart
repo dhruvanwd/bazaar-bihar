@@ -3,6 +3,7 @@ import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/models/PaymentInfoModal.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -17,6 +18,7 @@ class PaymentController extends GetxController {
 
   _placeOrder(List<Map> orderDetail) async {
     try {
+      EasyLoading.show();
       final resp = await _globalCtrl.apiRequestInstance.storeData(RequestBody(
           amendType: "insertMany",
           collectionName: "orders",
@@ -30,7 +32,9 @@ class PaymentController extends GetxController {
       );
       _cartCtrl.emptyCart();
       OrderController.to.fetchOrderDetails();
+      EasyLoading.dismiss();
     } catch (e) {
+      EasyLoading.dismiss();
       print(e);
     }
   }

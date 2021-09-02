@@ -1,55 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/SignupController.dart';
-import 'package:bazaar_bihar/Utils/RequestBody.dart';
-import 'package:bazaar_bihar/pages/Home.dart/HomePage.dart';
 import 'package:bazaar_bihar/pages/login-signup/CustomButton.dart';
 import 'package:bazaar_bihar/pages/login-signup/appTitle.dart';
 import 'createAccountLabel.dart';
 import 'bezierContainer.dart';
 
 class SignupPage extends StatelessWidget {
-  SignupPage({Key? key}) {
-    Get.put(SignupController());
-  }
+  SignupPage({Key? key}) : super(key: key);
 
   final height = Get.mediaQuery.size.height;
   final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final mobileController = TextEditingController();
   final passwordController = TextEditingController();
-  final _apiRequestInstance = GlobalController.to.apiRequestInstance;
 
   onSignup() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      try {
-        final resp = await _apiRequestInstance.createUser(RequestBody(
-            amendType: 'insertOne',
-            collectionName: 'users',
-            payload: [
-              {
-                'fullName': nameController.text,
-                'mobile': mobileController.text,
-                'role': 'buyer',
-                'password': passwordController.text,
-                'state': 'bihar',
-                'city': 'nawada',
-              }
-            ]));
-        print(resp.data);
-        GlobalController.to.updateStorage(EStorageKeys.PROFILE, resp.data);
-        print(GlobalController.to.getStroageJson(EStorageKeys.PROFILE));
-        Get.offAll(HomePage());
-      } catch (e) {
-        Get.snackbar(
-          "Signup failed",
-          "Server error.",
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: Colors.red,
-        );
-      }
+      SignupController.to.createUser({
+        'fullName': nameController.text,
+        'mobile': mobileController.text,
+        'role': 'buyer',
+        'password': passwordController.text,
+        'state': 'bihar',
+        'city': 'nawada',
+      });
     } else {
       print("Invalid form");
     }

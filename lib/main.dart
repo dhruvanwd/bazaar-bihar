@@ -2,6 +2,7 @@ import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
+import 'package:bazaar_bihar/GetxControllers/SignupController.dart';
 import 'package:bazaar_bihar/components/LoaderPage.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
@@ -9,16 +10,21 @@ import 'package:bazaar_bihar/pages/Home.dart/HomePage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/ProductsPage.dart';
 import 'package:bazaar_bihar/pages/login-signup/SignupPage.dart';
 import 'package:bazaar_bihar/pages/login-signup/loginPage.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'pages/CartPage/CartCarousel.dart';
 import 'pages/Home.dart/ShopsPage.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await GetStorage.init();
   final globalController = Get.put(GlobalController());
   Get.put(HomePageController());
+  Get.put(SignupController());
   Get.put(CartController());
   Get.put(OrderController());
   Get.put(PaymentController());
@@ -28,6 +34,7 @@ void main() async {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(primaryColor: Colors.orange),
       darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.grey),
+      builder: EasyLoading.init(),
       themeMode: globalController.themeMode,
       getPages: [
         GetPage(
