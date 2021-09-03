@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:bazaar_bihar/components/customAnimation.dart';
 import 'package:bazaar_bihar/models/UserModel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import 'package:bazaar_bihar/models/ImagesModel.dart';
 import 'package:bazaar_bihar/models/ProductsModel.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:bazaar_bihar/pages/login-signup/LoginPage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 
 enum EStorageKeys { PROFILE, SETTINGS, CART, CART_ADDRESS }
@@ -20,6 +22,8 @@ class GlobalController extends GetxController {
   static GlobalController get to => Get.find();
   var dateFormat = DateFormat("yy-MM-dd hh:mm:ss aaa");
   ThemeMode get themeMode => ThemeMode.system;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   final ApiRequest apiRequestInstance = ApiRequest();
   late UserModel userProfile;
 
@@ -66,8 +70,10 @@ class GlobalController extends GetxController {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       _localStorage.erase();
+                      await _googleSignIn.signOut();
+                      await _auth.signOut();
                       Get.offAll(LoginPage());
                       Get.back();
                     },

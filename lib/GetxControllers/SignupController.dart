@@ -17,6 +17,7 @@ class SignupController extends GetxController {
   final _globalCtrl = GlobalController.to;
 
   loginUser(var user) async {
+    EasyLoading.show();
     try {
       var resp;
       if (user['password'] != null) {
@@ -40,6 +41,7 @@ class SignupController extends GetxController {
       if (!isUserjson(resp.data)) throw Error();
       _globalCtrl.updateUserProfileInstance(resp.data);
       _globalCtrl.updateStorage(EStorageKeys.PROFILE, resp.data);
+      EasyLoading.dismiss();
       Get.offAll(HomePage());
     } catch (e) {
       print(e);
@@ -49,6 +51,7 @@ class SignupController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         colorText: Colors.red,
       );
+      EasyLoading.dismiss();
       throw e;
     }
   }
@@ -100,7 +103,6 @@ class SignupController extends GetxController {
         "state": "Bihar",
         "city": "Nawada"
       };
-
       try {
         await loginUser({
           "email": profile['email'],
@@ -117,11 +119,6 @@ class SignupController extends GetxController {
       print(e.message);
       throw e;
     }
-  }
-
-  Future<void> signOutFromGoogle() async {
-    await _googleSignIn.signOut();
-    await _auth.signOut();
   }
 
   toogleObscureText() {
