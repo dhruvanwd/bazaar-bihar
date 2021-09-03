@@ -41,7 +41,7 @@ class PaymentController extends GetxController {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     PaymentInfoModal priceInfo = _cartCtrl.getOrderPriceSummary();
-    final profile = _globalCtrl.getStroageJson(EStorageKeys.PROFILE);
+    final profile = _globalCtrl.userProfile;
     DateTime now = DateTime.now();
     String updatedDt = _globalCtrl.dateFormat.format(now);
 
@@ -56,7 +56,7 @@ class PaymentController extends GetxController {
       // ACCEPTED //CANCELLED // IN_TRANSIT
       // DELIVERED
       "createdAt": updatedDt,
-      "orderBy": profile['_id'],
+      "orderBy": profile.id,
     };
 
     final orders = _cartCtrl.carts.map((e) {
@@ -78,13 +78,13 @@ class PaymentController extends GetxController {
 
   initTransaction() {
     PaymentInfoModal priceInfo = _cartCtrl.getOrderPriceSummary();
-    final profile = _globalCtrl.getStroageJson(EStorageKeys.PROFILE);
+    final profile = _globalCtrl.userProfile;
     var options = {
       'key': 'rzp_test_XRToCJGiKV3909',
       'amount': priceInfo.totalSp,
       'name': 'BazaarBihar',
       'description': 'Order From BazaarBihar',
-      'prefill': {'contact': profile['mobile'], 'email': 'test@razorpay.com'}
+      'prefill': {'contact': profile.mobile, 'email': profile.email}
     };
     print("--------payment options---------");
     print(options);

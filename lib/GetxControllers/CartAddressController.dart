@@ -27,8 +27,8 @@ class CartAddressController extends GetxController {
 
   Future<CartAddressModel> createNewAddress(CartAddressModel address) async {
     final Map jsonCartAddress = address.toJson();
-    final profile = GlobalController.to.getStroageJson(EStorageKeys.PROFILE);
-    jsonCartAddress["ownerId"] = profile['_id'];
+    final profile = GlobalController.to.userProfile;
+    jsonCartAddress["ownerId"] = profile.id;
     jsonCartAddress.remove("_id");
     print("after removing id");
     print(jsonCartAddress);
@@ -65,26 +65,25 @@ class CartAddressController extends GetxController {
   restoreOfflineAddressData() {
     final Map? addrJson =
         GlobalController.to.getStroageJson(EStorageKeys.CART_ADDRESS);
-    print("restoreOfflineAddressData...........!");
-    print(addrJson);
     if (addrJson != null) {
       final List addrJsonList = List.from(addrJson['addresses']);
       addrJsonList.forEach((cartJson) {
-        print(cartJson);
         cartAdresses.add(CartAddressModel.fromJson(cartJson));
       });
-      selectedAddres = cartAdresses.firstWhere((addr1) =>
-          addrJson['selectedAddres']['addressLine1'] == addr1.addressLine1);
+      if (addrJson['selectedAddres'] != null) {
+        selectedAddres = cartAdresses.firstWhere((addr1) =>
+            addrJson['selectedAddres']['addressLine1'] == addr1.addressLine1);
+      }
     }
   }
 
   fetchCartAddresses() async {
     if (cartAdresses.length != 0) return;
-    final profile = GlobalController.to.getStroageJson(EStorageKeys.PROFILE);
+    final profile = GlobalController.to.userProfile;
     final resp = await _apiInstance.fetchData(RequestBody(
         amendType: 'findOne',
         collectionName: 'cart_addresses',
-        payload: {"ownerId": profile['_id']}));
+        payload: {"ownerId": profile.id}));
     print("cart addresses..............!");
     List addresses = resp.data;
     addresses.forEach((addr) {

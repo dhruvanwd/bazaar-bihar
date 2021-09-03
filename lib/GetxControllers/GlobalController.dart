@@ -164,6 +164,11 @@ class GlobalController extends GetxController {
 
   @override
   void onInit() {
+    if (isUserLoggedIn) {
+      final userProfile = getStroageJson(EStorageKeys.PROFILE);
+      updateUserProfile(userProfile);
+    }
+
     configLoading();
     fetchCategories();
     super.onInit();
@@ -180,18 +185,17 @@ class GlobalController extends GetxController {
   fetchShops(String? categoryId) async {
     try {
       EasyLoading.show();
-      final userProfile = getStroageJson(EStorageKeys.PROFILE);
       final Map<String, dynamic> payload = {
         "name": {
           "\$regex": '',
           "\$options": 'i',
         },
         "state": {
-          "\$regex": userProfile['state'],
+          "\$regex": userProfile.state,
           "\$options": 'i',
         },
         "city": {
-          "\$regex": userProfile['city'],
+          "\$regex": userProfile.city,
           "\$options": 'i',
         }
       };

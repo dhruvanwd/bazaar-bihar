@@ -37,12 +37,9 @@ class SignupController extends GetxController {
         );
       }
 
-      print("-------resp.data---------");
-      print(resp.data);
       if (!isUserjson(resp.data)) throw Error();
       _globalCtrl.updateUserProfile(resp.data);
       _globalCtrl.updateStorage(EStorageKeys.PROFILE, resp.data);
-      print(_globalCtrl.getStroageJson(EStorageKeys.PROFILE));
       Get.offAll(HomePage());
     } catch (e) {
       print(e);
@@ -62,12 +59,9 @@ class SignupController extends GetxController {
       EasyLoading.show();
       final resp = await _apiRequestInstance.createUser(RequestBody(
           amendType: 'insertOne', collectionName: 'users', payload: [profile]));
-      print("------createUser-resp.data---------");
-      print(resp.data);
       if (!isUserjson(resp.data)) throw Error();
       _globalCtrl.updateUserProfile(resp.data);
       _globalCtrl.updateStorage(EStorageKeys.PROFILE, resp.data);
-      print(_globalCtrl.getStroageJson(EStorageKeys.PROFILE));
       Get.offAll(HomePage());
     } catch (e) {
       print(e);
@@ -93,10 +87,10 @@ class SignupController extends GetxController {
         idToken: googleSignInAuthentication.idToken,
       );
       UserCredential user = await _auth.signInWithCredential(credential);
-      print("-----------user-----------");
-      print(user);
-      print("-------userProfile--------");
-      print(user.additionalUserInfo!.profile);
+      // print("-----------user-----------");
+      // print(user);
+      // print("-------userProfile--------");
+      // print(user.additionalUserInfo!.profile);
       final profile = user.additionalUserInfo!.profile!;
       final rawProfileJson = {
         "fullName": profile['name'],

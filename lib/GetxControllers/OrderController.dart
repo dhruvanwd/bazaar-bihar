@@ -13,14 +13,14 @@ class OrderController extends GetxController {
 
   fetchOrderDetails() async {
     var dateFormat = DateFormat("yy-MM-dd");
-    final profile = _globalCtrl.getStroageJson(EStorageKeys.PROFILE);
+    final profile = _globalCtrl.userProfile;
     final resp = await _apiRequestInstance.fetchData(
         RequestBody(amendType: "findOne", collectionName: "orders", payload: {
       "createdAt": {
         "\$regex": "${dateFormat.format(DateTime.now())}",
         "\$options": 'i',
       },
-      "orderBy": profile['_id']
+      "orderBy": profile.id
     }));
     orders = resp.data;
     update();

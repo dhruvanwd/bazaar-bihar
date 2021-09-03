@@ -33,7 +33,6 @@ class HomePageController extends GetxController {
 
   @override
   void onInit() {
-    print('initializing HomePageController...............!');
     checkInternetStatus();
     subscription =
         Connectivity().onConnectivityChanged.listen(handleInternetStatus);
