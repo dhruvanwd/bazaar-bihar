@@ -4,8 +4,6 @@ import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/Utils/RequestBody.dart';
-import 'package:bazaar_bihar/pages/Home.dart/HomePage.dart';
 import 'package:bazaar_bihar/pages/login-signup/CustomButton.dart';
 import 'package:bazaar_bihar/pages/login-signup/appTitle.dart';
 import 'createAccountLabel.dart';

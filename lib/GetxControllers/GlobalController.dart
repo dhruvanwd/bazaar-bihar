@@ -23,6 +23,11 @@ class GlobalController extends GetxController {
   final ApiRequest apiRequestInstance = ApiRequest();
   late UserModel userProfile;
 
+  updateUserProfile(var profile) {
+    userProfile = UserModel.fromJson(profile);
+    update();
+  }
+
   final _localStorage = GetStorage();
 
   getKeyFromEnum(EStorageKeys key) {
@@ -155,20 +160,6 @@ class GlobalController extends GetxController {
       ..userInteractions = true
       ..contentPadding = EdgeInsets.all(60)
       ..customAnimation = CustomAnimation();
-  }
-
-  updateUserProfile(Map profileJson) async {
-    try {
-      final resp = await apiRequestInstance.storeData(
-          RequestBody(amendType: '', collectionName: 'users', payload: [
-        {"_id": profileJson['_id']},
-        profileJson
-      ]));
-      categories = categoryModelFromMap(resp.data);
-      update();
-    } catch (e) {
-      print(e);
-    }
   }
 
   @override

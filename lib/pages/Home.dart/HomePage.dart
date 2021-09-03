@@ -71,6 +71,14 @@ class HomePage extends StatelessWidget {
         if (_.showOfflineDialog) {
           showOfflineDialog();
         }
+
+        try {
+          print("-----profile----------");
+          print(_globalController.userProfile.toJson());
+        } catch (e) {
+          print(e);
+        }
+
         return SideMenu(
           key: _endSideMenuKey,
           inverse: true, // end side menu

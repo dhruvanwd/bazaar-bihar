@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:bazaar_bihar/Utils/RequestBody.dart';
 
 class ApiRequest {
-  final String baseUrl = 'http://52.14.49.133:8000';
+  final String baseUrl = 'http://3.23.46.248:8000';
   Dio _dio() {
     // Put your authorization token here
     return Dio(BaseOptions(

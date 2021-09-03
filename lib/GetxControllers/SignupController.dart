@@ -1,6 +1,6 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/Utils/RequestBody.dart';
-import 'package:bazaar_bihar/models/UserModel.dart';
+import 'package:bazaar_bihar/Utils/utils.dart';
 import 'package:bazaar_bihar/pages/Home.dart/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,20 +14,35 @@ class SignupController extends GetxController {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final _globalCtrl = GlobalController.to;
 
   loginUser(var user) async {
     try {
-      final resp = await GlobalController.to.apiRequestInstance.loginUser(
-        RequestBody(
-          amendType: 'findOne',
-          collectionName: 'users',
-          payload: [user],
-        ),
-      );
+      var resp;
+      if (user['password'] != null) {
+        resp = await _globalCtrl.apiRequestInstance.loginUser(
+          RequestBody(
+            amendType: 'findOne',
+            collectionName: 'users',
+            payload: [user],
+          ),
+        );
+      } else {
+        resp = await _globalCtrl.apiRequestInstance.storeData(
+          RequestBody(
+            amendType: 'findOne',
+            collectionName: 'users',
+            payload: [user],
+          ),
+        );
+      }
+
       print("-------resp.data---------");
       print(resp.data);
-      GlobalController.to.updateStorage(EStorageKeys.PROFILE, resp.data);
-      print(GlobalController.to.getStroageJson(EStorageKeys.PROFILE));
+      if (!isUserjson(resp.data)) throw Error();
+      _globalCtrl.updateUserProfile(resp.data);
+      _globalCtrl.updateStorage(EStorageKeys.PROFILE, resp.data);
+      print(_globalCtrl.getStroageJson(EStorageKeys.PROFILE));
       Get.offAll(HomePage());
     } catch (e) {
       print(e);
@@ -37,21 +52,25 @@ class SignupController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         colorText: Colors.red,
       );
+      throw e;
     }
   }
 
   createUser(var profile) async {
-    final _apiRequestInstance = GlobalController.to.apiRequestInstance;
+    final _apiRequestInstance = _globalCtrl.apiRequestInstance;
     try {
       EasyLoading.show();
       final resp = await _apiRequestInstance.createUser(RequestBody(
           amendType: 'insertOne', collectionName: 'users', payload: [profile]));
+      print("------createUser-resp.data---------");
       print(resp.data);
-      UserModel.fromJson(resp.data);
-      GlobalController.to.updateStorage(EStorageKeys.PROFILE, resp.data);
-      print(GlobalController.to.getStroageJson(EStorageKeys.PROFILE));
+      if (!isUserjson(resp.data)) throw Error();
+      _globalCtrl.updateUserProfile(resp.data);
+      _globalCtrl.updateStorage(EStorageKeys.PROFILE, resp.data);
+      print(_globalCtrl.getStroageJson(EStorageKeys.PROFILE));
       Get.offAll(HomePage());
     } catch (e) {
+      print(e);
       Get.snackbar(
         "Signup failed",
         "Server error.",
@@ -78,16 +97,28 @@ class SignupController extends GetxController {
       print(user);
       print("-------userProfile--------");
       print(user.additionalUserInfo!.profile);
-
       final profile = user.additionalUserInfo!.profile!;
-
-      createUser({
+      final rawProfileJson = {
         "fullName": profile['name'],
         "email": profile['email'],
         "picture": profile['picture'],
-        "avatar": user.user?.photoURL,
-        "mobile": user.user?.phoneNumber
-      });
+        "role": "buyer",
+        "state": "Bihar",
+        "city": "Nawada"
+      };
+
+      try {
+        await loginUser({
+          "email": profile['email'],
+        });
+      } catch (e) {
+        if (user.user != null && user.user?.photoURL != null) {
+          rawProfileJson["avatar"] = user.user?.photoURL;
+        } else if (user.user != null && user.user?.phoneNumber != null) {
+          rawProfileJson["mobile"] = user.user?.phoneNumber;
+        }
+        await createUser(rawProfileJson);
+      }
     } on FirebaseAuthException catch (e) {
       print(e.message);
       throw e;
