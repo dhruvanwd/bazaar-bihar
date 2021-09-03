@@ -131,7 +131,6 @@ class CartController extends GetxController {
 
   @override
   void onInit() {
-    Get.put(CartAddressController());
     restoreOfflineCartData();
     super.onInit();
   }

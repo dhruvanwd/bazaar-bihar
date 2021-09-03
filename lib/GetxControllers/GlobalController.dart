@@ -23,7 +23,7 @@ class GlobalController extends GetxController {
   final ApiRequest apiRequestInstance = ApiRequest();
   late UserModel userProfile;
 
-  updateUserProfile(var profile) {
+  updateUserProfileInstance(var profile) {
     userProfile = UserModel.fromJson(profile);
     update();
   }
@@ -124,6 +124,24 @@ class GlobalController extends GetxController {
     }
   }
 
+  updateUserProfile(Map profile) async {
+    try {
+      final resp = await apiRequestInstance.storeData(RequestBody(
+          amendType: 'findOneAndUpdate',
+          collectionName: 'users',
+          payload: [
+            {"_id": userProfile.id},
+            {"\$set": profile},
+            {"returnNewDocument": true}
+          ]));
+      print("updated user profile....!");
+      print(resp.data);
+      // updateUserProfileInstance(resp.data);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   // ------categories----------
 
   List<CategoryModel> categories = [];
@@ -166,9 +184,8 @@ class GlobalController extends GetxController {
   void onInit() {
     if (isUserLoggedIn) {
       final userProfile = getStroageJson(EStorageKeys.PROFILE);
-      updateUserProfile(userProfile);
+      updateUserProfileInstance(userProfile);
     }
-
     configLoading();
     fetchCategories();
     super.onInit();

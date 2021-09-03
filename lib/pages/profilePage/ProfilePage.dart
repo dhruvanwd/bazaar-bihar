@@ -18,22 +18,20 @@ class _MapScreenState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
-  final TextEditingController maxWidthController = TextEditingController();
-  final TextEditingController maxHeightController = TextEditingController();
-  final TextEditingController qualityController = TextEditingController();
   late TextEditingController _fullName;
   late TextEditingController _mobile;
   late TextEditingController _city;
   late TextEditingController _state;
+  late TextEditingController _email;
   dynamic _pickImageError;
   _MapScreenState() {
-    final profile = GlobalController.to.getStroageJson(EStorageKeys.PROFILE);
-    _fullName = TextEditingController(text: profile['fullName']);
-    _mobile = TextEditingController(text: profile['mobile']);
-    _city = TextEditingController(text: profile['city']);
-    _state = TextEditingController(text: profile['state']);
+    final profile = GlobalController.to.userProfile;
+    _fullName = TextEditingController(text: profile.fullName);
+    _mobile = TextEditingController(text: profile.mobile);
+    _city = TextEditingController(text: profile.city);
+    _state = TextEditingController(text: profile.state);
+    _email = TextEditingController(text: profile.email);
   }
-// getStroageJson
 
   final ImagePicker _picker = ImagePicker();
   var _imageFile;
@@ -55,6 +53,14 @@ class _MapScreenState extends State<ProfilePage>
 
       print(e);
     }
+  }
+
+  onUpdateProfile() {
+    GlobalController.to.updateUserProfile({
+      "fullName": _fullName.text,
+      "mobile": _mobile.text,
+      "email": _email.text,
+    });
   }
 
   @override
@@ -160,13 +166,13 @@ class _MapScreenState extends State<ProfilePage>
                                   ),
                                 ],
                               ),
-                              // Column(
-                              //   mainAxisAlignment: MainAxisAlignment.end,
-                              //   mainAxisSize: MainAxisSize.min,
-                              //   children: <Widget>[
-                              //     _status ? _getEditIcon() : Container(),
-                              //   ],
-                              // )
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  _status ? _getEditIcon() : Container(),
+                                ],
+                              )
                             ],
                           )),
                       Padding(
@@ -207,41 +213,42 @@ class _MapScreenState extends State<ProfilePage>
                               ),
                             ],
                           )),
-                      // Padding(
-                      //     padding:
-                      //         EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
-                      //     child:  Row(
-                      //       mainAxisSize: MainAxisSize.max,
-                      //       children: <Widget>[
-                      //          Column(
-                      //           mainAxisAlignment: MainAxisAlignment.start,
-                      //           mainAxisSize: MainAxisSize.min,
-                      //           children: <Widget>[
-                      //              Text(
-                      //               'Email ID',
-                      //               style: TextStyle(
-                      //                   fontSize: 16.0,
-                      //                   fontWeight: FontWeight.bold),
-                      //             ),
-                      //           ],
-                      //         ),
-                      //       ],
-                      //     )),
-                      // Padding(
-                      //     padding:
-                      //         EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
-                      //     child:  Row(
-                      //       mainAxisSize: MainAxisSize.max,
-                      //       children: <Widget>[
-                      //          Flexible(
-                      //           child:  TextField(
-                      //             decoration: const InputDecoration(
-                      //                 hintText: "Enter Email ID"),
-                      //             enabled: !_status,
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     )),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              left: 25.0, right: 25.0, top: 25.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Text(
+                                    'Email ID',
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              left: 25.0, right: 25.0, top: 2.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              Flexible(
+                                child: TextField(
+                                  controller: _email,
+                                  decoration: const InputDecoration(
+                                      hintText: "Enter Email ID"),
+                                  enabled: !_status,
+                                ),
+                              ),
+                            ],
+                          )),
                       Padding(
                           padding: EdgeInsets.only(
                               left: 25.0, right: 25.0, top: 10.0),
@@ -279,67 +286,67 @@ class _MapScreenState extends State<ProfilePage>
                               ),
                             ],
                           )),
-                      Padding(
-                          padding: EdgeInsets.only(
-                              left: 25.0, right: 25.0, top: 10.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  child: Text(
-                                    'City',
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                flex: 2,
-                              ),
-                              Expanded(
-                                child: Container(
-                                  child: Text(
-                                    'State',
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                flex: 2,
-                              ),
-                            ],
-                          )),
-                      Padding(
-                          padding: EdgeInsets.only(
-                              left: 25.0, right: 25.0, top: 2.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Flexible(
-                                child: Padding(
-                                  padding: EdgeInsets.only(right: 10.0),
-                                  child: TextField(
-                                    controller: _city,
-                                    decoration:
-                                        const InputDecoration(hintText: "City"),
-                                    enabled: !_status,
-                                  ),
-                                ),
-                                flex: 2,
-                              ),
-                              Flexible(
-                                child: TextField(
-                                  controller: _state,
-                                  decoration: const InputDecoration(
-                                      hintText: "Enter State"),
-                                  enabled: !_status,
-                                ),
-                                flex: 2,
-                              ),
-                            ],
-                          )),
+                      // Padding(
+                      //     padding: EdgeInsets.only(
+                      //         left: 25.0, right: 25.0, top: 10.0),
+                      //     child: Row(
+                      //       mainAxisSize: MainAxisSize.max,
+                      //       mainAxisAlignment: MainAxisAlignment.start,
+                      //       children: <Widget>[
+                      //         Expanded(
+                      //           child: Container(
+                      //             child: Text(
+                      //               'City',
+                      //               style: TextStyle(
+                      //                   fontSize: 16.0,
+                      //                   fontWeight: FontWeight.bold),
+                      //             ),
+                      //           ),
+                      //           flex: 2,
+                      //         ),
+                      //         Expanded(
+                      //           child: Container(
+                      //             child: Text(
+                      //               'State',
+                      //               style: TextStyle(
+                      //                   fontSize: 16.0,
+                      //                   fontWeight: FontWeight.bold),
+                      //             ),
+                      //           ),
+                      //           flex: 2,
+                      //         ),
+                      //       ],
+                      //     )),
+                      // Padding(
+                      //     padding: EdgeInsets.only(
+                      //         left: 25.0, right: 25.0, top: 2.0),
+                      //     child: Row(
+                      //       mainAxisSize: MainAxisSize.max,
+                      //       mainAxisAlignment: MainAxisAlignment.start,
+                      //       children: <Widget>[
+                      //         Flexible(
+                      //           child: Padding(
+                      //             padding: EdgeInsets.only(right: 10.0),
+                      //             child: TextField(
+                      //               controller: _city,
+                      //               decoration:
+                      //                   const InputDecoration(hintText: "City"),
+                      //               enabled: !_status,
+                      //             ),
+                      //           ),
+                      //           flex: 2,
+                      //         ),
+                      //         Flexible(
+                      //           child: TextField(
+                      //             controller: _state,
+                      //             decoration: const InputDecoration(
+                      //                 hintText: "Enter State"),
+                      //             enabled: !_status,
+                      //           ),
+                      //           flex: 2,
+                      //         ),
+                      //       ],
+                      //     )),
                       !_status ? _getActionButtons() : Container(),
                     ],
                   ),
@@ -375,6 +382,7 @@ class _MapScreenState extends State<ProfilePage>
                   setState(() {
                     _status = true;
                     FocusScope.of(context).requestFocus(FocusNode());
+                    onUpdateProfile();
                   });
                 },
                 // shape:  RoundedRectangleBorder(

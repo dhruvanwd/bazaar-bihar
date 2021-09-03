@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
@@ -25,9 +26,10 @@ void main() async {
   final globalController = Get.put(GlobalController());
   Get.put(HomePageController());
   Get.put(SignupController());
-  Get.put(CartController());
-  Get.put(OrderController());
-  Get.put(PaymentController());
+  Get.lazyPut(() => CartController());
+  Get.lazyPut(() => OrderController());
+  Get.lazyPut(() => CartAddressController());
+  Get.lazyPut(() => PaymentController());
   Get.lazyPut(() => OrderController());
   runApp(
     GetMaterialApp(

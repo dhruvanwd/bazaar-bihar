@@ -23,8 +23,6 @@ class SignupPage extends StatelessWidget {
         'mobile': mobileController.text,
         'role': 'buyer',
         'password': passwordController.text,
-        'state': 'bihar',
-        'city': 'nawada',
       });
     } else {
       print("Invalid form");
@@ -109,30 +107,7 @@ class SignupPage extends StatelessWidget {
                             }
                           },
                         ),
-                        Padding(padding: EdgeInsets.only(top: 16)),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    border: UnderlineInputBorder(),
-                                    enabled: false,
-                                    labelText: 'State'),
-                                initialValue: "Bihar",
-                              ),
-                            ),
-                            Expanded(
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    border: UnderlineInputBorder(),
-                                    enabled: false,
-                                    labelText: 'City'),
-                                initialValue: "Nawada",
-                              ),
-                            )
-                          ],
-                        ),
-                        Padding(padding: EdgeInsets.only(top: 40)),
+                        Padding(padding: EdgeInsets.only(top: 60)),
                         signInSubmitButton(onSignup, "Create Account"),
                         Padding(padding: EdgeInsets.only(top: 50)),
                         createAccountLabel(

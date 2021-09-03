@@ -38,7 +38,7 @@ class SignupController extends GetxController {
       }
 
       if (!isUserjson(resp.data)) throw Error();
-      _globalCtrl.updateUserProfile(resp.data);
+      _globalCtrl.updateUserProfileInstance(resp.data);
       _globalCtrl.updateStorage(EStorageKeys.PROFILE, resp.data);
       Get.offAll(HomePage());
     } catch (e) {
@@ -60,7 +60,7 @@ class SignupController extends GetxController {
       final resp = await _apiRequestInstance.createUser(RequestBody(
           amendType: 'insertOne', collectionName: 'users', payload: [profile]));
       if (!isUserjson(resp.data)) throw Error();
-      _globalCtrl.updateUserProfile(resp.data);
+      _globalCtrl.updateUserProfileInstance(resp.data);
       _globalCtrl.updateStorage(EStorageKeys.PROFILE, resp.data);
       Get.offAll(HomePage());
     } catch (e) {

@@ -16,10 +16,13 @@ class _OrdersPageState extends State<OrdersPage> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: GetBuilder<OrderController>(
-      builder: (_orderCtrl) => Column(
-        children: _orderCtrl.orders.length > 0
-            ? _orderCtrl.orders.map((order) => OrderCard(order)).toList()
-            : [ShopUnavailable("No order till now !")],
+      builder: (_orderCtrl) => Container(
+        margin: EdgeInsets.only(bottom: 50),
+        child: Column(
+          children: _orderCtrl.orders.length > 0
+              ? _orderCtrl.orders.map((order) => OrderCard(order)).toList()
+              : [ShopUnavailable("No order till now !")],
+        ),
       ),
     ));
   }
