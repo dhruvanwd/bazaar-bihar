@@ -21,7 +21,7 @@ class LoginGoogleBtn extends StatelessWidget {
               width: 28,
             ),
             Text(
-              "Login with Google",
+              "Continue with Google",
               style: Get.theme.textTheme.subtitle2!.copyWith(
                 color: Colors.grey.shade800,
               ),

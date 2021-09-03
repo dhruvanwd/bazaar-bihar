@@ -100,7 +100,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         Padding(padding: EdgeInsets.only(top: 60)),
                         signInSubmitButton(onLogin, "Login"),
-                        Padding(padding: EdgeInsets.only(top: 140)),
+                        Padding(padding: EdgeInsets.only(top: 100)),
                         LoginGoogleBtn(),
                         createAccountLabel(
                             'signup', 'Don\'t have an account ?', 'Register')

@@ -20,16 +20,12 @@ class _MapScreenState extends State<ProfilePage>
   final FocusNode myFocusNode = FocusNode();
   late TextEditingController _fullName;
   late TextEditingController _mobile;
-  late TextEditingController _city;
-  late TextEditingController _state;
   late TextEditingController _email;
   dynamic _pickImageError;
   _MapScreenState() {
     final profile = GlobalController.to.userProfile;
     _fullName = TextEditingController(text: profile.fullName);
     _mobile = TextEditingController(text: profile.mobile);
-    _city = TextEditingController(text: profile.city);
-    _state = TextEditingController(text: profile.state);
     _email = TextEditingController(text: profile.email);
   }
 

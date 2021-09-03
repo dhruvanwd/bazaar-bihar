@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/pages/login-signup/LoginGoogleBtn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/SignupController.dart';
@@ -110,6 +111,8 @@ class SignupPage extends StatelessWidget {
                         Padding(padding: EdgeInsets.only(top: 60)),
                         signInSubmitButton(onSignup, "Create Account"),
                         Padding(padding: EdgeInsets.only(top: 50)),
+                        LoginGoogleBtn(),
+                        Padding(padding: EdgeInsets.only(top: 30)),
                         createAccountLabel(
                             'login', 'Already have an account ?', 'login')
                       ],
