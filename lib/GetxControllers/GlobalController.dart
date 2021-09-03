@@ -18,6 +18,8 @@ import 'package:intl/intl.dart';
 
 enum EStorageKeys { PROFILE, SETTINGS, CART, CART_ADDRESS }
 
+enum ECategoryViewer { CHIP, CARD }
+
 class GlobalController extends GetxController {
   static GlobalController get to => Get.find();
   var dateFormat = DateFormat("yy-MM-dd hh:mm:ss aaa");
@@ -26,6 +28,13 @@ class GlobalController extends GetxController {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final ApiRequest apiRequestInstance = ApiRequest();
   late UserModel userProfile;
+
+  ECategoryViewer categoryViewer = ECategoryViewer.CARD;
+
+  updateCategoryViewer(ECategoryViewer catViewer) {
+    categoryViewer = catViewer;
+    update();
+  }
 
   updateUserProfileInstance(var profile) {
     userProfile = UserModel.fromJson(profile);

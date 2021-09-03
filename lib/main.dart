@@ -26,11 +26,10 @@ void main() async {
   final globalController = Get.put(GlobalController());
   Get.put(HomePageController());
   Get.put(SignupController());
+  Get.put(OrderController());
   Get.lazyPut(() => CartController());
-  Get.lazyPut(() => OrderController());
   Get.lazyPut(() => CartAddressController());
   Get.lazyPut(() => PaymentController());
-  Get.lazyPut(() => OrderController());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

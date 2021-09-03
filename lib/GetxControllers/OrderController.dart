@@ -22,8 +22,11 @@ class OrderController extends GetxController {
       },
       "orderBy": profile.id
     }));
-    orders = resp.data;
-    update();
+    print(resp.data);
+    if (resp.data != "" && resp.data != null) {
+      orders = resp.data;
+      update();
+    }
   }
 
   @override
