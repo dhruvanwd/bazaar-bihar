@@ -1,5 +1,4 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/models/PaymentInfoModal.dart';
 import 'package:bazaar_bihar/models/ShopModels.dart';

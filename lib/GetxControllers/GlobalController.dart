@@ -178,8 +178,13 @@ class GlobalController extends GetxController {
     }
   }
 
-  createImageUrl(ImageModel image) =>
-      'https://bazaar-bihar.s3.ap-south-1.amazonaws.com/' + image.filename;
+  createImageUrl(ImageModel image) {
+    if (image.filename.contains("https://"))
+      return image.filename;
+    else
+      return 'https://bazaar-bihar.s3.ap-south-1.amazonaws.com/' +
+          image.filename;
+  }
 
   void configLoading() {
     EasyLoading.instance
