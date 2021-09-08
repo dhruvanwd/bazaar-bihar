@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
 
         try {
           print("-----profile----------");
-          print(_globalController.userProfile.toJson());
+          print(_globalController.userProfile!.toJson());
         } catch (e) {
           print(e);
         }

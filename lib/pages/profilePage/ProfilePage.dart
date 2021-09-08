@@ -24,9 +24,11 @@ class _MapScreenState extends State<ProfilePage>
   dynamic _pickImageError;
   _MapScreenState() {
     final profile = GlobalController.to.userProfile;
-    _fullName = TextEditingController(text: profile.fullName);
-    _mobile = TextEditingController(text: profile.mobile);
-    _email = TextEditingController(text: profile.email);
+    if (profile != null) {
+      _fullName = TextEditingController(text: profile.fullName);
+      _mobile = TextEditingController(text: profile.mobile);
+      _email = TextEditingController(text: profile.email);
+    }
   }
 
   final ImagePicker _picker = ImagePicker();

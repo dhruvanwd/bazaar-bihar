@@ -27,7 +27,7 @@ class GlobalController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final ApiRequest apiRequestInstance = ApiRequest();
-  late UserModel userProfile;
+  UserModel? userProfile;
 
   ECategoryViewer categoryViewer = ECategoryViewer.CARD;
 
@@ -145,7 +145,7 @@ class GlobalController extends GetxController {
           amendType: 'findOneAndUpdate',
           collectionName: 'users',
           payload: [
-            {"_id": userProfile.id},
+            {"_id": userProfile!.id},
             {"\$set": profile},
             {"returnNewDocument": true}
           ]));
@@ -228,11 +228,11 @@ class GlobalController extends GetxController {
           "\$options": 'i',
         },
         "state": {
-          "\$regex": userProfile.state,
+          "\$regex": userProfile!.state,
           "\$options": 'i',
         },
         "city": {
-          "\$regex": userProfile.city,
+          "\$regex": userProfile!.city,
           "\$options": 'i',
         }
       };

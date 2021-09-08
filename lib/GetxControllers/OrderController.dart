@@ -14,6 +14,7 @@ class OrderController extends GetxController {
   fetchOrderDetails() async {
     var dateFormat = DateFormat("yy-MM-dd");
     final profile = _globalCtrl.userProfile;
+    if (profile == null) return;
     final resp = await _apiRequestInstance.fetchData(
         RequestBody(amendType: "findOne", collectionName: "orders", payload: {
       "createdAt": {

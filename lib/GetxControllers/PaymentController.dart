@@ -56,7 +56,7 @@ class PaymentController extends GetxController {
       // ACCEPTED //CANCELLED // IN_TRANSIT
       // DELIVERED
       "createdAt": updatedDt,
-      "orderBy": profile.id,
+      "orderBy": profile!.id,
     };
 
     final orders = _cartCtrl.carts.map((e) {
@@ -84,7 +84,7 @@ class PaymentController extends GetxController {
       'amount': priceInfo.totalSp,
       'name': 'BazaarBihar',
       'description': 'Order From BazaarBihar',
-      'prefill': {'contact': profile.mobile, 'email': profile.email}
+      'prefill': {'contact': profile!.mobile, 'email': profile.email}
     };
     print("--------payment options---------");
     print(options);
