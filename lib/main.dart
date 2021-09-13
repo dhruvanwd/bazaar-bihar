@@ -23,11 +23,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
-  final globalController = Get.put(GlobalController());
+  final glblCtrl = Get.put(GlobalController());
   Get.put(HomePageController());
   Get.put(SignupController());
   Get.put(OrderController());
-  Get.lazyPut(() => CartController());
+  Get.put(CartController());
   Get.lazyPut(() => CartAddressController());
   Get.lazyPut(() => PaymentController());
   runApp(
@@ -36,12 +36,11 @@ void main() async {
       theme: ThemeData.light().copyWith(primaryColor: Colors.orange),
       darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.grey),
       builder: EasyLoading.init(),
-      themeMode: globalController.themeMode,
+      themeMode: glblCtrl.themeMode,
       getPages: [
         GetPage(
             name: '/',
-            page: () =>
-                globalController.isUserLoggedIn ? HomePage() : LoginPage()),
+            page: () => glblCtrl.isUserLoggedIn ? HomePage() : LoginPage()),
         GetPage(name: "/loader", page: () => LoaderPage()),
         GetPage(name: '/signup', page: () => SignupPage()),
         GetPage(name: '/shops', page: () => ShopsPage()),

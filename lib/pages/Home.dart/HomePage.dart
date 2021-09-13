@@ -12,11 +12,11 @@ import 'package:new_version/new_version.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 class HomePage extends StatelessWidget {
-  final _globalController = Get.find<GlobalController>();
+  final _glblCtrl = Get.find<GlobalController>();
   final newVersion = NewVersion();
   HomePage() {
-    if (_globalController.shopsList.length == 0) {
-      _globalController.fetchShops(null);
+    if (_glblCtrl.shopsList.length == 0) {
+      _glblCtrl.fetchShops(null);
     }
   }
 
@@ -71,10 +71,9 @@ class HomePage extends StatelessWidget {
         if (_.showOfflineDialog) {
           showOfflineDialog();
         }
-
         try {
           print("-----profile----------");
-          print(_globalController.userProfile!.toJson());
+          print(_glblCtrl.userProfile!.toJson());
         } catch (e) {
           print(e);
         }
@@ -99,15 +98,15 @@ class HomePage extends StatelessWidget {
                 title: Text(_.appTitle),
                 actions: [
                   IconButton(
-                    onPressed: _globalController.logout,
+                    onPressed: _glblCtrl.logout,
                     icon: Icon(AntDesign.logout),
                   )
                 ],
               ),
               body: _.currentPage,
               floatingActionButton: GetBuilder<CartController>(
-                builder: (_floatCtrl) => Visibility(
-                  visible: _floatCtrl.carts.length != 0,
+                builder: (_cartCtrl) => Visibility(
+                  visible: _cartCtrl.carts.length != 0,
                   child: FloatingCartButton(),
                 ),
               ),

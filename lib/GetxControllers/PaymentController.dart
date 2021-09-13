@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
@@ -57,6 +58,7 @@ class PaymentController extends GetxController {
       // DELIVERED
       "createdAt": updatedDt,
       "orderBy": profile!.id,
+      "deliveryAddress": CartAddressController.to.selectedAddres?.toJson(),
     };
 
     final orders = _cartCtrl.carts.map((e) {
