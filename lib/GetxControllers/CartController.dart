@@ -38,7 +38,8 @@ class CartController extends GetxController {
     double totalSp = 0.0;
     List<Map<dynamic, dynamic>> shopWiseInfo = [];
     carts.forEach((cart) {
-      final shopInfo = Map.from({"shopName": cart.shop.name});
+      final shopInfo =
+          Map.from({"shopName": cart.shop.name, "shopId": cart.shop.id});
       cart.products.forEach((product) {
         double mrp = double.parse(product.markedPrice) * product.cartItemCount;
         shopInfo['mrp'] = mrp;

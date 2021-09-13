@@ -65,7 +65,7 @@ class CheckoutCart extends StatelessWidget {
                           dense: true,
                           value: address,
                           selected:
-                              address.id == _addressCtrl.selectedAddres!.id,
+                              address.id == _addressCtrl.selectedAddres?.id,
                           groupValue: _addressCtrl.selectedAddres,
                           title: Text("${address.addressLine1}"),
                           subtitle: Text("${address.receiverName}"),

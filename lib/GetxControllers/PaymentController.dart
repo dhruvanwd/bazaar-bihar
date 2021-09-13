@@ -62,7 +62,7 @@ class PaymentController extends GetxController {
     final orders = _cartCtrl.carts.map((e) {
       final tempMap = e.toJson();
       final paymentInfo = shopWiseInfo
-          .firstWhere((shopInfo) => shopInfo['shopName'] == e.shop.name);
+          .firstWhere((shopInfo) => shopInfo['shopId'] == e.shop.id);
       return {...tempMap, ...orderDetail, ...paymentInfo};
     }).toList();
     _placeOrder(orders);
