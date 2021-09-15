@@ -4,7 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:bazaar_bihar/models/ImagesModel.dart';
+import 'CategoryModel.dart';
+import 'ImagesModel.dart';
 
 List<ProductModel> productModelFromMap(List<dynamic> products) =>
     List<ProductModel>.from(products.map((x) => ProductModel.fromMap(x)));
@@ -21,7 +22,7 @@ class ProductModel {
       required this.sellingPrice,
       required this.quantity,
       required this.description,
-      required this.categoryId,
+      required this.category,
       required this.shopId,
       required this.isInStock,
       required this.unit,
@@ -34,7 +35,7 @@ class ProductModel {
   String sellingPrice;
   String quantity;
   String description;
-  String categoryId;
+  CategoryModel category;
   String shopId;
   bool isInStock;
   String unit;
@@ -55,7 +56,7 @@ class ProductModel {
       sellingPrice: json["sellingPrice"],
       quantity: json["quantity"],
       description: json["description"],
-      categoryId: json["categoryId"],
+      category: CategoryModel.fromMap(json["category"]),
       shopId: json["shopId"],
       isInStock: json["isInStock"],
       unit: json["unit"],
@@ -69,7 +70,7 @@ class ProductModel {
         "sellingPrice": sellingPrice,
         "quantity": quantity,
         "description": description,
-        "categoryId": categoryId,
+        "category": category.toMap(),
         "shopId": shopId,
         "isInStock": isInStock,
         "unit": unit,
