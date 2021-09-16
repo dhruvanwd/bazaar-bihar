@@ -17,6 +17,7 @@ class CartPage extends StatelessWidget {
             expandedHeight: 250,
             stretch: true,
             toolbarTextStyle: TextStyle(color: Colors.green),
+            iconTheme: IconTheme.of(context).copyWith(color: Colors.purple),
             titleSpacing: 0.0,
             title: Card(
               color: Colors.white70,

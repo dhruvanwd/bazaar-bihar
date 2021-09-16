@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
+import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/components/StrechedPrimaryButton.dart';
 import 'package:bazaar_bihar/models/CartAddressModel.dart';
 import 'package:easy_mask/easy_mask.dart';
@@ -8,13 +9,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartAddressForm extends StatelessWidget {
-  CartAddressForm({Key? key}) : super(key: key);
+  final _glblCtrl = GlobalController.to;
+  late TextEditingController _stateController;
+  late TextEditingController _cityController;
+  CartAddressForm() {
+    _stateController =
+        TextEditingController(text: _glblCtrl.userProfile?.state);
+
+    _cityController = TextEditingController(text: _glblCtrl.userProfile?.city);
+  }
   final _formKey = GlobalKey<FormState>();
 
   final _localityController = TextEditingController();
-  final _zipCodeController = TextEditingController(text: "805110");
-  final _stateController = TextEditingController(text: "Bihar");
-  final _cityController = TextEditingController(text: "Nawada");
+  final _zipCodeController = TextEditingController();
+
   final _addressLine1Controller = TextEditingController();
   final _mobileController = TextEditingController();
   final _nameController = TextEditingController();
@@ -95,6 +103,8 @@ class CartAddressForm extends StatelessWidget {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Enter receiver\'s name';
+                              } else if (value.length < 3) {
+                                return "Name too small";
                               }
                             },
                           ),
@@ -148,21 +158,6 @@ class CartAddressForm extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 4),
-                          child: TextFormField(
-                            enabled: false,
-                            controller: _zipCodeController,
-                            decoration: InputDecoration(
-                                border: UnderlineInputBorder(),
-                                labelText: 'Pin Code'),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Enter your pincode.';
-                              }
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 4),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -198,6 +193,23 @@ class CartAddressForm extends StatelessWidget {
                                 ),
                               )
                             ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 4),
+                          child: TextFormField(
+                            controller: _zipCodeController,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                                border: UnderlineInputBorder(),
+                                labelText: 'Pin Code'),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Enter your pincode.';
+                              } else if (value.length != 6) {
+                                return "Invalid pin code";
+                              }
+                            },
                           ),
                         ),
                         Padding(
