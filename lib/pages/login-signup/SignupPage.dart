@@ -1,34 +1,59 @@
+import 'package:bazaar_bihar/CityStateDropDown/StateCityModel.dart';
 import 'package:bazaar_bihar/pages/login-signup/LoginGoogleBtn.dart';
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/SignupController.dart';
 import 'package:bazaar_bihar/pages/login-signup/CustomButton.dart';
 import 'package:bazaar_bihar/pages/login-signup/appTitle.dart';
+import 'CityDropdownSelector.dart';
+import 'StateDropdownSelector.dart';
 import 'createAccountLabel.dart';
 import 'bezierContainer.dart';
 
-class SignupPage extends StatelessWidget {
-  SignupPage({Key? key}) : super(key: key);
+class SignupPage extends StatefulWidget {
+  const SignupPage({Key? key}) : super(key: key);
 
+  @override
+  _SignupPageState createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
   final height = Get.mediaQuery.size.height;
   final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final mobileController = TextEditingController();
   final passwordController = TextEditingController();
+  final cityController = TextEditingController();
+  StateCity? selectedState;
+  CityModel? selectedCity;
 
   onSignup() async {
     if (_formKey.currentState!.validate()) {
+      if (selectedState == null) {
+        Get.snackbar("Select your state", "state is required",
+            snackPosition: SnackPosition.BOTTOM);
+        return;
+      } else if (selectedCity == null) {
+        Get.snackbar("Select your city", "city is required",
+            snackPosition: SnackPosition.BOTTOM);
+        return;
+      }
       _formKey.currentState!.save();
       SignupController.to.createUser({
         'fullName': nameController.text,
         'mobile': mobileController.text,
         'role': 'buyer',
+        'state': selectedState?.state,
+        "city": selectedCity?.city,
         'password': passwordController.text,
       });
     } else {
       print("Invalid form");
     }
   }
+
+  // stateCityList
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +100,9 @@ class SignupPage extends StatelessWidget {
                             AutofillHints.telephoneNumberLocal,
                             AutofillHints.telephoneNumberDevice,
                           ],
+                          inputFormatters: [
+                            TextInputMask(mask: '999 9999 999', reverse: false)
+                          ],
                           decoration: InputDecoration(
                               prefixText: "+91",
                               border: UnderlineInputBorder(),
@@ -107,6 +135,46 @@ class SignupPage extends StatelessWidget {
                               return 'Enter password';
                             }
                           },
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    right: selectedState != null ? 8 : 0),
+                                child: StateDropdownSelector(
+                                  onChangeValue: (StateCity state) {
+                                    setState(() {
+                                      selectedState = state;
+                                      selectedCity = null;
+                                      print(state.state);
+                                    });
+                                  },
+                                  selectedState: selectedState,
+                                ),
+                              ),
+                            ),
+                            selectedState != null
+                                ? Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: CityDropdownSelector(
+                                        cities: selectedState!.districts,
+                                        onChangeValue: (CityModel city) {
+                                          setState(() {
+                                            selectedCity = city;
+                                            print(city.city);
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    height: 0,
+                                    width: 0,
+                                  ),
+                          ],
                         ),
                         Padding(padding: EdgeInsets.only(top: 60)),
                         signInSubmitButton(onSignup, "Create Account"),

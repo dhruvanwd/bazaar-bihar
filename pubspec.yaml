@@ -34,7 +34,7 @@ dependencies:
   firebase_auth: ^1.0.1
   google_sign_in: ^5.0.0
   firebase_analytics: ^5.0.2
-
+  ej_selector: ^1.0.0
 
 
 dev_dependencies:
