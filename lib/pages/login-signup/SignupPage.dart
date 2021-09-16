@@ -7,6 +7,7 @@ import 'package:bazaar_bihar/GetxControllers/SignupController.dart';
 import 'package:bazaar_bihar/pages/login-signup/CustomButton.dart';
 import 'package:bazaar_bihar/pages/login-signup/appTitle.dart';
 import 'CityDropdownSelector.dart';
+import 'StateCityForm.dart';
 import 'StateDropdownSelector.dart';
 import 'createAccountLabel.dart';
 import 'bezierContainer.dart';
@@ -54,6 +55,21 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   // stateCityList
+
+  handleStateChange(StateCity state) {
+    setState(() {
+      selectedState = state;
+      selectedCity = null;
+      print(state.state);
+    });
+  }
+
+  handleCityChange(CityModel city) {
+    setState(() {
+      selectedCity = city;
+      print(city.city);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,45 +152,11 @@ class _SignupPageState extends State<SignupPage> {
                             }
                           },
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    right: selectedState != null ? 8 : 0),
-                                child: StateDropdownSelector(
-                                  onChangeValue: (StateCity state) {
-                                    setState(() {
-                                      selectedState = state;
-                                      selectedCity = null;
-                                      print(state.state);
-                                    });
-                                  },
-                                  selectedState: selectedState,
-                                ),
-                              ),
-                            ),
-                            selectedState != null
-                                ? Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: CityDropdownSelector(
-                                        cities: selectedState!.districts,
-                                        onChangeValue: (CityModel city) {
-                                          setState(() {
-                                            selectedCity = city;
-                                            print(city.city);
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                  )
-                                : Container(
-                                    height: 0,
-                                    width: 0,
-                                  ),
-                          ],
+                        StateCityForm(
+                          cities: selectedState?.districts,
+                          handleCityChange: handleCityChange,
+                          handleStateChange: handleStateChange,
+                          selectedState: selectedState,
                         ),
                         Padding(padding: EdgeInsets.only(top: 60)),
                         signInSubmitButton(onSignup, "Create Account"),

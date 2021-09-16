@@ -249,25 +249,26 @@ class _MapScreenState extends State<ProfilePage>
                             ],
                           )),
                       Padding(
-                          padding: EdgeInsets.only(
-                              left: 25.0, right: 25.0, top: 10.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Text(
-                                    'Mobile',
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )),
+                        padding:
+                            EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text(
+                                  'Mobile',
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                       Padding(
                           padding: EdgeInsets.only(
                               left: 25.0, right: 25.0, top: 2.0),
@@ -285,67 +286,6 @@ class _MapScreenState extends State<ProfilePage>
                               ),
                             ],
                           )),
-                      // Padding(
-                      //     padding: EdgeInsets.only(
-                      //         left: 25.0, right: 25.0, top: 10.0),
-                      //     child: Row(
-                      //       mainAxisSize: MainAxisSize.max,
-                      //       mainAxisAlignment: MainAxisAlignment.start,
-                      //       children: <Widget>[
-                      //         Expanded(
-                      //           child: Container(
-                      //             child: Text(
-                      //               'City',
-                      //               style: TextStyle(
-                      //                   fontSize: 16.0,
-                      //                   fontWeight: FontWeight.bold),
-                      //             ),
-                      //           ),
-                      //           flex: 2,
-                      //         ),
-                      //         Expanded(
-                      //           child: Container(
-                      //             child: Text(
-                      //               'State',
-                      //               style: TextStyle(
-                      //                   fontSize: 16.0,
-                      //                   fontWeight: FontWeight.bold),
-                      //             ),
-                      //           ),
-                      //           flex: 2,
-                      //         ),
-                      //       ],
-                      //     )),
-                      // Padding(
-                      //     padding: EdgeInsets.only(
-                      //         left: 25.0, right: 25.0, top: 2.0),
-                      //     child: Row(
-                      //       mainAxisSize: MainAxisSize.max,
-                      //       mainAxisAlignment: MainAxisAlignment.start,
-                      //       children: <Widget>[
-                      //         Flexible(
-                      //           child: Padding(
-                      //             padding: EdgeInsets.only(right: 10.0),
-                      //             child: TextField(
-                      //               controller: _city,
-                      //               decoration:
-                      //                   const InputDecoration(hintText: "City"),
-                      //               enabled: !_status,
-                      //             ),
-                      //           ),
-                      //           flex: 2,
-                      //         ),
-                      //         Flexible(
-                      //           child: TextField(
-                      //             controller: _state,
-                      //             decoration: const InputDecoration(
-                      //                 hintText: "Enter State"),
-                      //             enabled: !_status,
-                      //           ),
-                      //           flex: 2,
-                      //         ),
-                      //       ],
-                      //     )),
                       !_status ? _getActionButtons() : Container(),
                     ],
                   ),
