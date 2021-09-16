@@ -37,7 +37,6 @@ class SignupController extends GetxController {
           ),
         );
       }
-
       if (!isUserjson(resp.data)) throw Error();
       _globalCtrl.updateUserProfileInstance(resp.data);
       _globalCtrl.updateStorage(EStorageKeys.PROFILE, resp.data);

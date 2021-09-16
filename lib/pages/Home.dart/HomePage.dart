@@ -65,17 +65,18 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    try {
+      print("-----profile----------");
+      print(_glblCtrl.userProfile!.toJson());
+    } catch (e) {
+      print(e);
+    }
+
     checkUpdate(context);
     return GetBuilder<HomePageController>(
       builder: (_) {
         if (_.showOfflineDialog) {
           showOfflineDialog();
-        }
-        try {
-          print("-----profile----------");
-          print(_glblCtrl.userProfile!.toJson());
-        } catch (e) {
-          print(e);
         }
 
         return SideMenu(

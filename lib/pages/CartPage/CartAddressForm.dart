@@ -33,7 +33,7 @@ class CartAddressForm extends StatelessWidget {
         "city": _cityController.text,
         "state": _stateController.text,
         "zipCode": _zipCodeController.text,
-        "destinationContact": _mobileController.text,
+        "destinationContact": _mobileController.text.removeAllWhitespace,
         "addressLine1": _addressLine1Controller.text,
         "locality": _localityController.text,
         "receiverName": _nameController.text,
@@ -115,6 +115,7 @@ class CartAddressForm extends StatelessWidget {
                               TextInputMask(
                                   mask: '999 9999 999', reverse: false)
                             ],
+                            keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                                 prefixText: "+91",
                                 border: UnderlineInputBorder(),

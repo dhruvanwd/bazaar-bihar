@@ -37,10 +37,7 @@ class CheckoutCart extends StatelessWidget {
         body: Container(
           width: Get.mediaQuery.size.width,
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child:
-              // _addressCtrl.cartAdresses.length == 0
-
-              Container(
+          child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,

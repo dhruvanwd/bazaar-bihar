@@ -23,7 +23,7 @@ enum ECategoryViewer { CHIP, CARD }
 class GlobalController extends GetxController {
   static GlobalController get to => Get.find();
   var dateFormat = DateFormat("yy-MM-dd hh:mm:ss aaa");
-  ThemeMode get themeMode => ThemeMode.system;
+  ThemeMode get themeMode => ThemeMode.light;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final ApiRequest apiRequestInstance = ApiRequest();

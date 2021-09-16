@@ -21,6 +21,14 @@ class LoginPage extends StatelessWidget {
   onLogin() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+      if (passwordController.text.isEmpty) {
+        Get.snackbar(
+          "Enter your password",
+          "password is required",
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        return;
+      }
       SignupController.to.loginUser({
         "mobile": usernameController.text.removeWhiteSpaces,
         "password": passwordController.text
@@ -101,7 +109,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         Padding(padding: EdgeInsets.only(top: 60)),
                         signInSubmitButton(onLogin, "Login"),
-                        Padding(padding: EdgeInsets.only(top: 100)),
+                        Padding(padding: EdgeInsets.only(top: 60)),
                         LoginGoogleBtn(),
                         createAccountLabel(
                             'signup', 'Don\'t have an account ?', 'Register')

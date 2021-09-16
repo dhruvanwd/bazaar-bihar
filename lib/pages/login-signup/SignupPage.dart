@@ -8,7 +8,6 @@ import 'package:bazaar_bihar/pages/login-signup/CustomButton.dart';
 import 'package:bazaar_bihar/pages/login-signup/appTitle.dart';
 import 'CityDropdownSelector.dart';
 import 'StateCityForm.dart';
-import 'StateDropdownSelector.dart';
 import 'createAccountLabel.dart';
 import 'bezierContainer.dart';
 
@@ -43,7 +42,7 @@ class _SignupPageState extends State<SignupPage> {
       _formKey.currentState!.save();
       SignupController.to.createUser({
         'fullName': nameController.text,
-        'mobile': mobileController.text,
+        'mobile': mobileController.text.removeAllWhitespace,
         'role': 'buyer',
         'state': selectedState?.state,
         "city": selectedCity?.city,
@@ -158,9 +157,9 @@ class _SignupPageState extends State<SignupPage> {
                           handleStateChange: handleStateChange,
                           selectedState: selectedState,
                         ),
-                        Padding(padding: EdgeInsets.only(top: 60)),
+                        Padding(padding: EdgeInsets.only(top: 40)),
                         signInSubmitButton(onSignup, "Create Account"),
-                        Padding(padding: EdgeInsets.only(top: 50)),
+                        Padding(padding: EdgeInsets.only(top: 30)),
                         LoginGoogleBtn(),
                         Padding(padding: EdgeInsets.only(top: 30)),
                         createAccountLabel(

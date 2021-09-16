@@ -9,9 +9,17 @@ class HomePageController extends GetxController {
   int currentTabIndex = 0;
   bool showOfflineDialog = false;
   dynamic subscription;
+  String appTitle = "Homepage";
 
   setTabIndex(int indx) {
     currentTabIndex = indx;
+    if (currentTabIndex == 0) {
+      appTitle = "Homepage";
+    } else if (currentTabIndex == 1) {
+      appTitle = "My orders";
+    } else if (currentTabIndex == 2) {
+      appTitle = "Profile";
+    }
     update();
   }
 
@@ -45,20 +53,14 @@ class HomePageController extends GetxController {
     super.onClose();
   }
 
-  var appTitle = "Homepage";
-
   get currentPage {
     if (currentTabIndex == 0) {
-      appTitle = "Homepage";
       return LandingPage();
     } else if (currentTabIndex == 1) {
-      appTitle = "My orders";
       return OrdersPage();
     } else if (currentTabIndex == 2) {
-      appTitle = "Profile";
       return ProfilePage();
     }
-    appTitle = "Homepage";
     return LandingPage();
   }
 }

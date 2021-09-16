@@ -28,12 +28,21 @@ void main() async {
   Get.put(SignupController());
   Get.put(OrderController());
   Get.put(CartController());
-  Get.lazyPut(() => CartAddressController());
+  Get.put(CartAddressController());
   Get.lazyPut(() => PaymentController());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(primaryColor: Colors.orange),
+      theme: ThemeData.light().copyWith(
+        primaryColor: Colors.orange,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.orange,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
+        ),
+      ),
       darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.grey),
       builder: EasyLoading.init(),
       themeMode: glblCtrl.themeMode,
