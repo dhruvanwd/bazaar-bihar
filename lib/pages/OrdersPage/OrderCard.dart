@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/Utils/utils.dart';
 import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
 import 'package:flip_card/flip_card.dart';
@@ -67,7 +68,7 @@ class OrderCard extends StatelessWidget {
                       ),
                     ),
                     trailing: Text(
-                      '\$${orderDetail["mrp"]}',
+                      '$rupeeSymbol${orderDetail["mrp"]}',
                       style: TextStyle(
                         color: Colors.blue.shade400,
                       ),
@@ -112,8 +113,9 @@ class OrderCard extends StatelessWidget {
                                 ),
                                 title: Text(product.name),
                                 subtitle: Text(
-                                    'MRP: \$${product.markedPrice}   Discount: ${product.discount}%'),
-                                trailing: Text('\$${product.sellingPrice}'),
+                                    'MRP: $rupeeSymbol${product.markedPrice}   Discount: ${product.discount}%'),
+                                trailing:
+                                    Text('$rupeeSymbol${product.sellingPrice}'),
                               ),
                             ),
                           );
@@ -127,9 +129,9 @@ class OrderCard extends StatelessWidget {
                   color: Colors.cyan.shade50,
                   child: ListTile(
                     title: Text('Total'),
-                    subtitle:
-                        Text('MRP: \$${orderDetail["mrp"]}   Discount: 20%'),
-                    trailing: Text('\$${orderDetail["sp"]}'),
+                    subtitle: Text(
+                        'MRP: $rupeeSymbol${orderDetail["mrp"]}   Discount: 20%'),
+                    trailing: Text('$rupeeSymbol${orderDetail["sp"]}'),
                   ),
                 ),
               ],

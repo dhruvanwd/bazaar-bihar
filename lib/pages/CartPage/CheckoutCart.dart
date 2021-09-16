@@ -13,6 +13,7 @@ class CheckoutCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CartAddressController>(
+      init: CartAddressController(),
       builder: (_addressCtrl) => Scaffold(
         appBar: AppBar(
           title: Text("Confirm order"),

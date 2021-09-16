@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/components/OfflineDialog.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -97,12 +98,6 @@ class HomePage extends StatelessWidget {
                 leading:
                     IconButton(icon: Icon(Icons.menu), onPressed: toggleDrawer),
                 title: Text(_.appTitle),
-                actions: [
-                  IconButton(
-                    onPressed: _glblCtrl.logout,
-                    icon: Icon(AntDesign.logout),
-                  )
-                ],
               ),
               body: _.currentPage,
               floatingActionButton: GetBuilder<CartController>(

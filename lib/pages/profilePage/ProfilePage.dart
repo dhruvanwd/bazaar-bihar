@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:bazaar_bihar/Utils/extensions.dart';
+import 'package:bazaar_bihar/components/CustomAvatar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -85,30 +88,18 @@ class _MapScreenState extends State<ProfilePage>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             _imageFile != null
-                                ? SizedBox(
-                                    width: 140.0,
-                                    height: 140.0,
-                                    child: Card(
-                                      clipBehavior: Clip.hardEdge,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      ),
-                                      child: Image.file(
-                                        File(_imageFile.path),
-                                        fit: BoxFit.cover,
-                                      ),
+                                ? CustomAvatar(
+                                    child: Image.file(
+                                      File(_imageFile.path),
+                                      fit: BoxFit.cover,
                                     ),
                                   )
-                                : Container(
-                                    width: 140.0,
-                                    height: 140.0,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        image: ExactAssetImage('images/as.png'),
-                                        fit: BoxFit.cover,
-                                      ),
+                                : CustomAvatar(
+                                    child: CachedNetworkImage(
+                                      fit: BoxFit.cover,
+                                      imageUrl: _.userProfile!.avatar,
+                                      errorWidget: (_, url, error) =>
+                                          Image.asset('images/as.png'),
                                     ),
                                   ),
                           ],
@@ -278,6 +269,11 @@ class _MapScreenState extends State<ProfilePage>
                               Flexible(
                                 child: TextField(
                                   controller: _mobile,
+                                  inputFormatters: [
+                                    TextInputMask(
+                                        mask: '999 9999 999', reverse: false)
+                                  ],
+                                  keyboardType: TextInputType.phone,
                                   decoration: const InputDecoration(
                                       prefixText: "+91",
                                       hintText: "Enter Mobile Number"),

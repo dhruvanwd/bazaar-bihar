@@ -151,7 +151,8 @@ class GlobalController extends GetxController {
           ]));
       print("updated user profile....!");
       print(resp.data);
-      // updateUserProfileInstance(resp.data);
+      updateUserProfileInstance(resp.data['value']);
+      updateStorage(EStorageKeys.PROFILE, resp.data['value']);
     } catch (e) {
       print(e);
     }

@@ -83,7 +83,7 @@ class PaymentController extends GetxController {
     final profile = _globalCtrl.userProfile;
     var options = {
       'key': 'rzp_test_XRToCJGiKV3909',
-      'amount': priceInfo.totalSp,
+      'amount': priceInfo.totalSp * 100,
       'name': 'BazaarBihar',
       'description': 'Order From BazaarBihar',
       'prefill': {'contact': profile!.mobile, 'email': profile.email}
