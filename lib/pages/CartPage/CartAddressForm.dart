@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/components/StrechedPrimaryButton.dart';
@@ -10,12 +9,11 @@ import 'package:get/get.dart';
 
 class CartAddressForm extends StatelessWidget {
   final _glblCtrl = GlobalController.to;
-  late TextEditingController _stateController;
-  late TextEditingController _cityController;
+  late final TextEditingController _stateController;
+  late final TextEditingController _cityController;
   CartAddressForm() {
     _stateController =
         TextEditingController(text: _glblCtrl.userProfile?.state);
-
     _cityController = TextEditingController(text: _glblCtrl.userProfile?.city);
   }
   final _formKey = GlobalKey<FormState>();

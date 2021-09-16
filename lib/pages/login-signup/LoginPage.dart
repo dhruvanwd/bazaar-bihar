@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/SignupController.dart';
+import 'package:bazaar_bihar/Utils/extensions.dart';
 import 'package:bazaar_bihar/pages/login-signup/LoginGoogleBtn.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class LoginPage extends StatelessWidget {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       SignupController.to.loginUser({
-        "mobile": usernameController.text.replaceAll(new RegExp(r"\s+"), ""),
+        "mobile": usernameController.text.removeWhiteSpaces,
         "password": passwordController.text
       });
     } else {

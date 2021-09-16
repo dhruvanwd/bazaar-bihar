@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bazaar_bihar/Utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -56,7 +57,7 @@ class _MapScreenState extends State<ProfilePage>
   onUpdateProfile() {
     GlobalController.to.updateUserProfile({
       "fullName": _fullName.text,
-      "mobile": _mobile.text,
+      "mobile": _mobile.text.removeWhiteSpaces,
       "email": _email.text,
     });
   }
