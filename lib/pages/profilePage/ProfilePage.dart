@@ -26,13 +26,18 @@ class _MapScreenState extends State<ProfilePage>
   late TextEditingController _mobile;
   late TextEditingController _email;
   dynamic _pickImageError;
-  _MapScreenState() {
+
+  updateCtrls() {
     final profile = GlobalController.to.userProfile;
     if (profile != null) {
       _fullName = TextEditingController(text: profile.fullName);
       _mobile = TextEditingController(text: profile.mobile);
       _email = TextEditingController(text: profile.email);
     }
+  }
+
+  _MapScreenState() {
+    updateCtrls();
   }
 
   final ImagePicker _picker = ImagePicker();
@@ -57,11 +62,38 @@ class _MapScreenState extends State<ProfilePage>
     }
   }
 
-  onUpdateProfile() {
-    GlobalController.to.updateUserProfile({
+  onUpdateProfile(BuildContext context) async {
+    if (_fullName.text.isEmpty) {
+      Get.snackbar(
+        "Name can't be empty",
+        "Invalid input",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    } else if (_mobile.text.isEmpty) {
+      Get.snackbar(
+        "Mobile number can't be empty",
+        "Invalid input",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    } else if (_email.text.isEmpty) {
+      Get.snackbar(
+        "Email can't be empty",
+        "Invalid input",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+    await GlobalController.to.updateUserProfile({
       "fullName": _fullName.text,
       "mobile": _mobile.text.removeWhiteSpaces,
       "email": _email.text,
+    });
+    updateCtrls();
+    setState(() {
+      _status = true;
+      FocusScope.of(context).requestFocus(FocusNode());
     });
   }
 
@@ -312,13 +344,12 @@ class _MapScreenState extends State<ProfilePage>
             child: Padding(
               padding: EdgeInsets.only(right: 10.0),
               child: OutlinedButton(
-                child: Text("Save"),
+                child: Text(
+                  "Save",
+                  style: TextStyle(color: Colors.green),
+                ),
                 onPressed: () {
-                  setState(() {
-                    _status = true;
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    onUpdateProfile();
-                  });
+                  onUpdateProfile(context);
                 },
                 // shape:  RoundedRectangleBorder(
                 //     borderRadius:  BorderRadius.circular(20.0)),
@@ -330,9 +361,13 @@ class _MapScreenState extends State<ProfilePage>
             child: Padding(
               padding: EdgeInsets.only(left: 10.0),
               child: OutlinedButton(
-                child: Text("Cancel"),
+                child: Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.red),
+                ),
                 onPressed: () {
                   setState(() {
+                    updateCtrls();
                     _status = true;
                     FocusScope.of(context).requestFocus(FocusNode());
                   });

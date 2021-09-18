@@ -100,12 +100,7 @@ class HomePage extends StatelessWidget {
                 title: Text(_.appTitle),
               ),
               body: _.currentPage,
-              floatingActionButton: GetBuilder<CartController>(
-                builder: (_cartCtrl) => Visibility(
-                  visible: _cartCtrl.carts.length != 0,
-                  child: FloatingCartButton(),
-                ),
-              ),
+              floatingActionButton: FloatingCartButton(),
               bottomNavigationBar: ConvexAppBar(
                 backgroundColor: Get.theme.primaryColor,
                 style: TabStyle.flip,
