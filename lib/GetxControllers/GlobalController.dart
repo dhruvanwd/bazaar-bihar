@@ -4,7 +4,6 @@ import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/shared/components/customAnimation.dart';
 import 'package:bazaar_bihar/shared/login-signup/LoginPage.dart';
 import 'package:bazaar_bihar/shared/models/CategoryModel.dart';
-import 'package:bazaar_bihar/shared/models/ImagesModel.dart';
 import 'package:bazaar_bihar/shared/models/ProductsModel.dart';
 import 'package:bazaar_bihar/shared/models/ShopModels.dart';
 import 'package:bazaar_bihar/shared/models/UserModel.dart';
@@ -177,14 +176,6 @@ class GlobalController extends GetxController {
     } catch (e) {
       print(e);
     }
-  }
-
-  createImageUrl(ImageModel image) {
-    if (image.filename.contains("https://"))
-      return image.filename;
-    else
-      return 'https://bazaar-bihar.s3.ap-south-1.amazonaws.com/' +
-          image.filename;
   }
 
   void configLoading() {
