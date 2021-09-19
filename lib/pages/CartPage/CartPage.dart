@@ -1,8 +1,8 @@
-import 'package:bazaar_bihar/components/CachedImageManager.dart';
-import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/pages/CartPage/ProductCartItem.dart';
+import 'package:bazaar_bihar/shared/Utils/extensions.dart';
+import 'package:bazaar_bihar/shared/components/CachedImageManager.dart';
+import 'package:bazaar_bihar/shared/models/CartModel.dart';
 import 'package:flutter/material.dart';
-import 'package:bazaar_bihar/Utils/extensions.dart' show CapExtension;
 
 class CartPage extends StatelessWidget {
   final CartModel cart;

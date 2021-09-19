@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:bazaar_bihar/Utils/extensions.dart';
-import 'package:bazaar_bihar/components/CustomAvatar.dart';
+import 'package:bazaar_bihar/shared/Utils/extensions.dart';
+import 'package:bazaar_bihar/shared/components/CustomAvatar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
-import 'package:bazaar_bihar/components/ShopUnavailable.dart';
+import 'package:bazaar_bihar/shared/components/ShopUnavailable.dart';
 import 'package:flutter/material.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/OrderCard.dart';
 import 'package:get/get.dart';

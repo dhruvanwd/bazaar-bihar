@@ -1,10 +1,10 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/models/CartModel.dart';
-import 'package:bazaar_bihar/models/PaymentInfoModal.dart';
-import 'package:bazaar_bihar/models/ShopModels.dart';
+import 'package:bazaar_bihar/shared/models/CartModel.dart';
+import 'package:bazaar_bihar/shared/models/PaymentInfoModal.dart';
+import 'package:bazaar_bihar/shared/models/ProductsModel.dart';
+import 'package:bazaar_bihar/shared/models/ShopModels.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:bazaar_bihar/models/ProductsModel.dart';
 
 class CartController extends GetxController {
   static CartController get to => Get.find();

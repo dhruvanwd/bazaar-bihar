@@ -1,18 +1,18 @@
 import 'dart:convert';
-import 'package:bazaar_bihar/components/customAnimation.dart';
-import 'package:bazaar_bihar/models/UserModel.dart';
+import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
+import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
+import 'package:bazaar_bihar/shared/components/customAnimation.dart';
+import 'package:bazaar_bihar/shared/login-signup/LoginPage.dart';
+import 'package:bazaar_bihar/shared/models/CategoryModel.dart';
+import 'package:bazaar_bihar/shared/models/ImagesModel.dart';
+import 'package:bazaar_bihar/shared/models/ProductsModel.dart';
+import 'package:bazaar_bihar/shared/models/ShopModels.dart';
+import 'package:bazaar_bihar/shared/models/UserModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:bazaar_bihar/Utils/ApiService.dart';
-import 'package:bazaar_bihar/Utils/RequestBody.dart';
-import 'package:bazaar_bihar/models/CategoryModel.dart';
-import 'package:bazaar_bihar/models/ImagesModel.dart';
-import 'package:bazaar_bihar/models/ProductsModel.dart';
-import 'package:bazaar_bihar/models/ShopModels.dart';
-import 'package:bazaar_bihar/pages/login-signup/LoginPage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 

@@ -1,8 +1,8 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
-import 'package:bazaar_bihar/models/PaymentInfoModal.dart';
 import 'package:bazaar_bihar/pages/CartPage/CollapsableCartFooter.dart';
 import 'package:bazaar_bihar/pages/CartPage/GenShopDetail.dart';
 import 'package:bazaar_bihar/pages/CartPage/ShopWiseBill.dart';
+import 'package:bazaar_bihar/shared/models/PaymentInfoModal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

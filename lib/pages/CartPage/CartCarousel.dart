@@ -1,8 +1,8 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
-import 'package:bazaar_bihar/components/StrechedPrimaryButton.dart';
 import 'package:bazaar_bihar/pages/CartPage/CartFooter.dart';
 import 'package:bazaar_bihar/pages/CartPage/CartPage.dart';
 import 'package:bazaar_bihar/pages/CartPage/emptyCart.dart';
+import 'package:bazaar_bihar/shared/components/StrechedPrimaryButton.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

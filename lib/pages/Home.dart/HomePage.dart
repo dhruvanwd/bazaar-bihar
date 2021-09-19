@@ -1,13 +1,11 @@
-import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
-import 'package:bazaar_bihar/components/OfflineDialog.dart';
+import 'package:bazaar_bihar/shared/components/FloatingCartButton.dart';
+import 'package:bazaar_bihar/shared/components/OfflineDialog.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
-import 'package:bazaar_bihar/components/FloatingCartButton.dart';
 import 'package:bazaar_bihar/pages/Home.dart/AppBarMenu.dart';
 import 'package:new_version/new_version.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';

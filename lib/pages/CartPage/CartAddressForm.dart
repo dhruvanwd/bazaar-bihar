@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/components/StrechedPrimaryButton.dart';
-import 'package:bazaar_bihar/models/CartAddressModel.dart';
+import 'package:bazaar_bihar/shared/components/StrechedPrimaryButton.dart';
+import 'package:bazaar_bihar/shared/models/CartAddressModel.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

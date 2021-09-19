@@ -1,6 +1,6 @@
-import 'package:bazaar_bihar/Utils/utils.dart';
-import 'package:bazaar_bihar/models/CartModel.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
+import 'package:bazaar_bihar/shared/Utils/utils.dart';
+import 'package:bazaar_bihar/shared/models/CartModel.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

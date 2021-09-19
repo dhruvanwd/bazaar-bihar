@@ -1,5 +1,5 @@
-import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
+import 'package:bazaar_bihar/shared/models/ShopModels.dart';
 import 'package:flutter/material.dart';
 
 class ShopCard extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/components/CachedImageManager.dart';
-import 'package:bazaar_bihar/models/CategoryModel.dart';
+import 'package:bazaar_bihar/shared/components/CachedImageManager.dart';
+import 'package:bazaar_bihar/shared/models/CategoryModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

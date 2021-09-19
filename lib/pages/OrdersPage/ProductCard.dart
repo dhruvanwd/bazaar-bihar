@@ -1,12 +1,12 @@
-import 'package:bazaar_bihar/components/ProductPriceInfo.dart';
-import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
+import 'package:bazaar_bihar/shared/Utils/extensions.dart';
+import 'package:bazaar_bihar/shared/components/ProductPriceInfo.dart';
+import 'package:bazaar_bihar/shared/models/ProductsModel.dart';
+import 'package:bazaar_bihar/shared/models/ShopModels.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
-import 'package:bazaar_bihar/models/ProductsModel.dart';
-import 'package:bazaar_bihar/Utils/extensions.dart' show CapExtension;
 
 class ProductCard extends StatelessWidget {
   final ProductModel currentProduct;

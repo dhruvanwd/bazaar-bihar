@@ -1,9 +1,9 @@
 import 'package:bazaar_bihar/pages/Home.dart/ShopCard.dart';
-import 'package:bazaar_bihar/components/ShopUnavailable.dart';
+import 'package:bazaar_bihar/shared/components/ShopUnavailable.dart';
+import 'package:bazaar_bihar/shared/models/ShopModels.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/models/ShopModels.dart';
 import 'package:stacked_card_carousel/stacked_card_carousel.dart';
 
 class ShopsList extends StatelessWidget {

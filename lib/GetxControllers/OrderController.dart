@@ -1,6 +1,6 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/Utils/ApiService.dart';
-import 'package:bazaar_bihar/Utils/RequestBody.dart';
+import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
+import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 

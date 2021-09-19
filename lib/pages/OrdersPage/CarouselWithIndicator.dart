@@ -1,5 +1,5 @@
-import 'package:bazaar_bihar/components/CachedImageManager.dart';
-import 'package:bazaar_bihar/models/ImagesModel.dart';
+import 'package:bazaar_bihar/shared/components/CachedImageManager.dart';
+import 'package:bazaar_bihar/shared/models/ImagesModel.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

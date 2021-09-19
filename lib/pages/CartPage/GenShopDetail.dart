@@ -1,9 +1,9 @@
 import 'package:bazaar_bihar/pages/CartPage/ShopWiseBill.dart';
+import 'package:bazaar_bihar/shared/Utils/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:bazaar_bihar/Utils/extensions.dart' show CapExtension;
 
 genShopDetail(List<Map> shopsInfo, dynamic callBack) {
   final shopsWidget = shopsInfo
@@ -49,7 +49,9 @@ genShopDetail(List<Map> shopsInfo, dynamic callBack) {
 
   return SingleChildScrollView(
     child: Column(
-      children: []..addAll(shopsWidget)..addAll([Divider()]),
+      children: []
+        ..addAll(shopsWidget)
+        ..addAll([Divider()]),
     ),
   );
 }
