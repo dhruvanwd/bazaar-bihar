@@ -1,5 +1,4 @@
 const dirTree = require("directory-tree");
-const { getFileProperties } = require('get-file-properties')
 const resolveAbsPath = require('path').resolve
 const AWS = require('aws-sdk')
 // a client can be shared by different commands.
@@ -51,7 +50,7 @@ async function recursivePrintFile(tree) {
 }
 
 
-const manageSync = async () => {
+const syncToS3 = async () => {
     const tree = dirTree(destPath);
     await recursivePrintFile(tree)
 }
@@ -63,7 +62,6 @@ async function* listAllKeys(opts = { Bucket: "orca-lib" }) {
         yield data;
     } while (opts.ContinuationToken);
 }
-
 
 async function handleS3Fetch() {
     for await (const data of listAllKeys()) {
