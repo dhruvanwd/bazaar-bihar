@@ -2,7 +2,7 @@ import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
-import 'package:bazaar_bihar/GetxControllers/SignupController.dart';
+import 'package:bazaar_bihar/shared/login-signup/SignupController.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/pages/Home.dart/HomePage.dart';
