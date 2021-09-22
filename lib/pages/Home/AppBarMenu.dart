@@ -27,7 +27,7 @@ class AppBarMenu extends StatelessWidget {
                           size: 100,
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
-                            imageUrl: _.userProfile!.avatar,
+                            imageUrl: _.userProfile!.avatar ?? "",
                             errorWidget: (_, url, error) =>
                                 Image.asset('images/as.png'),
                           ),

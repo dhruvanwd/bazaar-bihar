@@ -129,7 +129,7 @@ class _MapScreenState extends State<ProfilePage>
                                 : CustomAvatar(
                                     child: CachedNetworkImage(
                                       fit: BoxFit.cover,
-                                      imageUrl: _.userProfile!.avatar,
+                                      imageUrl: _.userProfile?.avatar ?? "",
                                       errorWidget: (_, url, error) =>
                                           Image.asset('images/as.png'),
                                     ),
