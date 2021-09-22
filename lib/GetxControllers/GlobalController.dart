@@ -1,8 +1,7 @@
 import 'dart:convert';
+import 'package:bazaar_bihar/login-signup/LoginPage.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
-import 'package:bazaar_bihar/shared/components/customAnimation.dart';
-import 'package:bazaar_bihar/shared/login-signup/LoginPage.dart';
 import 'package:bazaar_bihar/shared/models/CategoryModel.dart';
 import 'package:bazaar_bihar/shared/models/ProductsModel.dart';
 import 'package:bazaar_bihar/shared/models/ShopModels.dart';

@@ -3,22 +3,21 @@ import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
-import 'package:bazaar_bihar/shared/login-signup/SignupController.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/pages/Home/HomePage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/ProductsPage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'login-signup/LoginPage.dart';
+import 'login-signup/SignupController.dart';
+import 'login-signup/SignupPage.dart';
 import 'pages/CartPage/CartCarousel.dart';
 import 'pages/Home/ShopsPage.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-
 import 'shared/components/LoaderPage.dart';
-import 'shared/login-signup/LoginPage.dart';
-import 'shared/login-signup/SignupPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
