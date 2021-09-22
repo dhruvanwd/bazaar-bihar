@@ -28,7 +28,7 @@ void main() async {
   Get.put(SignupController());
   Get.put(OrderController());
   Get.put(CartController());
-  Get.lazyPut(() => PaymentController());
+  Get.put(PaymentController());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

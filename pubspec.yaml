@@ -19,7 +19,7 @@ dependencies:
   stacked_card_carousel: ^0.0.3-nullsafety.1
   carousel_slider: ^4.0.0
   flip_card: ^0.5.0
-  flutter_icons: ^1.1.0
+  flutter_icons_null_safety: ^1.1.0
   shrink_sidemenu: ^2.0.0+1-null-safety
   easy_mask: ^2.0.1
   connectivity_plus: ^1.1.0

@@ -2,7 +2,7 @@ import 'package:bazaar_bihar/pages/CartPage/ShopWiseBill.dart';
 import 'package:bazaar_bihar/shared/Utils/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:get/get.dart';
 
 genShopDetail(List<Map> shopsInfo, dynamic callBack) {

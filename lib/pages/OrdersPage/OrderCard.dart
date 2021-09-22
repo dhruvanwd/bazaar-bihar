@@ -68,7 +68,7 @@ class OrderCard extends StatelessWidget {
                       ),
                     ),
                     trailing: Text(
-                      '$rupeeSymbol${orderDetail["mrp"]}',
+                      '$rupeeSymbol${orderDetail["sp"]}',
                       style: TextStyle(
                         color: Colors.blue.shade400,
                       ),

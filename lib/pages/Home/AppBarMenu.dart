@@ -2,7 +2,7 @@ import 'package:bazaar_bihar/shared/Utils/extensions.dart';
 import 'package:bazaar_bihar/shared/components/CustomAvatar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 
