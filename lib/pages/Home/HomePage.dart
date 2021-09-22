@@ -70,7 +70,6 @@ class HomePage extends StatelessWidget {
       print(e);
     }
 
-    checkUpdate(context);
     return GetBuilder<HomePageController>(
       builder: (_) {
         if (_.showOfflineDialog) {

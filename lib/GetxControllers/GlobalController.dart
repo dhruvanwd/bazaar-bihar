@@ -178,27 +178,13 @@ class GlobalController extends GetxController {
     }
   }
 
-  void configLoading() {
-    EasyLoading.instance
-      ..displayDuration = const Duration(milliseconds: 2000)
-      ..indicatorType = EasyLoadingIndicatorType.cubeGrid
-      ..loadingStyle = EasyLoadingStyle.dark
-      ..indicatorSize = 100.0
-      ..radius = 10.0
-      ..maskType = EasyLoadingMaskType.custom
-      ..maskColor = Colors.white60
-      ..userInteractions = true
-      ..contentPadding = EdgeInsets.all(60)
-      ..customAnimation = CustomAnimation();
-  }
-
   @override
   void onInit() {
     if (isUserLoggedIn) {
       final userProfile = getStroageJson(EStorageKeys.PROFILE);
       updateUserProfileInstance(userProfile);
     }
-    configLoading();
+
     fetchCategories();
     super.onInit();
   }
