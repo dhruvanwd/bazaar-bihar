@@ -1,5 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/pages/Home.dart/HomePage.dart';
+import 'package:bazaar_bihar/pages/Home/HomePage.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';

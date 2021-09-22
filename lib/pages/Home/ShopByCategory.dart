@@ -1,5 +1,5 @@
-import 'package:bazaar_bihar/pages/Home.dart/CategoryCard.dart';
-import 'package:bazaar_bihar/pages/Home.dart/CategoryChip.dart';
+import 'package:bazaar_bihar/pages/Home/CategoryCard.dart';
+import 'package:bazaar_bihar/pages/Home/CategoryChip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';

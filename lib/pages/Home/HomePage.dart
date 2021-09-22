@@ -6,7 +6,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
-import 'package:bazaar_bihar/pages/Home.dart/AppBarMenu.dart';
+import 'package:bazaar_bihar/pages/Home/AppBarMenu.dart';
 import 'package:new_version/new_version.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 

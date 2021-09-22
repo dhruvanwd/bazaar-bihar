@@ -1,4 +1,4 @@
-import 'package:bazaar_bihar/pages/Home.dart/ShopCard.dart';
+import 'package:bazaar_bihar/pages/Home/ShopCard.dart';
 import 'package:bazaar_bihar/shared/components/ShopUnavailable.dart';
 import 'package:bazaar_bihar/shared/models/ShopModels.dart';
 import 'package:flutter/material.dart';

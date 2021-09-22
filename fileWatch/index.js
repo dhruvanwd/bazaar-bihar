@@ -18,7 +18,7 @@ const destPath = "../lib/shared";
 async function printMeta(filepath) {
     const absPath = resolveAbsPath(filepath);
     console.log(fs.statSync(absPath)?.mtime)
-    const relativePath =pathModule.join(__dirname, destPath);
+    const relativePath = pathModule.join(__dirname, destPath);
     const keyPath = absPath.replace(relativePath, "")
         .replace('\\', "")
         .replace(/^\\\\\?\\/, "")
@@ -51,7 +51,7 @@ async function recursivePrintFile(tree) {
 }
 
 const syncToS3 = async () => {
-    const tree = dirTree(pathModule.join(__dirname,destPath));
+    const tree = dirTree(pathModule.join(__dirname, destPath));
     await recursivePrintFile(tree)
 }
 
@@ -69,7 +69,7 @@ async function handleS3Fetch() {
         for (let ind = 0; ind < data.Contents.length; ind++) {
             const s3FileMeta = data.Contents[ind];
             const s3ResObj = await client.getObject({ Bucket: "orca-lib", Key: s3FileMeta['Key'] }).promise();
-            fse.outputFileSync(pathModule.join(destPath, s3FileMeta['Key']), s3ResObj.Body.toString('utf-8'), { encoding: "utf8" })
+            fse.outputFileSync(pathModule.join(__dirname, destPath, s3FileMeta['Key']), s3ResObj.Body.toString('utf-8'), { encoding: "utf8" })
         }
     }
 }

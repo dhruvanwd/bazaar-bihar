@@ -3,7 +3,7 @@ import 'package:bazaar_bihar/shared/models/CategoryModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/pages/Home.dart/ShopsList.dart';
+import 'package:bazaar_bihar/pages/Home/ShopsList.dart';
 
 class ShopsPage extends StatelessWidget {
   ShopsPage({key}) : super(key: key);
