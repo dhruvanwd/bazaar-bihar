@@ -11,7 +11,9 @@
     "start": "flutter run --no-sound-null-safety",
     "bundle:dev": "flutter build appbundle --no-sound-null-safety",
     "bundle:prod": "flutter build appbundle --release --no-sound-null-safety",
-    "build:apk:prod": "flutter build apk --release --no-sound-null-safety"
+    "build:apk:prod": "flutter build apk --release --no-sound-null-safety",
+    "shared-lib:push":"node ./fileWatch/index.js --push",
+    "shared-lib:pull":"node ./fileWatch/index.js --pull"
   },
   "repository": {
     "type": "git",

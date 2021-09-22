@@ -69,9 +69,17 @@ async function handleS3Fetch() {
         for (let ind = 0; ind < data.Contents.length; ind++) {
             const s3FileMeta = data.Contents[ind];
             const s3ResObj = await client.getObject({ Bucket: "orca-lib", Key: s3FileMeta['Key'] }).promise();
-            fse.outputFileSync(pathModule.join(__dirname, s3FileMeta['Key']), s3ResObj.Body.toString('utf-8'), { encoding: "utf8" })
+            fse.outputFileSync(pathModule.join(destPath, s3FileMeta['Key']), s3ResObj.Body.toString('utf-8'), { encoding: "utf8" })
         }
     }
 }
 
-handleS3Fetch();
+
+const argsList = process.argv.slice(2)
+const inputCommand = argsList[0]
+console.log(inputCommand)
+if (inputCommand === "--push") {
+    syncToS3();
+} else if (inputCommand === "--pull") {
+    handleS3Fetch();
+}
