@@ -18,7 +18,8 @@ const destPath = "../lib/shared";
 async function printMeta(filepath) {
     const absPath = resolveAbsPath(filepath);
     console.log(fs.statSync(absPath)?.mtime)
-    const keyPath = absPath.replace(resolveAbsPath(destPath), "")
+    const relativePath =pathModule.join(__dirname, destPath);
+    const keyPath = absPath.replace(relativePath, "")
         .replace('\\', "")
         .replace(/^\\\\\?\\/, "")
         .replace(/\\/g, '\/')
@@ -49,9 +50,8 @@ async function recursivePrintFile(tree) {
     }
 }
 
-
 const syncToS3 = async () => {
-    const tree = dirTree(destPath);
+    const tree = dirTree(pathModule.join(__dirname,destPath));
     await recursivePrintFile(tree)
 }
 
