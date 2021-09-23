@@ -160,9 +160,7 @@ class _SignupPageState extends State<SignupPage> {
                         Padding(padding: EdgeInsets.only(top: 40)),
                         signInSubmitButton(onSignup, "Create Account"),
                         Padding(padding: EdgeInsets.only(top: 30)),
-                        LoginGoogleBtn(() {
-                          _.signInwithGoogle();
-                        }),
+                        LoginGoogleBtn(_.signInwithGoogle),
                         Padding(padding: EdgeInsets.only(top: 30)),
                         createAccountLabel(
                             'login', 'Already have an account ?', 'login')
