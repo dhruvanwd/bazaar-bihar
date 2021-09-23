@@ -35,7 +35,9 @@ dependencies:
   google_sign_in: ^5.0.0
   firebase_analytics: ^5.0.2
   ej_selector: ^1.0.0
+  dropdown_search: ^1.0.0
 
+  
 
 dev_dependencies:
   flutter_test:

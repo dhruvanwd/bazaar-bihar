@@ -69,6 +69,7 @@ class LoginPage extends StatelessWidget {
                             AutofillHints.telephoneNumberLocal,
                             AutofillHints.telephoneNumberDevice,
                           ],
+                          keyboardType: TextInputType.phone,
                           inputFormatters: [
                             TextInputMask(mask: '999 9999 999', reverse: false)
                           ],

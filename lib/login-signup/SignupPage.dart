@@ -118,6 +118,7 @@ class _SignupPageState extends State<SignupPage> {
                           inputFormatters: [
                             TextInputMask(mask: '999 9999 999', reverse: false)
                           ],
+                          keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                               prefixText: "+91",
                               border: UnderlineInputBorder(),
