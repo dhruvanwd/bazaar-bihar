@@ -1,7 +1,7 @@
 import 'package:bazaar_bihar/login-signup/SignupController.dart';
 import 'package:bazaar_bihar/shared/Utils/extensions.dart';
-import 'package:bazaar_bihar/shared/login-signup/CustomButton.dart';
-import 'package:bazaar_bihar/login-signup/LoginGoogleBtn.dart';
+import 'package:bazaar_bihar/shared/login-signup/signInSubmitButton.dart';
+import 'package:bazaar_bihar/shared/login-signup/LoginGoogleBtn.dart';
 import 'package:bazaar_bihar/shared/login-signup/appTitle.dart';
 import 'package:bazaar_bihar/shared/login-signup/bezierContainer.dart';
 import 'package:bazaar_bihar/shared/login-signup/createAccountLabel.dart';
@@ -108,7 +108,9 @@ class LoginPage extends StatelessWidget {
                         Padding(padding: EdgeInsets.only(top: 60)),
                         signInSubmitButton(onLogin, "Login"),
                         Padding(padding: EdgeInsets.only(top: 60)),
-                        LoginGoogleBtn(),
+                        LoginGoogleBtn(() {
+                          _.signInwithGoogle();
+                        }),
                         createAccountLabel(
                             'signup', 'Don\'t have an account ?', 'Register')
                       ],

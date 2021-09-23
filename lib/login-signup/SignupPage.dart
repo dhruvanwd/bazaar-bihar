@@ -1,7 +1,7 @@
 import 'package:bazaar_bihar/shared/CityStateDropDown/StateCityModel.dart';
 import 'package:bazaar_bihar/shared/login-signup/CityDropdownSelector.dart';
-import 'package:bazaar_bihar/shared/login-signup/CustomButton.dart';
-import 'package:bazaar_bihar/login-signup/LoginGoogleBtn.dart';
+import 'package:bazaar_bihar/shared/login-signup/signInSubmitButton.dart';
+import 'package:bazaar_bihar/shared/login-signup/LoginGoogleBtn.dart';
 import 'package:bazaar_bihar/shared/login-signup/StateCityForm.dart';
 import 'package:bazaar_bihar/shared/login-signup/appTitle.dart';
 import 'package:bazaar_bihar/shared/login-signup/bezierContainer.dart';
@@ -160,7 +160,9 @@ class _SignupPageState extends State<SignupPage> {
                         Padding(padding: EdgeInsets.only(top: 40)),
                         signInSubmitButton(onSignup, "Create Account"),
                         Padding(padding: EdgeInsets.only(top: 30)),
-                        LoginGoogleBtn(),
+                        LoginGoogleBtn(() {
+                          _.signInwithGoogle();
+                        }),
                         Padding(padding: EdgeInsets.only(top: 30)),
                         createAccountLabel(
                             'login', 'Already have an account ?', 'login')
