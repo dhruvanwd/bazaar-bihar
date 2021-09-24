@@ -3,6 +3,7 @@ import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
+import 'package:bazaar_bihar/shared/Utils/paymentStatuses.dart';
 import 'package:bazaar_bihar/shared/models/PaymentInfoModal.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -53,11 +54,10 @@ class PaymentController extends GetxController {
     List shopWiseInfo = priceInfoJson['shopWiseInfo'];
     final Map orderDetail = {
       "paymentId": response.paymentId,
-      "status": "INITIATED",
-      // ACCEPTED //CANCELLED // IN_TRANSIT
-      // DELIVERED
+      "status": OrderStatus.INITIATED.name,
       "createdAt": updatedDt,
       "orderBy": profile!.id,
+      "userName": profile.fullName,
       "deliveryAddress": CartAddressController.to.selectedAddres?.toJson(),
     };
 

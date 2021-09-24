@@ -889,11 +889,6 @@ fsevents@~2.3.2:
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
   integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
 
-get-file-properties@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/get-file-properties/-/get-file-properties-1.0.1.tgz#b4147e875963d1074d23905422aa094ba412c4d8"
-  integrity sha512-46xG/mXgpE1T0sCh/dg10t1DKecxyLyUUyy0UwYsFIoEX5yKFSIdnyY5FGC9uyF3pT7BgJ4hyurbmdxyXXd5cw==
-
 glob-parent@~5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"

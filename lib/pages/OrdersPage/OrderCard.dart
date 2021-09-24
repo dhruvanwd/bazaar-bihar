@@ -40,7 +40,7 @@ class OrderCard extends StatelessWidget {
                             decoration: BoxDecoration(color: Colors.white),
                             child: Center(
                               child: Text(
-                                "Order Placed",
+                                orderDetail['status'],
                                 style: Get.theme.textTheme.subtitle2,
                               ),
                             ),

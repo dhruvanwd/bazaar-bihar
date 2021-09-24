@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/models/CartModel.dart';
 import 'package:bazaar_bihar/shared/models/PaymentInfoModal.dart';
 import 'package:bazaar_bihar/shared/models/ProductsModel.dart';
@@ -38,16 +39,21 @@ class CartController extends GetxController {
     double totalSp = 0.0;
     List<Map<dynamic, dynamic>> shopWiseInfo = [];
     carts.forEach((cart) {
-      final shopInfo =
-          Map.from({"shopName": cart.shop.name, "shopId": cart.shop.id});
+      final shopInfo = Map.from({
+        "shopName": cart.shop.name,
+        "shopId": cart.shop.id,
+        'mrp': 0,
+        'sp': 0
+      });
       cart.products.forEach((product) {
         double mrp = double.parse(product.markedPrice) * product.cartItemCount;
-        shopInfo['mrp'] = mrp;
+        shopInfo['mrp'] += mrp;
         totalMrp += mrp;
         final double sp =
             double.parse(product.sellingPrice) * product.cartItemCount;
-        shopInfo['sp'] = sp;
+        shopInfo['sp'] += sp;
         totalSp += sp;
+        muliPrint(["mrp", shopInfo['mrp'], "sp", shopInfo['sp']]);
       });
       shopWiseInfo.add(shopInfo);
     });
