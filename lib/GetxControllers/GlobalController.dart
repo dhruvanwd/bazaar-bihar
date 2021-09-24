@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:bazaar_bihar/login-signup/LoginPage.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
+import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/models/CategoryModel.dart';
 import 'package:bazaar_bihar/shared/models/ProductsModel.dart';
 import 'package:bazaar_bihar/shared/models/ShopModels.dart';
@@ -182,6 +183,7 @@ class GlobalController extends GetxController {
     if (isUserLoggedIn) {
       final userProfile = getStroageJson(EStorageKeys.PROFILE);
       updateUserProfileInstance(userProfile);
+      fetchShops(null);
     }
 
     fetchCategories();
@@ -219,6 +221,8 @@ class GlobalController extends GetxController {
       }
       final resp = await apiRequestInstance.fetchData(RequestBody(
           amendType: '', collectionName: 'shops', payload: payload));
+
+      muliPrint(["fetched shops...!", resp.data]);
       if (categoryId == null) {
         shopsList = shopModelFromJson(resp.data);
       } else {
@@ -226,9 +230,9 @@ class GlobalController extends GetxController {
       }
       update();
       EasyLoading.dismiss();
-    } catch (e) {
+    } catch (e, s) {
       EasyLoading.dismiss();
-      print(e);
+      muliPrint([e, s]);
     }
   }
 

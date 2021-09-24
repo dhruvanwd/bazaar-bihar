@@ -36,6 +36,7 @@ dependencies:
   firebase_analytics: ^5.0.2
   ej_selector: ^1.0.0
   dropdown_search: ^1.0.0
+  cashfree_pg: ^2.0.3+23
 
   
 
