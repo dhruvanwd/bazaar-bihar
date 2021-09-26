@@ -15,7 +15,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 
-enum EStorageKeys { PROFILE, SETTINGS, CART, CART_ADDRESS }
+enum EStorageKeys { PROFILE, SETTINGS, CART, CART_ADDRESS, CATEGORY_VIEWER }
 
 enum ECategoryViewer { CHIP, CARD }
 
@@ -27,11 +27,16 @@ class GlobalController extends GetxController {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final ApiRequest apiRequestInstance = ApiRequest();
   UserModel? userProfile;
-
   ECategoryViewer categoryViewer = ECategoryViewer.CARD;
-
   updateCategoryViewer(ECategoryViewer catViewer) {
     categoryViewer = catViewer;
+    String? catType;
+    if (categoryViewer == ECategoryViewer.CARD) {
+      catType = "card";
+    } else if (categoryViewer == ECategoryViewer.CHIP) {
+      catType = "chip";
+    }
+    updateStorage(EStorageKeys.CATEGORY_VIEWER, {"catType": catType});
     update();
   }
 
@@ -51,6 +56,8 @@ class GlobalController extends GetxController {
       return 'cart';
     } else if (key == EStorageKeys.CART_ADDRESS) {
       return 'addresses';
+    } else if (key == EStorageKeys.CATEGORY_VIEWER) {
+      return "CATEGORY_VIEWER";
     }
   }
 
@@ -178,8 +185,27 @@ class GlobalController extends GetxController {
     }
   }
 
+  restoreShopByCategory() {
+    try {
+      final catTypeDetail = getStroageJson(EStorageKeys.CATEGORY_VIEWER);
+      final catType = catTypeDetail['catType'];
+      print(catType);
+      if (catType != null) {
+        if (catType == "card") {
+          categoryViewer = ECategoryViewer.CARD;
+        } else if (catType == "chip") {
+          categoryViewer = ECategoryViewer.CHIP;
+        }
+      }
+      update();
+    } catch (e, s) {
+      muliPrint([e, s]);
+    }
+  }
+
   @override
   void onInit() {
+    restoreShopByCategory();
     if (isUserLoggedIn) {
       final userProfile = getStroageJson(EStorageKeys.PROFILE);
       updateUserProfileInstance(userProfile);

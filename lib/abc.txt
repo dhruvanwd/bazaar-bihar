@@ -1,0 +1,10 @@
+TODO: 
+1. in landing page when user hasn't made any order yet.
+then we should show suggested shops.
+if user has purchased any things, then it should be recent shops.
+with list of shops he ordered from.
+
+
+2. User should be able to give feedback.
+3. we should track number of orders per shop.
+4. implement upload profile photos to aws s3.
