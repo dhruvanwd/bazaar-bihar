@@ -1,5 +1,5 @@
-import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
 import 'package:bazaar_bihar/shared/Utils/extensions.dart';
+import 'package:bazaar_bihar/shared/components/CarouselWithIndicator.dart';
 import 'package:bazaar_bihar/shared/components/ProductPriceInfo.dart';
 import 'package:bazaar_bihar/shared/models/ProductsModel.dart';
 import 'package:bazaar_bihar/shared/models/ShopModels.dart';

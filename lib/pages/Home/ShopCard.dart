@@ -1,4 +1,4 @@
-import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
+import 'package:bazaar_bihar/shared/components/CarouselWithIndicator.dart';
 import 'package:bazaar_bihar/shared/models/ShopModels.dart';
 import 'package:flutter/material.dart';
 
