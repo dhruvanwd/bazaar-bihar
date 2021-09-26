@@ -21,10 +21,13 @@ class PaymentController extends GetxController {
   _placeOrder(List<Map> orderDetail) async {
     try {
       EasyLoading.show();
-      final resp = await _globalCtrl.apiRequestInstance.storeData(RequestBody(
+      final resp = await _globalCtrl.apiRequestInstance.storeData(
+        RequestBody(
           amendType: "insertMany",
           collectionName: "orders",
-          payload: [orderDetail]));
+          payload: [orderDetail],
+        ),
+      );
       print(resp.data);
       Get.offAllNamed("/");
       Get.snackbar(

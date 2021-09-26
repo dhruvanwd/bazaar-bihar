@@ -1,17 +1,17 @@
 import 'package:bazaar_bihar/pages/OrdersPage/CarouselWithIndicator.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
-import 'package:bazaar_bihar/shared/models/CartModel.dart';
+import 'package:bazaar_bihar/shared/models/OrderModel.dart';
+import 'package:bazaar_bihar/shared/orderComponents/orderPriceSummary.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrderCard extends StatelessWidget {
-  final Map orderDetail;
+  final OrderModel orderDetail;
   OrderCard(this.orderDetail);
 
   @override
   Widget build(BuildContext context) {
-    final CartModel order = CartModel.fromMap(orderDetail);
     print(orderDetail);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8),
@@ -28,7 +28,7 @@ class OrderCard extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    CarouselWithIndicator(order.shop.images),
+                    CarouselWithIndicator(orderDetail.shop.images),
                     Positioned(
                         left: -50,
                         top: 25,
@@ -40,7 +40,7 @@ class OrderCard extends StatelessWidget {
                             decoration: BoxDecoration(color: Colors.white),
                             child: Center(
                               child: Text(
-                                orderDetail['status'],
+                                orderDetail.status,
                                 style: Get.theme.textTheme.subtitle2,
                               ),
                             ),
@@ -56,19 +56,19 @@ class OrderCard extends StatelessWidget {
                   ),
                   child: ListTile(
                     title: Text(
-                      order.shop.name,
+                      orderDetail.shop.name,
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
                     subtitle: Text(
-                      orderDetail['createdAt'],
+                      orderDetail.createdAt,
                       style: TextStyle(
                         color: Colors.blueGrey.shade100,
                       ),
                     ),
                     trailing: Text(
-                      '$rupeeSymbol${orderDetail["sp"]}',
+                      '$rupeeSymbol${orderDetail.sp}',
                       style: TextStyle(
                         color: Colors.blue.shade400,
                       ),
@@ -95,7 +95,7 @@ class OrderCard extends StatelessWidget {
                     child: ListView.custom(
                       childrenDelegate: SliverChildBuilderDelegate(
                         (_, index) {
-                          final product = order.products[index];
+                          final product = orderDetail.products[index];
                           return Card(
                             clipBehavior: Clip.hardEdge,
                             shape: RoundedRectangleBorder(
@@ -120,20 +120,12 @@ class OrderCard extends StatelessWidget {
                             ),
                           );
                         },
-                        childCount: order.products.length,
+                        childCount: orderDetail.products.length,
                       ),
                     ),
                   ),
                 ),
-                Container(
-                  color: Colors.cyan.shade50,
-                  child: ListTile(
-                    title: Text('Total'),
-                    subtitle: Text(
-                        'MRP: $rupeeSymbol${orderDetail["mrp"]}   Discount: 20%'),
-                    trailing: Text('$rupeeSymbol${orderDetail["sp"]}'),
-                  ),
-                ),
+                orderPriceSummary(orderDetail),
               ],
             ),
           ),

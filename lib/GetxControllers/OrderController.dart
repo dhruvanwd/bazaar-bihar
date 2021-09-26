@@ -1,6 +1,7 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
+import 'package:bazaar_bihar/shared/models/OrderModel.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -9,7 +10,7 @@ class OrderController extends GetxController {
   final ApiRequest _apiRequestInstance = ApiRequest();
   final _globalCtrl = GlobalController.to;
 
-  var orders = [];
+  List<OrderModel> orders = [];
 
   fetchOrderDetails() async {
     var dateFormat = DateFormat("yy-MM-dd");
@@ -25,7 +26,7 @@ class OrderController extends GetxController {
     }));
     print(resp.data);
     if (resp.data != "" && resp.data != null) {
-      orders = resp.data;
+      orders = ordersModelFromMap(resp.data);
       update();
     }
   }
