@@ -1,6 +1,7 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
+import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/models/OrderModel.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -19,12 +20,12 @@ class OrderController extends GetxController {
     final resp = await _apiRequestInstance.fetchData(
         RequestBody(amendType: "", collectionName: "orders", payload: {
       "createdAt": {
-        "\$regex": "${dateFormat.format(DateTime.now())}",
+        "\$regex": "",
         "\$options": 'i',
       },
       "orderBy": profile.id
     }));
-    print(resp.data);
+    muliPrint(["fetched placed orders.........!", resp.data]);
     if (resp.data != "" && resp.data != null) {
       orders = ordersModelFromMap(resp.data);
       update();

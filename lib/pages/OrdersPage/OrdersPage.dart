@@ -10,7 +10,15 @@ class OrdersPage extends StatelessWidget {
     return SingleChildScrollView(
       child: GetBuilder<OrderController>(
         builder: (_orderCtrl) => Container(
-          margin: EdgeInsets.only(bottom: 50),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.lightBlue.shade50,
+                Colors.blueGrey.shade50,
+              ],
+            ),
+          ),
+          padding: EdgeInsets.only(bottom: 50),
           child: Column(
             children: _orderCtrl.orders.length > 0
                 ? _orderCtrl.orders.map((order) => OrderCard(order)).toList()

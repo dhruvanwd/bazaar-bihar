@@ -39,6 +39,7 @@ dependencies:
   cashfree_pg: ^2.0.3+23
   easy_rich_text: ^0.5.7
   image_crop: ^0.4.0
+  simple_s3: ^0.3.2
 
   
 

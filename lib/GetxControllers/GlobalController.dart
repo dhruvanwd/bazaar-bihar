@@ -188,6 +188,7 @@ class GlobalController extends GetxController {
   restoreShopByCategory() {
     try {
       final catTypeDetail = getStroageJson(EStorageKeys.CATEGORY_VIEWER);
+      if (catTypeDetail == null) return;
       final catType = catTypeDetail['catType'];
       print(catType);
       if (catType != null) {

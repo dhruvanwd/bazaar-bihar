@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bazaar_bihar/shared/ImageCropper/ImageCropper.dart';
 import 'package:bazaar_bihar/shared/ImageCropper/ImageCropperCtrl.dart';
 import 'package:bazaar_bihar/shared/Utils/extensions.dart';
+import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/components/CustomAvatar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_mask/easy_mask.dart';
@@ -44,6 +45,13 @@ class _MapScreenState extends State<ProfilePage>
 
   onUpdateProfile(BuildContext context) async {
     // TODO: while updating profile if used has uploaded image then upload to s3 first then store url.
+    final _imgCtrl = ImageCropperController.to;
+    String? avatar;
+    if (_imgCtrl.croppedImages.length == 1) {
+      final uploadedImg = _imgCtrl.croppedImages[0];
+      avatar = await _imgCtrl.uploadAwsFile(uploadedImg, "profile");
+      muliPrint(["uploaded image: ", avatar]);
+    }
 
     if (_fullName.text.isEmpty) {
       Get.snackbar(
@@ -67,11 +75,15 @@ class _MapScreenState extends State<ProfilePage>
       );
       return;
     }
-    await GlobalController.to.updateUserProfile({
+    final updatedProfile = {
       "fullName": _fullName.text,
       "mobile": _mobile.text.removeWhiteSpaces,
       "email": _email.text,
-    });
+    };
+    if (avatar != null) {
+      updatedProfile['avatar'] = avatar;
+    }
+    await GlobalController.to.updateUserProfile(updatedProfile);
     updateCtrls();
     setState(() {
       _status = true;

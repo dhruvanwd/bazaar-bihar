@@ -39,7 +39,7 @@ class OrderCard extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
+                      padding: const EdgeInsets.only(right: 8.0, top: 4),
                       child: CircleAvatar(
                         backgroundColor: Colors.green,
                         radius: 8,
@@ -47,7 +47,7 @@ class OrderCard extends StatelessWidget {
                     ),
                     Text(
                       orderDetail.status,
-                      style: TextStyle(color: Colors.purple, fontSize: 16),
+                      style: TextStyle(color: Colors.purple, fontSize: 15),
                     )
                   ],
                 ),
