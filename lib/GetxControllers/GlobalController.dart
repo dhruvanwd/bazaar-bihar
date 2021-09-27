@@ -226,7 +226,6 @@ class GlobalController extends GetxController {
 
   fetchShops(String? categoryId) async {
     try {
-      EasyLoading.show();
       final Map<String, dynamic> payload = {
         "name": {
           "\$regex": '',
@@ -255,9 +254,7 @@ class GlobalController extends GetxController {
         shopsListByCatId = shopModelFromJson(resp.data);
       }
       update();
-      EasyLoading.dismiss();
     } catch (e, s) {
-      EasyLoading.dismiss();
       muliPrint([e, s]);
     }
   }

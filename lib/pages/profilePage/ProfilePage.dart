@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:bazaar_bihar/shared/ImageCropper/ImageCropper.dart';
+import 'package:bazaar_bihar/shared/ImageCropper/ImageCropperCtrl.dart';
 import 'package:bazaar_bihar/shared/Utils/extensions.dart';
 import 'package:bazaar_bihar/shared/components/CustomAvatar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -40,29 +42,9 @@ class _MapScreenState extends State<ProfilePage>
     updateCtrls();
   }
 
-  final ImagePicker _picker = ImagePicker();
-  var _imageFile;
-
-  selectImage(BuildContext context) async {
-    try {
-      final pickedFile = await _picker.pickImage(
-        source: ImageSource.camera,
-        maxWidth: 200,
-        maxHeight: 200,
-      );
-      setState(() {
-        _imageFile = pickedFile!;
-      });
-    } catch (e) {
-      setState(() {
-        _pickImageError = e;
-      });
-
-      print(e);
-    }
-  }
-
   onUpdateProfile(BuildContext context) async {
+    // TODO: while updating profile if used has uploaded image then upload to s3 first then store url.
+
     if (_fullName.text.isEmpty) {
       Get.snackbar(
         "Name can't be empty",
@@ -115,47 +97,61 @@ class _MapScreenState extends State<ProfilePage>
                         bottom: 10,
                       ),
                       child: Stack(fit: StackFit.loose, children: <Widget>[
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            _imageFile != null
-                                ? CustomAvatar(
+                        GetBuilder<ImageCropperController>(
+                          builder: (_imgCtrl) {
+                            return Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                if (_imgCtrl.croppedImages.length > 0)
+                                  CustomAvatar(
                                     child: Image.file(
-                                      File(_imageFile.path),
+                                      File(_imgCtrl.croppedImages[0].path),
                                       fit: BoxFit.cover,
                                     ),
                                   )
-                                : CustomAvatar(
+                                else if (_.userProfile?.avatar != null ||
+                                    _.userProfile?.picture != null)
+                                  CustomAvatar(
                                     child: CachedNetworkImage(
                                       fit: BoxFit.cover,
-                                      imageUrl: _.userProfile?.avatar ?? "",
-                                      errorWidget: (_, url, error) =>
-                                          Image.asset('images/as.png'),
+                                      imageUrl: _.userProfile!.avatar ??
+                                          _.userProfile!.picture!,
                                     ),
-                                  ),
-                          ],
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(top: 90.0, right: 100.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                CircleAvatar(
-                                  backgroundColor: Colors.red,
-                                  radius: 25.0,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      selectImage(context);
-                                    },
-                                    icon: Icon(
-                                      Icons.camera_alt,
-                                      color: Colors.white,
+                                  )
+                                else
+                                  CustomAvatar(
+                                    child: Image.asset(
+                                      'images/as.png',
+                                      fit: BoxFit.cover,
                                     ),
-                                  ),
-                                )
+                                  )
                               ],
-                            )),
+                            );
+                          },
+                        ),
+                        if (!_status)
+                          Padding(
+                              padding: EdgeInsets.only(top: 90.0, right: 100.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  CircleAvatar(
+                                    backgroundColor: Colors.red,
+                                    radius: 25.0,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        // _imgCtrl.openImage();
+                                        Get.to(ImageCropper());
+                                      },
+                                      icon: Icon(
+                                        Icons.camera_alt,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )),
                       ]),
                     )
                   ],

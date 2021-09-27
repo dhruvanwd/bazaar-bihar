@@ -2,6 +2,7 @@ import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
+import 'package:bazaar_bihar/shared/ImageCropper/ImageCropperCtrl.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
@@ -29,6 +30,7 @@ void main() async {
   Get.put(OrderController());
   Get.put(CartController());
   Get.put(PaymentController());
+  Get.put(ImageCropperController());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

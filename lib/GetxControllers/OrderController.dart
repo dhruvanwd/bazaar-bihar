@@ -17,7 +17,7 @@ class OrderController extends GetxController {
     final profile = _globalCtrl.userProfile;
     if (profile == null) return;
     final resp = await _apiRequestInstance.fetchData(
-        RequestBody(amendType: "findOne", collectionName: "orders", payload: {
+        RequestBody(amendType: "", collectionName: "orders", payload: {
       "createdAt": {
         "\$regex": "${dateFormat.format(DateTime.now())}",
         "\$options": 'i',
