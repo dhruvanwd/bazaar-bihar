@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:image_picker/image_picker.dart';
 
 typedef void OnPickImageCallback(
     double? maxWidth, double? maxHeight, int? quality);
@@ -28,7 +27,6 @@ class _MapScreenState extends State<ProfilePage>
   late TextEditingController _fullName;
   late TextEditingController _mobile;
   late TextEditingController _email;
-  dynamic _pickImageError;
 
   updateCtrls() {
     final profile = GlobalController.to.userProfile;
@@ -44,7 +42,6 @@ class _MapScreenState extends State<ProfilePage>
   }
 
   onUpdateProfile(BuildContext context) async {
-    // TODO: while updating profile if used has uploaded image then upload to s3 first then store url.
     final _imgCtrl = ImageCropperController.to;
     String? avatar;
     if (_imgCtrl.croppedImages.length == 1) {

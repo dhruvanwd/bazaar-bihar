@@ -225,7 +225,7 @@ class GlobalController extends GetxController {
     update();
   }
 
-  fetchShops(String? categoryId) async {
+  fetchShops(CategoryModel? category) async {
     try {
       final Map<String, dynamic> payload = {
         "name": {
@@ -242,14 +242,14 @@ class GlobalController extends GetxController {
         }
       };
 
-      if (categoryId != null) {
-        payload.assign("categoryId", categoryId);
+      if (category != null) {
+        payload.assign("category", category.toMap());
       }
       final resp = await apiRequestInstance.fetchData(RequestBody(
           amendType: '', collectionName: 'shops', payload: payload));
 
       muliPrint(["fetched shops...!", resp.data]);
-      if (categoryId == null) {
+      if (category == null) {
         shopsList = shopModelFromJson(resp.data);
       } else {
         shopsListByCatId = shopModelFromJson(resp.data);

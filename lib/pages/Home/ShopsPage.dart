@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/pages/Home/ShopsList.dart';
+import '../../shared/Utils/extensions.dart';
 
 class ShopsPage extends StatelessWidget {
   ShopsPage({key}) : super(key: key);
@@ -12,7 +13,7 @@ class ShopsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${category.name} Shops"),
+        title: Text("${category.name.inCaps} Shops"),
       ),
       floatingActionButton: FloatingCartButton(),
       body: GetBuilder<GlobalController>(

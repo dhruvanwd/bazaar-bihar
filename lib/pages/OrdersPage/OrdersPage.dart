@@ -5,6 +5,7 @@ import 'package:bazaar_bihar/pages/OrdersPage/OrderCard.dart';
 import 'package:get/get.dart';
 
 class OrdersPage extends StatelessWidget {
+  // TODO: add filters to orders.
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

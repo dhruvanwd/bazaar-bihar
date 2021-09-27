@@ -74,6 +74,8 @@ class CartAddressController extends GetxController {
         selectedAddres = cartAdresses.firstWhere((addr1) =>
             addrJson['selectedAddres']['addressLine1'] == addr1.addressLine1);
       }
+    } else {
+      fetchCartAddresses();
     }
   }
 
@@ -96,7 +98,6 @@ class CartAddressController extends GetxController {
   @override
   void onInit() {
     restoreOfflineAddressData();
-    fetchCartAddresses();
     super.onInit();
   }
 }

@@ -14,7 +14,7 @@ class OrderCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 8,
-        vertical: 8,
+        vertical: 4,
       ),
       child: InkWell(
         onTap: () {

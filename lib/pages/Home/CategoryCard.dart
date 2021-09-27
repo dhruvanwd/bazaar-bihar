@@ -23,7 +23,7 @@ class _CategoryCardState extends State<CategoryCard> {
       child: InkWell(
         onTap: () {
           _.clearCurrentShop();
-          _.fetchShops(cat.id);
+          _.fetchShops(cat);
           Get.toNamed('/shops', arguments: cat);
         },
         child: Card(

@@ -4,7 +4,6 @@ import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/models/OrderModel.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class OrderController extends GetxController {
   static OrderController get to => Get.find();
@@ -14,7 +13,7 @@ class OrderController extends GetxController {
   List<OrderModel> orders = [];
 
   fetchOrderDetails() async {
-    var dateFormat = DateFormat("yy-MM-dd");
+    // var dateFormat = DateFormat("yy-MM-dd");
     final profile = _globalCtrl.userProfile;
     if (profile == null) return;
     final resp = await _apiRequestInstance.fetchData(

@@ -27,7 +27,7 @@ class CategoryChip extends StatelessWidget {
         ),
         onPressed: () {
           _.clearCurrentShop();
-          _.fetchShops(cat.id);
+          _.fetchShops(cat);
           Get.toNamed('/shops', arguments: cat);
         },
         backgroundColor: Colors.white,

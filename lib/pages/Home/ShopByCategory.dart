@@ -14,7 +14,7 @@ class ShopByCategory extends StatelessWidget {
       builder: (_) => Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
             child: Container(
               width: Get.mediaQuery.size.width,
               child: Row(
@@ -30,6 +30,7 @@ class ShopByCategory extends StatelessWidget {
                     child: Row(
                       children: [
                         IconButton(
+                            padding: EdgeInsetsDirectional.all(2),
                             onPressed: () {
                               _.updateCategoryViewer(ECategoryViewer.CARD);
                             },
@@ -40,6 +41,7 @@ class ShopByCategory extends StatelessWidget {
                               FontAwesome.align_center,
                             )),
                         IconButton(
+                          padding: EdgeInsetsDirectional.all(2),
                           color: _.categoryViewer == ECategoryViewer.CHIP
                               ? Get.theme.primaryColor
                               : Colors.grey,
