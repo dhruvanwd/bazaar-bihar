@@ -1,5 +1,5 @@
 import 'package:bazaar_bihar/shared/models/OrderModel.dart';
-import 'package:bazaar_bihar/shared/orderComponents/DetailedOrder.dart';
+import 'package:bazaar_bihar/pages/OrdersPage/DetailedOrder.dart';
 import 'package:bazaar_bihar/shared/orderComponents/orderPriceSummary.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +25,7 @@ class OrderCard extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(
-                  left: 12,
+                  left: 16,
                   top: 8,
                   right: 12,
                 ),

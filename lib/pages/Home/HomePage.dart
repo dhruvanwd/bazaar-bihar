@@ -9,6 +9,13 @@ import 'package:bazaar_bihar/pages/Home/AppBarMenu.dart';
 import 'package:new_version/new_version.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
+// TODO:
+// 1. add theming.
+// 2.add internationalization.
+// 3. add otp verification.
+// 4. add email verification.
+// 5. add a simple wallet.
+// 6. add faq section.
 class HomePage extends StatelessWidget {
   final _glblCtrl = Get.find<GlobalController>();
   final newVersion = NewVersion();
