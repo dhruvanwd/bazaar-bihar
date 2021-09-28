@@ -225,7 +225,15 @@ class GlobalController extends GetxController {
     update();
   }
 
+  Map<String, dynamic> categoryWiseShopDetails = {};
+
   fetchShops(CategoryModel? category) async {
+    if (category != null && categoryWiseShopDetails[category.name] != null) {
+      shopsListByCatId = categoryWiseShopDetails[category.name];
+      print("restored fatched shops ${category.name}");
+      update();
+      return;
+    }
     try {
       final Map<String, dynamic> payload = {
         "name": {
@@ -253,6 +261,7 @@ class GlobalController extends GetxController {
         shopsList = shopModelFromJson(resp.data);
       } else {
         shopsListByCatId = shopModelFromJson(resp.data);
+        categoryWiseShopDetails[category.name] = shopsListByCatId;
       }
       update();
     } catch (e, s) {
@@ -266,13 +275,22 @@ class GlobalController extends GetxController {
   }
 
   List<ProductModel> productsList = [];
+  Map<String, dynamic> productsCacheByShopId = {};
+
   fetchProductsByShopId(String shopId) async {
     try {
+      if (productsCacheByShopId[shopId] != null) {
+        productsList = productsCacheByShopId[shopId];
+        print("restored fatched products list $shopId");
+        update();
+        return;
+      }
       EasyLoading.show();
       final Map<String, dynamic> payload = {"shopId": shopId};
       final resp = await apiRequestInstance.fetchData(RequestBody(
           amendType: '', collectionName: 'products', payload: payload));
       productsList = productModelFromMap(resp.data);
+      productsCacheByShopId[shopId] = productsList;
       update();
       EasyLoading.dismiss();
     } catch (e) {

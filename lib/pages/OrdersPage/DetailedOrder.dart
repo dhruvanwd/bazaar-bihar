@@ -1,12 +1,11 @@
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
-
-import '../../shared/orderComponents/ProductCard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../shared/orderComponents/orderUserNameDateCount.dart';
 import '../../shared/orderComponents/orderPriceSummary.dart';
 import '../../shared/models/OrderModel.dart';
+import '../../shared/orderComponents/ProductCard.dart';
 
 class DetailedOrder extends StatelessWidget {
   final OrderModel orderDetail;
@@ -23,20 +22,6 @@ class DetailedOrder extends StatelessWidget {
           decoration: BoxDecoration(gradient: lightGradient),
           child: Column(
             children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Container(
-                    child: Column(
-                      children: [
-                        ...orderDetail.products
-                            .map((product) => ProductCard(product))
-                            .toList(),
-                        Padding(padding: EdgeInsets.symmetric(vertical: 16))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
               Card(
                 child: Column(
                   children: [
@@ -74,6 +59,20 @@ class DetailedOrder extends StatelessWidget {
                     //   ),
                     // ),
                   ],
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        ...orderDetail.products
+                            .map((product) => ProductCard(product))
+                            .toList(),
+                        Padding(padding: EdgeInsets.symmetric(vertical: 16))
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ],
