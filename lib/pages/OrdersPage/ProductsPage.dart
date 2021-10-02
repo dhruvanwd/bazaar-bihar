@@ -20,16 +20,15 @@ class ProductsPage extends StatelessWidget {
         ),
         floatingActionButton: FloatingCartButton(),
         body: Container(
+          height: Get.mediaQuery.size.height,
           margin: EdgeInsets.only(top: 5, bottom: 10),
           padding: EdgeInsets.all(8),
-          child: GridView.count(
-            crossAxisCount: 1,
-            crossAxisSpacing: 2.0,
-            childAspectRatio: screenWidth < 365 ? 1 : 1.1,
+          child: SingleChildScrollView(
+              child: Column(
             children: _.productsList.length > 0
                 ? _.productsList.map((product) => ProductCard(product)).toList()
                 : [ShopUnavailable("No product found....")],
-          ),
+          )),
         ),
       ),
     );

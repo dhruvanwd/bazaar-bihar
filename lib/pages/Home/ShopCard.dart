@@ -16,7 +16,7 @@ class ShopCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          CarouselWithIndicator(shop.images),
+          CarouselWithIndicator(shop.images, aspectRatio: 1.3),
           Container(
             child: ListTile(
               title: Text(shop.name),

@@ -40,6 +40,7 @@ dependencies:
   easy_rich_text: ^0.5.7
   image_crop: ^0.4.0
   simple_s3: ^0.3.2
+  flutter_rating_bar: ^4.0.0
 
   
 

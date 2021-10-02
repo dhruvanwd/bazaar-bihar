@@ -3,6 +3,7 @@ import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/models/OrderModel.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class OrderController extends GetxController {
@@ -28,6 +29,32 @@ class OrderController extends GetxController {
     if (resp.data != "" && resp.data != null) {
       orders = ordersModelFromMap(resp.data);
       update();
+    }
+  }
+
+  rateNdReviewOrder(OrderModel orderDetail, Map updateDetail) async {
+    try {
+      EasyLoading.show();
+      final resp = await _apiRequestInstance.storeData(RequestBody(
+          amendType: 'findOneAndUpdate',
+          collectionName: 'orders',
+          payload: [
+            {"_id": orderDetail.id},
+            {"\$set": updateDetail},
+            {"returnNewDocument": true}
+          ]));
+      EasyLoading.dismiss();
+
+      print(resp.data['value']['rating']);
+      print(resp.data['value']['review']);
+      if (resp.data != "" && resp.data != null) {
+        orderDetail.rating = updateDetail['rating'];
+        orderDetail.review = updateDetail['review'];
+        update();
+      }
+    } catch (e, s) {
+      EasyLoading.dismiss();
+      muliPrint([e, s]);
     }
   }
 
