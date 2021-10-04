@@ -252,6 +252,7 @@ class GlobalController extends GetxController {
 
       if (category != null) {
         payload.assign("category", category.toMap());
+        EasyLoading.show();
       }
       final resp = await apiRequestInstance.fetchData(RequestBody(
           amendType: '', collectionName: 'shops', payload: payload));
@@ -264,7 +265,9 @@ class GlobalController extends GetxController {
         categoryWiseShopDetails[category.name] = shopsListByCatId;
       }
       update();
+      if (category != null) EasyLoading.dismiss();
     } catch (e, s) {
+      EasyLoading.dismiss();
       muliPrint([e, s]);
     }
   }
