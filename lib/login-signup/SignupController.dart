@@ -82,6 +82,7 @@ class SignupController extends GetxController {
 
   Future<String?> signInwithGoogle() async {
     try {
+      EasyLoading.show();
       final GoogleSignInAccount? googleSignInAccount =
           await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleSignInAuthentication =
@@ -116,7 +117,9 @@ class SignupController extends GetxController {
         }
         await createUser(rawProfileJson);
       }
+      EasyLoading.dismiss();
     } on FirebaseAuthException catch (e) {
+      EasyLoading.dismiss();
       print(e.message);
       throw e;
     }

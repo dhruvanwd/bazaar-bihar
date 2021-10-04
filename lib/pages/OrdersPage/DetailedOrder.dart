@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import '../../shared/orderComponents/orderUserNameDateCount.dart';
 import '../../shared/orderComponents/orderPriceSummary.dart';
 import '../../shared/models/OrderModel.dart';
-import '../../shared/orderComponents/ProductCard.dart';
 
 class DetailedOrder extends StatelessWidget {
   final OrderModel orderDetail;

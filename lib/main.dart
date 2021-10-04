@@ -1,7 +1,9 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
+import 'package:bazaar_bihar/GetxControllers/NotificationController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
+import 'package:bazaar_bihar/pages/Wallet/WalletHome.dart';
 import 'package:bazaar_bihar/shared/ImageCropper/ImageCropperCtrl.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
@@ -31,6 +33,7 @@ void main() async {
   Get.put(CartController());
   Get.put(PaymentController());
   Get.put(ImageCropperController());
+
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -57,6 +60,7 @@ void main() async {
         GetPage(name: '/products', page: () => ProductsPage()),
         GetPage(name: '/cart', page: () => CartCarousel()),
         GetPage(name: '/checkout', page: () => CheckoutCart()),
+        GetPage(name: '/wallet', page: () => WalletHome()),
       ],
     ),
   );

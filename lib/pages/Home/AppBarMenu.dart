@@ -58,7 +58,10 @@ class AppBarMenu extends StatelessWidget {
                     dense: true,
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      toggleDrawer();
+                      Get.toNamed("/wallet");
+                    },
                     leading: Icon(Icons.monetization_on,
                         size: 20.0, color: Colors.white),
                     title: Text(
@@ -84,18 +87,18 @@ class AppBarMenu extends StatelessWidget {
                     ),
                     dense: true,
                   ),
-                  ListTile(
-                    onTap: () {},
-                    leading: Icon(Icons.star_border,
-                        size: 20.0, color: Colors.white),
-                    title: Text(
-                      "Favorites",
-                      style: Get.theme.textTheme.subtitle2!.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
-                    dense: true,
-                  ),
+                  // ListTile(
+                  //   onTap: () {},
+                  //   leading: Icon(Icons.star_border,
+                  //       size: 20.0, color: Colors.white),
+                  //   title: Text(
+                  //     "Favorites",
+                  //     style: Get.theme.textTheme.subtitle2!.copyWith(
+                  //       color: Colors.white,
+                  //     ),
+                  //   ),
+                  //   dense: true,
+                  // ),
                   ListTile(
                     onTap: () {},
                     leading:
