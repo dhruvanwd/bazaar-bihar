@@ -69,9 +69,14 @@ class ProductCartItem extends StatelessWidget {
                                 padding: EdgeInsets.all(0),
                                 iconSize: 20,
                                 onPressed: () {
-                                  _cartCtrl.incrProductCount(product);
+                                  _cartCtrl.decrProductCount(shop, product);
                                 },
-                                icon: Icon(Icons.add),
+                                icon: product.cartItemCount == 1
+                                    ? Icon(
+                                        Icons.delete,
+                                        color: Colors.deepOrange,
+                                      )
+                                    : Icon(Icons.remove),
                               ),
                               Container(
                                 child: Text(
@@ -83,14 +88,9 @@ class ProductCartItem extends StatelessWidget {
                                 padding: EdgeInsets.all(0),
                                 iconSize: 20,
                                 onPressed: () {
-                                  _cartCtrl.decrProductCount(shop, product);
+                                  _cartCtrl.incrProductCount(product);
                                 },
-                                icon: product.cartItemCount == 1
-                                    ? Icon(
-                                        Icons.delete,
-                                        color: Colors.deepOrange,
-                                      )
-                                    : Icon(Icons.remove),
+                                icon: Icon(Icons.add),
                               ),
                             ],
                           ),

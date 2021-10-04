@@ -23,7 +23,7 @@ class ShopsList extends StatelessWidget {
         pageController: _pageController,
         type: StackedCardCarouselType.fadeOutStack,
         initialOffset: 16,
-        spaceBetweenItems: screenWidth < 365 ? 300 : 350,
+        spaceBetweenItems: screenWidth < 365 ? 320 : 370,
         items: shopsList.length != 0
             ? shopsList
                 .map(

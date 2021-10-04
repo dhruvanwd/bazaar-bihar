@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/Widgets/FloatingCartButton.dart';
+import 'package:bazaar_bihar/shared/components/AppExitPopup.dart';
 import 'package:bazaar_bihar/shared/components/OfflineDialog.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -83,40 +84,43 @@ class HomePage extends StatelessWidget {
           showOfflineDialog();
         }
 
-        return SideMenu(
-          key: _endSideMenuKey,
-          inverse: true, // end side menu
-          background: Colors.blueGrey.shade700,
-          type: SideMenuType.slideNRotate,
-          menu: AppBarMenu(toggleDrawer),
-          radius: BorderRadius.circular(8),
+        return WillPopScope(
           child: SideMenu(
-            key: _sideMenuKey,
-            menu: AppBarMenu(toggleDrawer),
-            type: SideMenuType.slideNRotate,
-            radius: BorderRadius.circular(8),
+            key: _endSideMenuKey,
+            inverse: true, // end side menu
             background: Colors.blueGrey.shade700,
-            child: Scaffold(
-              appBar: AppBar(
-                leading:
-                    IconButton(icon: Icon(Icons.menu), onPressed: toggleDrawer),
-                title: Text(_.appTitle),
-              ),
-              body: _.currentPage,
-              floatingActionButton: FloatingCartButton(),
-              bottomNavigationBar: ConvexAppBar(
-                backgroundColor: Get.theme.primaryColor,
-                style: TabStyle.flip,
-                items: [
-                  TabItem(icon: Icons.home, title: 'Home'),
-                  TabItem(icon: Icons.receipt, title: 'Orders'),
-                  TabItem(icon: Icons.people, title: 'Profile'),
-                ],
-                initialActiveIndex: _.currentTabIndex,
-                onTap: _.setTabIndex,
+            type: SideMenuType.slideNRotate,
+            menu: AppBarMenu(toggleDrawer),
+            radius: BorderRadius.circular(8),
+            child: SideMenu(
+              key: _sideMenuKey,
+              menu: AppBarMenu(toggleDrawer),
+              type: SideMenuType.slideNRotate,
+              radius: BorderRadius.circular(8),
+              background: Colors.blueGrey.shade700,
+              child: Scaffold(
+                appBar: AppBar(
+                  leading: IconButton(
+                      icon: Icon(Icons.menu), onPressed: toggleDrawer),
+                  title: Text(_.appTitle),
+                ),
+                body: _.currentPage,
+                floatingActionButton: FloatingCartButton(),
+                bottomNavigationBar: ConvexAppBar(
+                  backgroundColor: Get.theme.primaryColor,
+                  style: TabStyle.flip,
+                  items: [
+                    TabItem(icon: Icons.home, title: 'Home'),
+                    TabItem(icon: Icons.receipt, title: 'Orders'),
+                    TabItem(icon: Icons.people, title: 'Profile'),
+                  ],
+                  initialActiveIndex: _.currentTabIndex,
+                  onTap: _.setTabIndex,
+                ),
               ),
             ),
           ),
+          onWillPop: () => showExitPopup(context),
         );
       },
     );
