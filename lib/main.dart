@@ -28,6 +28,7 @@ void main() async {
   await GetStorage.init();
   final glblCtrl = Get.put(GlobalController());
   Get.put(HomePageController());
+  Get.put(NotificationController());
   Get.put(SignupController());
   Get.put(OrderController());
   Get.put(CartController());

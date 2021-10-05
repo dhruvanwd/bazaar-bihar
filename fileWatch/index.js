@@ -6,6 +6,9 @@ const fs = require('fs')
 const fse = require('fs-extra')
 const pathModule = require('path')
 
+/**
+ * user need to pull first if last push is from other user
+ */
 var client = new AWS.S3({
     region: "ap-south-1",
     accessKeyId: "AKIAT7N5CF2WLISO76HD",

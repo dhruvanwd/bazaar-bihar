@@ -118,9 +118,9 @@ class SignupController extends GetxController {
         await createUser(rawProfileJson);
       }
       EasyLoading.dismiss();
-    } on FirebaseAuthException catch (e) {
+    } catch (e) {
       EasyLoading.dismiss();
-      print(e.message);
+      print(e);
       throw e;
     }
   }

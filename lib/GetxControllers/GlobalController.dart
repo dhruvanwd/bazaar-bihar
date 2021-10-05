@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:bazaar_bihar/login-signup/LoginPage.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
+import 'package:bazaar_bihar/shared/Utils/CacheApiResponse.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/models/CategoryModel.dart';
@@ -170,13 +171,19 @@ class GlobalController extends GetxController {
 
   fetchCategories() async {
     try {
-      final resp = await apiRequestInstance.fetchData(
+      final payload =
           RequestBody(amendType: '', collectionName: 'categories', payload: {
         "name": {
           "\$regex": '',
           "\$options": 'i',
         },
-      }));
+      });
+      if (storeRestoreData(payload, null) != null) {
+        categories = categoryModelFromMap(storeRestoreData(payload, null));
+        return;
+      }
+      final resp = await apiRequestInstance.fetchData(payload);
+      storeRestoreData(payload, resp.data);
       categories = categoryModelFromMap(resp.data);
       // closeLoader();
       update();

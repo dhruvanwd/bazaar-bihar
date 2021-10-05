@@ -21,7 +21,7 @@ class ShopWiseTotalBill extends StatelessWidget {
           ),
         ),
         Text(
-          "${isShop ? 'SP: ' : 'Payable amount: '} ₹${shopData['totalSp']}",
+          "${isShop ? 'SP: ' : 'Payable: '} ₹${shopData['totalSp']}",
           style: TextStyle(
             decoration: TextDecoration.none,
             color: Colors.purple,
