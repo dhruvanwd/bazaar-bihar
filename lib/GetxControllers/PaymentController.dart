@@ -3,7 +3,7 @@ import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
-import 'package:bazaar_bihar/shared/Utils/paymentStatuses.dart';
+import 'package:bazaar_bihar/shared/Utils/orderStatuses.dart';
 import 'package:bazaar_bihar/shared/models/PaymentInfoModal.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';

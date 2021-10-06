@@ -1,5 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
-import 'package:bazaar_bihar/shared/Utils/paymentStatuses.dart';
+import 'package:bazaar_bihar/shared/Utils/orderStatuses.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/components/RateNdReview.dart';
 import 'package:bazaar_bihar/shared/components/StrechedPrimaryButton.dart';
