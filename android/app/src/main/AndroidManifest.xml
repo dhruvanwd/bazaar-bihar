@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.orca_mob">
    <application
-        android:label="BazaarBihar"
+        android:label="BazaarVihar"
         android:usesCleartextTraffic="true"
         android:name="androidx.multidex.MultiDexApplication"
         android:icon="@mipmap/ic_launcher">
