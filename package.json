@@ -8,10 +8,10 @@
     "test": "test"
   },
   "scripts": {
-    "start": "flutter run --no-sound-null-safety",
-    "bundle:dev": "flutter build appbundle --no-sound-null-safety",
-    "bundle:prod": "flutter build appbundle --release --no-sound-null-safety",
-    "build:apk:prod": "flutter build apk --release --no-sound-null-safety",
+    "start": "flutter run",
+    "bundle:dev": "flutter build appbundle",
+    "bundle:prod": "flutter build appbundle --release",
+    "build:apk:prod": "flutter build apk --release",
     "shared-lib:push":"node ./fileWatch/index.js --push",
     "shared-lib:pull":"node ./fileWatch/index.js --pull"
   },
