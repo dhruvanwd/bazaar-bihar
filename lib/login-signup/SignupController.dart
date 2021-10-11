@@ -103,6 +103,8 @@ class SignupController extends GetxController {
         "picture": profile['picture'],
         "role": "buyer",
         "state": "Bihar",
+        "mobileVerified": false,
+        "emailVerified": true,
         "city": "Nawada"
       };
       try {

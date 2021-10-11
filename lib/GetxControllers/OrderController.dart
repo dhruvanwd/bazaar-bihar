@@ -15,20 +15,25 @@ class OrderController extends GetxController {
 
   fetchOrderDetails() async {
     // var dateFormat = DateFormat("yy-MM-dd");
-    final profile = _globalCtrl.userProfile;
-    if (profile == null) return;
-    final resp = await _apiRequestInstance.fetchData(
-        RequestBody(amendType: "", collectionName: "orders", payload: {
-      "createdAt": {
-        "\$regex": "",
-        "\$options": 'i',
-      },
-      "orderBy": profile.id
-    }));
-    muliPrint(["fetched placed orders.........!", resp.data]);
-    if (resp.data != "" && resp.data != null) {
-      orders = ordersModelFromMap(resp.data);
-      update();
+    try {
+      final profile = _globalCtrl.userProfile;
+      if (profile == null) return;
+      final resp = await _apiRequestInstance.fetchData(
+          RequestBody(amendType: "", collectionName: "orders", payload: {
+        "createdAt": {
+          "\$regex": "",
+          "\$options": 'i',
+        },
+        "orderBy": profile.id
+      }));
+      muliPrint(["fetched placed orders.........!", resp.data]);
+      if (resp.data != "" && resp.data != null) {
+        orders = ordersModelFromMap(resp.data);
+        update();
+      }
+    } catch (e, s) {
+      EasyLoading.dismiss();
+      muliPrint([e, s]);
     }
   }
 

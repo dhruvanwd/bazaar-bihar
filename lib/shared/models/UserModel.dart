@@ -18,6 +18,8 @@ class UserModel {
     required this.city,
     required this.picture,
     required this.avatar,
+    required this.mobileVerified,
+    required this.emailVerified,
     required this.id,
   });
 
@@ -29,6 +31,8 @@ class UserModel {
   String city;
   String? picture;
   String? avatar;
+  bool? mobileVerified;
+  bool? emailVerified;
   String id;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -39,6 +43,8 @@ class UserModel {
       state: json["state"],
       city: json["city"],
       picture: json["picture"],
+      mobileVerified: json['mobileVerified'],
+      emailVerified: json['emailVerified'],
       avatar: json["avatar"],
       id: json['_id']);
 
@@ -51,6 +57,8 @@ class UserModel {
         "city": city,
         "picture": picture,
         "avatar": avatar,
+        "emailVerified": emailVerified,
+        "mobileVerified": mobileVerified,
         '_id': id
       };
 }

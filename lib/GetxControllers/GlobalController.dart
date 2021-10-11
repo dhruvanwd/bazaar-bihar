@@ -148,6 +148,7 @@ class GlobalController extends GetxController {
 
   updateUserProfile(Map profile) async {
     try {
+      EasyLoading.show();
       final resp = await apiRequestInstance.storeData(RequestBody(
           amendType: 'findOneAndUpdate',
           collectionName: 'users',
@@ -161,9 +162,11 @@ class GlobalController extends GetxController {
       var userProfileJson =
           Map<String, dynamic>.from({...userProfile!.toJson(), ...profile});
       updateUserProfileInstance(userProfileJson);
+      EasyLoading.dismiss();
       updateStorage(EStorageKeys.PROFILE, userProfileJson);
       update();
     } catch (e) {
+      EasyLoading.dismiss();
       print(e);
     }
   }

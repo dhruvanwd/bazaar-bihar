@@ -45,6 +45,8 @@ class _SignupPageState extends State<SignupPage> {
         'mobile': mobileController.text.removeAllWhitespace,
         'role': 'buyer',
         'state': selectedState?.state,
+        "mobileVerified": false,
+        "emailVerified": false,
         "city": selectedCity?.city,
         'password': passwordController.text,
       });

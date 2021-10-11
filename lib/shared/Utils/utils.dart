@@ -1,6 +1,7 @@
 import '../components/customAnimation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'dart:math';
 
 import '../models/ImagesModel.dart';
 
@@ -49,3 +50,11 @@ final lightGradient = LinearGradient(
     Colors.blueGrey.shade50,
   ],
 );
+String generateOtp() {
+  int min = 100000;
+  int max = 999999;
+  int randomminmax = min + Random().nextInt(max - min);
+  muliPrint(["Otp generated", randomminmax]);
+
+  return randomminmax.toString();
+}

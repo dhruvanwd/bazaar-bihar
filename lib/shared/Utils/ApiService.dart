@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 import 'RequestBody.dart';
 
 class ApiRequest {
-  final String baseUrl = 'http://3.23.46.248:8000';
+  final String baseUrl = 'http://192.168.43.84:8000';
+  // final String baseUrl = 'http://3.23.46.248:8000';
   Dio _dio() {
     // Put your authorization token here
     return Dio(BaseOptions(
@@ -25,5 +28,9 @@ class ApiRequest {
 
   Future<Response> createUser(RequestBody data) async {
     return await _dio().post('/createUser', data: data.toJson());
+  }
+
+  Future<Response> sendSMS(Map data) async {
+    return await _dio().post('/send-msg', data: jsonEncode(data));
   }
 }
