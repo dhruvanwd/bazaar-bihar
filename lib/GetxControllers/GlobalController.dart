@@ -158,8 +158,11 @@ class GlobalController extends GetxController {
           ]));
       print("updated user profile....!");
       print(resp.data);
-      updateUserProfileInstance(resp.data['value']);
-      updateStorage(EStorageKeys.PROFILE, resp.data['value']);
+      var userProfileJson =
+          Map<String, dynamic>.from({...userProfile!.toJson(), ...profile});
+      updateUserProfileInstance(userProfileJson);
+      updateStorage(EStorageKeys.PROFILE, userProfileJson);
+      update();
     } catch (e) {
       print(e);
     }

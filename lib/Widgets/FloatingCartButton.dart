@@ -8,24 +8,29 @@ class FloatingCartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<CartController>(
       builder: (_) => GetBuilder<CartController>(
-        builder: (_cartCtrl) => Visibility(
-          visible: _cartCtrl.carts.length != 0,
-          child: FloatingActionButton(
-            mini: true,
-            onPressed: () {
-              Get.toNamed('/cart');
-            },
-            child: Badge(
-              badgeContent: Text(
-                _.carts.length.toString(),
-                style: TextStyle(color: Colors.white),
-              ),
-              child: Icon(
-                Icons.shopping_cart,
+        builder: (_cartCtrl) {
+          int totalProductsLength = 0;
+          _.carts
+              .forEach((cart) => totalProductsLength += cart.products.length);
+          return Visibility(
+            visible: _cartCtrl.carts.length != 0,
+            child: FloatingActionButton(
+              mini: true,
+              onPressed: () {
+                Get.toNamed('/cart');
+              },
+              child: Badge(
+                badgeContent: Text(
+                  totalProductsLength.toString(),
+                  style: TextStyle(color: Colors.white),
+                ),
+                child: Icon(
+                  Icons.shopping_cart,
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

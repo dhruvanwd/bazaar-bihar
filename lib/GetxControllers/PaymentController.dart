@@ -45,6 +45,8 @@ class PaymentController extends GetxController {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    // TODO:
+    // 1. place order using paylater option
     PaymentInfoModal priceInfo = _cartCtrl.getOrderPriceSummary();
     final profile = _globalCtrl.userProfile;
     DateTime now = DateTime.now();
