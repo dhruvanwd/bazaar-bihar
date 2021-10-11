@@ -9,7 +9,7 @@ class ImageError extends StatelessWidget {
       decoration: BoxDecoration(
           image: DecorationImage(
               colorFilter: ColorFilter.linearToSrgbGamma(),
-              image: ExactAssetImage("images/logo.png"))),
+              image: ExactAssetImage("images/shop-vector.jpg"))),
       child: Center(
         child: Container(
           padding: EdgeInsets.all(8),

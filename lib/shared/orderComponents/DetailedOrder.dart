@@ -1,4 +1,4 @@
-import 'package:bazaar_bihar/shared/Utils/utils.dart';
+import '../Utils/utils.dart';
 
 import './ProductCard.dart';
 import 'package:flutter/material.dart';
@@ -45,34 +45,6 @@ class DetailedOrder extends StatelessWidget {
                       child: orderUserNameDateCount(orderDetail),
                     ),
                     orderPriceSummary(orderDetail),
-                    // Padding(
-                    //   padding: EdgeInsets.only(
-                    //     bottom: 4,
-                    //     left: 16,
-                    //     right: 16,
-                    //   ),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: [
-                    //       TextButton(
-                    //         onPressed: () {
-                    //           Get.dialog(Container(
-                    //             height: 400,
-                    //             color: Colors.white,
-                    //             child: Column(
-                    //               children: [],
-                    //             ),
-                    //           ));
-                    //         },
-                    //         child: Text(
-                    //           "Rate this order",
-                    //           style:
-                    //               TextStyle(color: Colors.purple, fontSize: 13),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

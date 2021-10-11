@@ -25,6 +25,10 @@ class ShopModel {
     required this.city,
     required this.pinCode,
     required this.ownerId,
+    required this.allowPickups,
+    required this.payOnDelivery,
+    required this.weekDays,
+    required this.operatingTime,
   });
 
   String id;
@@ -36,6 +40,11 @@ class ShopModel {
   String city;
   String pinCode;
   String ownerId;
+  bool allowPickups;
+  bool payOnDelivery;
+  List<String> weekDays;
+  Map<String, String> operatingTime;
+  // Keys = ['start', 'end']
 
   factory ShopModel.fromJson(Map<String, dynamic> json) => ShopModel(
         id: json["_id"],
@@ -48,6 +57,13 @@ class ShopModel {
         city: json["city"],
         pinCode: json["pinCode"],
         ownerId: json["ownerId"],
+        allowPickups: json['allowPickups'] ?? false,
+        payOnDelivery: json['payOnDelivery'] ?? false,
+        weekDays: List<String>.from(json['weekDays'] ?? const <List<String>>[]),
+        operatingTime: json["operatingTime"] != null
+            ? Map<String, String>.from(json["operatingTime"])
+            : Map<String, String>.from(
+                {"start": "09:00 AM", "end": "09:00 PM"}),
       );
 
   Map<String, dynamic> toJson() => {
@@ -60,5 +76,9 @@ class ShopModel {
         "city": city,
         "pinCode": pinCode,
         "ownerId": ownerId,
+        "allowPickups": allowPickups,
+        "payOnDelivery": payOnDelivery,
+        "weekDays": weekDays,
+        "operatingTime": operatingTime
       };
 }

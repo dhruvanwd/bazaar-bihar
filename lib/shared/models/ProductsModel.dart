@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'CategoryModel.dart';
 import 'ImagesModel.dart';
+import './FeatureModel.dart';
 
 List<ProductModel> productModelFromMap(List<dynamic> products) =>
     List<ProductModel>.from(products.map((x) => ProductModel.fromMap(x)));
@@ -28,6 +29,7 @@ class ProductModel {
       required this.unit,
       required this.manageInventory,
       required this.availableCount,
+      required this.details,
       this.cartItemCount = 0});
 
   String id;
@@ -44,6 +46,7 @@ class ProductModel {
   int cartItemCount;
   bool? manageInventory;
   String? availableCount;
+  List<ProductFeature> details;
 
   get discount =>
       (((double.parse(this.markedPrice) - double.parse(this.sellingPrice)) /
@@ -67,6 +70,9 @@ class ProductModel {
         cartItemCount: json['cartItemCount'] ?? 0,
         manageInventory: json['manageInventory'],
         availableCount: json['availableCount'],
+        details: json['details'] != null
+            ? productFeatureModelFromMap(json['details'])
+            : const [],
       );
 
   Map<String, dynamic> toMap() => {
@@ -84,5 +90,6 @@ class ProductModel {
         "cartItemCount": cartItemCount,
         "manageInventory": manageInventory,
         "availableCount": availableCount,
+        "details": List<dynamic>.from(details.map((e) => e.toJson()))
       };
 }

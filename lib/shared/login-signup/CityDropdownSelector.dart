@@ -19,7 +19,7 @@ class CityDropdownSelector extends StatelessWidget {
       child: EJSelectorButton<CityModel>(
         useValue: false,
         hint: Text(
-          'Select your city',
+          'Select city',
           style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
         ),
         onChange: onChangeValue,

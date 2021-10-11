@@ -133,7 +133,10 @@ class DetailedOrder extends StatelessWidget {
                   child: Column(
                     children: [
                       ...orderDetail.products
-                          .map((product) => DenseProductCard(product))
+                          .map((product) => DenseProductCard(
+                                product,
+                                isOrdered: true,
+                              ))
                           .toList(),
                       Padding(padding: EdgeInsets.symmetric(vertical: 16))
                     ],

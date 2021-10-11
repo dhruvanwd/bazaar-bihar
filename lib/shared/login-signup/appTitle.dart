@@ -17,7 +17,7 @@ Widget appTitle() {
             style: TextStyle(color: Colors.black, fontSize: 30),
           ),
           TextSpan(
-            text: 'B',
+            text: 'V',
             style: TextStyle(color: Color(0xffe46b10), fontSize: 30),
           ),
           TextSpan(

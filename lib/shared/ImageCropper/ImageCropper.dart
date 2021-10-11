@@ -34,7 +34,7 @@ class ImageCropper extends StatelessWidget {
           child: Crop.file(
             _imgCropperCtrl.sample!,
             key: _imgCropperCtrl.cropKey,
-            aspectRatio: 2,
+            aspectRatio: 1.6,
           ),
         ),
         Container(
