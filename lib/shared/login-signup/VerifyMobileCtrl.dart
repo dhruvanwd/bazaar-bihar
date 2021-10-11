@@ -13,6 +13,13 @@ class VerifyMobileCtrl extends GetxController {
   final globalCtrl = GlobalController.to;
   String generatedOtp = generateOtp();
   String? otpErrorMsg;
+  bool otpSent = false;
+  bool changeMobile = false;
+
+  editMobile() {
+    changeMobile = true;
+    update();
+  }
 
   verifyOtp() async {
     otpErrorMsg = null;
@@ -52,12 +59,20 @@ class VerifyMobileCtrl extends GetxController {
       https://bazaarvihar.com
       """,
       }).then((value) {
+        otpSent = true;
         print(value.data);
         EasyLoading.dismiss();
+        update();
       });
     } catch (e, s) {
       EasyLoading.dismiss();
       muliPrint([e, s]);
     }
+  }
+
+  @override
+  void onInit() {
+    mobileController.text = globalCtrl.userProfile!.mobile;
+    super.onInit();
   }
 }

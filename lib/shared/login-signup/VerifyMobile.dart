@@ -2,6 +2,7 @@ import 'package:bazaar_bihar/shared/components/StrechedPrimaryButton.dart';
 import 'package:bazaar_bihar/shared/login-signup/VerifyMobileCtrl.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
 
 class VerifyMobile extends StatelessWidget {
@@ -24,7 +25,7 @@ class VerifyMobile extends StatelessWidget {
               padding: EdgeInsets.all(16),
               child: Column(
                 children: [
-                  if (_.globalCtrl.userProfile!.mobile == "")
+                  if (_.globalCtrl.userProfile!.mobile == "" || _.changeMobile)
                     TextFormField(
                       controller: _.mobileController,
                       autofillHints: [
@@ -37,9 +38,10 @@ class VerifyMobile extends StatelessWidget {
                         TextInputMask(mask: '999 9999 999', reverse: false)
                       ],
                       decoration: InputDecoration(
-                          prefixText: "+91",
-                          border: UnderlineInputBorder(),
-                          labelText: 'Mobile Number'),
+                        prefixText: "+91",
+                        border: UnderlineInputBorder(),
+                        labelText: 'Mobile Number',
+                      ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter username';
@@ -47,37 +49,58 @@ class VerifyMobile extends StatelessWidget {
                       },
                     )
                   else
-                    TextFormField(
-                      inputFormatters: [
-                        TextInputMask(mask: '999 999', reverse: false)
-                      ],
-                      initialValue: _.globalCtrl.userProfile!.mobile,
-                      decoration: InputDecoration(
-                          enabled: false,
-                          border: UnderlineInputBorder(),
-                          labelText: 'Mobile number'),
+                    InkWell(
+                      onTap: () {
+                        print("Edit moble");
+                        _.editMobile();
+                      },
+                      child: TextFormField(
+                        inputFormatters: [
+                          TextInputMask(mask: '999 999', reverse: false)
+                        ],
+                        initialValue: _.globalCtrl.userProfile!.mobile,
+                        decoration: InputDecoration(
+                            enabled: false,
+                            suffixIcon: Icon(Icons.edit_outlined),
+                            border: UnderlineInputBorder(),
+                            labelText: 'Mobile number'),
+                      ),
                     ),
                   Container(
                     alignment: Alignment.centerRight,
-                    child: TextButton(
-                        onPressed: () {
-                          _.sendOtp();
-                        },
-                        child: Text("Get OTP")),
+                    padding: EdgeInsets.only(top: 8),
+                    child: InkWell(
+                      onTap: () {
+                        _.sendOtp();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Get OTP",
+                          style: TextStyle(
+                            color: Colors.purple,
+                            fontSize: 12,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  TextFormField(
-                    controller: _.otpController,
-                    inputFormatters: [
-                      TextInputMask(mask: '999 999', reverse: false)
-                    ],
-                    decoration: InputDecoration(
-                        border: UnderlineInputBorder(), labelText: 'Enter otp'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Enter otp';
-                      }
-                    },
-                  ),
+                  if (_.otpSent)
+                    TextFormField(
+                      controller: _.otpController,
+                      inputFormatters: [
+                        TextInputMask(mask: '999 999', reverse: false)
+                      ],
+                      decoration: InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Enter otp'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Enter otp';
+                        }
+                      },
+                    ),
                   if (_.otpErrorMsg != null)
                     Container(
                       alignment: Alignment.centerLeft,
@@ -89,7 +112,14 @@ class VerifyMobile extends StatelessWidget {
                     ),
                   Expanded(child: Container()),
                   StrechedPrimaryButton(_.verifyOtp, "Verify OTP"),
-                  Padding(padding: EdgeInsets.only(top: 12)),
+                  Center(
+                    child: TextButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: Text("Close"),
+                    ),
+                  ),
                 ],
               ),
             ),
