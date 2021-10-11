@@ -20,7 +20,8 @@ class ShopCard extends StatelessWidget {
           Container(
             child: ListTile(
               title: Text(shop.name),
-              trailing: Text('9:00 AM - 9:00 PM'),
+              trailing: Text(
+                  '${shop.operatingTime["start"]} - ${shop.operatingTime["end"]}'),
               subtitle: Text(shop.addressLine1),
             ),
           )

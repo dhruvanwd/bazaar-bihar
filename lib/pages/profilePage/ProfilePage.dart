@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:bazaar_bihar/shared/ImageCropper/ImageCropper.dart';
 import 'package:bazaar_bihar/shared/ImageCropper/ImageCropperCtrl.dart';
-import 'package:bazaar_bihar/shared/Utils/extensions.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/components/CustomAvatar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -25,14 +24,12 @@ class _MapScreenState extends State<ProfilePage>
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
   late TextEditingController _fullName;
-  late TextEditingController _mobile;
   late TextEditingController _email;
 
   updateCtrls() {
     final profile = GlobalController.to.userProfile;
     if (profile != null) {
       _fullName = TextEditingController(text: profile.fullName);
-      _mobile = TextEditingController(text: profile.mobile);
       _email = TextEditingController(text: profile.email);
     }
   }
@@ -57,13 +54,6 @@ class _MapScreenState extends State<ProfilePage>
         snackPosition: SnackPosition.BOTTOM,
       );
       return;
-    } else if (_mobile.text.isEmpty) {
-      Get.snackbar(
-        "Mobile number can't be empty",
-        "Invalid input",
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      return;
     } else if (_email.text.isEmpty) {
       Get.snackbar(
         "Email can't be empty",
@@ -74,7 +64,6 @@ class _MapScreenState extends State<ProfilePage>
     }
     final updatedProfile = {
       "fullName": _fullName.text,
-      "mobile": _mobile.text.removeWhiteSpaces,
       "email": _email.text,
     };
     if (avatar != null) {
@@ -88,9 +77,20 @@ class _MapScreenState extends State<ProfilePage>
     });
   }
 
+  Widget getVerifiedUnverifiedIcon(bool isValid) {
+    return isValid
+        ? Icon(Icons.check_circle_outline)
+        : Icon(
+            Icons.info_outline,
+            color: Colors.red,
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GlobalController>(builder: (_) {
+      bool isMobileVerified = _.userProfile!.mobileVerified == true;
+      bool isEmailVerified = _.userProfile!.emailVerified == true;
       return SingleChildScrollView(
         child: Container(
           color: Colors.white,
@@ -267,9 +267,11 @@ class _MapScreenState extends State<ProfilePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               Flexible(
-                                child: TextField(
-                                  controller: _email,
-                                  decoration: const InputDecoration(
+                                child: TextFormField(
+                                  initialValue: _.userProfile!.email,
+                                  decoration: InputDecoration(
+                                      suffixIcon: getVerifiedUnverifiedIcon(
+                                          isEmailVerified),
                                       hintText: "Enter Email ID"),
                                   enabled: !_status,
                                 ),
@@ -289,8 +291,9 @@ class _MapScreenState extends State<ProfilePage>
                                 Text(
                                   'Mobile',
                                   style: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold),
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ],
                             ),
@@ -304,17 +307,18 @@ class _MapScreenState extends State<ProfilePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               Flexible(
-                                child: TextField(
-                                  controller: _mobile,
+                                child: TextFormField(
                                   inputFormatters: [
                                     TextInputMask(
                                         mask: '999 9999 999', reverse: false)
                                   ],
-                                  keyboardType: TextInputType.phone,
-                                  decoration: const InputDecoration(
+                                  initialValue: _.userProfile!.mobile,
+                                  decoration: InputDecoration(
                                       prefixText: "+91",
+                                      suffixIcon: getVerifiedUnverifiedIcon(
+                                          isMobileVerified),
                                       hintText: "Enter Mobile Number"),
-                                  enabled: !_status,
+                                  enabled: false,
                                 ),
                               ),
                             ],
