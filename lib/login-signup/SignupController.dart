@@ -1,5 +1,5 @@
-import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/pages/Home/HomePage.dart';
+import 'package:bazaar_bihar/pages/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
@@ -12,18 +12,18 @@ import 'package:google_sign_in/google_sign_in.dart';
 class SignupController extends GetxController {
   bool isObscureText = true;
   static SignupController get to => Get.find();
-  final ApiRequest apiRequestInstance = ApiRequest();
+  final ApiRequest _apiRequestInstance = ApiRequest();
+  final OfflineStorage _offlineStorage = OfflineStorage();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final _globalCtrl = GlobalController.to;
 
   loginUser(var user) async {
     EasyLoading.show();
     try {
       var resp;
       if (user['password'] != null) {
-        resp = await _globalCtrl.apiRequestInstance.loginUser(
+        resp = await _apiRequestInstance.loginUser(
           RequestBody(
             amendType: 'findOne',
             collectionName: 'users',
@@ -31,7 +31,7 @@ class SignupController extends GetxController {
           ),
         );
       } else {
-        resp = await _globalCtrl.apiRequestInstance.storeData(
+        resp = await _apiRequestInstance.storeData(
           RequestBody(
             amendType: 'findOne',
             collectionName: 'users',
@@ -40,10 +40,10 @@ class SignupController extends GetxController {
         );
       }
       if (!isUserjson(resp.data)) throw Error();
-      _globalCtrl.updateUserProfileInstance(resp.data);
-      _globalCtrl.updateStorage(EStorageKeys.PROFILE, resp.data);
+      // _globalCtrl.updateUserProfileInstance(resp.data);
+      _offlineStorage.updateStorage(EStorageKeys.PROFILE, resp.data);
       EasyLoading.dismiss();
-      Get.offAll(HomePage());
+      Get.offAll(() => HomePage());
     } catch (e) {
       print(e);
       Get.snackbar(
@@ -58,15 +58,14 @@ class SignupController extends GetxController {
   }
 
   createUser(var profile) async {
-    final _apiRequestInstance = _globalCtrl.apiRequestInstance;
     try {
       EasyLoading.show();
       final resp = await _apiRequestInstance.createUser(RequestBody(
           amendType: 'insertOne', collectionName: 'users', payload: [profile]));
       if (!isUserjson(resp.data)) throw Error();
-      _globalCtrl.updateUserProfileInstance(resp.data);
-      _globalCtrl.updateStorage(EStorageKeys.PROFILE, resp.data);
-      Get.offAll(HomePage());
+      // _globalCtrl.updateUserProfileInstance(resp.data);
+      _offlineStorage.updateStorage(EStorageKeys.PROFILE, resp.data);
+      Get.offAll(() => HomePage());
     } catch (e) {
       print(e);
       Get.snackbar(

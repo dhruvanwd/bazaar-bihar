@@ -3,11 +3,11 @@ import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
 import 'package:bazaar_bihar/GetxControllers/NotificationController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
+import 'package:bazaar_bihar/pages/OfflineStorage.dart';
 import 'package:bazaar_bihar/pages/Wallet/WalletHome.dart';
 import 'package:bazaar_bihar/shared/ImageCropper/ImageCropperCtrl.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
-import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/pages/Home/HomePage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/ProductsPage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,20 +20,14 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'shared/components/LoaderPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final OfflineStorage offlineStorage = OfflineStorage();
   await Firebase.initializeApp();
   await GetStorage.init();
-  final glblCtrl = Get.put(GlobalController());
-  Get.put(HomePageController());
   // Get.put(NotificationController());
   Get.put(SignupController());
-  Get.put(OrderController());
-  Get.put(CartController());
-  Get.put(PaymentController());
-  Get.put(ImageCropperController());
 
   runApp(
     GetMaterialApp(
@@ -50,12 +44,13 @@ void main() async {
       ),
       darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.grey),
       builder: EasyLoading.init(),
-      themeMode: glblCtrl.themeMode,
+      themeMode: ThemeMode.light,
+      initialRoute: "/",
       getPages: [
         GetPage(
             name: '/',
-            page: () => glblCtrl.isUserLoggedIn ? HomePage() : LoginPage()),
-        GetPage(name: "/loader", page: () => LoaderPage()),
+            page: () =>
+                offlineStorage.isUserLoggedIn ? HomePage() : LoginPage()),
         GetPage(name: '/signup', page: () => SignupPage()),
         GetPage(name: '/shops', page: () => ShopsPage()),
         GetPage(name: '/products', page: () => ProductsPage()),

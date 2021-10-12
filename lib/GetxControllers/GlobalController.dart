@@ -1,5 +1,5 @@
-import 'dart:convert';
 import 'package:bazaar_bihar/login-signup/LoginPage.dart';
+import 'package:bazaar_bihar/pages/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/CacheApiResponse.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
@@ -12,11 +12,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
-
-enum EStorageKeys { PROFILE, SETTINGS, CART, CART_ADDRESS, CATEGORY_VIEWER }
 
 enum ECategoryViewer { CHIP, CARD }
 
@@ -27,6 +24,7 @@ class GlobalController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final ApiRequest apiRequestInstance = ApiRequest();
+  final OfflineStorage offlineStorage = OfflineStorage();
   UserModel? userProfile;
   ECategoryViewer categoryViewer = ECategoryViewer.CARD;
   updateCategoryViewer(ECategoryViewer catViewer) {
@@ -37,29 +35,14 @@ class GlobalController extends GetxController {
     } else if (categoryViewer == ECategoryViewer.CHIP) {
       catType = "chip";
     }
-    updateStorage(EStorageKeys.CATEGORY_VIEWER, {"catType": catType});
+    offlineStorage
+        .updateStorage(EStorageKeys.CATEGORY_VIEWER, {"catType": catType});
     update();
   }
 
   updateUserProfileInstance(var profile) {
     userProfile = UserModel.fromJson(profile);
     update();
-  }
-
-  final _localStorage = GetStorage();
-
-  getKeyFromEnum(EStorageKeys key) {
-    if (key == EStorageKeys.PROFILE) {
-      return "profile";
-    } else if (key == EStorageKeys.SETTINGS) {
-      return 'settings';
-    } else if (key == EStorageKeys.CART) {
-      return 'cart';
-    } else if (key == EStorageKeys.CART_ADDRESS) {
-      return 'addresses';
-    } else if (key == EStorageKeys.CATEGORY_VIEWER) {
-      return "CATEGORY_VIEWER";
-    }
   }
 
   updateTheme() {}
@@ -87,10 +70,10 @@ class GlobalController extends GetxController {
                 children: [
                   TextButton(
                     onPressed: () async {
-                      _localStorage.erase();
+                      offlineStorage.clearStorage();
                       await _googleSignIn.signOut();
                       await _auth.signOut();
-                      Get.offAll(LoginPage());
+                      Get.offAll(() => LoginPage());
                       Get.back();
                     },
                     child: Text(
@@ -116,36 +99,6 @@ class GlobalController extends GetxController {
     );
   }
 
-  get isUserLoggedIn {
-    try {
-      return getStroageJson(EStorageKeys.PROFILE) != null;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  updateStorage(EStorageKeys key, dynamic data) {
-    try {
-      String keyName = getKeyFromEnum(key);
-      final jsonEncoder = JsonEncoder();
-      _localStorage.write(keyName, jsonEncoder.convert(data));
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  getStroageJson(EStorageKeys key) {
-    try {
-      String keyName = getKeyFromEnum(key);
-      String rawJson = _localStorage.read(keyName);
-      Map<String, dynamic> jsonData =
-          Map<String, dynamic>.from(jsonDecode(rawJson));
-      return jsonData;
-    } catch (e) {
-      print(e);
-    }
-  }
-
   updateUserProfile(Map profile) async {
     try {
       EasyLoading.show();
@@ -163,7 +116,7 @@ class GlobalController extends GetxController {
           Map<String, dynamic>.from({...userProfile!.toJson(), ...profile});
       updateUserProfileInstance(userProfileJson);
       EasyLoading.dismiss();
-      updateStorage(EStorageKeys.PROFILE, userProfileJson);
+      offlineStorage.updateStorage(EStorageKeys.PROFILE, userProfileJson);
       update();
     } catch (e) {
       EasyLoading.dismiss();
@@ -200,7 +153,8 @@ class GlobalController extends GetxController {
 
   restoreShopByCategory() {
     try {
-      final catTypeDetail = getStroageJson(EStorageKeys.CATEGORY_VIEWER);
+      final catTypeDetail =
+          offlineStorage.getStroageJson(EStorageKeys.CATEGORY_VIEWER);
       if (catTypeDetail == null) return;
       final catType = catTypeDetail['catType'];
       print(catType);
@@ -220,8 +174,8 @@ class GlobalController extends GetxController {
   @override
   void onInit() {
     restoreShopByCategory();
-    if (isUserLoggedIn) {
-      final userProfile = getStroageJson(EStorageKeys.PROFILE);
+    if (offlineStorage.isUserLoggedIn) {
+      final userProfile = offlineStorage.getStroageJson(EStorageKeys.PROFILE);
       updateUserProfileInstance(userProfile);
       fetchShops(null);
     }

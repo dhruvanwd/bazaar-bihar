@@ -1,4 +1,4 @@
-import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/pages/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/models/CartModel.dart';
 import 'package:bazaar_bihar/shared/models/PaymentInfoModal.dart';
@@ -9,13 +9,13 @@ import 'package:get/get.dart';
 
 class CartController extends GetxController {
   static CartController get to => Get.find();
+  final OfflineStorage offlineStorage = OfflineStorage();
   List<CartModel> carts = [];
 
   updateCartState() {
     final cartsJsonList = carts.map((cart) => cart.toJson()).toList();
     print(cartsJsonList);
-    GlobalController.to
-        .updateStorage(EStorageKeys.CART, {"cart": cartsJsonList});
+    offlineStorage.updateStorage(EStorageKeys.CART, {"cart": cartsJsonList});
   }
 
   removeCartItem(String shopName) {
@@ -126,8 +126,7 @@ class CartController extends GetxController {
   }
 
   restoreOfflineCartData() {
-    final Map? cartsJson =
-        GlobalController.to.getStroageJson(EStorageKeys.CART);
+    final Map? cartsJson = offlineStorage.getStroageJson(EStorageKeys.CART);
     if (cartsJson != null) {
       final List cartsJsonList = List.from(cartsJson['cart']);
       cartsJsonList

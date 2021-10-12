@@ -1,4 +1,8 @@
+import 'package:bazaar_bihar/GetxControllers/CartController.dart';
+import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
+import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
 import 'package:bazaar_bihar/Widgets/FloatingCartButton.dart';
+import 'package:bazaar_bihar/shared/ImageCropper/ImageCropperCtrl.dart';
 import 'package:bazaar_bihar/shared/components/AppExitPopup.dart';
 import 'package:bazaar_bihar/shared/components/OfflineDialog.dart';
 import 'package:bazaar_bihar/shared/login-signup/VerifyMobile.dart';
@@ -19,17 +23,11 @@ import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 // 5. add a simple wallet.
 // 6. add faq section.
 class HomePage extends StatelessWidget {
-  final _glblCtrl = Get.find<GlobalController>();
   final newVersion = NewVersion();
-  HomePage() {
-    if (_glblCtrl.shopsList.length == 0) {
-      _glblCtrl.fetchShops(null);
-    }
-  }
 
   verifyMobileDialog() async {
-    final _glblCtrl = Get.find<GlobalController>();
     await Future.delayed(Duration(seconds: 2));
+    final _glblCtrl = Get.find<GlobalController>();
     if (_glblCtrl.userProfile?.mobile == "" ||
         _glblCtrl.userProfile?.mobileVerified != true) {
       Get.dialog(
@@ -87,14 +85,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     try {
-      print("-----profile----------");
+      Get.put(GlobalController());
+      Get.put(CartController());
+      Get.put(OrderController());
+      Get.put(PaymentController());
+      Get.put(ImageCropperController());
       verifyMobileDialog();
-      print(_glblCtrl.userProfile!.toJson());
     } catch (e) {
       print(e);
     }
 
     return GetBuilder<HomePageController>(
+      init: HomePageController(),
       builder: (_) {
         if (_.showOfflineDialog) {
           showOfflineDialog();

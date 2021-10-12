@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/pages/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/shared/models/CartAddressModel.dart';
@@ -8,12 +9,13 @@ class CartAddressController extends GetxController {
   static CartAddressController get to => Get.find();
   final List<CartAddressModel> cartAdresses = [];
   final ApiRequest _apiInstance = ApiRequest();
+  final OfflineStorage offlineStorage = OfflineStorage();
 
   CartAddressModel? selectedAddres;
 
   updateOfflineAddressData() {
     final addressJsonList = cartAdresses.map((addr) => addr.toJson()).toList();
-    GlobalController.to.updateStorage(EStorageKeys.CART_ADDRESS, {
+    offlineStorage.updateStorage(EStorageKeys.CART_ADDRESS, {
       "addresses": addressJsonList,
       "selectedAddres": selectedAddres?.toJson()
     });
@@ -64,7 +66,7 @@ class CartAddressController extends GetxController {
 
   restoreOfflineAddressData() {
     final Map? addrJson =
-        GlobalController.to.getStroageJson(EStorageKeys.CART_ADDRESS);
+        offlineStorage.getStroageJson(EStorageKeys.CART_ADDRESS);
     if (addrJson != null) {
       final List addrJsonList = List.from(addrJson['addresses']);
       addrJsonList.forEach((cartJson) {
