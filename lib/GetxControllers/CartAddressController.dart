@@ -1,5 +1,5 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/pages/generic/OfflineStorage.dart';
+import 'package:bazaar_bihar/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/CityStateDropDown/StateCityModel.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';

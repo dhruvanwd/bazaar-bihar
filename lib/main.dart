@@ -1,4 +1,4 @@
-import 'package:bazaar_bihar/pages/generic/OfflineStorage.dart';
+import 'package:bazaar_bihar/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/pages/Wallet/WalletHome.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';

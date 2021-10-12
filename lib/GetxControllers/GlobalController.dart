@@ -1,5 +1,5 @@
+import 'package:bazaar_bihar/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/login-signup/LoginPage.dart';
-import 'package:bazaar_bihar/pages/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/CacheApiResponse.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
