@@ -1,6 +1,7 @@
 import 'package:bazaar_bihar/Widgets/FloatingCartButton.dart';
 import 'package:bazaar_bihar/shared/components/AppExitPopup.dart';
 import 'package:bazaar_bihar/shared/components/OfflineDialog.dart';
+import 'package:bazaar_bihar/shared/login-signup/VerifyMobile.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,20 @@ class HomePage extends StatelessWidget {
   HomePage() {
     if (_glblCtrl.shopsList.length == 0) {
       _glblCtrl.fetchShops(null);
+    }
+  }
+
+  verifyMobileDialog() async {
+    final _glblCtrl = Get.find<GlobalController>();
+    await Future.delayed(Duration(seconds: 2));
+    if (_glblCtrl.userProfile?.mobile == "" ||
+        _glblCtrl.userProfile?.mobileVerified != true) {
+      Get.dialog(
+        VerifyMobile(),
+        useSafeArea: true,
+      );
+    } else {
+      print("${_glblCtrl.userProfile?.mobile} skipping verify mobile");
     }
   }
 
@@ -73,6 +88,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     try {
       print("-----profile----------");
+      verifyMobileDialog();
       print(_glblCtrl.userProfile!.toJson());
     } catch (e) {
       print(e);

@@ -1,5 +1,3 @@
-import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/shared/login-signup/VerifyMobile.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/pages/Home/LandingPage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/OrdersPage.dart';
@@ -41,28 +39,11 @@ class HomePageController extends GetxController {
     handleInternetStatus(connectivityResult);
   }
 
-  verifyMobileDialog() async {
-    final _glblCtrl = Get.find<GlobalController>();
-    await Future.delayed(Duration(seconds: 2));
-    if (_glblCtrl.userProfile?.mobile == "" ||
-        _glblCtrl.userProfile?.mobileVerified != true) {
-      Get.dialog(
-        VerifyMobile(),
-        useSafeArea: true,
-      );
-    } else {
-      print("${_glblCtrl.userProfile?.mobile} skipping verify mobile");
-    }
-  }
-
   @override
   void onInit() {
     checkInternetStatus();
     subscription =
         Connectivity().onConnectivityChanged.listen(handleInternetStatus);
-
-    verifyMobileDialog();
-
     super.onInit();
   }
 

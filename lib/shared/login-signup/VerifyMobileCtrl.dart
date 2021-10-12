@@ -17,7 +17,9 @@ class VerifyMobileCtrl extends GetxController {
   bool changeMobile = false;
 
   editMobile() {
+    generatedOtp = generateOtp();
     changeMobile = true;
+    otpSent = false;
     update();
   }
 
@@ -72,7 +74,7 @@ class VerifyMobileCtrl extends GetxController {
 
   @override
   void onInit() {
-    mobileController.text = globalCtrl.userProfile!.mobile;
+    mobileController.text = globalCtrl.userProfile?.mobile ?? "";
     super.onInit();
   }
 }
