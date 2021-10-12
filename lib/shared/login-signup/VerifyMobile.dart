@@ -1,3 +1,4 @@
+import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/components/SimpleCloseBtn.dart';
 import 'package:bazaar_bihar/shared/components/StrechedPrimaryButton.dart';
 import 'package:bazaar_bihar/shared/login-signup/VerifyMobileCtrl.dart';
@@ -46,11 +47,8 @@ class VerifyMobile extends StatelessWidget {
                         border: UnderlineInputBorder(),
                         labelText: 'Mobile Number',
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter username';
-                        }
-                      },
+                      validator: (value) =>
+                          validateMobile(value?.removeAllWhitespace),
                     )
                   else
                     InkWell(

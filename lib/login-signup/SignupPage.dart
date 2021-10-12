@@ -1,4 +1,5 @@
 import 'package:bazaar_bihar/shared/CityStateDropDown/StateCityModel.dart';
+import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/login-signup/CityDropdownSelector.dart';
 import 'package:bazaar_bihar/shared/login-signup/signInSubmitButton.dart';
 import 'package:bazaar_bihar/shared/login-signup/LoginGoogleBtn.dart';
@@ -126,11 +127,8 @@ class _SignupPageState extends State<SignupPage> {
                               prefixText: "+91",
                               border: UnderlineInputBorder(),
                               labelText: 'Mobile Number'),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Enter your mobile number';
-                            }
-                          },
+                          validator: (value) =>
+                              validateMobile(value?.removeAllWhitespace),
                         ),
                         Padding(padding: EdgeInsets.only(top: 12)),
                         TextFormField(

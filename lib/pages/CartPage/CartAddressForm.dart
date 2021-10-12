@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
+import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/components/SimpleCloseBtn.dart';
 import 'package:bazaar_bihar/shared/components/StrechedPrimaryButton.dart';
 import 'package:bazaar_bihar/shared/login-signup/StateCityForm.dart';
@@ -99,11 +100,8 @@ class CartAddressForm extends StatelessWidget {
                                 prefixText: "+91",
                                 border: UnderlineInputBorder(),
                                 labelText: 'Receiver\'s Contact Number'),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter mobile number';
-                              }
-                            },
+                            validator: (value) =>
+                                validateMobile(value?.removeAllWhitespace),
                           ),
                         ),
                         Padding(

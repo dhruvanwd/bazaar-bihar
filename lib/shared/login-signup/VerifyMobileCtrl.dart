@@ -63,11 +63,7 @@ class VerifyMobileCtrl extends GetxController {
       _apiRequestInstance.sendSMS({
         "to":
             "+91${mobileController.text.length < 10 ? globalCtrl.userProfile!.mobile : mobileController.text.removeAllWhitespace}",
-        "message":
-            """Dear customer, your OTP to login is $generatedOtp. Valid for 10 mins.
-          Please ignore this sms if you haven't requested OTP.
-      https://bazaarvihar.com
-      """,
+        "message": otpTemplate(generatedOtp),
       }).then((value) {
         otpSent = true;
         print(value.data);

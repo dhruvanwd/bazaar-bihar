@@ -23,6 +23,9 @@ calculateDiscount(mrp, sp) {
   return ((((a - b) / (a))) * 100).toStringAsFixed(2);
 }
 
+otpTemplate(var generatedOtp) =>
+    """Dear customer, your OTP is $generatedOtp. Valid for 10 mins. Please ignore this sms if you haven't requested OTP.Bazaarvihar pvt ltd. https://bazaarvihar.com""";
+
 createImageUrl(ImageModel image) {
   if (image.filename.contains("https://"))
     return image.filename;
@@ -57,4 +60,15 @@ String generateOtp() {
   muliPrint(["Otp generated", randomminmax]);
 
   return randomminmax.toString();
+}
+
+String? validateMobile(String? value) {
+  if (value == null) return null;
+  String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+  RegExp regExp = new RegExp(pattern);
+  if (value.length == 0) {
+    return 'Please enter mobile number';
+  } else if (!regExp.hasMatch(value)) {
+    return 'Please enter valid mobile number';
+  }
 }

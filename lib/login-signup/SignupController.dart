@@ -14,7 +14,7 @@ class SignupController extends GetxController {
   static SignupController get to => Get.find();
   final ApiRequest _apiRequestInstance = ApiRequest();
   final OfflineStorage _offlineStorage = OfflineStorage();
-
+  bool otpSent = false;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
@@ -123,6 +123,24 @@ class SignupController extends GetxController {
       EasyLoading.dismiss();
       print(e);
       throw e;
+    }
+  }
+
+  sendOtp(String mobileNumber, var otp) async {
+    try {
+      EasyLoading.show();
+      _apiRequestInstance.sendSMS({
+        "to": "+91$mobileNumber",
+        "message": otpTemplate(otp),
+      }).then((value) {
+        otpSent = true;
+        print(value.data);
+        EasyLoading.dismiss();
+        update();
+      });
+    } catch (e, s) {
+      EasyLoading.dismiss();
+      muliPrint([e, s]);
     }
   }
 
