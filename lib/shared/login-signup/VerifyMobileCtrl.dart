@@ -32,8 +32,16 @@ class VerifyMobileCtrl extends GetxController {
       Map updateProfile = {
         "mobileVerified": true,
       };
-      if (mobileController.text.length == 10) {
-        updateProfile['mobile'] = mobileController.text;
+      if (mobileController.text.removeAllWhitespace.length != 10) {
+        Get.snackbar(
+          "Invalid mobile number",
+          "",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.white,
+        );
+      }
+      if (mobileController.text.removeAllWhitespace.length == 10) {
+        updateProfile['mobile'] = mobileController.text.removeAllWhitespace;
       }
       await globalCtrl.updateUserProfile(updateProfile);
       Get.snackbar(
@@ -42,7 +50,7 @@ class VerifyMobileCtrl extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.white,
       );
-      Get.back();
+      Get.offAllNamed("/");
     } else {
       otpErrorMsg = "OTP mismatch";
     }
@@ -54,7 +62,7 @@ class VerifyMobileCtrl extends GetxController {
       EasyLoading.show();
       _apiRequestInstance.sendSMS({
         "to":
-            "+91${mobileController.text.length < 10 ? globalCtrl.userProfile!.mobile : mobileController.text}",
+            "+91${mobileController.text.length < 10 ? globalCtrl.userProfile!.mobile : mobileController.text.removeAllWhitespace}",
         "message":
             """Dear customer, your OTP to login is $generatedOtp. Valid for 10 mins.
           Please ignore this sms if you haven't requested OTP.

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class StrechedPrimaryButton extends StatelessWidget {
-  StrechedPrimaryButton(this.onPressed, this.textTitle);
+  StrechedPrimaryButton(this.onPressed, this.textTitle,
+      {this.disabled = false});
   final onPressed;
+  final bool disabled;
   final String textTitle;
 
   @override
@@ -13,10 +15,10 @@ class StrechedPrimaryButton extends StatelessWidget {
         Expanded(
           child: TextButton(
             style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all(Get.theme.primaryColor),
+              backgroundColor: MaterialStateProperty.all(
+                  disabled ? Colors.grey.shade300 : Get.theme.primaryColor),
             ),
-            onPressed: onPressed,
+            onPressed: disabled ? () {} : onPressed,
             child: Text(
               "$textTitle",
               style: TextStyle(color: Colors.white),

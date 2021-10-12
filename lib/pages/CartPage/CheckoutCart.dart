@@ -25,7 +25,7 @@ class CheckoutCart extends StatelessWidget {
               if (_addressCtrl.selectedAddres.runtimeType != CartAddressModel) {
                 Get.snackbar(
                   "Select Address",
-                  "select one address",
+                  "select or add new delivery address",
                   snackPosition: SnackPosition.BOTTOM,
                 );
               } else {

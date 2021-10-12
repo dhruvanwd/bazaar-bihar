@@ -24,7 +24,7 @@ class UserModel {
   });
 
   String fullName;
-  String mobile;
+  String? mobile;
   String? email;
   String role;
   String state;

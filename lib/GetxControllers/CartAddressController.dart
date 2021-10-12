@@ -1,7 +1,10 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/pages/generic/OfflineStorage.dart';
+import 'package:bazaar_bihar/shared/CityStateDropDown/StateCityModel.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
+import 'package:bazaar_bihar/shared/Utils/utils.dart';
+import 'package:bazaar_bihar/shared/login-signup/CityDropdownSelector.dart';
 import 'package:bazaar_bihar/shared/models/CartAddressModel.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +13,36 @@ class CartAddressController extends GetxController {
   final List<CartAddressModel> cartAdresses = [];
   final ApiRequest _apiInstance = ApiRequest();
   final OfflineStorage offlineStorage = OfflineStorage();
+  final profile = GlobalController.to.userProfile;
+
+  StateCity? selectedState;
+  CityModel? selectedCity;
+
+  handleStateChange(StateCity state) {
+    selectedState = state;
+    selectedCity = null;
+    print(state.state);
+    update();
+  }
+
+  handleCityChange(CityModel city) {
+    selectedCity = city;
+    print(city.city);
+    update();
+  }
+
+  initDefaultStateCity() {
+    try {
+      selectedState = stateCityList
+          .firstWhere((element) => element.state == profile?.state);
+      String? city = selectedState?.districts
+          .firstWhere((element) => element == profile?.city);
+
+      selectedCity = CityModel(city);
+    } catch (e, s) {
+      muliPrint([e, s]);
+    }
+  }
 
   CartAddressModel? selectedAddres;
 
@@ -29,7 +62,6 @@ class CartAddressController extends GetxController {
 
   Future<CartAddressModel> createNewAddress(CartAddressModel address) async {
     final Map jsonCartAddress = address.toJson();
-    final profile = GlobalController.to.userProfile;
     jsonCartAddress["ownerId"] = profile!.id;
     jsonCartAddress.remove("_id");
     print("after removing id");
@@ -83,7 +115,6 @@ class CartAddressController extends GetxController {
 
   fetchCartAddresses() async {
     if (cartAdresses.length != 0) return;
-    final profile = GlobalController.to.userProfile;
     final resp = await _apiInstance.fetchData(RequestBody(
         amendType: 'findOne',
         collectionName: 'cart_addresses',
@@ -100,6 +131,7 @@ class CartAddressController extends GetxController {
   @override
   void onInit() {
     restoreOfflineAddressData();
+    initDefaultStateCity();
     super.onInit();
   }
 }

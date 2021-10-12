@@ -82,20 +82,20 @@ class ProductCard extends StatelessWidget {
                       builder: (_cartCtrl) {
                         final bool isAddedToCart =
                             _cartCtrl.isproductAdded(_shop, currentProduct);
-                        return IconButton(
-                          color: Colors.deepOrange,
+                        return TextButton.icon(
                           onPressed: () {
                             if (isAddedToCart) {
                               _cartCtrl.removeProduct(_shop, currentProduct);
                             } else
                               _cartCtrl.addProduct(_shop, currentProduct);
                           },
+                          label: Text(isAddedToCart ? "Remove" : "Add"),
                           icon: isAddedToCart
                               ? Icon(
                                   Icons.remove_shopping_cart,
                                 )
                               : Icon(
-                                  MaterialCommunityIcons.cart_plus,
+                                  MaterialCommunityIcons.cart,
                                 ),
                         );
                       },

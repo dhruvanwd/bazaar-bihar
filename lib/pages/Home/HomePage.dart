@@ -29,6 +29,7 @@ class HomePage extends StatelessWidget {
     await Future.delayed(Duration(seconds: 2));
     final _glblCtrl = Get.find<GlobalController>();
     if (_glblCtrl.userProfile?.mobile == "" ||
+        _glblCtrl.userProfile?.mobile == null ||
         _glblCtrl.userProfile?.mobileVerified != true) {
       Get.dialog(
         VerifyMobile(),

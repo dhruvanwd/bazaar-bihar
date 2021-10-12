@@ -1,37 +1,35 @@
 import 'dart:math';
 import 'package:bazaar_bihar/GetxControllers/CartAddressController.dart';
-import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:bazaar_bihar/shared/components/SimpleCloseBtn.dart';
 import 'package:bazaar_bihar/shared/components/StrechedPrimaryButton.dart';
+import 'package:bazaar_bihar/shared/login-signup/StateCityForm.dart';
 import 'package:bazaar_bihar/shared/models/CartAddressModel.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartAddressForm extends StatelessWidget {
-  final _glblCtrl = GlobalController.to;
-  late final TextEditingController _stateController;
-  late final TextEditingController _cityController;
-  CartAddressForm() {
-    _stateController =
-        TextEditingController(text: _glblCtrl.userProfile?.state);
-    _cityController = TextEditingController(text: _glblCtrl.userProfile?.city);
-  }
   final _formKey = GlobalKey<FormState>();
-
   final _localityController = TextEditingController();
   final _zipCodeController = TextEditingController();
-
   final _addressLine1Controller = TextEditingController();
   final _mobileController = TextEditingController();
   final _nameController = TextEditingController();
+
   final rand = Random();
 
   onCreateAddress() {
     if (_formKey.currentState!.validate()) {
+      final _addressCtrl = CartAddressController.to;
+      if (_addressCtrl.selectedState == null ||
+          _addressCtrl.selectedCity == null) {
+        Get.snackbar("Invalid city state", "Select your city and state");
+        return;
+      }
       _formKey.currentState!.save();
       final Map<String, dynamic> addressDetail = {
-        "city": _cityController.text,
-        "state": _stateController.text,
+        "city": _addressCtrl.selectedCity?.city,
+        "state": _addressCtrl.selectedState?.state,
         "zipCode": _zipCodeController.text,
         "destinationContact": _mobileController.text.removeAllWhitespace,
         "addressLine1": _addressLine1Controller.text,
@@ -40,8 +38,7 @@ class CartAddressForm extends StatelessWidget {
         "_id": "tempId${rand.nextDouble()}"
       };
       print(addressDetail);
-      CartAddressController.to
-          .addNewAddress(cartAddressModelFromJson(addressDetail));
+      _addressCtrl.addNewAddress(cartAddressModelFromJson(addressDetail));
     }
   }
 
@@ -55,7 +52,7 @@ class CartAddressForm extends StatelessWidget {
               height: Get.mediaQuery.size.height - 120,
               child: SingleChildScrollView(
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 100, horizontal: 16),
+                  margin: EdgeInsets.symmetric(horizontal: 16),
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.grey.shade50,
@@ -66,29 +63,11 @@ class CartAddressForm extends StatelessWidget {
                     key: _formKey,
                     child: Column(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 4),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    "Add new address",
-                                    style: Get.theme.textTheme.headline6!
-                                        .copyWith(color: Colors.purple),
-                                  ),
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                icon: Icon(
-                                  Icons.close,
-                                  color: Colors.red,
-                                ),
-                              )
-                            ],
+                        Center(
+                          child: Text(
+                            "Add new address",
+                            style: Get.theme.textTheme.headline6!
+                                .copyWith(color: Colors.purple),
                           ),
                         ),
                         Padding(
@@ -155,44 +134,11 @@ class CartAddressForm extends StatelessWidget {
                             },
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 4),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: TextFormField(
-                                  enabled: false,
-                                  controller: _stateController,
-                                  decoration: InputDecoration(
-                                      border: UnderlineInputBorder(),
-                                      labelText: 'State'),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Enter your state.';
-                                    }
-                                  },
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                              ),
-                              Flexible(
-                                child: TextFormField(
-                                  enabled: false,
-                                  controller: _cityController,
-                                  decoration: InputDecoration(
-                                      border: UnderlineInputBorder(),
-                                      labelText: 'City'),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Enter your city.';
-                                    }
-                                  },
-                                ),
-                              )
-                            ],
-                          ),
+                        StateCityForm(
+                          cities: _addressCtrl.selectedState?.districts,
+                          handleCityChange: _addressCtrl.handleCityChange,
+                          handleStateChange: _addressCtrl.handleStateChange,
+                          selectedState: _addressCtrl.selectedState,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 4),
@@ -215,7 +161,8 @@ class CartAddressForm extends StatelessWidget {
                           padding: EdgeInsets.only(top: 40),
                           child: StrechedPrimaryButton(
                               onCreateAddress, "Add Address"),
-                        )
+                        ),
+                        SimpleCloseBtn()
                       ],
                     ),
                   ),

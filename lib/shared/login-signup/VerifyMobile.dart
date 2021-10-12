@@ -1,6 +1,8 @@
+import 'package:bazaar_bihar/shared/components/SimpleCloseBtn.dart';
 import 'package:bazaar_bihar/shared/components/StrechedPrimaryButton.dart';
 import 'package:bazaar_bihar/shared/login-signup/VerifyMobileCtrl.dart';
 import 'package:easy_mask/easy_mask.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
@@ -25,7 +27,9 @@ class VerifyMobile extends StatelessWidget {
               padding: EdgeInsets.all(16),
               child: Column(
                 children: [
-                  if (_.globalCtrl.userProfile!.mobile == "" || _.changeMobile)
+                  if (_.globalCtrl.userProfile!.mobile == "" ||
+                      _.globalCtrl.userProfile!.mobile == null ||
+                      _.changeMobile)
                     TextFormField(
                       controller: _.mobileController,
                       autofillHints: [
@@ -92,6 +96,7 @@ class VerifyMobile extends StatelessWidget {
                       inputFormatters: [
                         TextInputMask(mask: '999 999', reverse: false)
                       ],
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: 'Enter otp'),
@@ -99,6 +104,9 @@ class VerifyMobile extends StatelessWidget {
                         if (value == null || value.isEmpty) {
                           return 'Enter otp';
                         }
+                      },
+                      onChanged: (value) {
+                        _.update();
                       },
                     ),
                   if (_.otpErrorMsg != null)
@@ -111,15 +119,12 @@ class VerifyMobile extends StatelessWidget {
                       ),
                     ),
                   Expanded(child: Container()),
-                  StrechedPrimaryButton(_.verifyOtp, "Verify OTP"),
-                  Center(
-                    child: TextButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: Text("Close"),
-                    ),
+                  StrechedPrimaryButton(
+                    _.verifyOtp,
+                    "Verify OTP",
+                    disabled: _.otpController.text.length != 7,
                   ),
+                  SimpleCloseBtn(),
                 ],
               ),
             ),
