@@ -1,7 +1,7 @@
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
-import 'package:bazaar_bihar/shared/components/SimpleCloseBtn.dart';
-import 'package:bazaar_bihar/shared/components/StrechedPrimaryButton.dart';
-import 'package:bazaar_bihar/shared/login-signup/VerifyMobileCtrl.dart';
+import '../components/SimpleCloseBtn.dart';
+import '../components/StrechedPrimaryButton.dart';
+import './VerifyMobileCtrl.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

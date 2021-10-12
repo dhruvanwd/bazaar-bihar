@@ -1,7 +1,7 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
-import 'package:bazaar_bihar/shared/Utils/extensions.dart';
-import 'package:bazaar_bihar/shared/Utils/utils.dart';
+import '../Utils/ApiService.dart';
+import '../Utils/extensions.dart';
+import '../Utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
