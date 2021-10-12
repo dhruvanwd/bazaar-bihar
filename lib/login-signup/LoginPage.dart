@@ -48,6 +48,7 @@ class LoginPage extends StatelessWidget {
               child: BezierContainer(),
             ),
             GetBuilder<SignupController>(
+              init: SignupController(),
               builder: (_) => Positioned(
                 child: Form(
                   key: _formKey,

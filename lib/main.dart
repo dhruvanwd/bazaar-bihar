@@ -1,18 +1,11 @@
-import 'package:bazaar_bihar/GetxControllers/CartController.dart';
-import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
-import 'package:bazaar_bihar/GetxControllers/NotificationController.dart';
-import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
-import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
-import 'package:bazaar_bihar/pages/OfflineStorage.dart';
+import 'package:bazaar_bihar/pages/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/pages/Wallet/WalletHome.dart';
-import 'package:bazaar_bihar/shared/ImageCropper/ImageCropperCtrl.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
 import 'package:bazaar_bihar/pages/Home/HomePage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/ProductsPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'login-signup/LoginPage.dart';
-import 'login-signup/SignupController.dart';
 import 'login-signup/SignupPage.dart';
 import 'pages/CartPage/CartCarousel.dart';
 import 'pages/Home/ShopsPage.dart';
@@ -26,9 +19,6 @@ void main() async {
   final OfflineStorage offlineStorage = OfflineStorage();
   await Firebase.initializeApp();
   await GetStorage.init();
-  // Get.put(NotificationController());
-  Get.put(SignupController());
-
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

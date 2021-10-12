@@ -1,5 +1,5 @@
 import 'package:bazaar_bihar/pages/Home/HomePage.dart';
-import 'package:bazaar_bihar/pages/OfflineStorage.dart';
+import 'package:bazaar_bihar/pages/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';

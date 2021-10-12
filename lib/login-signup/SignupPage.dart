@@ -76,6 +76,7 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<SignupController>(
+        init: SignupController(),
         builder: (_) => SingleChildScrollView(
           child: Stack(
             children: [
