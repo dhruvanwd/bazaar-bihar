@@ -26,23 +26,23 @@ class VerifyMobileCtrl extends GetxController {
   verifyOtp() async {
     otpErrorMsg = null;
     String enteredOTP = otpController.text.removeWhiteSpaces;
+    String mobileNumber = mobileController.text.removeAllWhitespace;
     if (enteredOTP.length != 6) {
       otpErrorMsg = "Invalid OTP";
     } else if (generatedOtp == enteredOTP) {
       Map updateProfile = {
         "mobileVerified": true,
       };
-      if (mobileController.text.removeAllWhitespace.length != 10) {
+      if (mobileNumber.length != 10) {
         Get.snackbar(
           "Invalid mobile number",
           "",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.white,
         );
+        return;
       }
-      if (mobileController.text.removeAllWhitespace.length == 10) {
-        updateProfile['mobile'] = mobileController.text.removeAllWhitespace;
-      }
+      updateProfile['mobile'] = mobileNumber;
       await globalCtrl.updateUserProfile(updateProfile);
       Get.snackbar(
         "Mobile number verified",
@@ -61,8 +61,7 @@ class VerifyMobileCtrl extends GetxController {
     try {
       EasyLoading.show();
       _apiRequestInstance.sendSMS({
-        "to":
-            "+91${mobileController.text.length < 10 ? globalCtrl.userProfile!.mobile : mobileController.text.removeAllWhitespace}",
+        "to": "+91${mobileController.text.removeAllWhitespace}",
         "message": otpTemplate(generatedOtp),
       }).then((value) {
         otpSent = true;
@@ -78,7 +77,7 @@ class VerifyMobileCtrl extends GetxController {
 
   @override
   void onInit() {
-    mobileController.text = globalCtrl.userProfile?.mobile ?? "";
+    mobileController.text = globalCtrl.userProfile!.mobile!;
     super.onInit();
   }
 }

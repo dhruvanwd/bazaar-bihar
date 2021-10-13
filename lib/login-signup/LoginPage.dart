@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:bazaar_bihar/login-signup/OtpResendCtrl.dart';
 import 'package:bazaar_bihar/login-signup/SignupController.dart';
 import 'package:bazaar_bihar/shared/Utils/extensions.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
@@ -17,20 +20,19 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
-  String generatedOtp = generateOtp();
+  String _generatedOtp = generateOtp();
   final height = Get.mediaQuery.size.height;
   final _formKey = GlobalKey<FormState>();
-
-  final mobileCtrl = TextEditingController();
-  final passwordController = TextEditingController();
-  final otpCtrl = TextEditingController();
-
+  final _mobileCtrl = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _otpCtrl = TextEditingController();
   bool isWhatsAppLogin = false;
+  final otpResendCtrl = Get.put(OtpResendTimerCtrl());
 
-  onLogin() async {
+  loginWithPassword() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      if (passwordController.text.isEmpty) {
+      if (_passwordController.text.isEmpty) {
         Get.snackbar(
           "Enter your password",
           "password is required",
@@ -39,11 +41,31 @@ class _LoginPageState extends State<LoginPage>
         return;
       }
       SignupController.to.loginUser({
-        "mobile": mobileCtrl.text.removeWhiteSpaces,
-        "password": passwordController.text
+        "mobile": _mobileCtrl.text.removeWhiteSpaces,
+        "password": _passwordController.text
       });
     } else {
       print('invalid form');
+    }
+  }
+
+  loginWithOtp() {
+    // TODO: show otp mismatch
+    if (_generatedOtp == _otpCtrl.text.removeAllWhitespace) {
+      SignupController.to.loginUser({
+        "mobile": _mobileCtrl.text.removeWhiteSpaces,
+      });
+    }
+  }
+
+  onLogin() async {
+    try {
+      if (_tabController.index == 0) {
+        loginWithOtp();
+      } else
+        loginWithPassword();
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -53,6 +75,9 @@ class _LoginPageState extends State<LoginPage>
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: 2);
+    _tabController.addListener(() {
+      print(_tabController.index);
+    });
   }
 
   @override
@@ -90,27 +115,31 @@ class _LoginPageState extends State<LoginPage>
                             padding: EdgeInsets.only(bottom: 50),
                             child: appTitle(),
                           ),
-                          TabBar(
-                              controller: _tabController,
-                              labelColor: Colors.purple,
-                              indicatorColor: Colors.purple,
-                              padding: EdgeInsets.all(0),
-                              isScrollable: true,
-                              tabs: [
-                                Tab(
-                                  text: "Login with OTP",
-                                ),
-                                Tab(
-                                  text: "Login with password",
-                                ),
-                              ]),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 32.0),
+                            child: TabBar(
+                                controller: _tabController,
+                                labelColor: Colors.purple,
+                                indicatorColor: Colors.purple,
+                                padding: EdgeInsets.all(0),
+                                isScrollable: true,
+                                tabs: [
+                                  Tab(
+                                    text: "Login with OTP",
+                                  ),
+                                  Tab(
+                                    text: "Login with password",
+                                  ),
+                                ]),
+                          ),
                           TextFormField(
-                            controller: mobileCtrl,
+                            controller: _mobileCtrl,
                             autofillHints: [
                               AutofillHints.telephoneNumber,
                               AutofillHints.telephoneNumberLocal,
                               AutofillHints.telephoneNumberDevice,
                             ],
+                            autofocus: true,
                             keyboardType: TextInputType.phone,
                             inputFormatters: [
                               TextInputMask(
@@ -118,7 +147,7 @@ class _LoginPageState extends State<LoginPage>
                             ],
                             decoration: InputDecoration(
                                 prefixText: "+91",
-                                border: UnderlineInputBorder(),
+                                border: OutlineInputBorder(),
                                 labelText: 'Mobile Number'),
                             validator: (value) =>
                                 validateMobile(value?.removeAllWhitespace),
@@ -141,14 +170,41 @@ class _LoginPageState extends State<LoginPage>
                                                   contentPadding:
                                                       EdgeInsets.all(0),
                                                   dense: true,
+                                                  activeColor: Colors.green,
+                                                  inactiveThumbColor:
+                                                      Colors.blue,
                                                   secondary: TextButton(
-                                                      onPressed: () async {
-                                                        await _.sendOtp(
-                                                            mobileCtrl.text
-                                                                .removeAllWhitespace,
-                                                            generatedOtp);
+                                                    onPressed: () async {
+                                                      if (otpResendCtrl
+                                                              .secondsDelayed !=
+                                                          0) {
+                                                        print(
+                                                            "otp minimum thresold added");
+                                                        return;
+                                                      }
+                                                      await _.sendOtp(
+                                                          _mobileCtrl.text
+                                                              .removeAllWhitespace,
+                                                          _generatedOtp);
+                                                      otpResendCtrl.init();
+                                                    },
+                                                    child: GetBuilder<
+                                                        OtpResendTimerCtrl>(
+                                                      builder: (_timerCtrl) {
+                                                        if (_timerCtrl
+                                                                .secondsDelayed !=
+                                                            0)
+                                                          return Text(
+                                                            "Resend in ${_timerCtrl.totalSeconds - _timerCtrl.secondsDelayed}s",
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .blueGrey,
+                                                            ),
+                                                          );
+                                                        return Text("Get OTP");
                                                       },
-                                                      child: Text("Get OTP")),
+                                                    ),
+                                                  ),
                                                   controlAffinity:
                                                       ListTileControlAffinity
                                                           .leading,
@@ -169,8 +225,8 @@ class _LoginPageState extends State<LoginPage>
                                           ),
                                         ),
                                         TextFormField(
-                                          controller: otpCtrl,
-                                          obscureText: _.isObscureText,
+                                          controller: _otpCtrl,
+                                          focusNode: otpResendCtrl.otpFocusNode,
                                           inputFormatters: [
                                             TextInputMask(
                                                 mask: '999 999', reverse: false)
@@ -178,7 +234,7 @@ class _LoginPageState extends State<LoginPage>
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
                                               enabled: _.otpSent,
-                                              border: UnderlineInputBorder(),
+                                              border: OutlineInputBorder(),
                                               labelText: 'OTP'),
                                           validator: (value) {
                                             if (value == null ||
@@ -191,11 +247,12 @@ class _LoginPageState extends State<LoginPage>
                                     ),
                                   ),
                                   Container(
+                                    margin: EdgeInsets.only(top: 40),
                                     child: TextFormField(
-                                      controller: passwordController,
+                                      controller: _passwordController,
                                       obscureText: _.isObscureText,
                                       decoration: InputDecoration(
-                                          border: UnderlineInputBorder(),
+                                          border: OutlineInputBorder(),
                                           suffixIcon: IconButton(
                                             onPressed: _.toogleObscureText,
                                             icon: _.isObscureText

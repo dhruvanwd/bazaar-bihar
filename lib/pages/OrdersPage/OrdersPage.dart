@@ -11,6 +11,7 @@ class OrdersPage extends StatelessWidget {
     return SingleChildScrollView(
       child: GetBuilder<OrderController>(
         builder: (_orderCtrl) => Container(
+          height: Get.mediaQuery.size.height,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
