@@ -1,7 +1,3 @@
-import 'dart:async';
-
-import 'package:bazaar_bihar/login-signup/OtpResendCtrl.dart';
-import 'package:bazaar_bihar/login-signup/SignupController.dart';
 import 'package:bazaar_bihar/shared/Utils/extensions.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/login-signup/signInSubmitButton.dart';
@@ -12,6 +8,8 @@ import 'package:bazaar_bihar/shared/login-signup/createAccountLabel.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'OtpResendCtrl.dart';
+import 'SignupController.dart';
 
 class LoginPage extends StatefulWidget {
   @override

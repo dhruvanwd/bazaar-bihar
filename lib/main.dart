@@ -4,9 +4,9 @@ import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
 import 'package:bazaar_bihar/pages/Home/HomePage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/ProductsPage.dart';
+import 'package:bazaar_bihar/shared/login-signup/LoginPage.dart';
+import 'package:bazaar_bihar/shared/login-signup/SignupPage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'login-signup/LoginPage.dart';
-import 'login-signup/SignupPage.dart';
 import 'pages/CartPage/CartCarousel.dart';
 import 'pages/Home/ShopsPage.dart';
 import 'package:get/get.dart';
@@ -42,6 +42,7 @@ void main() async {
             page: () =>
                 offlineStorage.isUserLoggedIn ? HomePage() : LoginPage()),
         GetPage(name: '/signup', page: () => SignupPage()),
+        GetPage(name: '/login', page: () => LoginPage()),
         GetPage(name: '/shops', page: () => ShopsPage()),
         GetPage(name: '/products', page: () => ProductsPage()),
         GetPage(name: '/cart', page: () => CartCarousel()),

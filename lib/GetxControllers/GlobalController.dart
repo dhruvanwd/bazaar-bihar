@@ -1,5 +1,4 @@
 import 'package:bazaar_bihar/generic/OfflineStorage.dart';
-import 'package:bazaar_bihar/login-signup/LoginPage.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/CacheApiResponse.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
@@ -73,7 +72,7 @@ class GlobalController extends GetxController {
                       offlineStorage.clearStorage();
                       await _googleSignIn.signOut();
                       await _auth.signOut();
-                      Get.offAll(() => LoginPage());
+                      Get.offAllNamed("/login");
                       Get.back();
                     },
                     child: Text(
