@@ -47,13 +47,23 @@ class SignupController extends GetxController {
       EasyLoading.dismiss();
       Get.offAll(() => HomePage());
     } catch (e) {
+      if (user['password'] == null) {
+        Get.snackbar(
+          "User not Registered",
+          "Create account",
+          snackPosition: SnackPosition.BOTTOM,
+          colorText: Colors.red,
+        );
+      } else {
+        Get.snackbar(
+          "Login failed",
+          "Invalid credentials.",
+          snackPosition: SnackPosition.BOTTOM,
+          colorText: Colors.red,
+        );
+      }
       print(e);
-      Get.snackbar(
-        "Login failed",
-        "Invalid credentials.",
-        snackPosition: SnackPosition.BOTTOM,
-        colorText: Colors.red,
-      );
+
       EasyLoading.dismiss();
       throw e;
     }
@@ -131,15 +141,14 @@ class SignupController extends GetxController {
   sendOtp(String mobileNumber, var otp) async {
     try {
       EasyLoading.show();
-      _apiRequestInstance.sendSMS({
+      var resp = await _apiRequestInstance.sendSMS({
         "to": "+91$mobileNumber",
         "message": otpTemplate(otp),
-      }).then((value) {
-        otpSent = true;
-        print(value.data);
-        EasyLoading.dismiss();
-        update();
       });
+      otpSent = true;
+      print(resp.data);
+      EasyLoading.dismiss();
+      update();
     } catch (e, s) {
       EasyLoading.dismiss();
       muliPrint([e, s]);

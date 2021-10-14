@@ -20,6 +20,12 @@ class OtpResendTimerCtrl extends GetxController {
     });
   }
 
+  resetTimer() {
+    _timer?.cancel();
+    secondsDelayed = 0;
+    update();
+  }
+
   @override
   void onClose() {
     _timer?.cancel();

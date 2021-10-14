@@ -2,13 +2,13 @@ import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'OtpResendCtrl.dart';
-import 'SignupController.dart';
 import '../Utils/utils.dart';
 import '../login-signup/signInSubmitButton.dart';
 import '../login-signup/LoginGoogleBtn.dart';
 import '../login-signup/appTitle.dart';
 import '../login-signup/bezierContainer.dart';
 import '../login-signup/createAccountLabel.dart';
+import 'SignupController.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -26,14 +26,25 @@ class _LoginPageState extends State<LoginPage>
   bool isWhatsAppLogin = false;
   final otpResendCtrl = Get.put(OtpResendTimerCtrl());
 
+  onResetOtp() {
+    _generatedOtp = generateOtp();
+    otpResendCtrl.resetTimer();
+  }
+
   onLogin(SignupController _) async {
     try {
       if (_tabController.index == 0) {
         if (_generatedOtp == _otpCtrl.text.removeAllWhitespace) {
-          _.loginUser({
-            "mobile": _mobileCtrl.text.removeAllWhitespace,
-          });
-        } else {}
+          try {
+            _.loginUser({
+              "mobile": _mobileCtrl.text.removeAllWhitespace,
+            });
+          } catch (e, s) {
+            muliPrint([e, s]);
+          }
+        } else {
+          _.otpMisMatchError();
+        }
       } else
         _.loginWithPassword(_formKey,
             mobile: _mobileCtrl.text.removeAllWhitespace,
@@ -252,7 +263,9 @@ class _LoginPageState extends State<LoginPage>
                                 ]),
                           ),
                           Padding(padding: EdgeInsets.only(top: 16)),
-                          signInSubmitButton(onLogin, "Login"),
+                          signInSubmitButton(() {
+                            onLogin(_);
+                          }, "Login"),
                           Padding(padding: EdgeInsets.only(top: 60)),
                           LoginGoogleBtn(_.signInwithGoogle),
                           Padding(padding: EdgeInsets.only(top: 30)),
