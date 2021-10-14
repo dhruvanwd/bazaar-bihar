@@ -1,16 +1,16 @@
-import 'package:bazaar_bihar/shared/CityStateDropDown/StateCityModel.dart';
-import 'package:bazaar_bihar/shared/Utils/utils.dart';
-import 'package:bazaar_bihar/shared/login-signup/CityDropdownSelector.dart';
-import 'package:bazaar_bihar/shared/login-signup/signInSubmitButton.dart';
-import 'package:bazaar_bihar/shared/login-signup/LoginGoogleBtn.dart';
-import 'package:bazaar_bihar/shared/login-signup/StateCityForm.dart';
-import 'package:bazaar_bihar/shared/login-signup/appTitle.dart';
-import 'package:bazaar_bihar/shared/login-signup/bezierContainer.dart';
-import 'package:bazaar_bihar/shared/login-signup/createAccountLabel.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import './SignupController.dart';
+import '../CityStateDropDown/StateCityModel.dart';
+import '../Utils/utils.dart';
+import '../login-signup/CityDropdownSelector.dart';
+import '../login-signup/signInSubmitButton.dart';
+import '../login-signup/LoginGoogleBtn.dart';
+import '../login-signup/StateCityForm.dart';
+import '../login-signup/appTitle.dart';
+import '../login-signup/bezierContainer.dart';
+import '../login-signup/createAccountLabel.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -161,11 +161,11 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         Padding(padding: EdgeInsets.only(top: 40)),
                         signInSubmitButton(onSignup, "Create Account"),
-                        Padding(padding: EdgeInsets.only(top: 30)),
+                        Padding(padding: EdgeInsets.only(top: 60)),
                         LoginGoogleBtn(_.signInwithGoogle),
                         Padding(padding: EdgeInsets.only(top: 30)),
                         createAccountLabel(
-                            'login', 'Already have an account ?', 'login')
+                            'login', 'Already have an account ?', 'Login')
                       ],
                     ),
                   ),

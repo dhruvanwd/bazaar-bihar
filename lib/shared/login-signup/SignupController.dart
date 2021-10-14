@@ -1,13 +1,13 @@
 import 'package:bazaar_bihar/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/pages/Home/HomePage.dart';
-import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
-import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
-import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../Utils/ApiService.dart';
+import '../Utils/RequestBody.dart';
+import '../Utils/utils.dart';
 
 class SignupController extends GetxController {
   bool isObscureText = true;
@@ -17,6 +17,8 @@ class SignupController extends GetxController {
   bool otpSent = false;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  String? otpErrorTxt;
 
   loginUser(var user) async {
     EasyLoading.show();
@@ -146,6 +148,39 @@ class SignupController extends GetxController {
 
   toogleObscureText() {
     isObscureText = isObscureText ? false : true;
+    update();
+  }
+
+  loginWithPassword(GlobalKey<FormState> _formKey,
+      {required String password, required String mobile}) {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      if (password.isEmpty) {
+        Get.snackbar(
+          "Enter your password",
+          "password is required",
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        return;
+      }
+      loginUser({"mobile": mobile, "password": password});
+    } else {
+      print('invalid form');
+    }
+  }
+
+  clearOtpMismatchError() {
+    if (otpErrorTxt != null) {
+      otpErrorTxt = null;
+      update();
+    }
+  }
+
+  otpMisMatchError() async {
+    EasyLoading.show();
+    await Future.delayed(Duration(seconds: 1));
+    otpErrorTxt = "OTP mismatch";
+    EasyLoading.dismiss();
     update();
   }
 }

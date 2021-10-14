@@ -1,15 +1,14 @@
-import 'package:bazaar_bihar/shared/Utils/extensions.dart';
-import 'package:bazaar_bihar/shared/Utils/utils.dart';
-import 'package:bazaar_bihar/shared/login-signup/signInSubmitButton.dart';
-import 'package:bazaar_bihar/shared/login-signup/LoginGoogleBtn.dart';
-import 'package:bazaar_bihar/shared/login-signup/appTitle.dart';
-import 'package:bazaar_bihar/shared/login-signup/bezierContainer.dart';
-import 'package:bazaar_bihar/shared/login-signup/createAccountLabel.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'OtpResendCtrl.dart';
 import 'SignupController.dart';
+import '../Utils/utils.dart';
+import '../login-signup/signInSubmitButton.dart';
+import '../login-signup/LoginGoogleBtn.dart';
+import '../login-signup/appTitle.dart';
+import '../login-signup/bezierContainer.dart';
+import '../login-signup/createAccountLabel.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -27,41 +26,18 @@ class _LoginPageState extends State<LoginPage>
   bool isWhatsAppLogin = false;
   final otpResendCtrl = Get.put(OtpResendTimerCtrl());
 
-  loginWithPassword() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      if (_passwordController.text.isEmpty) {
-        Get.snackbar(
-          "Enter your password",
-          "password is required",
-          snackPosition: SnackPosition.BOTTOM,
-        );
-        return;
-      }
-      SignupController.to.loginUser({
-        "mobile": _mobileCtrl.text.removeWhiteSpaces,
-        "password": _passwordController.text
-      });
-    } else {
-      print('invalid form');
-    }
-  }
-
-  loginWithOtp() {
-    // TODO: show otp mismatch
-    if (_generatedOtp == _otpCtrl.text.removeAllWhitespace) {
-      SignupController.to.loginUser({
-        "mobile": _mobileCtrl.text.removeWhiteSpaces,
-      });
-    }
-  }
-
-  onLogin() async {
+  onLogin(SignupController _) async {
     try {
       if (_tabController.index == 0) {
-        loginWithOtp();
+        if (_generatedOtp == _otpCtrl.text.removeAllWhitespace) {
+          _.loginUser({
+            "mobile": _mobileCtrl.text.removeAllWhitespace,
+          });
+        } else {}
       } else
-        loginWithPassword();
+        _.loginWithPassword(_formKey,
+            mobile: _mobileCtrl.text.removeAllWhitespace,
+            password: _passwordController.text.removeAllWhitespace);
     } catch (e) {
       print(e);
     }
@@ -147,8 +123,10 @@ class _LoginPageState extends State<LoginPage>
                                 prefixText: "+91",
                                 border: OutlineInputBorder(),
                                 labelText: 'Mobile Number'),
-                            validator: (value) =>
-                                validateMobile(value?.removeAllWhitespace),
+                            validator: (value) {
+                              _.clearOtpMismatchError();
+                              validateMobile(value?.removeAllWhitespace);
+                            },
                           ),
                           SizedBox(
                             height: 140,
@@ -232,9 +210,11 @@ class _LoginPageState extends State<LoginPage>
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
                                               enabled: _.otpSent,
+                                              errorText: _.otpErrorTxt,
                                               border: OutlineInputBorder(),
                                               labelText: 'OTP'),
                                           validator: (value) {
+                                            _.clearOtpMismatchError();
                                             if (value == null ||
                                                 value.isEmpty) {
                                               return 'Enter OTP';
@@ -275,6 +255,7 @@ class _LoginPageState extends State<LoginPage>
                           signInSubmitButton(onLogin, "Login"),
                           Padding(padding: EdgeInsets.only(top: 60)),
                           LoginGoogleBtn(_.signInwithGoogle),
+                          Padding(padding: EdgeInsets.only(top: 30)),
                           createAccountLabel(
                               'signup', 'Don\'t have an account ?', 'Register')
                         ],
