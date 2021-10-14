@@ -29,7 +29,7 @@ class _SignupPageState extends State<SignupPage> {
   StateCity? selectedState;
   CityModel? selectedCity;
 
-  onSignup() async {
+  onSignup(SignupController _) async {
     if (_formKey.currentState!.validate()) {
       if (selectedState == null) {
         Get.snackbar("Select your state", "state is required",
@@ -41,7 +41,7 @@ class _SignupPageState extends State<SignupPage> {
         return;
       }
       _formKey.currentState!.save();
-      SignupController.to.createUser({
+      _.createUser({
         'fullName': nameController.text,
         'mobile': mobileController.text.removeAllWhitespace,
         'role': 'buyer',
@@ -160,7 +160,9 @@ class _SignupPageState extends State<SignupPage> {
                           selectedState: selectedState,
                         ),
                         Padding(padding: EdgeInsets.only(top: 40)),
-                        signInSubmitButton(onSignup, "Create Account"),
+                        signInSubmitButton(() {
+                          onSignup(_);
+                        }, "Create Account"),
                         Padding(padding: EdgeInsets.only(top: 60)),
                         LoginGoogleBtn(_.signInwithGoogle),
                         Padding(padding: EdgeInsets.only(top: 30)),

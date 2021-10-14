@@ -17,7 +17,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
-  String _generatedOtp = generateOtp();
   final height = Get.mediaQuery.size.height;
   final _formKey = GlobalKey<FormState>();
   final _mobileCtrl = TextEditingController();
@@ -26,15 +25,10 @@ class _LoginPageState extends State<LoginPage>
   bool isWhatsAppLogin = false;
   final otpResendCtrl = Get.put(OtpResendTimerCtrl());
 
-  onResetOtp() {
-    _generatedOtp = generateOtp();
-    otpResendCtrl.resetTimer();
-  }
-
   onLogin(SignupController _) async {
     try {
       if (_tabController.index == 0) {
-        if (_generatedOtp == _otpCtrl.text.removeAllWhitespace) {
+        if (otpResendCtrl.generatedOtp == _otpCtrl.text.removeAllWhitespace) {
           try {
             _.loginUser({
               "mobile": _mobileCtrl.text.removeAllWhitespace,
@@ -117,28 +111,37 @@ class _LoginPageState extends State<LoginPage>
                                   ),
                                 ]),
                           ),
-                          TextFormField(
-                            controller: _mobileCtrl,
-                            autofillHints: [
-                              AutofillHints.telephoneNumber,
-                              AutofillHints.telephoneNumberLocal,
-                              AutofillHints.telephoneNumberDevice,
-                            ],
-                            autofocus: true,
-                            keyboardType: TextInputType.phone,
-                            inputFormatters: [
-                              TextInputMask(
-                                  mask: '999 9999 999', reverse: false)
-                            ],
-                            decoration: InputDecoration(
-                                prefixText: "+91",
-                                border: OutlineInputBorder(),
-                                labelText: 'Mobile Number'),
-                            validator: (value) {
-                              _.clearOtpMismatchError();
-                              validateMobile(value?.removeAllWhitespace);
-                            },
-                          ),
+                          GetBuilder<OtpResendTimerCtrl>(
+                              builder: (_otpCtrl) => TextFormField(
+                                    controller: _mobileCtrl,
+                                    autofillHints: otpResendCtrl
+                                                .secondsDelayed ==
+                                            0
+                                        ? [
+                                            AutofillHints.telephoneNumber,
+                                            AutofillHints.telephoneNumberLocal,
+                                            AutofillHints.telephoneNumberDevice,
+                                          ]
+                                        : null,
+                                    autofocus: true,
+                                    keyboardType: TextInputType.phone,
+                                    inputFormatters: [
+                                      TextInputMask(
+                                          mask: '999 9999 999', reverse: false)
+                                    ],
+                                    decoration: InputDecoration(
+                                        prefixText: "+91",
+                                        enabled:
+                                            otpResendCtrl.secondsDelayed == 0,
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Mobile Number'),
+                                    validator: (value) {
+                                      _.clearOtpMismatchError();
+                                      otpResendCtrl.resetTimer();
+                                      validateMobile(
+                                          value?.removeAllWhitespace);
+                                    },
+                                  )),
                           SizedBox(
                             height: 140,
                             child: TabBarView(
@@ -172,7 +175,8 @@ class _LoginPageState extends State<LoginPage>
                                                       await _.sendOtp(
                                                           _mobileCtrl.text
                                                               .removeAllWhitespace,
-                                                          _generatedOtp);
+                                                          otpResendCtrl
+                                                              .generatedOtp);
                                                       otpResendCtrl.init();
                                                     },
                                                     child: GetBuilder<
