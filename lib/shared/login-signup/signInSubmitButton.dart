@@ -13,10 +13,11 @@ Widget signInSubmitButton(dynamic onTap, String label) {
         borderRadius: BorderRadius.all(Radius.circular(8)),
         boxShadow: <BoxShadow>[
           BoxShadow(
-              color: Colors.grey.shade200,
-              offset: Offset(2, 4),
-              blurRadius: 5,
-              spreadRadius: 2)
+            color: Colors.grey.shade200,
+            offset: Offset(2, 4),
+            blurRadius: 5,
+            spreadRadius: 2,
+          )
         ],
         gradient: LinearGradient(
           begin: Alignment.centerLeft,

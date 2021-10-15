@@ -1,13 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:bazaar_bihar/shared/login-signup/SignupController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-typedef void LoginBtn();
-
 class LoginGoogleBtn extends StatelessWidget {
-  LoginGoogleBtn(this.onPressed);
-
-  final LoginBtn onPressed;
+  final _signupCtrl = SignupController.to;
   final colorizeColors = [
     Colors.orange,
     Colors.purple,
@@ -30,7 +27,7 @@ class LoginGoogleBtn extends StatelessWidget {
         children: [
           AnimatedTextKit(
             repeatForever: true,
-            onTap: onPressed,
+            onTap: _signupCtrl.signInwithGoogle,
             animatedTexts: [
               ColorizeAnimatedText(
                 "Login with Google",

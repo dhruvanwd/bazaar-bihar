@@ -271,7 +271,7 @@ class _LoginPageState extends State<LoginPage>
                             onLogin(_);
                           }, "Login"),
                           Padding(padding: EdgeInsets.only(top: 60)),
-                          LoginGoogleBtn(_.signInwithGoogle),
+                          LoginGoogleBtn(),
                           Padding(padding: EdgeInsets.only(top: 30)),
                           createAccountLabel(
                               'signup', 'Don\'t have an account ?', 'Register')

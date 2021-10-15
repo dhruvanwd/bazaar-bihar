@@ -25,9 +25,10 @@ class _MapScreenState extends State<ProfilePage>
   final FocusNode myFocusNode = FocusNode();
   late TextEditingController _fullName;
   late TextEditingController _email;
+  final _glblCtrl = GlobalController.to;
 
   updateCtrls() {
-    final profile = GlobalController.to.userProfile;
+    final profile = _glblCtrl.userProfile;
     if (profile != null) {
       _fullName = TextEditingController(text: profile.fullName);
       _email = TextEditingController(text: profile.email);
@@ -69,7 +70,7 @@ class _MapScreenState extends State<ProfilePage>
     if (avatar != null) {
       updatedProfile['avatar'] = avatar;
     }
-    await GlobalController.to.updateUserProfile(updatedProfile);
+    await _glblCtrl.updateUserProfile(updatedProfile);
     updateCtrls();
     setState(() {
       _status = true;
@@ -241,25 +242,26 @@ class _MapScreenState extends State<ProfilePage>
                             ],
                           )),
                       Padding(
-                          padding: EdgeInsets.only(
-                              left: 25.0, right: 25.0, top: 25.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Text(
-                                    'Email ID',
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )),
+                        padding:
+                            EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text(
+                                  'Email ID',
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                       Padding(
                           padding: EdgeInsets.only(
                               left: 25.0, right: 25.0, top: 2.0),
@@ -268,11 +270,12 @@ class _MapScreenState extends State<ProfilePage>
                             children: <Widget>[
                               Flexible(
                                 child: TextFormField(
-                                  initialValue: _.userProfile!.email,
+                                  controller: _email,
                                   decoration: InputDecoration(
-                                      suffixIcon: getVerifiedUnverifiedIcon(
-                                          isEmailVerified),
-                                      hintText: "Enter Email ID"),
+                                    suffixIcon: getVerifiedUnverifiedIcon(
+                                        isEmailVerified),
+                                    hintText: "Enter Email ID",
+                                  ),
                                   enabled: !_status,
                                 ),
                               ),

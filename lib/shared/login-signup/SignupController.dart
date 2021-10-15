@@ -10,6 +10,7 @@ import '../Utils/RequestBody.dart';
 import '../Utils/utils.dart';
 
 class SignupController extends GetxController {
+  static SignupController get to => Get.find();
   bool isObscureText = true;
   final ApiRequest _apiRequestInstance = ApiRequest();
   final OfflineStorage _offlineStorage = OfflineStorage();
