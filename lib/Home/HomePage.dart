@@ -1,6 +1,7 @@
 import 'package:bazaar_bihar/GetxControllers/CartController.dart';
 import 'package:bazaar_bihar/GetxControllers/OrderController.dart';
 import 'package:bazaar_bihar/GetxControllers/PaymentController.dart';
+import 'package:bazaar_bihar/Home/AppBarMenu.dart';
 import 'package:bazaar_bihar/Widgets/FloatingCartButton.dart';
 import 'package:bazaar_bihar/shared/ImageCropper/ImageCropperCtrl.dart';
 import 'package:bazaar_bihar/shared/components/AppExitPopup.dart';
@@ -11,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
 import 'package:bazaar_bihar/GetxControllers/HomePageController.dart';
-import 'package:bazaar_bihar/pages/Home/AppBarMenu.dart';
 import 'package:new_version/new_version.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 

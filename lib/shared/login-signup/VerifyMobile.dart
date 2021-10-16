@@ -1,4 +1,4 @@
-import 'package:bazaar_bihar/shared/Utils/utils.dart';
+import '../Utils/utils.dart';
 import '../components/SimpleCloseBtn.dart';
 import '../components/StrechedPrimaryButton.dart';
 import './VerifyMobileCtrl.dart';

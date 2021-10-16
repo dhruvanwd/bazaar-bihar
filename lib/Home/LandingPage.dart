@@ -1,8 +1,8 @@
+import 'package:bazaar_bihar/Home/ShopByCategory.dart';
+import 'package:bazaar_bihar/Home/ShopsList.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/pages/Home/ShopByCategory.dart';
-import 'package:bazaar_bihar/pages/Home/ShopsList.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);

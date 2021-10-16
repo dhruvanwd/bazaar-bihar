@@ -1,4 +1,4 @@
-import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import '../../GetxControllers/GlobalController.dart';
 import '../Utils/ApiService.dart';
 import '../Utils/extensions.dart';
 import '../Utils/utils.dart';

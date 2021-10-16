@@ -1,5 +1,3 @@
-import 'package:bazaar_bihar/pages/Home/HomePage.dart';
-import '../generic/OfflineStorage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -8,6 +6,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../Utils/ApiService.dart';
 import '../Utils/RequestBody.dart';
 import '../Utils/utils.dart';
+import '../generic/OfflineStorage.dart';
+import '../../Home/HomePage.dart';
 
 class SignupController extends GetxController {
   static SignupController get to => Get.find();

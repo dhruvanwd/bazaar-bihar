@@ -1,4 +1,4 @@
-import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import '../../getxControllers/GlobalController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,9 +1,9 @@
+import 'package:bazaar_bihar/Home/ShopsList.dart';
 import 'package:bazaar_bihar/Widgets/FloatingCartButton.dart';
 import 'package:bazaar_bihar/shared/models/CategoryModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/pages/Home/ShopsList.dart';
 import '../../shared/Utils/extensions.dart';
 
 class ShopsPage extends StatelessWidget {

@@ -1,5 +1,5 @@
+import 'package:bazaar_bihar/Home/LandingPage.dart';
 import 'package:get/get.dart';
-import 'package:bazaar_bihar/pages/Home/LandingPage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/OrdersPage.dart';
 import 'package:bazaar_bihar/pages/profilePage/ProfilePage.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';

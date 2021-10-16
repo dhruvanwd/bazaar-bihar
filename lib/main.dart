@@ -1,14 +1,14 @@
+import 'package:bazaar_bihar/Home/HomePage.dart';
+import 'package:bazaar_bihar/Home/ShopsPage.dart';
 import 'package:bazaar_bihar/pages/Wallet/WalletHome.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
-import 'package:bazaar_bihar/pages/Home/HomePage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/ProductsPage.dart';
 import 'package:bazaar_bihar/shared/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/login-signup/LoginPage.dart';
 import 'package:bazaar_bihar/shared/login-signup/SignupPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'pages/CartPage/CartCarousel.dart';
-import 'pages/Home/ShopsPage.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
