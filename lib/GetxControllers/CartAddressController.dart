@@ -1,9 +1,9 @@
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
-import 'package:bazaar_bihar/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/CityStateDropDown/StateCityModel.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
+import 'package:bazaar_bihar/shared/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/login-signup/CityDropdownSelector.dart';
 import 'package:bazaar_bihar/shared/models/CartAddressModel.dart';
 import 'package:get/get.dart';

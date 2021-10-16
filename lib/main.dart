@@ -1,9 +1,9 @@
-import 'package:bazaar_bihar/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/pages/Wallet/WalletHome.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/pages/CartPage/CheckoutCart.dart';
 import 'package:bazaar_bihar/pages/Home/HomePage.dart';
 import 'package:bazaar_bihar/pages/OrdersPage/ProductsPage.dart';
+import 'package:bazaar_bihar/shared/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/login-signup/LoginPage.dart';
 import 'package:bazaar_bihar/shared/login-signup/SignupPage.dart';
 import 'package:firebase_core/firebase_core.dart';

@@ -1,8 +1,8 @@
-import 'package:bazaar_bihar/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/CacheApiResponse.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
+import 'package:bazaar_bihar/shared/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/models/CategoryModel.dart';
 import 'package:bazaar_bihar/shared/models/ProductsModel.dart';
 import 'package:bazaar_bihar/shared/models/ShopModels.dart';
