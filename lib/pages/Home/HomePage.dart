@@ -18,8 +18,6 @@ import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 // TODO:
 // 1. add theming.
 // 2.add internationalization.
-// 3. add otp verification.
-// 4. add email verification.
 // 5. add a simple wallet.
 // 6. add faq section.
 class HomePage extends StatelessWidget {
@@ -120,13 +118,15 @@ class HomePage extends StatelessWidget {
               child: Scaffold(
                 appBar: AppBar(
                   leading: IconButton(
-                      icon: Icon(Icons.menu), onPressed: toggleDrawer),
+                      color: Colors.black,
+                      icon: Icon(Icons.menu),
+                      onPressed: toggleDrawer),
                   title: Text(_.appTitle),
                 ),
                 body: _.currentPage,
                 floatingActionButton: FloatingCartButton(),
                 bottomNavigationBar: ConvexAppBar(
-                  backgroundColor: Get.theme.primaryColor,
+                  backgroundColor: Colors.cyan.withOpacity(0.5),
                   style: TabStyle.flip,
                   items: [
                     TabItem(icon: Icons.home, title: 'Home'),

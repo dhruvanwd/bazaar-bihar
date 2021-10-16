@@ -7,8 +7,6 @@ import 'package:bazaar_bihar/pages/Home/ShopsList.dart';
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
 // TODO: users should be able to rate shops and orders
-// TODO: setup otp;
-// also give option to verify  E-mail if user logged in with mobile
   @override
   Widget build(BuildContext context) {
     return Container(

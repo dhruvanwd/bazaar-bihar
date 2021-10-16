@@ -25,9 +25,11 @@ void main() async {
       theme: ThemeData.light().copyWith(
         primaryColor: Colors.orange,
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.orange,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          elevation: 0,
           titleTextStyle: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 20,
           ),
         ),

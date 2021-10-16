@@ -24,7 +24,15 @@ class OrdersPage extends StatelessWidget {
           child: Column(
             children: _orderCtrl.orders.length > 0
                 ? _orderCtrl.orders.map((order) => OrderCard(order)).toList()
-                : [ShopUnavailable("No order till now !")],
+                : [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 20.0,
+                          right: 20.0,
+                          top: Get.mediaQuery.size.height / 4),
+                      child: ShopUnavailable("No order till now !"),
+                    ),
+                  ],
           ),
         ),
       ),

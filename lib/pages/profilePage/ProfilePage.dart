@@ -6,10 +6,12 @@ import 'package:bazaar_bihar/shared/Utils/utils.dart';
 import 'package:bazaar_bihar/shared/components/CustomAvatar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_mask/easy_mask.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:bazaar_bihar/GetxControllers/GlobalController.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 typedef void OnPickImageCallback(
     double? maxWidth, double? maxHeight, int? quality);
@@ -24,14 +26,12 @@ class _MapScreenState extends State<ProfilePage>
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
   late TextEditingController _fullName;
-  late TextEditingController _email;
   final _glblCtrl = GlobalController.to;
 
   updateCtrls() {
     final profile = _glblCtrl.userProfile;
     if (profile != null) {
       _fullName = TextEditingController(text: profile.fullName);
-      _email = TextEditingController(text: profile.email);
     }
   }
 
@@ -55,17 +55,9 @@ class _MapScreenState extends State<ProfilePage>
         snackPosition: SnackPosition.BOTTOM,
       );
       return;
-    } else if (_email.text.isEmpty) {
-      Get.snackbar(
-        "Email can't be empty",
-        "Invalid input",
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      return;
     }
     final updatedProfile = {
       "fullName": _fullName.text,
-      "email": _email.text,
     };
     if (avatar != null) {
       updatedProfile['avatar'] = avatar;
@@ -85,6 +77,27 @@ class _MapScreenState extends State<ProfilePage>
             Icons.info_outline,
             color: Colors.red,
           );
+  }
+
+  verifyEmail() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    final GoogleSignInAccount? googleSignInAccount =
+        await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount!.authentication;
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+    UserCredential user = await _auth.signInWithCredential(credential);
+    final profile = user.additionalUserInfo!.profile!;
+    print(profile);
+    final updatedProfile = {
+      "email": profile['email'],
+      "emailVerified": profile['email_verified'],
+    };
+    await _glblCtrl.updateUserProfile(updatedProfile);
   }
 
   @override
@@ -176,53 +189,55 @@ class _MapScreenState extends State<ProfilePage>
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                          padding: EdgeInsets.only(
-                              left: 25.0, right: 25.0, top: 25.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Text(
-                                    'Parsonal Information',
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  _status ? _getEditIcon() : Container(),
-                                ],
-                              )
-                            ],
-                          )),
+                        padding:
+                            EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text(
+                                  'Parsonal Information',
+                                  style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                _status ? _getEditIcon() : Container(),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                       Padding(
-                          padding: EdgeInsets.only(
-                              left: 25.0, right: 25.0, top: 25.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Text(
-                                    'Name',
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )),
+                        padding:
+                            EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text(
+                                  'Name',
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                       Padding(
                           padding: EdgeInsets.only(
                               left: 25.0, right: 25.0, top: 2.0),
@@ -262,25 +277,36 @@ class _MapScreenState extends State<ProfilePage>
                           ],
                         ),
                       ),
-                      Padding(
-                          padding: EdgeInsets.only(
-                              left: 25.0, right: 25.0, top: 2.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Flexible(
-                                child: TextFormField(
-                                  controller: _email,
-                                  decoration: InputDecoration(
-                                    suffixIcon: getVerifiedUnverifiedIcon(
-                                        isEmailVerified),
-                                    hintText: "Enter Email ID",
+                      if (_.userProfile!.email == null ||
+                          _.userProfile!.emailVerified != true)
+                        Center(
+                          child: TextButton(
+                            onPressed: () {
+                              verifyEmail();
+                            },
+                            child: Text("Add email address"),
+                          ),
+                        )
+                      else
+                        Padding(
+                            padding: EdgeInsets.only(
+                                left: 25.0, right: 25.0, top: 2.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Flexible(
+                                  child: TextFormField(
+                                    initialValue: _.userProfile!.email ?? "",
+                                    decoration: InputDecoration(
+                                      suffixIcon: getVerifiedUnverifiedIcon(
+                                          isEmailVerified),
+                                      hintText: "Enter Email ID",
+                                    ),
+                                    enabled: !_status,
                                   ),
-                                  enabled: !_status,
                                 ),
-                              ),
-                            ],
-                          )),
+                              ],
+                            )),
                       Padding(
                         padding:
                             EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0),

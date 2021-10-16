@@ -20,7 +20,7 @@ class CartPage extends StatelessWidget {
             iconTheme: IconTheme.of(context).copyWith(color: Colors.purple),
             titleSpacing: 0.0,
             title: Card(
-              color: Colors.white70,
+              color: Colors.cyan.shade300,
               child: Padding(
                 padding: EdgeInsets.all(8),
                 child: Text(
