@@ -42,7 +42,6 @@ class SignupController extends GetxController {
         );
       }
       if (!isUserjson(resp.data)) throw Error();
-      // _globalCtrl.updateUserProfileInstance(resp.data);
       _offlineStorage.updateStorage(EStorageKeys.PROFILE, resp.data);
       EasyLoading.dismiss();
       Get.offAll(() => HomePage());
@@ -191,5 +190,11 @@ class SignupController extends GetxController {
     otpErrorTxt = "OTP mismatch";
     EasyLoading.dismiss();
     update();
+  }
+
+  @override
+  void onClose() {
+    print("Closing SignupController .....!");
+    super.onClose();
   }
 }

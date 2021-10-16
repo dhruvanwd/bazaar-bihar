@@ -13,7 +13,9 @@ import '../login-signup/bezierContainer.dart';
 import '../login-signup/createAccountLabel.dart';
 
 class SignupPage extends StatefulWidget {
-  const SignupPage({Key? key}) : super(key: key);
+  SignupPage() {
+    Get.put(SignupController());
+  }
 
   @override
   _SignupPageState createState() => _SignupPageState();
@@ -77,7 +79,6 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<SignupController>(
-        init: SignupController(),
         builder: (_) => SingleChildScrollView(
           child: Stack(
             children: [
@@ -160,9 +161,7 @@ class _SignupPageState extends State<SignupPage> {
                           selectedState: selectedState,
                         ),
                         Padding(padding: EdgeInsets.only(top: 40)),
-                        signInSubmitButton(() {
-                          onSignup(_);
-                        }, "Create Account"),
+                        signInSubmitButton(() => onSignup(_), "Create Account"),
                         Padding(padding: EdgeInsets.only(top: 60)),
                         LoginGoogleBtn(),
                         Padding(padding: EdgeInsets.only(top: 30)),
