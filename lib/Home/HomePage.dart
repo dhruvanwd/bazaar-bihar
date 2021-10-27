@@ -5,7 +5,6 @@ import 'package:bazaar_bihar/Home/AppBarMenu.dart';
 import 'package:bazaar_bihar/Widgets/FloatingCartButton.dart';
 import 'package:bazaar_bihar/shared/ImageCropper/ImageCropperCtrl.dart';
 import 'package:bazaar_bihar/shared/components/AppExitPopup.dart';
-import 'package:bazaar_bihar/shared/components/OfflineDialog.dart';
 import 'package:bazaar_bihar/shared/login-signup/VerifyMobile.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -36,22 +35,6 @@ class HomePage extends StatelessWidget {
     } else {
       print("${_glblCtrl.userProfile?.mobile} skipping verify mobile");
     }
-  }
-
-  showOfflineDialog() async {
-    await Future.delayed(Duration(seconds: 2));
-    Get.defaultDialog(
-      content: OfflineDialog(),
-      title: "You are offline..!",
-      titlePadding: EdgeInsets.all(16),
-      confirm: TextButton(
-        onPressed: () {
-          Get.back();
-        },
-        child: Text("Okay"),
-      ),
-      titleStyle: TextStyle(color: Colors.brown),
-    );
   }
 
   checkUpdate(BuildContext context) {
@@ -97,10 +80,6 @@ class HomePage extends StatelessWidget {
     return GetBuilder<HomePageController>(
       init: HomePageController(),
       builder: (_) {
-        if (_.showOfflineDialog) {
-          showOfflineDialog();
-        }
-
         return WillPopScope(
           child: SideMenu(
             key: _endSideMenuKey,

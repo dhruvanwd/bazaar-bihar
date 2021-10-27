@@ -7,7 +7,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 class HomePageController extends GetxController {
   static HomePageController get to => Get.find();
   int currentTabIndex = 0;
-  bool showOfflineDialog = false;
   dynamic subscription;
   String appTitle = "Homepage";
 
@@ -23,27 +22,8 @@ class HomePageController extends GetxController {
     update();
   }
 
-  handleInternetStatus(ConnectivityResult connectivityResult) {
-    if (connectivityResult == ConnectivityResult.none) {
-      print("internet not connected");
-      showOfflineDialog = true;
-    } else {
-      print("internet connected");
-      showOfflineDialog = false;
-    }
-    update();
-  }
-
-  checkInternetStatus() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    handleInternetStatus(connectivityResult);
-  }
-
   @override
   void onInit() {
-    checkInternetStatus();
-    subscription =
-        Connectivity().onConnectivityChanged.listen(handleInternetStatus);
     super.onInit();
   }
 

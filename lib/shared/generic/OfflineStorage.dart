@@ -2,23 +2,30 @@ import 'dart:convert';
 
 import 'package:get_storage/get_storage.dart';
 
-enum EStorageKeys { PROFILE, SETTINGS, CART, CART_ADDRESS, CATEGORY_VIEWER }
+enum EStorageKeys {
+  PROFILE,
+  SETTINGS,
+  CART,
+  CART_ADDRESS,
+  CATEGORY_VIEWER,
+  SHOP_PROFILE
+}
 
 class OfflineStorage {
   final _localStorage = GetStorage();
 
   getKeyFromEnum(EStorageKeys key) {
-    if (key == EStorageKeys.PROFILE) {
+    if (key == EStorageKeys.PROFILE)
       return "profile";
-    } else if (key == EStorageKeys.SETTINGS) {
+    else if (key == EStorageKeys.SETTINGS)
       return 'settings';
-    } else if (key == EStorageKeys.CART) {
+    else if (key == EStorageKeys.CART)
       return 'cart';
-    } else if (key == EStorageKeys.CART_ADDRESS) {
+    else if (key == EStorageKeys.CART_ADDRESS)
       return 'addresses';
-    } else if (key == EStorageKeys.CATEGORY_VIEWER) {
+    else if (key == EStorageKeys.CATEGORY_VIEWER)
       return "CATEGORY_VIEWER";
-    }
+    else if (key == EStorageKeys.SHOP_PROFILE) return "shop";
   }
 
   updateStorage(EStorageKeys key, dynamic data) {

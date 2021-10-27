@@ -2,6 +2,7 @@ import 'package:bazaar_bihar/shared/Utils/ApiService.dart';
 import 'package:bazaar_bihar/shared/Utils/CacheApiResponse.dart';
 import 'package:bazaar_bihar/shared/Utils/RequestBody.dart';
 import 'package:bazaar_bihar/shared/Utils/utils.dart';
+import 'package:bazaar_bihar/shared/ctrls/NetworkStatusGetCtrl.dart';
 import 'package:bazaar_bihar/shared/generic/OfflineStorage.dart';
 import 'package:bazaar_bihar/shared/models/CategoryModel.dart';
 import 'package:bazaar_bihar/shared/models/ProductsModel.dart';
@@ -180,6 +181,8 @@ class GlobalController extends GetxController {
     }
 
     fetchCategories();
+    Get.put(NetworkStatusGetCtrl());
+
     super.onInit();
   }
 

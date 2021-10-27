@@ -23,7 +23,8 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
     if (widget.images.length == 0) return Container();
 
     return Container(
-      child: Column(
+      child: Stack(
+        alignment: AlignmentDirectional.center,
         children: [
           CarouselSlider(
             options: CarouselOptions(
@@ -52,28 +53,34 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                 )
                 .toList(),
           ),
-          Visibility(
-            visible: widget.images.length > 1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: widget.images.asMap().entries.map((entry) {
-                return GestureDetector(
-                  onTap: () => _controller.animateToPage(entry.key),
-                  child: Container(
-                    width: 12.0,
-                    height: 12.0,
-                    margin:
-                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: (Get.theme.brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.purple)
-                            .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-                  ),
-                );
-              }).toList(),
+          Positioned(
+            child: Visibility(
+              visible: widget.images.length > 1,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: widget.images.asMap().entries.map((entry) {
+                    return GestureDetector(
+                      onTap: () => _controller.animateToPage(entry.key),
+                      child: Container(
+                        width: 12.0,
+                        height: 12.0,
+                        margin: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 4.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: (Get.theme.brightness == Brightness.dark
+                                    ? Colors.purple
+                                    : Colors.white)
+                                .withOpacity(
+                                    _current == entry.key ? 0.9 : 0.4)),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
             ),
+            bottom: 2,
           )
         ],
       ),

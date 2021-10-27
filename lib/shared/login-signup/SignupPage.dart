@@ -103,6 +103,7 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         TextFormField(
                           controller: nameController,
+                          autofocus: true,
                           decoration: InputDecoration(
                               border: UnderlineInputBorder(),
                               labelText: 'Full name'),
