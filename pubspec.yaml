@@ -43,6 +43,8 @@ dependencies:
   flutter_local_notifications: ^8.2.0
   device_info: ^2.0.2
   animated_text_kit: ^4.2.1
+  widget_marquee: ^0.0.5
+  
 
 
 dev_dependencies:

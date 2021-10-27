@@ -50,7 +50,7 @@ class WalletHome extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("Super coins ",
+                            Text("Reward coins ",
                                 style: Get.theme.textTheme.headline6),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -86,25 +86,10 @@ class WalletHome extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
-                  children: [
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                    ListTile(title: Text("Transactions 1")),
-                  ],
+                  children: List.generate(
+                      50,
+                      (index) =>
+                          ListTile(title: Text("Transactions ${index + 1}"))),
                 ),
               ),
             )

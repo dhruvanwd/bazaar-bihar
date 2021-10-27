@@ -1,4 +1,4 @@
-import 'package:bazaarbihar_seller/shared/components/SimpleCloseBtn.dart';
+import './SimpleCloseBtn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

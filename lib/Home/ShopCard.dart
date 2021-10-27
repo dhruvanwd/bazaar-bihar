@@ -1,6 +1,7 @@
 import 'package:bazaar_bihar/shared/components/CarouselWithIndicator.dart';
 import 'package:bazaar_bihar/shared/models/ShopModels.dart';
 import 'package:flutter/material.dart';
+import 'package:widget_marquee/widget_marquee.dart';
 
 class ShopCard extends StatelessWidget {
   final ShopModel shop;
@@ -22,7 +23,11 @@ class ShopCard extends StatelessWidget {
               title: Text(shop.name),
               trailing: Text(
                   '${shop.operatingTime["start"]} - ${shop.operatingTime["end"]}'),
-              subtitle: Text(shop.addressLine1),
+              subtitle: Marquee(
+                child: Text(shop.addressLine1),
+                delayDuration: Duration(seconds: 2),
+                gap: 40,
+              ),
             ),
           )
         ],

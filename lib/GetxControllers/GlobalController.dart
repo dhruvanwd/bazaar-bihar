@@ -138,13 +138,13 @@ class GlobalController extends GetxController {
         },
       });
       if (storeRestoreData(payload, null) != null) {
+        print(".............restored cached categories..........!");
         categories = categoryModelFromMap(storeRestoreData(payload, null));
         return;
       }
       final resp = await apiRequestInstance.fetchData(payload);
-      storeRestoreData(payload, resp.data);
+      storeRestoreData(payload, resp.data, duration: Duration(days: 1));
       categories = categoryModelFromMap(resp.data);
-      // closeLoader();
       update();
     } catch (e) {
       print(e);
