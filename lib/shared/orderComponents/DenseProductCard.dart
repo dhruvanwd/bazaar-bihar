@@ -16,7 +16,7 @@ class DenseProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 208,
       width: Get.mediaQuery.size.width,
       child: Card(
         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -30,7 +30,7 @@ class DenseProductCard extends StatelessWidget {
                     child: Center(
                       child: CarouselWithIndicator(
                         currentProduct.images,
-                        aspectRatio: 1.04,
+                        aspectRatio: 0.85,
                       ),
                     ),
                   ),

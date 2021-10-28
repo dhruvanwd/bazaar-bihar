@@ -14,6 +14,7 @@ class LoginPage extends StatefulWidget {
   LoginPage() {
     Get.put(
       SignupController(),
+      permanent: true,
     );
   }
   @override

@@ -105,7 +105,7 @@ class HomePage extends StatelessWidget {
                 body: _.currentPage,
                 floatingActionButton: FloatingCartButton(),
                 bottomNavigationBar: ConvexAppBar(
-                  backgroundColor: Colors.cyan.withOpacity(0.5),
+                  backgroundColor: Colors.cyan.withOpacity(0.8),
                   style: TabStyle.flip,
                   items: [
                     TabItem(icon: Icons.home, title: 'Home'),
