@@ -24,7 +24,6 @@ class ProfilePage extends StatefulWidget {
 class _MapScreenState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   bool _status = true;
-  final FocusNode myFocusNode = FocusNode();
   late TextEditingController _fullName;
   final _glblCtrl = GlobalController.to;
 
@@ -239,23 +238,24 @@ class _MapScreenState extends State<ProfilePage>
                         ),
                       ),
                       Padding(
-                          padding: EdgeInsets.only(
-                              left: 25.0, right: 25.0, top: 2.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Flexible(
-                                child: TextField(
-                                  controller: _fullName,
-                                  decoration: const InputDecoration(
-                                    hintText: "Enter Your Name",
-                                  ),
-                                  enabled: !_status,
-                                  autofocus: !_status,
+                        padding:
+                            EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Flexible(
+                              child: TextField(
+                                controller: _fullName,
+                                decoration: const InputDecoration(
+                                  hintText: "Enter Your Name",
                                 ),
+                                enabled: !_status,
+                                autofocus: !_status,
                               ),
-                            ],
-                          )),
+                            ),
+                          ],
+                        ),
+                      ),
                       Padding(
                         padding:
                             EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
@@ -269,8 +269,9 @@ class _MapScreenState extends State<ProfilePage>
                                 Text(
                                   'Email ID',
                                   style: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold),
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ],
                             ),
@@ -302,7 +303,6 @@ class _MapScreenState extends State<ProfilePage>
                                           isEmailVerified),
                                       hintText: "Enter Email ID",
                                     ),
-                                    enabled: !_status,
                                   ),
                                 ),
                               ],
@@ -366,8 +366,6 @@ class _MapScreenState extends State<ProfilePage>
 
   @override
   void dispose() {
-    // Clean up the controller when the Widget is disposed
-    myFocusNode.dispose();
     super.dispose();
   }
 

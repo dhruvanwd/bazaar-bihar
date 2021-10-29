@@ -58,6 +58,7 @@ class _CategoryCardState extends State<CategoryCard> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Colors.brown,
+                        fontSize: 12,
                       ),
                     ),
                   ),
