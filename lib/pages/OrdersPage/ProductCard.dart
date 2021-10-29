@@ -25,12 +25,9 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: currentProduct.images.length == 1 ? 241 : 270,
-              child: CarouselWithIndicator(
-                currentProduct.images,
-                aspectRatio: 1.5,
-              ),
+            CarouselWithIndicator(
+              currentProduct.images,
+              aspectRatio: 1.5,
             ),
             Container(
               padding: EdgeInsets.only(left: 4, bottom: 4),
