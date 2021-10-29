@@ -44,7 +44,7 @@ class _MapScreenState extends State<ProfilePage>
     if (_imgCtrl.croppedImages.length == 1) {
       final uploadedImg = _imgCtrl.croppedImages[0];
       avatar = await _imgCtrl.uploadAwsFile(uploadedImg, "profile");
-      muliPrint(["uploaded image: ", avatar]);
+      multiPrint(["uploaded image: ", avatar]);
     }
 
     if (_fullName.text.isEmpty) {

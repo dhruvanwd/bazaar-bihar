@@ -71,7 +71,7 @@ class VerifyMobileCtrl extends GetxController {
       });
     } catch (e, s) {
       EasyLoading.dismiss();
-      muliPrint([e, s]);
+      multiPrint([e, s]);
     }
   }
 

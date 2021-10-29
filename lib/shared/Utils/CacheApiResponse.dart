@@ -20,7 +20,7 @@ storeRestoreData(RequestBody payload, dynamic jsonData,
         print("api expired skipped reading....");
         return null;
       } else {
-        muliPrint([
+        multiPrint([
           "this will expire on",
           expiryDate.toString(),
         ]);
@@ -39,6 +39,6 @@ storeRestoreData(RequestBody payload, dynamic jsonData,
       return jsonData;
     }
   } catch (e, s) {
-    muliPrint([e, s]);
+    multiPrint([e, s]);
   }
 }

@@ -42,7 +42,7 @@ class ImageCropperController extends GetxController {
       print(result);
       return result;
     } catch (e, s) {
-      muliPrint([e, s]);
+      multiPrint([e, s]);
     }
   }
 

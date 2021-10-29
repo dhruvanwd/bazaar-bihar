@@ -53,7 +53,7 @@ class CartController extends GetxController {
             double.parse(product.sellingPrice) * product.cartItemCount;
         shopInfo['sp'] += sp;
         totalSp += sp;
-        muliPrint(["mrp", shopInfo['mrp'], "sp", shopInfo['sp']]);
+        multiPrint(["mrp", shopInfo['mrp'], "sp", shopInfo['sp']]);
       });
       shopWiseInfo.add(shopInfo);
     });

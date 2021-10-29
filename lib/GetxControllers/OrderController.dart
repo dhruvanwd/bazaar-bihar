@@ -26,14 +26,14 @@ class OrderController extends GetxController {
         },
         "orderBy": profile.id
       }));
-      muliPrint(["fetched placed orders.........!", resp.data]);
+      multiPrint(["fetched placed orders.........!", resp.data]);
       if (resp.data != "" && resp.data != null) {
         orders = ordersModelFromMap(resp.data);
         update();
       }
     } catch (e, s) {
       EasyLoading.dismiss();
-      muliPrint([e, s]);
+      multiPrint([e, s]);
     }
   }
 
@@ -59,7 +59,7 @@ class OrderController extends GetxController {
       }
     } catch (e, s) {
       EasyLoading.dismiss();
-      muliPrint([e, s]);
+      multiPrint([e, s]);
     }
   }
 

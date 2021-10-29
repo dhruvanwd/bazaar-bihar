@@ -167,7 +167,7 @@ class GlobalController extends GetxController {
       }
       update();
     } catch (e, s) {
-      muliPrint([e, s]);
+      multiPrint([e, s]);
     }
   }
 
@@ -179,10 +179,8 @@ class GlobalController extends GetxController {
       updateUserProfileInstance(userProfile);
       fetchShops(null);
     }
-
     fetchCategories();
     Get.put(NetworkStatusGetCtrl());
-
     super.onInit();
   }
 
@@ -209,14 +207,8 @@ class GlobalController extends GetxController {
           "\$regex": '',
           "\$options": 'i',
         },
-        "state": {
-          "\$regex": userProfile!.state,
-          "\$options": 'i',
-        },
-        "city": {
-          "\$regex": userProfile!.city,
-          "\$options": 'i',
-        }
+        "state": userProfile!.state,
+        "city": userProfile!.city
       };
 
       if (category != null) {
@@ -226,7 +218,7 @@ class GlobalController extends GetxController {
       final resp = await apiRequestInstance.fetchData(RequestBody(
           amendType: '', collectionName: 'shops', payload: payload));
 
-      muliPrint(["fetched shops...!", resp.data]);
+      multiPrint(["fetched shops...!", resp.data]);
       if (category == null) {
         shopsList = shopModelFromJson(resp.data);
       } else {
@@ -237,7 +229,7 @@ class GlobalController extends GetxController {
       if (category != null) EasyLoading.dismiss();
     } catch (e, s) {
       EasyLoading.dismiss();
-      muliPrint([e, s]);
+      multiPrint([e, s]);
     }
   }
 

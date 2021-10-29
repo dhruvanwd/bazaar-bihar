@@ -40,7 +40,7 @@ class CartAddressController extends GetxController {
 
       selectedCity = CityModel(city);
     } catch (e, s) {
-      muliPrint([e, s]);
+      multiPrint([e, s]);
     }
   }
 

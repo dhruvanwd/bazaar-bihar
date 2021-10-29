@@ -12,7 +12,7 @@ isUserjson(var profile) {
 }
 
 final rupeeSymbol = "₹";
-muliPrint(List<dynamic> arguments) {
+multiPrint(List<dynamic> arguments) {
   arguments.forEach((element) => print(element));
 }
 
@@ -57,7 +57,7 @@ String generateOtp() {
   int min = 100000;
   int max = 999999;
   int randomminmax = min + Random().nextInt(max - min);
-  muliPrint(["Otp generated", randomminmax]);
+  multiPrint(["Otp generated", randomminmax]);
 
   return randomminmax.toString();
 }

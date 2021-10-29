@@ -150,7 +150,7 @@ class SignupController extends GetxController {
       update();
     } catch (e, s) {
       EasyLoading.dismiss();
-      muliPrint([e, s]);
+      multiPrint([e, s]);
     }
   }
 

@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage>
               "mobile": _mobileCtrl.text.removeAllWhitespace,
             });
           } catch (e, s) {
-            muliPrint([e, s]);
+            multiPrint([e, s]);
           }
         } else {
           _.otpMisMatchError();

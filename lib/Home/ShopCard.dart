@@ -1,5 +1,3 @@
-import 'package:bazaar_bihar/shared/Utils/utils.dart';
-import 'package:bazaar_bihar/shared/Utils/weekdays.dart';
 import 'package:bazaar_bihar/shared/components/CarouselWithIndicator.dart';
 import 'package:bazaar_bihar/shared/models/ShopModels.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +13,7 @@ class ShopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    muliPrint(["week day", weekDayNm]);
     bool isShopOpen = shop.weekDays.contains(weekDayNm);
-    muliPrint(["isShopOpen", isShopOpen]);
     return Card(
       margin: EdgeInsets.only(bottom: 8),
       clipBehavior: Clip.hardEdge,
